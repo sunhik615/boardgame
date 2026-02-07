@@ -1,0 +1,364 @@
+:root {
+    --primary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --bg-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --secondary-text: #666666;
+    --tag-bg: rgba(255, 255, 255, 0.2);
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Detail Header Override */
+header.detail-header {
+    padding: 1rem 0;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.2s;
+}
+
+.back-link:hover {
+    opacity: 0.8;
+}
+
+/* Filter Section */
+.filter-container {
+    background: white;
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+
+    /* Sticky Positioning */
+    position: sticky;
+    top: 1rem;
+    z-index: 100;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-group label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--primary-color);
+}
+
+.filter-group select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* Search Input */
+.filter-group input[type="text"] {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: inherit;
+    width: 200px;
+    /* Specific width for search */
+}
+
+.btn-reset {
+    background-color: var(--secondary-text);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.btn-reset:hover {
+    background-color: var(--primary-color);
+}
+
+
+/* Grid Layout */
+.game-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Mobile first */
+    gap: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+@media (min-width: 600px) {
+    .game-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* Card Links */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Card Style */
+.game-card {
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    /* Ensure full height in grid */
+}
+
+.card-link:hover .game-card {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+.game-card:hover {
+    /* Kept for fallback if div used directly */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+.card-image {
+    height: 150px;
+    background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+    /* Default Gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dynamic colors handled by JS */
+
+
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.meta-info {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.badge {
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: var(--secondary-text);
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+.badge.difficulty {
+    background-color: #fff3e0;
+    color: #e67e22;
+}
+
+.badge.players {
+    background-color: #e3f2fd;
+    color: #2980b9;
+}
+
+.badge.time {
+    background-color: #e8f5e9;
+    color: #27ae60;
+}
+
+/* Detail Page Styles */
+.hero-section {
+    height: 350px;
+    /* Slight height increase for new tags */
+    background-color: #ddd;
+    background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* New Tags Section */
+.hero-tags {
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.8rem;
+    border-radius: 15px;
+    background: var(--tag-bg);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+
+.detail-content {
+    padding-bottom: 3rem;
+}
+
+.game-description h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.game-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #444;
+}
+
+/* Expansion Section */
+.game-expansion {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f0f4f8;
+    border-left: 4px solid #4a90e2;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.game-expansion strong {
+    color: #2c3e50;
+    margin-right: 0.5rem;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #ecf0f1;
+    color: var(--secondary-text);
+    margin-top: auto;
+}
+
+/* Mobile Tweaks */
+@media (max-width: 600px) {
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .filter-group select {
+        flex-grow: 1;
+        margin-left: 1rem;
+    }
+
+    .hero-section {
+        height: auto;
+        min-height: 300px;
+        padding-top: 4rem;
+    }
+}

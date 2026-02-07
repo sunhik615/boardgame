@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 보드게임 컬렉션</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>🎲 내 보드게임 컬렉션</h1>
+            <p>소중한 게임들을 한눈에</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Filter Section -->
+        <section id="filter-section" class="filter-container">
+            <div class="filter-group search-group">
+                <label for="search-input">검색</label>
+                <input type="text" id="search-input" placeholder="게임 이름 검색...">
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-players">인원 수</label>
+                <select id="filter-players">
+                    <option value="all">전체</option>
+                    <option value="2">2명</option>
+                    <option value="3">3명</option>
+                    <option value="4">4명</option>
+                    <option value="5+">5명 이상</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-time">플레이 시간</label>
+                <select id="filter-time">
+                    <option value="all">전체</option>
+                    <option value="30">30분 이하</option>
+                    <option value="60">60분 이하</option>
+                    <option value="over60">60분 초과</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-difficulty">난이도</label>
+                <select id="filter-difficulty">
+                    <option value="all">전체</option>
+                    <option value="easy">쉬움 (~2.0)</option>
+                    <option value="normal">보통 (2.0~3.0)</option>
+                    <option value="hard">어려움 (3.0+)</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sort-order">정렬</label>
+                <select id="sort-order">
+                    <option value="name">이름순</option>
+                    <option value="difficulty-asc">난이도 낮은 순</option>
+                    <option value="difficulty-desc">난이도 높은 순</option>
+                </select>
+            </div>
+
+            <button id="btn-reset" class="btn-reset">↺ 초기화</button>
+        </section>
+
+        <!-- Container for dynamic content -->
+        <div id="game-list" class="game-grid">
+            <!-- JavaScript will populate this -->
+            <p style="grid-column: 1/-1; text-align: center;">게임 목록을 불러오는 중...</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Board Game Collection</p>
+    </footer>
+
+    <!-- Data and Application Scripts -->
+    <script src="games-data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
