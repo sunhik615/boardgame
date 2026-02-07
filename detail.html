@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지 - 내 보드게임 컬렉션</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="detail-header">
+        <div class="container">
+            <a href="index.html" class="back-link">← 목록으로 돌아가기</a>
+        </div>
+    </header>
+
+    <main id="game-detail">
+        <div class="hero-section">
+            <div class="hero-content container">
+                <h1 id="game-title">게임 제목 로딩중...</h1>
+
+                <!-- Tags Section -->
+                <div class="hero-tags">
+                    <span id="game-genre" class="tag genre">장르</span>
+                    <span id="game-mechanism" class="tag mechanism">메커니즘</span>
+                </div>
+
+                <div class="hero-meta">
+                    <span id="game-players" class="badge players">👥 -인</span>
+                    <span id="game-time" class="badge time">⏱️ -분</span>
+                    <span id="game-difficulty" class="badge difficulty">🔥 -/5</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container detail-content">
+            <section class="game-description">
+                <h2>게임 소개</h2>
+                <p id="game-description-text">
+                    게임 정보를 불러오고 있습니다...
+                </p>
+                <div id="game-expansion" class="game-expansion" style="display: none;">
+                    <strong>추가 확장팩:</strong> <span id="game-expansion-text"></span>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Board Game Collection</p>
+    </footer>
+
+    <!-- Data and Application Scripts -->
+    <script src="games-data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
