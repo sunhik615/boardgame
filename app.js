@@ -223,14 +223,29 @@ function renderGameList(container, matches) {
         card.href = `detail.html?id=${game.id}`;
         card.className = 'card-link';
 
-        // Generate dynamic gradient if no explicit CSS class (though we have imageClass, specific CSS might be missing)
-        // We will assign the gradient inline for robustness given the user wiped styled classes
-        const bgStyle = `background: ${getGradient(game.id)};`;
+        // Generate dynamic gradient if no explicit CSS class
+        // Support for image/images property
+        const gameImg = game.image || game.images;
+
+        // If image exists, use white background. Otherwise, use gradient.
+        const bgStyle = gameImg ? 'background: #fff;' : `background: ${getGradient(game.id)};`;
+        const iconColor = gameImg ? 'color: #333;' : 'color: white;';
+
+        // Logic: if it's a simple filename, assume it's in assets/images/games/
+        // Otherwise use the path as provided (starting from assets/images/)
+        let imgSrc = '';
+        if (gameImg) {
+            imgSrc = gameImg.includes('/') ? `assets/images/${gameImg}` : `assets/images/games/${gameImg}`;
+        }
+
+        const imageContent = gameImg
+            ? `<img src="${imgSrc}" alt="${game.title}" class="card-game-image">`
+            : `<span>${game.icon}</span>`;
 
         card.innerHTML = `
             <article class="game-card">
-                <div class="card-image" style="${bgStyle}">
-                    <span>${game.icon}</span>
+                <div class="card-image" style="${bgStyle} ${iconColor}">
+                    ${imageContent}
                 </div>
                 <div class="card-content">
                     <h2>${game.title}</h2>
@@ -268,6 +283,23 @@ function renderGameDetail() {
 
     // Dynamic Background again
     heroSection.style.background = getGradient(game.id);
+
+    // If image exists, add it to hero section
+    const gameImg = game.image || game.images;
+    const miniImgContainer = document.getElementById('game-image-mini');
+    if (gameImg) {
+        const imgSrc = gameImg.includes('/') ? `assets/images/${gameImg}` : `assets/images/games/${gameImg}`;
+        heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${imgSrc}')`;
+        heroSection.style.backgroundSize = 'cover';
+        heroSection.style.backgroundPosition = 'center';
+
+        if (miniImgContainer) {
+            miniImgContainer.innerHTML = `<img src="${imgSrc}" alt="${game.title}">`;
+            miniImgContainer.style.display = 'block';
+        }
+    } else if (miniImgContainer) {
+        miniImgContainer.style.display = 'none';
+    }
 
     document.getElementById('game-title').textContent = game.title;
 
