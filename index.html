@@ -14,7 +14,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>🎲 내 보드게임 컬렉션</h1>
+            <h1>🎲 선혁 보드게임 컬렉션</h1>
             <p>소중한 게임들을 한눈에</p>
         </div>
     </header>
@@ -74,6 +74,10 @@
             <button id="btn-reset" class="btn-reset">↺ 초기화</button>
         </section>
 
+        <div class="results-info">
+            <span id="results-count" class="results-count">0 / 0</span>
+        </div>
+
         <!-- Container for dynamic content -->
         <div id="game-list" class="game-grid">
             <!-- JavaScript will populate this -->
@@ -82,10 +86,18 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 My Board Game Collection</p>
+        <p>&copy; 2026 ㅎㅅㅎ 보드게임 컬렉션</p>
     </footer>
 
     <!-- Data and Application Scripts -->
+    <!-- FAB Button -->
+    <button id="scroll-to-top" class="fab-btn" title="맨 위로 이동">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
     <script src="games-data.js"></script>
     <script src="app.js"></script>
 </body>
