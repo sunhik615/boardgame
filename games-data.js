@@ -168,7 +168,9 @@ const games = [
         "difficulty": 1.35,
         "imageClass": "gungsin",
         "icon": "🎭",
-        "description": "오늘 밤, 여왕께서 만찬을 여십니다. 여왕 폐하께서 주최하는 오늘의 만찬은 여러분이 총애하는 가문이 여왕 폐하의 눈에 들 좋은 기회입니다. 여왕 폐하의 눈에 띌 수만 있다면 험담과 협잡, 그 어떤 지저분한 계략도 마다할 수 없습니다."
+        "description": "오늘 밤, 여왕께서 만찬을 여십니다. 여왕 폐하께서 주최하는 오늘의 만찬은 여러분이 총애하는 가문이 여왕 폐하의 눈에 들 좋은 기회입니다. 여왕 폐하의 눈에 띌 수만 있다면 험담과 협잡, 그 어떤 지저분한 계략도 마다할 수 없습니다.",
+        "images": "궁신.png"
+
     },
     {
         "id": "dale-of-merchants",
@@ -286,6 +288,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "beaver-creek",
         "icon": "🦫",
+        "images": "비버크릭.jpg",
         "description": "여러분은 댐 짓기 전문가 비버가 되어서 댐이 무너지지 않게 친구들과 경쟁해야 합니다. 과연 여러분은 가장 똑똑한 비버가 될 수 있을까요?"
     },
     {
@@ -299,6 +302,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "stubborn-mules",
         "icon": "🫏",
+        "images": "고집센당나귀.png",
         "description": "우리는 주인의 말을 듣지 않는 당나귀들입니다. 당나귀와 주인들은 주사위 3개를 굴려 이동하는데, 결과적으로 주인들에게서 최대한 멀리 떨어진 당나귀가 승리하게 됩니다. 주인들이 가장 늦게 들어온다면 1등을 했던 당나귀가 승리하고, 주인들이 먼저 들어온다면 가장 늦게 들어오는 당나귀가 승리합니다."
     },
     {
@@ -483,6 +487,7 @@ const games = [
         "difficulty": 1.37,
         "imageClass": "giant-octopus",
         "icon": "🐙",
+        "images": "거대문어대소동.jpg",
         "description": "바닷속 알까기. 문어를 피해 보물을 모아라!"
     },
     {
@@ -509,6 +514,7 @@ const games = [
         "difficulty": 2.02,
         "imageClass": "isle-of-trains",
         "icon": "🚂",
+        "images": "기차섬.png",
         "description": "기차섬에는 최고의 차장들이 모여 있습니다. 역사상 가장 위대한 차장으로 기억되고 싶다고요? 그럼 당장 일을 시작하세요! 계약을 이행하고, 화물과 승객을 운송하며 환상적인 기관차를 만들어 보세요."
     },
     {
@@ -522,6 +528,7 @@ const games = [
         "difficulty": 2.25,
         "imageClass": "explorers-of-navoria",
         "icon": "🧭",
+        "images": "나보리아.jpg",
         "description": "풍부한 판타지 세계를 배경으로 한 몰입형 빌딩 및 일꾼 놓기 게임. 바다에서 떠오른 새로운 대륙을 탐험하는 데 도움이 되는 캐릭터와 상품을 모아보세요. 마을 주민들과 함께 마을에서 상품을 수집하고 큰 보상을 받으세요. 나보리아의 탐험가가 될 준비가 되셨나요?",
         "expansion": "나보리아의 탐험가 : 잊혀진 땅"
     },
@@ -887,6 +894,7 @@ const games = [
         "difficulty": 2.23,
         "imageClass": "planet-unknown",
         "icon": "🌍",
+        "images": "미지의 행성.JPG",
         "description": "지구는 고갈되고 있습니다. 바야흐로, 인류의 미래를 위한 행성 개척 프로젝트가 시작됩니다."
     },
     {
@@ -1878,6 +1886,7 @@ const games = [
         "difficulty": 1.5,
         "imageClass": "pocket-farm",
         "icon": "🧺",
+        "images": "포켓팜.jpg",
         "description": "햇볕이 내리쬐고 비가 내리는 변화무쌍한 날씨를 견뎌내며 과일을 많이 담을 수 있도록 바구니를 잘 준비해보세요! 열두 달이 지난 뒤 많은 과일을 수확하면 농사의 달인이 될 수 있습니다."
     },
     {
