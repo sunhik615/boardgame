@@ -89,6 +89,10 @@ header.detail-header {
     z-index: 100;
 }
 
+.mobile-filter-toggle {
+    display: none;
+}
+
 .filter-group {
     display: flex;
     align-items: center;
@@ -355,6 +359,49 @@ footer {
         z-index: 1000;
         /* Ensure it sticks to top */
         position: sticky;
+    }
+
+    /* Mobile Toggle Button */
+    .mobile-filter-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0.8rem;
+        background: none;
+        border: none;
+        font-weight: bold;
+        color: var(--primary-color);
+        font-size: 1rem;
+        cursor: pointer;
+        grid-column: 1 / -1;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 0.5rem;
+    }
+
+    .mobile-filter-toggle .toggle-icon {
+        transition: transform 0.3s ease;
+    }
+
+    /* Collapsed State (Default on Mobile) */
+    .filter-container:not(.expanded) .filter-group,
+    .filter-container:not(.expanded) .btn-reset {
+        display: none;
+    }
+
+    .filter-container:not(.expanded) {
+        grid-template-columns: 1fr;
+        /* Single column for the button */
+        padding-bottom: 0.5rem;
+    }
+
+    /* Expanded State */
+    .filter-container.expanded .toggle-icon {
+        transform: rotate(180deg);
+    }
+
+    .filter-container.expanded {
+        padding-bottom: 1rem;
     }
 
     /* Reset specific container width adjustments to fit the parent properly */

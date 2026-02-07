@@ -71,6 +71,16 @@ function initFilters() {
     const btnReset = document.getElementById('btn-reset');
     const sortOrder = document.getElementById('sort-order');
     const searchInput = document.getElementById('search-input');
+    const mobileToggle = document.getElementById('mobile-filter-toggle');
+
+    // Mobile Toggle Listener
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+            const container = document.querySelector('.filter-container');
+            container.classList.toggle('expanded');
+            // Optional: Update text content or icon rotation handled by CSS
+        });
+    }
 
     const filterInputs = [filterPlayers, filterTime, filterDifficulty, sortOrder];
 
