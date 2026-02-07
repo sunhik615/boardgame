@@ -53,12 +53,31 @@ document.addEventListener('DOMContentLoaded', () => {
     // Index Page
     if (gameListContainer) {
         initFilters();
-        renderGameList(gameListContainer, currentGames);
+        applyFilters(); // Initial render and count update
     }
 
     // Detail Page
     if (detailContainer) {
         renderGameDetail();
+    }
+
+    // Scroll-to-Top FAB Logic
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     }
 });
 
@@ -171,6 +190,22 @@ function applyFilters() {
 
     const container = document.getElementById('game-list');
     renderGameList(container, filtered);
+
+    // Update results count display
+    const resultsCountEl = document.getElementById('results-count');
+    if (resultsCountEl && typeof games !== 'undefined') {
+        const total = games.length;
+        const count = filtered.length;
+
+        // Show only total if no search/filters are active
+        const isFilterActive = searchVal || playersVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all';
+
+        if (isFilterActive) {
+            resultsCountEl.textContent = `${total}개 중에 ${count}개를 찾았습니다.`;
+        } else {
+            resultsCountEl.textContent = `총 ${total}개 보유중입니다.`;
+        }
+    }
 }
 
 
