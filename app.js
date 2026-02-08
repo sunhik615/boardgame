@@ -242,8 +242,17 @@ function renderGameList(container, matches, isSearchActive) {
 
         card.innerHTML = `
             <article class="game-card">
-                <div class="card-image" style="${bgStyle} ${iconColor}">
-                    ${imageContent}
+                <div class="card-image-container">
+                    <div class="card-image" style="${bgStyle} ${iconColor}">
+                        ${imageContent}
+                    </div>
+                    <div class="card-info-reveal">
+                        <div class="reveal-content">
+                            <span class="reveal-tag">${game.genre || '보드게임'}</span>
+                            <p class="reveal-mech">${game.mechanism || '다양한 재미'}</p>
+                            <span class="reveal-hint">자세히 보기 →</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-content">
                     <h2>${game.title}</h2>
