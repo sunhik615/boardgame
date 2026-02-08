@@ -188,17 +188,15 @@ function applyFilters() {
         filtered.sort((a, b) => a.title.localeCompare(b.title));
     }
 
+    const isFilterActive = !!(searchVal || playersVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all');
     const container = document.getElementById('game-list');
-    renderGameList(container, filtered);
+    renderGameList(container, filtered, isFilterActive);
 
     // Update results count display
     const resultsCountEl = document.getElementById('results-count');
     if (resultsCountEl && typeof games !== 'undefined') {
         const total = games.length;
         const count = filtered.length;
-
-        // Show only total if no search/filters are active
-        const isFilterActive = searchVal || playersVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all';
 
         if (isFilterActive) {
             resultsCountEl.textContent = `${total}개 중에 ${count}개를 찾았습니다.`;
@@ -210,7 +208,7 @@ function applyFilters() {
 
 
 // --- Rendering Logic ---
-function renderGameList(container, matches) {
+function renderGameList(container, matches, isSearchActive) {
     container.innerHTML = '';
 
     if (matches.length === 0) {
@@ -250,7 +248,12 @@ function renderGameList(container, matches) {
                 <div class="card-content">
                     <h2>${game.title}</h2>
                     <div class="meta-info">
-                        <span class="badge players">👥 ${game.minPlayers}-${game.maxPlayers}인</span>
+                        <span class="badge players">
+                            ${isSearchActive
+                ? `⭐ 추천: ${game.bestPlayers ? (game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`) : `${game.minPlayers}-${game.maxPlayers}인`}`
+                : `👥 ${game.minPlayers}-${game.maxPlayers}인${game.bestPlayers ? ` | 추천: ${game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`}` : ''}`
+            }
+                        </span>
                         <span class="badge time">⏱️ ${game.playTime}</span>
                         <span class="badge difficulty">🔥 ${game.difficulty}/5</span>
                     </div>
@@ -322,6 +325,15 @@ function renderGameDetail() {
     }
 
     document.getElementById('game-players').textContent = `👥 ${game.minPlayers}-${game.maxPlayers}인`;
+    const bestPlayersEl = document.getElementById('game-best-players');
+    if (bestPlayersEl) {
+        if (game.bestPlayers) {
+            bestPlayersEl.textContent = `⭐ 추천: ${game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`}`;
+            bestPlayersEl.style.display = 'inline-block';
+        } else {
+            bestPlayersEl.style.display = 'none';
+        }
+    }
     document.getElementById('game-time').textContent = `⏱️ ${game.playTime}`;
     document.getElementById('game-difficulty').textContent = `🔥 ${game.difficulty}/5`;
 
