@@ -1,13 +1,29 @@
 :root {
-    --primary-color: #2c3e50;
-    --accent-color: #e74c3c;
-    --bg-color: #f8f9fa;
+    --primary-color: #1a2a3a;
+    --accent-color: #ff4757;
+    --bg-color: #f0f2f5;
     --card-bg: #ffffff;
-    --text-color: #333333;
-    --secondary-text: #666666;
-    --tag-bg: rgba(255, 255, 255, 0.2);
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --radius: 12px;
+    --text-color: #2f3542;
+    --secondary-text: #57606f;
+    --tag-bg: rgba(255, 255, 255, 0.15);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
+    --radius: 16px;
+    --glass: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 * {
@@ -17,10 +33,11 @@
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Outfit', 'Noto Sans KR', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -32,12 +49,28 @@ body {
 
 /* Header */
 header {
-    background-color: var(--primary-color);
+    background: linear-gradient(-45deg, #1a2a3a, #2c3e50, #34495e, #2c3e50);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
     color: white;
-    padding: 2rem 0;
-    margin-bottom: 2rem;
+    padding: 4rem 0;
+    margin-bottom: 3rem;
     text-align: center;
     box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: var(--bg-color);
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
 }
 
 header h1 {
@@ -64,9 +97,15 @@ header p {
 
 /* Detail Header Override */
 header.detail-header {
-    padding: 1rem 0;
+    padding: 1.5rem 0;
     margin-bottom: 0;
     text-align: left;
+    background: var(--primary-color);
+    animation: none;
+}
+
+header.detail-header::after {
+    display: none;
 }
 
 .back-link {
@@ -84,20 +123,23 @@ header.detail-header {
 
 /* Filter Section */
 .filter-container {
-    background: white;
-    padding: 1rem;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.5rem;
     align-items: center;
     justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.4);
 
     /* Sticky Positioning */
     position: sticky;
-    top: 1rem;
+    top: 1.5rem;
     z-index: 100;
 }
 
@@ -187,8 +229,8 @@ header.detail-header {
 }
 
 .card-link:hover .game-card {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: var(--shadow-hover);
 }
 
 .game-card:hover {
@@ -298,7 +340,8 @@ header.detail-header {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 2.5rem;
+    gap: 3rem;
+    padding: 2rem 0;
 }
 
 .hero-mini-image {

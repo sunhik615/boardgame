@@ -184,6 +184,7 @@ const games = [
         "imageClass": "dale-of-merchants",
         "icon": "🐿️",
         "description": "세계 각지에서 모여든 유명한 동물 상인들이 무역 대회에 참가하기 위해 데일로 모였습니다. 이들의 목표는 단 하나, 우승자로서 전설적인 길드의 새로운 일원이 되는 것입니다. 플레이어는 이 상인들이 되어 새로운 기술을 배우고, 물품을 거래하며, 재고를 관리합니다. 누구보다 먼저 화려한 상점 진열대를 완성한 플레이어가 게임의 승자가 되며, 길드에 입장할 수 있는 자격을 얻게 됩니다!",
+        "bestPlayers": 3,
         "expansion": "상인들의 계곡 2, 3, 컬렉션"
     },
     {
@@ -368,6 +369,7 @@ const games = [
         "difficulty": 2.25,
         "imageClass": "meadow",
         "icon": "🦊",
+        "bestPlayers": 4,
         "description": "가장 위대한 관찰자가 되기 위한 여정을 떠나보세요! 여러분은 지도 한 장을 들고, 경이로운 이야기로 가득 찬 자연 속으로 떠납니다. 다양한 지식을 바탕으로 경이로운 풍경과 동식물들을 발견하고, 모닥불에 둘러 앉아 여러분이 관찰한 것들을 다른 사람과 나누며 경쟁해 보세요!",
         "expansion": "메도우 : 하류, 메도우 : R 봉투"
     },
@@ -382,6 +384,7 @@ const games = [
         "difficulty": 2.38,
         "imageClass": "perch",
         "icon": "🦅",
+        "bestPlayers": 4,
         "description": "Perch(횃대)에서 벌어지는 새들의 전투! 플레이어는 장소들을 장악하기 위해 자신 무리의 새들을 지휘하며 겨루게 됩니다. 특정 장소에 가장 많은 새를 배치하고, 적을 횃대에서 쫓아내고, 수적 우위를 차지하며 승점을 획득하고 피조물들을 조종하세요."
     },
     {
@@ -395,6 +398,7 @@ const games = [
         "difficulty": 1.39,
         "imageClass": "avenue",
         "icon": "🍇",
+        "bestPlayers": 4,
         "description": "포도농장에 길을 잇자! 맛있는 포도를 성과 농장에 연결시켜 보세요. 가장 많은 점수를 얻은 사람이 승리할 수 있답니다!"
     },
     {
@@ -408,6 +412,7 @@ const games = [
         "difficulty": 1.68,
         "imageClass": "next-station-paris",
         "icon": "🗼",
+        "bestPlayers": 4,
         "description": "파리가 지금껏 보지 못했던 최고의 지하철 기획자가 되세요!"
     },
     {
@@ -421,6 +426,7 @@ const games = [
         "difficulty": 1.48,
         "imageClass": "sea-salt-paper",
         "icon": "🌊",
+        "bestPlayers": 4,
         "description": "손에 카드를 모으고, 효과를 발휘하고, 라운드를 끝낼 주도권을 가져오세요. 점수를 더 얻기 위해 상대방에게 한 턴을 줄만큼, 당신은 과감하십니까?",
         "expansion": "종이와 바다 : 확장팩"
     },
@@ -435,6 +441,7 @@ const games = [
         "difficulty": 1.96,
         "imageClass": "fertility",
         "icon": "🏜️",
+        "bestPlayers": 4,
         "description": "플레이어들은 파라오의 명을 받은 고대 이집트의 주지사로서 나일 유역의 대도시와 그 주변 지역을 다스린다. 범람이 끝나고 비옥해진 나일 계곡의 토지에서 자원을 수집하고, 수익성이 좋은 상점을 건설해 상품을 공급하며 도시를 키워나가고 오벨리스크와 피라미드, 스핑크스, 사원 등 각자의 상징 기념물을 건설하며, 이를 통해 파라오의 영광을 드높이고 부를 축적해라."
     },
     {
@@ -448,6 +455,7 @@ const games = [
         "difficulty": 1.5,
         "imageClass": "gang-of-dice",
         "icon": "🎲",
+        "bestPlayers": 4,
         "description": "조직의 패권을 차지하기 위한 주사위 경쟁. 여러분은 거대 마피아 조직의 간부들입니다. 서로 상대의 부하들을 포섭하여 조직의 패권을 장악하기 위해 생쟁을 벌입니다. 모두에게 당신이 이 조직의 진정한 실력자라는 것을 보여주세요."
     },
     {
@@ -461,6 +469,7 @@ const games = [
         "difficulty": 1.18,
         "imageClass": "gouda-gouda",
         "icon": "🧀",
+        "bestPlayers": 4,
         "description": "생쥐 다섯 마리가 한 팀이 되어 먹음직스러운 치즈를 향해 경주합니다."
     },
     {
@@ -474,21 +483,8 @@ const games = [
         "difficulty": 1.95,
         "imageClass": "black-fleet",
         "icon": "🏴‍☠️",
+        "bestPlayers": 4,
         "description": "주지사 딸의 몸값을 지불하기 위해, 상선, 해적선, 그리고 해군 선박까지 운용하며 금화를 모으자"
-    },
-    {
-        "id": "giant-octopus",
-        "title": "거대문어대소동",
-        "genre": "파티",
-        "mechanism": "알까기",
-        "minPlayers": 1,
-        "maxPlayers": 5,
-        "playTime": "20분",
-        "difficulty": 1.37,
-        "imageClass": "giant-octopus",
-        "icon": "🐙",
-        "images": "거대문어대소동.jpg",
-        "description": "바닷속 알까기. 문어를 피해 보물을 모아라!"
     },
     {
         "id": "glux",
@@ -501,6 +497,7 @@ const games = [
         "difficulty": 1.62,
         "imageClass": "glux",
         "icon": "💡",
+        "bestPlayers": 4,
         "description": "글룩스는 빛으로 방을 밝히는 게임입니다. 플레이어는 규칙에 맞게 자신의 불빛 칩을 사용하여 수 싸움에서 승리하고, 게임판의 여러 지역을 자신의 빛으로 밝게 채워야 합니다."
     },
     {
@@ -515,6 +512,7 @@ const games = [
         "imageClass": "isle-of-trains",
         "icon": "🚂",
         "images": "기차섬.png",
+        "bestPlayers": 4,
         "description": "기차섬에는 최고의 차장들이 모여 있습니다. 역사상 가장 위대한 차장으로 기억되고 싶다고요? 그럼 당장 일을 시작하세요! 계약을 이행하고, 화물과 승객을 운송하며 환상적인 기관차를 만들어 보세요."
     },
     {
@@ -529,6 +527,7 @@ const games = [
         "imageClass": "explorers-of-navoria",
         "icon": "🧭",
         "images": "나보리아.jpg",
+        "bestPlayers": 4,
         "description": "풍부한 판타지 세계를 배경으로 한 몰입형 빌딩 및 일꾼 놓기 게임. 바다에서 떠오른 새로운 대륙을 탐험하는 데 도움이 되는 캐릭터와 상품을 모아보세요. 마을 주민들과 함께 마을에서 상품을 수집하고 큰 보상을 받으세요. 나보리아의 탐험가가 될 준비가 되셨나요?",
         "expansion": "나보리아의 탐험가 : 잊혀진 땅"
     },
@@ -543,6 +542,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "nyan-nyan-butler",
         "icon": "🐱",
+        "bestPlayers": 4,
         "description": "사랑스러운 고양이가 되어 집사에게 많은 걸 받아내세요! 가장 풍족한 고양이가 승리합니다!"
     },
     {
@@ -556,6 +556,7 @@ const games = [
         "difficulty": 1.89,
         "imageClass": "deep-blue",
         "icon": "🌊",
+        "bestPlayers": 4,
         "description": "이 전설 속의 지도를 산 것은 천재적인 발상이었습니다. 가장 오래되고, 가장 위대하며, 가장 비싼 보물을 실은 난파선이 물 밑에서 당신을 기다리고 있습니다. 잠수복과 산소 탱크를 탑재한 당신의 배는 닻을 내릴 준비를 마쳤습니다. 낭비할 시간이 없습니다! 역사상 가장 큰 보물찾기가 시작되었다는 것입니다!"
     },
     {
@@ -569,6 +570,7 @@ const games = [
         "difficulty": 2.03,
         "imageClass": "llama-land",
         "icon": "🦙",
+        "bestPlayers": 4,
         "description": "이곳 고원지대의 자연풍경은 숨 막히게 아름답고... 라마로 가득하네요?! 여러분은 감자와 옥수수, 카카오를 재배하는 농부입니다. 땅 타일을 알맞게 배치하고 계단식 논을 만들고 작물을 모아서 귀여운 라마를 가져와 배치하세요! 때로는 마을 사람들의 도움을 적절히 받는 것도 좋습니다. 과연 누가 가장 성공한 농부가 될까요?"
     },
     {
@@ -582,6 +584,7 @@ const games = [
         "difficulty": 2.22,
         "imageClass": "rallyman-gt",
         "icon": "🏎️",
+        "bestPlayers": 4,
         "description": "보드판 위에 실제 레이싱 느낌을 담아냈다!",
         "expansion": "랠리맨GT : 챔피언십, 월드투어, GT5 팩, GT4 팩, 팀 챌린지, 아드레날린 팩, KS주사위 팩"
     },
@@ -596,6 +599,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "run-mule-run",
         "icon": "🐴",
+        "bestPlayers": 4,
         "description": "\"달려라, 노새!\"는 트로피를 얻기 위한 4마리 노새의 치열한 경주입니다. 색상 화살표를 현명하게 읽어내서 어떤 노새가 우승을 할 지 예측해 보세요."
     },
     {
@@ -609,6 +613,7 @@ const games = [
         "difficulty": 2.35,
         "imageClass": "dominion",
         "icon": "🏰",
+        "bestPlayers": 4,
         "description": "내 왕국을 부강하게!"
     },
     {
@@ -622,6 +627,7 @@ const games = [
         "difficulty": 1.43,
         "imageClass": "tokyo-highway",
         "icon": "🌈",
+        "bestPlayers": 4,
         "description": "도쿄 하이웨이의 새로운 에디션 \"무지개 도시\"를 소개합니다! 무지개 도시는 다양한 색상의 새로운 도시 건물과 랜드마크, 그리고 새로운 미션이 포함되어 있습니다. 새로운 전략 점수 옵션과 독특한 도시경관을 만들어보세요!"
     },
     {
@@ -635,6 +641,7 @@ const games = [
         "difficulty": 1.98,
         "imageClass": "dragon-castle",
         "icon": "🏯",
+        "bestPlayers": 4,
         "description": "타일들을 가져와 자신의 성전을 만들자."
     },
     {
@@ -647,6 +654,7 @@ const games = [
         "playTime": "35분",
         "imageClass": "decrypto",
         "icon": "📟",
+        "bestPlayers": 4,
         "description": "디크립토는 팀전입니다. 각 팀은 상대팀의 코드를 해독해야 합니다."
     },
     {
@@ -660,6 +668,7 @@ const games = [
         "difficulty": 1.7,
         "imageClass": "red7",
         "icon": "🎨",
+        "bestPlayers": 4,
         "description": "우승 규칙은 간단하다. 최고의 카드나 한 세트를 가져라. 하지만 너의 차례가 올때도 여전히 같은 게임을 할지는 모른다. 현재 게임을 이기지 못하고 차례가 끝난다면 넌 탈락이다. 최후에 서 있는 사람이 이 라운드에서 승리한다."
     },
     {
@@ -673,6 +682,7 @@ const games = [
         "difficulty": 1.45,
         "imageClass": "railroad-ink",
         "icon": "🛤️",
+        "bestPlayers": 4,
         "description": "주사위를 굴리고 나온 눈금의 노선을 자신의 게임보드에 그립니다. 규칙에 맞게 길을 잘 그려 가장 높은 점수를 얻는 플레이어가 승리합니다."
     },
     {
@@ -686,6 +696,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "rummikub-select",
         "icon": "🔢",
+        "bestPlayers": 4,
         "description": "대중적으로 잘 알려진 루미큐브의 대회용 버전. 큼직한 숫자패는 손맛이 좋다. 자신의 숫자를 조합해서 먼저 털어버리면 승리."
     },
     {
@@ -699,6 +710,7 @@ const games = [
         "difficulty": 2.14,
         "imageClass": "renature",
         "icon": "🌳",
+        "bestPlayers": 4,
         "description": "리네이처는 자연을 되살리는 테마의 도미노 타일 놓기 및 영향력 게임입니다. 플레이어들은 황폐해진 오염된 계곡에 나무를 심고 식물을 키워 생태계를 복원해야 합니다."
     },
     {
@@ -712,6 +724,7 @@ const games = [
         "difficulty": 1.57,
         "imageClass": "maskmen",
         "icon": "🎭",
+        "bestPlayers": 4,
         "description": "프로레스링 매니저가 되어 이 신인 선수들을 데뷔시키어 우승해야 합니다. 과연 어떤 순서로 시합을 구성하면 좋을까요? #오잉크"
     },
     {
@@ -725,6 +738,7 @@ const games = [
         "difficulty": 1.92,
         "imageClass": "manhattan",
         "icon": "🏙️",
+        "bestPlayers": 4,
         "description": "서로 물고 무는 치열한 쟁탈전 마천루의 주인은 누구인가?",
         "expansion": "맨해튼 : 몬스터"
     },
@@ -739,6 +753,7 @@ const games = [
         "difficulty": 1.07,
         "imageClass": "men-at-work",
         "icon": "🏗️",
+        "bestPlayers": 4,
         "description": "일꾼들은 겁도 없이 보호 장비라고는 안전모뿐인 채 일하고 있습니다. 건축은 안전 장비 없이 높고 높게 올라갑니다. 머지않아 강철 대들보는 현기증 날 정도의 높이에 도달했고 붕괴되기 직전입니다."
     },
     {
@@ -752,6 +767,7 @@ const games = [
         "difficulty": 1.14,
         "imageClass": "mojo",
         "icon": "🃏",
+        "bestPlayers": 4,
         "description": "모죠가 모죠? 모죠는 8명까지 함께 즐길 수 있는, 짜릿하고 유쾌한 카드 게임입니다!"
     },
     {
@@ -765,6 +781,7 @@ const games = [
         "difficulty": 2.24,
         "imageClass": "libertalia",
         "icon": "🏴‍☠️",
+        "bestPlayers": 4,
         "description": "게일크레스트의 세계에서, 하늘 해적 선단은 바람을 타고 모험, 보물, 영광을 찾아 항해합니다. 이런 선단의 제독으로서, 여러분은 다양하게 구성된 승무원들을 이끌고 보물을 쟁여야 합니다. 그런데, 다른 세력들도 정확히 같은 승무원 패거리를 데리고 왔습니다. 과연 가장 교활한 수를 둬서 부를 거머쥘 해적은 누구일까요? 리버탈리아(Libertalia)란? 해적 선장 James Misson이 세웠다고 하는, 전설 속의 해적 유토피아를 가리킵니다."
     },
     {
@@ -778,6 +795,7 @@ const games = [
         "difficulty": 1.95,
         "imageClass": "little-town",
         "icon": "🏡",
+        "bestPlayers": 4,
         "description": "귀염뽀짝 신개념 마을 건설 게임. 따사롭고 풍요로운 대지에 새 보금자리를 만들어 볼까요? 보금자리를 찾던 사람들 앞에 광활한 대지가 모습을 드러냈어요. 사람들은 이곳에 <리틀타운>이란 새 도시를 세우기로 했죠! 숲과 호수, 돌산에서 자원을 캐서 건물을 지어봐요. 아참, 든든하게 일하려면 끼니마다 밥도 잘 챙겨 먹어야 해요."
     },
     {
@@ -791,6 +809,7 @@ const games = [
         "difficulty": 1.82,
         "imageClass": "reef",
         "icon": "🐠",
+        "bestPlayers": 4,
         "description": "미션카드를 사용하고 산호초를 개인 보드에 놓으세요. 미션 카드와 개인 보드에 놓인 산호초의 패턴에 따라 점수를 얻습니다. 게임 종료 후 점수가 가장 높은 플레이어가 승리합니다."
     },
     {
@@ -804,6 +823,7 @@ const games = [
         "difficulty": 1.37,
         "imageClass": "marrakech",
         "icon": "🕌",
+        "bestPlayers": 4,
         "description": "네가 밟고 있는 것은 누구의 양탄자? 2009년 멘사 셀렉트에 선정 된 마라케시! 마라케시 양탄자 시장을 배경으로 알록달록 양탄자를 누구보다 많이 진열하고 많이 팔아야 승리를 하는 아기자기하고 재미있는 보드게임!"
     },
     {
@@ -817,6 +837,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "burger-burger",
         "icon": "🍔",
+        "bestPlayers": 4,
         "description": "버거가 서있기 버거울 때까지 재료를 쌓는 신개념 균형 게임!"
     },
     {
@@ -830,6 +851,7 @@ const games = [
         "difficulty": 2.26,
         "imageClass": "bunny-kingdom",
         "icon": "🐰",
+        "bestPlayers": 4,
         "description": "버니킹덤의 모든 영주들은 들어라! 우리는 드디어 왕국을 확장할 ‘새로운 세계’를 발견하였다. 비옥한 대지와 푸른바다, 다양한 자원이 넘치는 이 새로운 세계를 우리 왕국의 새로운 영토로 삼을 것이다. 버니킹덤의 모든 영주들이여! 새로운 세계를 탐험하고 개척하는 이 영광스러운 대업을 너희에게 맡기고자 한다. 가장 큰 업적을 세운 영주에게 내 친히 ‘토끼중의 토끼’ 칭호와 함께 작위 상승의 상을 내릴 것이다. -버니킹덤 버니왕 3세-"
     },
     {
@@ -843,6 +865,7 @@ const games = [
         "difficulty": 1.67,
         "imageClass": "bus-route",
         "icon": "🚌",
+        "bestPlayers": 4,
         "description": "여러분은 버스 노선을 계획하는 책임자 입니다. 여러 고객층의 요구를 들어줄 수 있는 노선을 만들어 보세요!"
     },
     {
@@ -856,6 +879,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "venture-angels",
         "icon": "💡",
+        "bestPlayers": 4,
         "description": "벤처엔젤스에서 당신은 재미로 벤처 기업에 투자하는 억만장자입니다. 각 라운드에서 매력적이지만 위험한 벤처가 등장합니다. 비관적이거나 거품이 낀 벤처와 좋은 벤처를 분류하고 비밀리에 투자하십시오. 각 라운드가 끝날 때마다 비밀 입찰을 공개하고 어떤 벤처가 충분한 투자를 받았는지 확인하십시오. 가장 눈에 띄는 투자를 한 투자자는 성공에 기여한 것에 대해 보상을 받게 됩니다. 게임이 끝날 때 가장 큰 명성을 얻은 투자자가 벤처 엔젤이 됩니다."
     },
     {
@@ -869,6 +893,7 @@ const games = [
         "difficulty": 1.1,
         "imageClass": "moon-leap",
         "icon": "🌙",
+        "bestPlayers": 4,
         "description": "달 위의 우주인들이 가장 높은 점수 칸에 도달하기 위해서 점프의 레이싱을 펼칩니다. 게임이 끝났을 때 각자 도달한 칸의 숫자와 말의 숫자를 곱하여 가장 높은 점수를 얻은 플레이어가 승리합니다. 잊지 마세요! 남에서 섬프로 이동하는 것이 쉽지만은 않습니다."
     },
     {
@@ -882,6 +907,7 @@ const games = [
         "difficulty": 1.57,
         "imageClass": "mino-dice",
         "icon": "🎲",
+        "bestPlayers": 4,
         "description": "황소의 머리를 가진 거인 Minotaur. 그는 미궁 안에서 먹잇감이 나타나면 주사위를 굴리는 취미를 갖고 있습니다. 하지만 그는 승부를 운에만 맡기지 않습니다. 손에 들어온 주사위를 보고 몇 번을 이길 수 있을지, 또는 이길 수 없을지에 승부를 거세요. 예측만 맞는다면 어쩌면 Minotaur 도 쓰러뜨릴 수 있습니다."
     },
     {
@@ -896,6 +922,7 @@ const games = [
         "imageClass": "planet-unknown",
         "icon": "🌍",
         "images": "미지의 행성.JPG",
+        "bestPlayers": 4,
         "description": "지구는 고갈되고 있습니다. 바야흐로, 인류의 미래를 위한 행성 개척 프로젝트가 시작됩니다."
     },
     {
@@ -909,6 +936,7 @@ const games = [
         "difficulty": 2.32,
         "imageClass": "valletta",
         "icon": "⛪",
+        "bestPlayers": 4,
         "description": "중세 몰타의 수도 발레타를 건설하세요! 자원을 모으고 건물을 지으며 성 요한 기사단의 기사들과 협력하여 가장 위대한 건축가가 되어야 합니다."
     },
     {
@@ -922,6 +950,7 @@ const games = [
         "difficulty": 1.22,
         "imageClass": "circus-flohcati",
         "icon": "🎪",
+        "bestPlayers": 4,
         "description": "높은 점수의 서커스 카드를 모으세요."
     },
     {
@@ -935,6 +964,7 @@ const games = [
         "difficulty": 2.25,
         "imageClass": "stars-wish",
         "icon": "🌟",
+        "bestPlayers": 4,
         "description": "별의 소원을 이뤄주세요. 더 빛나는 존재가 되기 위해, 별은 사람의 감정을 이해하고 싶어 합니다. 감정을 모으면 소원을 이룰 수 있지만, 무리한 행동은 오히려 빛을 잃게 하니, 균형점을 찾아야 합니다."
     },
     {
@@ -948,6 +978,7 @@ const games = [
         "difficulty": 1.57,
         "imageClass": "break-the-cube",
         "icon": "🧊",
+        "bestPlayers": 4,
         "description": "“브레이크 더 큐브”에서 당신은 상대방 스크린 뒤에 숨겨진 블럭 배치를 가장 먼저 맞혀야 합니다. 상대방의 블럭 배치에 관한 질문을 하고, 정보를 얻으세요. 상대방보다 먼저 알아내면 승리합니다!"
     },
     {
@@ -961,6 +992,7 @@ const games = [
         "difficulty": 1.69,
         "imageClass": "blueprints",
         "icon": "🏗️",
+        "bestPlayers": 4,
         "description": "플레이어는 건축가가 되어 주어진 재료로 건물을 만듭니다. 다양한 배치로 점수를 얻어보세요."
     },
     {
@@ -974,6 +1006,7 @@ const games = [
         "difficulty": 1.88,
         "imageClass": "billabong",
         "icon": "🦘",
+        "bestPlayers": 4,
         "description": "20마리의 캥거루들이 '빌라봉' 호수의 주위를 돌아 위대한 경주를 펼칩니다. 캥거루는 서로를 뛰어넘으며 달리는데, 여건만 된다면 몇 마리의 캥거루라도 뛰어넘을 수 있습니다. 자신의 캥거루를 모두, 먼저 결승선을 통과시키는 플레이어가 승리합니다. 공정한 경주를 위해 심판 캥거루가 항시 대기 중입니다."
     },
     {
@@ -987,6 +1020,7 @@ const games = [
         "difficulty": 1.92,
         "imageClass": "sagrada",
         "icon": "⛪",
+        "bestPlayers": 4,
         "description": "화려한 스테인드글라스를 창조해보세요!",
         "expansion": "사그라다 : 5,6인 확장"
     },
@@ -1001,6 +1035,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "shallow-sea",
         "icon": "🌊",
+        "bestPlayers": 4,
         "description": "다양한 물고기, 해양 생물, 산호를 전략적으로 배치해 자신만의 아름다운 바닷속 풍경을 만들어보세요!",
         "expansion": "샐로우 씨 : 희귀 물고기, 샐로우 씨 : 산란 시즌"
     },
@@ -1015,6 +1050,7 @@ const games = [
         "difficulty": 1.37,
         "imageClass": "survive",
         "icon": "🏝️",
+        "bestPlayers": 4,
         "description": "환상의 섬 아틀란티스가 가라앉고 있습니다! 화산 폭발로 파괴되는 섬에서 탈출하여 육지로 무사히 도망치세요. 하지만 바다에는 굶주린 상어와 바다 괴물들이 여러분을 기다리고 있습니다."
     },
     {
@@ -1028,6 +1064,7 @@ const games = [
         "difficulty": 1.68,
         "imageClass": "sunset-over-water",
         "icon": "🌅",
+        "bestPlayers": 4,
         "description": "아름다운 자연을 그림으로 남겨보세요!"
     },
     {
@@ -1041,6 +1078,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "7-wonders-architects",
         "icon": "🏛️",
+        "bestPlayers": 4,
         "description": "각 문명을 상징하는 장대한 불가사의를 건축하는 일이 여러분에게 떨어졌습니다. 다른 도시들보다 빠르게 위대한 불가사의를 건축 하고 여러분의 문명을 과시해야 합니다."
     },
     {
@@ -1054,6 +1092,7 @@ const games = [
         "difficulty": 1.77,
         "imageClass": "century-golem",
         "icon": "💎",
+        "bestPlayers": 4,
         "description": "크리스탈을 이용해서 골렘을 만들어내자."
     },
     {
@@ -1067,6 +1106,7 @@ const games = [
         "difficulty": 2.16,
         "imageClass": "arboretum",
         "icon": "🌳",
+        "bestPlayers": 4,
         "description": "나무를 심어 아름다운 산책로를 완성하세요!"
     },
     {
@@ -1080,6 +1120,7 @@ const games = [
         "difficulty": 1.24,
         "imageClass": "super-mega-lucky-box",
         "icon": "🎁",
+        "bestPlayers": 4,
         "description": "빙고 게임으로 슈퍼! 메가! 럭키!한 재미를 담아낸 보드게임"
     },
     {
@@ -1093,6 +1134,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "swish",
         "icon": "⭕",
+        "bestPlayers": 4,
         "description": "스위시는 실시간으로 진행되는 재미있는 공간적 사고 게임입니다. 머릿속으로 카드를 조합해 다른 사람보다 먼저 '스위시'를 찾아보세요!"
     },
     {
@@ -1106,6 +1148,7 @@ const games = [
         "difficulty": 1.92,
         "imageClass": "scarabia",
         "icon": "🐞",
+        "bestPlayers": 4,
         "description": "황금풍뎅이를 발굴해서 점수를 먹자!"
     },
     {
@@ -1119,7 +1162,8 @@ const games = [
         "difficulty": 1.87,
         "imageClass": "hidden-leaders",
         "icon": "👑",
-        "description": "황제가 죽고, 오쉬라 섬은 혼란에 빠졌습니다. 자신의 리더가 왕좌를 차지할 수 있도록 본심을 숨긴 채 은밀하게 행동하세요!",
+        "bestPlayers": 4,
+        "description": "황제가 죽고, 오쉬라 섬은 혼란에 빠졌습니다. 자신의 리더가 왕좌를 차지할 수 있도록 본심을 숨긴 채 은밀하게 행동하세요!"
     },
     {
         "id": "startups",
@@ -1145,6 +1189,7 @@ const games = [
         "difficulty": 1.9,
         "imageClass": "splendor-marvel",
         "icon": "💎",
+        "bestPlayers": 3,
         "description": "슈퍼 히어로 팀의 지휘관이 되어 강력한 팀원들을 모으고, 우주의 절반을 없애려는 타노스의 음모를 막아내세요!"
     },
     {
@@ -1158,6 +1203,7 @@ const games = [
         "difficulty": 1.94,
         "imageClass": "cities",
         "icon": "🏙️",
+        "bestPlayers": 3,
         "description": "도시계획자인 여러분은 시의회의 의뢰를 받아 도시 재개발 계획을 세우고 주택과 사무실, 공원, 여가 공간 등을 어떻게 배치하고 건축할지 결정해야 합니다. 도시마다 요구하는 사항이 다르기에, 이에 맞춰 다양한 요소를 적재적소 배치해야 높은 점수를 얻을 수 있습니다. 과연 누가 세계적으로 유명한 도시를 가장 돋보이게 만드는 설계자가 될까요?"
     },
     {
@@ -1171,6 +1217,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "silly-cow",
         "icon": "🐄",
+        "bestPlayers": 4,
         "description": "동물들이 엉망진창으로 섞여버렸습니다. 동물들을 되찾는 가운데, 말썽쟁이들을 떠넘기려는 게임이 시작되었습니다. 말썽쟁이 소는 옆 사람에게 재빨리 넘기세요."
     },
     {
@@ -1184,6 +1231,7 @@ const games = [
         "difficulty": 1.4,
         "imageClass": "dance-of-ibexes",
         "icon": "🐐",
+        "bestPlayers": 4,
         "description": "소금을 찾아 좋은 자리에 머물고자, 아이벡스 산양들은 오늘도 절벽 위에서 눈치 싸움을 벌입니다. 매 라운드 숫자 타일을 잘 사용하세요. 안전한 자리에 머문다면 참 다행이지만, 독수리의 공격을 받을 수도 있습니다. 누군가 벌점 60점을 받을 때까지, 아이벡스의 눈치 싸움은 계속됩니다."
     },
     {
@@ -1197,6 +1245,7 @@ const games = [
         "difficulty": 1.76,
         "imageClass": "azul",
         "icon": "🎨",
+        "bestPlayers": 3,
         "description": "어떤 타일로 왕국 벽면을 꾸미면 좋을까? 스페인의 알람브라 궁전에 방문한 포르투갈 국왕 마누엘 1세는 궁전 벽면을 장식한 아름다운 타일들에 반해버렸습니다. 포르투갈의 타일 장인이 되어 에보라 왕궁을 화려하게 수놓아 주세요!"
     },
     {
@@ -1210,6 +1259,7 @@ const games = [
         "difficulty": 1.18,
         "imageClass": "deep-sea-adventure",
         "icon": "🐙",
+        "bestPlayers": 4,
         "description": "깊은 바다속으로 보물 사냥을 떠나 보세요~ #오잉크"
     },
     {
@@ -1223,7 +1273,8 @@ const games = [
         "difficulty": 1.92,
         "imageClass": "el-dorado",
         "icon": "🚣",
-        "description": "전설적인 황금의 도시를 찾아 울창한 남미 정글을 질주하세요.",
+        "bestPlayers": 3,
+        "description": "전설적인 황금의 도시를 찾아 울창한 남미 정글을 질주하세요."
     },
     {
         "id": "thats-pretty-clever",
@@ -1236,6 +1287,7 @@ const games = [
         "difficulty": 1.9,
         "imageClass": "thats-pretty-clever",
         "icon": "🦊",
+        "bestPlayers": 3,
         "description": "두뇌의 한계에 도전하는 신감각 주사위 게임! 6가지 색 주사위를 굴리고, 굴린 주사위를 하나씩 골라 점수로 사용합니다. 높은 주사위를 사용하면 높은 점수를 받지만, 대신 그만큼 다음 기회는 줄어들어요. 게임 방법은 간단하지만 점수를 잘 모으려면 머리를 잘 써야한답니다. '롤 앤 라이트' 장르의 붐을 일으킨 명작"
     },
     {
@@ -1249,6 +1301,7 @@ const games = [
         "difficulty": 2.34,
         "imageClass": "twice-as-clever",
         "icon": "🦊🦊",
+        "bestPlayers": 3,
         "description": "심감각 주사위 게임 <영리한 여우>가 두 배로 영리해져 돌아왔다! 2018년 독일 올해의 게임상 후보"
     },
     {
@@ -1262,6 +1315,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "yeti-snack",
         "icon": "🍦",
+        "bestPlayers": 4,
         "description": "이럴수가... 예티의 냉장고가 고장 나버렸어요! 식재료가 모두 녹아버리기 전에, 예티가 원하는 간식을 만들어주세요!"
     },
     {
@@ -1275,6 +1329,7 @@ const games = [
         "difficulty": 1.79,
         "imageClass": "challengers",
         "icon": "🏁",
+        "bestPlayers": 4,
         "description": "누가 \"깃발 뺏기\" 토너먼트의 우승컵을 들어올릴까요? 우주 저편의 외계인부터 깊은 바다 괴생물체까지, 각양각색의 실력자들이 오늘 경기장에 모였습니다. 바로 깃발 뺏기 대회에 참여하기 위해서죠! 최강의 팀을 꾸린 자만이 승자가 될 수 있습니다. 운과 실력을 모두 활용해 강력한 팀을 만드세요!"
     },
     {
@@ -1288,6 +1343,7 @@ const games = [
         "difficulty": 2.14,
         "imageClass": "challengers-beach-cup",
         "icon": "🏖️",
+        "bestPlayers": 4,
         "description": "세계 최고의 인기 스포츠 \"깃발 뺏기\" 토너먼트가 이제 비밀기지의 어두운 골목과 높디높은 산맥 꼭대기까지 그 명성과 열기를 터뜨려 나갑니다! 더 개성 넘치는 선수들로 무장하고, 더 치열해진 깃발 뺏기 토너먼트의 현장 속으로 지금 바로 뛰어드세요!"
     },
     {
@@ -1301,6 +1357,7 @@ const games = [
         "difficulty": 1.2,
         "imageClass": "steal-the-piggy-bank",
         "icon": "🐷",
+        "bestPlayers": 4,
         "description": "친구들과 즐겁고 긴장감 넘치는 간식 쟁탈전을 벌입니다! 맛있는 간식을 되도록 빨리, 많이 차지하세요!"
     },
     {
@@ -1314,6 +1371,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "ubongo-3d",
         "icon": "🧱",
+        "bestPlayers": 4,
         "description": "폴리오미노 게임의 대명사 우봉고가 3D버전으로 나왔습니다. 이제 우봉고 최고 난이도에 도전해 볼까요?"
     },
     {
@@ -1327,7 +1385,8 @@ const games = [
         "difficulty": 2.32,
         "imageClass": "a-wonderful-world",
         "icon": "🌍",
-        "description": "<원더풀 월드>는 디스토피아 테마를 지닌 간단한 전략 게임입니다. 여러분은 각 제국의 지도자가 되어 미래를 설계하고 어떻게 제국을 발전해 나갈지 고민해야 합니다. 지혜로운 판단으로 남들보다 발전된 제국을 만들어 보세요.",
+        "bestPlayers": 4,
+        "description": "<원더풀 월드>는 디스토피아 테마를 지닌 간단한 전략 게임입니다. 여러분은 각 제국의 지도자가 되어 미래를 설계하고 어떻게 제국을 발전해 나갈지 고민해야 합니다. 지혜로운 판단으로 남들보다 발전된 제국을 만들어 보세요."
     },
     {
         "id": "enchain",
@@ -1340,6 +1399,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "enchain",
         "icon": "🕵️",
+        "bestPlayers": 4,
         "description": "카지노에 비밀 요원들이 잠입했습니다. 청소부, 바텐더, 딜러, 노신사 등으로 변장한 요원들은 멋드러지고 특수한 소품들로 비밀스러운 신호를 주고받고 있습니다. 스파이의 암호를 빠르게 해독해 더 많은 요원을 확보하세요."
     },
     {
@@ -1353,6 +1413,7 @@ const games = [
         "difficulty": 1.07,
         "imageClass": "illusion",
         "icon": "👁️",
+        "bestPlayers": 3,
         "description": "어떤 색깔이 가장 많이 보이나요? 당신의 눈을 믿을 수 있나요? 카드를 색깔 비율대로 놓기만 하면 되는 아주 쉽고 간단한 게임."
     },
     {
@@ -1366,6 +1427,7 @@ const games = [
         "difficulty": 1.3,
         "imageClass": "spots",
         "icon": "🐶",
+        "bestPlayers": 2,
         "description": "어떤 강아지에게는 점이 있어요. 주사위에도 점이 있죠. 주사위를 알맞게 배치해서 강아지의 무늬를 완성하고 점수를 얻으세요!"
     },
     {
@@ -1379,6 +1441,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "eraser-wrestling",
         "icon": "🤼",
+        "bestPlayers": 4,
         "description": "기억 나습니까? 헐크 호건과 동시에, 무한 폭주하던 헐크, 지옥에서 건너 온, 공포의 카리스마 언더 테이커, 나이스한 외모에서 폭발하는 강력한 엘보우, 더락 얼마 전 우리 곁을 떠났지만, 영원한 전사, 워리어, 그들이 다시 새로운 전설을 씁니다."
     },
     {
@@ -1392,6 +1455,7 @@ const games = [
         "difficulty": 2.24,
         "imageClass": "world-wonders",
         "icon": "🏛️",
+        "bestPlayers": 3,
         "description": "찬란한 도시 문명이 펼쳐집니다. 역사에 길이 남을 고대 도시를 건설하세요.",
         "expansion": "월드원더스 : 문도"
     },
@@ -1406,6 +1470,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "world-changers",
         "icon": "📜",
+        "bestPlayers": 4,
         "description": "새로운 문명을 만들기 위해 과거의 위인들로 팀을 꾸려야 합니다. 각기 장단점이 있는 위인을 당신의 팀으로 데려와 가장 좋은 상승 효과를 만드세요."
     },
     {
@@ -1419,6 +1484,7 @@ const games = [
         "difficulty": 1.45,
         "imageClass": "hey-thats-my-fish",
         "icon": "🐧",
+        "bestPlayers": 4,
         "description": "빙하가 가라 앉고 있어요! 물고기가 모두 사라지기 전에 건질 수 있는 만큼 잡아보세요. 당신이 하지 않으면, 다른 펭귄들이 잡아갈 거예요. 자기 펭귄 가족의 운명은 각자의 손에 달렸어요. 여러분의 펭귄들은 가장 먹음직스러운 물고기를 잡고 경쟁 상대를 막기 위해 빠르게 줄어드는 빙하를 가로질러 움직여야 합니다. 하지만 경계를 늦춰선 안 됩니다! 빙하 한 조각에 갇힌 펭귄은 더는 물고기를 잡을 수 없으니까요."
     },
     {
@@ -1432,6 +1498,7 @@ const games = [
         "difficulty": 2.12,
         "imageClass": "industria",
         "icon": "🏭",
+        "bestPlayers": 4,
     },
     {
         "id": "chamsaejak",
@@ -1444,6 +1511,7 @@ const games = [
         "difficulty": 1.75,
         "imageClass": "chamsaejak",
         "icon": "🀄",
+        "bestPlayers": 4,
         "description": "마작의 초심자 버전"
     },
     {
@@ -1456,8 +1524,8 @@ const games = [
         "playTime": "15분",
         "difficulty": 1.1,
         "imageClass": "wonder-bowling",
-        "icon": " bowling",
         "icon": "🎳",
+        "bestPlayers": 4,
         "description": "원더 볼링에서는 공을 굴리는 대신 공 막대로 레인을 때려서 진동으로 핀을 쓰러뜨려야 합니다. 단 1개의 핀만 남기면 스트라이크지만 모든 핀을 쓰러뜨리면 페널티를 받게 됩니다. 섬세한 힘 조절로 가장 먼저 목표를 달성하세요!"
     },
     {
@@ -1471,6 +1539,7 @@ const games = [
         "difficulty": 1.05,
         "imageClass": "viking-see-saw",
         "icon": "⛵",
+        "bestPlayers": 4,
         "description": "바이킹 시소는 자신의 모든 화물을 배에 가장 먼저 실어야 하는 균형잡기 시소 게임입니다. 모양도 재질도 무게도 각기 다른 다양한 화물을 배의 방향이 바뀌지 않도록 조심스럽게 실어야 합니다. 가장 먼저 화물을 싣는 바이킹은 과연 누가 될까요?"
     },
     {
@@ -1484,6 +1553,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "ninja-master",
         "icon": "🥷",
+        "bestPlayers": 4,
         "description": "주사위 결과를 빠르고 정확하게 파악해서 가장 높은 점수를 얻을 수 있는 토큰을 가져가세요! 닌자가 은신술을 써서 사라지지는 않았는지 언제 검을 빼앗을지 냉철한 판단은 필수! 과연 누가 닌자 마스터의 자리에 오르게 될까요?"
     },
     {
@@ -1497,6 +1567,7 @@ const games = [
         "difficulty": 2.03,
         "imageClass": "kanagawa",
         "icon": "🖌️",
+        "bestPlayers": 3,
         "description": "붓 끝에서 피어나는 사계의 정취."
     },
     {
@@ -1510,6 +1581,7 @@ const games = [
         "difficulty": 1.89,
         "imageClass": "carcassonne-20th",
         "icon": "🏰",
+        "bestPlayers": 4,
         "description": "카르카손 20주년 정수가 담긴 기념판! 2001년 독일 올해의 게임상을 수상한 이래로 세계적으로 사랑을 받아온 <카르카손>이 20주년을 기념해 출시했습니다. 20주년 기념판에만 있는 고광택 타일과 특별 규칙으로 게임을 더 화려하게 재밌게 즐겨보세요."
     },
     {
@@ -1523,6 +1595,7 @@ const games = [
         "difficulty": 1.14,
         "imageClass": "cant-stop",
         "icon": "🎲",
+        "bestPlayers": 4,
         "description": "주사위를 굴리고, 2개씩 조합해서 가장 먼저 정상에 오르세요!!! 가장 먼저 3개의 정상에 다다르면 승리합니다."
     },
     {
@@ -1536,6 +1609,7 @@ const games = [
         "difficulty": 2.17,
         "imageClass": "calico",
         "icon": "🐱",
+        "bestPlayers": 2,
     },
     {
         "id": "coffee-rush",
@@ -1548,6 +1622,7 @@ const games = [
         "difficulty": 1.8,
         "imageClass": "coffee-rush",
         "icon": "☕",
+        "bestPlayers": 4,
         "description": "밀려드는 주문을 처리하여 SNS최고 인기 카페에 등극하세요! <커피 러시>는 카페를 경영하며 SNS 평판을 관리하는 게임입니다. 주문을 받아 재료를 준비하고, 음료를 만들어 서빙하세요."
     },
     {
@@ -1561,6 +1636,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "cats-run",
         "icon": "🐈",
+        "bestPlayers": 4,
         "description": "멍구가 풀려났다! 야옹이들아 도망쳐! 여기저기 부딪히며 마당을 돌아다니는 멍구 때문에, 고양이들이 곤경에 처했습니다. 멍구에 부딪히면 저 멀리 날아가니 조심하세요!"
     },
     {
@@ -1587,6 +1663,7 @@ const games = [
         "difficulty": 2.32,
         "imageClass": "code-777",
         "icon": "📟",
+        "bestPlayers": 4,
         "description": "스파이가 되어 모스코드를 사용해 암호를 주고 받자. #보드피아 책박스"
     },
     {
@@ -1600,6 +1677,7 @@ const games = [
         "difficulty": 1.12,
         "imageClass": "cookierun-loveletter",
         "icon": "🍪💌",
+        "bestPlayers": 4,
         "description": "괴도맛 쿠키는 어디에 있을까? 호두맛 쿠키를 도와 괴도맛 쿠키의 흔적을 찾고, 이를 위해 적절히 다른 쿠키들의 도움을 받으세요. 게임에서 승리하기 위해서는 호두맛 쿠키처럼 번뜩이는 추리력을 발휘해 마지막까지 살아남아야 한답니다!"
     },
     {
@@ -1613,6 +1691,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "cookierun-kingdom",
         "icon": "🍪🏰",
+        "bestPlayers": 4,
         "description": "마녀들이 구워낸 달콤하고 바삭한 키들의 세상... 소울잼을 가진 영웅 쿠키들의 등장으로 쿠키 문명은 대부흥을 맞이 하는데... 그러나 그것도 잠시... 어둠을 자처하는 자들의 등장으로 온 땅에 혼돈의 그림자가 드리우기 시작했다. 지금 바로 쿠키들의 운명이 걸린 최후의 전쟁이 시작된다."
     },
     {
@@ -1626,6 +1705,7 @@ const games = [
         "difficulty": 2.13,
         "imageClass": "cubitos",
         "icon": "🎲🏎️",
+        "bestPlayers": 4,
         "description": "경쾌한 주사위 레이스, 손 맛 좋은 주사위 엔진 빌딩게임. 주사위를 잘 조합해 콤보를 터트리면 부스터 온!"
     },
     {
@@ -1639,6 +1719,7 @@ const games = [
         "difficulty": 1.6,
         "imageClass": "crime-hotel",
         "icon": "🏨❓",
+        "bestPlayers": 4,
     },
     {
         "id": "kingdomino-stone-age",
@@ -1651,6 +1732,7 @@ const games = [
         "difficulty": 2.14,
         "imageClass": "kingdomino-stone-age",
         "icon": "🍖",
+        "bestPlayers": 4,
         "description": "눈 떠보니 석기시대 부족장이 되어있다? 우리 부족, 어디까지 성장할 수 있을까? 2017 독일 올해의 게임상 ‘킹도미노’가 석기시대 버전으로 돌아왔습니다."
     },
     {
@@ -1664,6 +1746,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "tasso-banana",
         "icon": "🍌",
+        "bestPlayers": 4,
         "description": "바나나 나무에 바나나가 열립니다. 바나나 스틱을 보드 위에 쌓으세요. 다른 스틱 두 개 위에 쌓는 데 성공했다면 스틱을 한 번 더 놓을 수 있습니다. 자신의 스틱을 먼저 모두 쌓으면 승리합니다."
     },
     {
@@ -1677,6 +1760,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "tasso-safari",
         "icon": "🦓",
+        "bestPlayers": 4,
         "description": "스틱과 스틱사이의 거리 가늠 게임"
     },
     {
@@ -1690,6 +1774,7 @@ const games = [
         "difficulty": 1.98,
         "imageClass": "takenoko",
         "icon": "🐼",
+        "bestPlayers": 3,
         "description": "여러분은 친교의 선물로 받은 거대한 판다를 잘 돌봐야 합니다. 땅을 견착하고 물을 대며, 판다가 먹을 대나무를 키워나가세요. 하지만 다 자라지도 않은 새싹도 먹어 치우는 판다의 주체할 수 없는 식욕을 만족시킬 수 있을까요?",
         "expansion": "타케노코 : 치비스"
     },
@@ -1704,6 +1789,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "takoyaki-master",
         "icon": "🍡",
+        "bestPlayers": 4,
         "description": "누구보다 먼저 타코야끼를 만드세요!"
     },
     {
@@ -1717,6 +1803,7 @@ const games = [
         "difficulty": 2.35,
         "imageClass": "ra",
         "icon": "🌞",
+        "bestPlayers": 3,
         "description": "태양신 라라는 태양의 힘을 사용해 다른 플레이어보다 더 자신의 왕조를 발전시키는 것을 목표로 합니다. 다른 플레이어들과 경매를 통해 발전있는 타일들을 효율적으로 얻어 자신의 왕조를 번영시키세요!"
     },
     {
@@ -1730,6 +1817,7 @@ const games = [
         "difficulty": 1.97,
         "imageClass": "tokaido-deluxe",
         "icon": "🗾",
+        "bestPlayers": 4,
         "description": "플레이어는 옛 일본의 여행객입니다. 플레이어들은 권위있는 토카이도를 따라 가능한 풍부한 경험으로 여행을 채우기 위해 노력할 것입니다. 풍부한 경험을 채우기 위해서는, 그들은 아름다운 전원지역을 따라 여행하고 맛있는 특선 요리들을 맛보며, 특산품들을 구입하고, 온천지의 혜택을 즐기며 잊지못할 만나의 추억을 간직해야 합니다.",
         "expansion": "토카이도 : 교차로, 토카이도 : 마츠리"
     },
@@ -1744,6 +1832,7 @@ const games = [
         "difficulty": 1.71,
         "imageClass": "topiary",
         "icon": "✂️🌳",
+        "bestPlayers": 4,
         "description": "아름다운 정원에서 예술품을 감상합시다. 다만 순서대로"
     },
     {
@@ -1757,6 +1846,7 @@ const games = [
         "difficulty": 1.68,
         "imageClass": "tonga-bonga",
         "icon": "⛵",
+        "bestPlayers": 4,
         "description": "통가봉가에서 여러분은 돈을 벌기 위해 자신의 배를 운용하는 야심찬 배의 주인입니다. 유능한 선원을 고용해서 남보다 빨리 도착할수록 더 큰 돈을 벌게 됩니다. 최고의 선원을 균형있는 투자로 고용하고 최고의 배의 주인이 되어보세요!"
     },
     {
@@ -1770,6 +1860,7 @@ const games = [
         "difficulty": 1.21,
         "imageClass": "triqueta",
         "icon": "💠",
+        "bestPlayers": 3,
         "description": "정확한 3개의 토큰으로 완벽한 트리게타를 완성하세요. 트리게타란? '세 방향에서 빌어와 하나로 엮인 매듭'이라는 뜻을 가진 상징으로, 세 가지가 하나로 연결됨을 의미합니다."
     },
     {
@@ -1783,6 +1874,7 @@ const games = [
         "difficulty": 2.34,
         "imageClass": "tichu",
         "icon": "🃏",
+        "bestPlayers": 4,
         "description": "티츄는 2:2 팀전 게임입니다. 한 팀이 1000점 이상 얻었을 때 더 높은 점수를 얻은 팀이 승리합니다."
     },
     {
@@ -1796,6 +1888,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "ttr-europe-15",
         "icon": "🚂",
+        "bestPlayers": 4,
         "description": "전 세계에서 가장 유명한 기차 여행 보드게임. 포호환 유럽 여행에 여러분을 초대합니다."
     },
     {
@@ -1809,6 +1902,7 @@ const games = [
         "difficulty": 1.3,
         "imageClass": "tiki-topple",
         "icon": "🗿",
+        "bestPlayers": 4,
         "description": "티키상들을 이동하여 나의 목표를 이루자"
     },
     {
@@ -1822,6 +1916,7 @@ const games = [
         "difficulty": 1.88,
         "imageClass": "faraway",
         "icon": "🗺️",
+        "bestPlayers": 4,
         "description": "안개의 바다 너머에는 신비로운 대륙 알룰라가 있습니다. 끊임없이 변하는 섬을 여행하며 알룰라의 주민을 만나 섬의 비밀을 찾고 다른 경쟁자보다 더 많은 명성을 얻으세요."
     },
     {
@@ -1835,6 +1930,7 @@ const games = [
         "difficulty": 1.96,
         "imageClass": "foundations-of-rome",
         "icon": "🏛️",
+        "bestPlayers": 4,
         "description": "로마에 오신 것을 환영합니다! 우리의 위대한 건국왕이신 로물루스의 요청에 따라 여러분들은 동료 건축가와 함께 이 영원한 도시에 넓은 거주지, 번화한 시장, 장엄한 기념물을 짓는 영광을 갖게 될 것입니다!"
     },
     {
@@ -1848,6 +1944,7 @@ const games = [
         "difficulty": 2.22,
         "imageClass": "fantastic-factories",
         "icon": "🏭",
+        "bestPlayers": 3,
         "description": "여러분만의 효율적인 공장단지를 세워서 다른 플레이어들과 경쟁 하세요. 청사진 카드를 조심스러 검토하여 여러분의 일꾼들을 훈련 시키고 최대한 많은 상품들을 생산해야 게임에서 승리할 수 있습니다.",
         "expansion": "판타스틱 팩토리 : 새로운 회사들, 기업 전쟁"
     },
@@ -1862,6 +1959,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "for-sale-autorama",
         "icon": "🚗",
+        "bestPlayers": 4,
         "description": "자동차 경매를 도와줄 유능한 어드바이저를 고용하세요! 어드바이저의 능력에 따라 자동차 경매의 결과가 뒤바뀝니다. 최고 경영자가 되기 위한 당신의 선택은?"
     },
     {
@@ -1875,6 +1973,7 @@ const games = [
         "difficulty": 1.75,
         "imageClass": "potion-explosion-10",
         "icon": "⚗️",
+        "bestPlayers": 4,
         "description": "여러분은 후러빌로룸 마법 학교의 마지막 기말고사를 앞두고 있는 마녀와 마법사들입니다. 전설의 재료를 사용해 물약을 만들고 마법 학교 최고의 우등생이 되어보세요!"
     },
     {
@@ -1915,6 +2014,7 @@ const games = [
         "difficulty": 1.43,
         "imageClass": "parade",
         "icon": "🐱",
+        "bestPlayers": 4,
         "description": "이상한 나라에서 펼쳐지는 앨리스와 친구들의 축제 퍼레이드"
     },
     {
@@ -1928,6 +2028,7 @@ const games = [
         "difficulty": 2.27,
         "imageClass": "first-rat",
         "icon": "🐀",
+        "bestPlayers": 3,
         "description": "치즈 달을 향한 고물상 쥐들의 위대한 경주."
     },
     {
@@ -1941,6 +2042,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "paper-safari",
         "icon": "🦒",
+        "bestPlayers": 4,
         "description": "귀여운 동물 종이인형으로 당신만의 사파리를 꾸며보세요."
     },
     {
@@ -1954,6 +2056,7 @@ const games = [
         "difficulty": 1.12,
         "imageClass": "penguin-party",
         "icon": "🐧",
+        "bestPlayers": 5,
         "description": "펭귄카드를 피라미드 모양으로 내려 놓아요. 수평으로 인접한 카드 2장 이상이 나왔다면, 그 위층에 카드를 놓을 수 있습니다. 다만, 아래에 놓은 2장의 카드 2색 중 한가지 색의 카드만 놓을 수 있습니다. 더 이상 카드를 내려놓을 수 없으면, 즉시 라운드에서 빠지고 손에 남은 카드 수 만큼 벌점 토큰을 받습니다. 아무도 카드를 낼 수 없게되면 그 라운드가 끝납니다."
     },
     {
@@ -1967,6 +2070,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "push-fish",
         "icon": "🎣",
+        "bestPlayers": 4,
         "description": "손 맛이 느껴지는 본격 낚시 게임!"
     },
     {
@@ -1980,6 +2084,7 @@ const games = [
         "difficulty": 2.24,
         "imageClass": "pueblo",
         "icon": "🏠",
+        "bestPlayers": 4,
         "description": "푸에블로는 미국 뉴멕시코 원주민들의 아름다운 진흙의 건축물을 말합니다. 여러분은 이제 푸에블로의 건축가가 되어 집을 짓습니다."
     },
     {
@@ -1993,6 +2098,7 @@ const games = [
         "difficulty": 1.56,
         "imageClass": "project-l",
         "icon": "🧩",
+        "bestPlayers": 3,
         "description": "새로운 공간 퍼즐 등장! 퍼즐을 맞추고, 블록을 얻어 더 큰 퍼즐에 도전합니다! 최종 승리를 위한 전략을 세워가는 새로운 공간 퍼즐 게임.",
         "expansion": "프로젝트 L : 피닉스, 프로젝트 L : 고스트 블록"
     },
@@ -2007,6 +2113,7 @@ const games = [
         "difficulty": 2.2,
         "imageClass": "flamecraft",
         "icon": "🐲",
+        "bestPlayers": 3,
         "description": "이 마을에는 창의적이고 작은 기술자인 장인 드래곤들이 함께 살고 있습니다. 여러분은 드래곤을 능숙하게 다루는 불꽃지기입니다. 드래곤과 대화하고, 적절한 상점에 배치하고, 마법을 활용해 상점 주민들을 돕고, 명성을 높이세요."
     },
     {
@@ -2020,6 +2127,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "film-it",
         "icon": "📸",
+        "bestPlayers": 3,
         "description": "<필름을 감아!>는 필름의 순서를 조정하여 예쁜 사진집을 만드는 카드 게임입니다. 햇살이 비추는 동안 자신만의 방식으로 사진을 찍으세요. 피사체를 고르고, 필름을 감고, 완벽한 순간에 셔터를 누르세요. 누가 가장 아름다운 사진집을 완성할까요?"
     },
     {
@@ -2033,6 +2141,7 @@ const games = [
         "difficulty": 2.01,
         "imageClass": "harmonies",
         "icon": "🌿",
+        "bestPlayers": 2,
         "description": "손바닥만 한 판 위에 여러분의 취향을 담은 작고 아름다운 생태계를 만들어 주세요. 풍경 토큰을 놓아 산, 강, 들판 등 다양한 지형을 만들고 동물들이 살아가기에 알맞은 환경이 조성되면 동물들이 저절로 찾아옵니다. 고민하여 자연을 가꾸다 보면 어느새 아름다운 풍경이 눈앞에 펼쳐져 있습니다."
     },
     {
@@ -2046,6 +2155,7 @@ const games = [
         "difficulty": 1.49,
         "imageClass": "high-society",
         "icon": "🎩",
+        "bestPlayers": 4,
         "description": "자! 여기 모두가 누리고 싶어하는 삶이 경매에 나왔습니다. 남은 돈이 가장 적은 플레이어는 탈락하고, 카드 점수를 가장 많이 얻은 플레이어가 승리합니다. 최대한 많은 매물과 행운을 얻고, 불행은 최대한 피하세요."
     },
     {
@@ -2059,6 +2169,7 @@ const games = [
         "difficulty": 1.02,
         "imageClass": "easy-come-easy-go",
         "icon": "🎲",
+        "bestPlayers": 2,
         "description": "요트 경매장에 오신것을 환영합니다! 화려하고 날렵하게 생긴 요트들이 당신의 선택을 기다리고 있습니다. 모든 요트들은 주사위 4개만 잘 굴린다면 가지고 올 수 있지요. 하지만, 기억하세요! 쉽게 가져온 요트는 쉽게 손을 떠난답니다!"
     },
     {
@@ -2072,6 +2183,7 @@ const games = [
         "difficulty": 3.04,
         "imageClass": "dinosaur-island",
         "icon": "🦖",
+        "bestPlayers": 3,
         "description": "나만의 쥬라기 공원을 만들어보세요. 공룡DNA를 수집하고 연구하여 공룡을 다시 살려내고 그 공룡을 통해 공원 방문객들에게 스릴을 제공하세요."
     },
     {
@@ -2085,6 +2197,7 @@ const games = [
         "difficulty": 2.7,
         "imageClass": "grand-austria-hotel",
         "icon": "🏨",
+        "bestPlayers": 2,
         "description": "1900년대 초, 오스트리아-헝가리 제국의 수도 빈은 전 세계의 예술가, 정치인, 여행객으로 붐비는 유럽 문화의 중심 도시였습니다. 여러분은 빈에서 새롭게 호텔을 개업한 호텔리어로서, 최고 수준의 호텔을 만들기 위해 객실을 넓히고, 유능한 직원을 고용하고, 손님들에게 식사를 대접하며 최고의 서비스를 제공해야 합니다. 호텔의 운영뿐만 아니라 황제 폐하께 경의를 표하는 것 역시 호텔의 명성을 유지하는데 꼭 필요합니다. 여러분의 호텔을 오스트리아 최고의 품격이 함께 하는 곳으로 만들어 보시길 바랍니다.",
         "expansion": "그랜드 오스트리아 호텔 : 왈츠"
     },
@@ -2099,6 +2212,7 @@ const games = [
         "difficulty": 3.06,
         "imageClass": "glen-more-2",
         "icon": "🏰",
+        "bestPlayers": 3,
         "description": "클랜을 이끌고 스코틀랜드 역사에 한 획을 그으세요. 클랜의 영광을 위하여!"
     },
     {
@@ -2112,6 +2226,7 @@ const games = [
         "difficulty": 3.39,
         "imageClass": "newton",
         "icon": "🍎",
+        "bestPlayers": 3,
         "description": "18세기 미개척 분야에 대한 활발한 연구와 함께 위대한 과학적 발견이 뒤따른 시대였습니다. 그 시절 과학계의 경쟁은 매우 치열 했습니다. 여러분은 전도 유망한 과학자가 되어 세계 과학계의 가장 존경받는 학자가 되어야 합니다.",
         "expansion": "뉴턴 : 위대한 발견"
     },
@@ -2126,6 +2241,7 @@ const games = [
         "difficulty": 2.7,
         "imageClass": "mexica",
         "icon": "🗿",
+        "bestPlayers": 4,
         "description": "운하를 파고 Tenochtitlan의 수로를 따라 정착지를 건설하세요. #가면 3부작"
     },
     {
@@ -2139,6 +2255,7 @@ const games = [
         "difficulty": 2.43,
         "imageClass": "cuzco",
         "icon": "⛰️",
+        "bestPlayers": 4,
         "description": "안데스 산맥의 고산지대, 쿠스코, 이곳에 잉카 문명의 새 기반을 만듭니다. 당신은 위대한 잉카족의 고위인사로서 쿠스코 지역을 발전시켜야 합니다. 계단식 논에 물을 대고 도시에 사원을 지어 성대한 축제를 열고 큰 명성을 얻어 황제의 자리에 오를 수 있습니다. #가면 3부작"
     },
     {
@@ -2152,6 +2269,7 @@ const games = [
         "difficulty": 2.8,
         "imageClass": "tikal",
         "icon": "🏺",
+        "bestPlayers": 4,
         "description": "울창한 정글 속에서 숨겨진 사원을 발견하고, 귀중한 보물을 수집하는 탐험가가 되어 보세요! 마야문명, 남아메리카의 가장 강력한 왕국의 수도 티칼. 그 찬란했던 문명을 발견한다. #가면 3부작"
     },
     {
@@ -2165,6 +2283,7 @@ const games = [
         "difficulty": 2.9,
         "imageClass": "rajas-of-the-ganges",
         "icon": "🐘",
+        "bestPlayers": 3,
         "description": "세계에서 가장 번성하고 안정적이던 인도의 무굴 제국. 그 화려했던 제국의 역사 속으로 다함께 빠져볼까요?",
         "expansion": "갠지스의 라자 : 구디 박스1, 갠지스의 라자 : 구디 박스2"
     },
@@ -2179,6 +2298,7 @@ const games = [
         "difficulty": 2.91,
         "imageClass": "dune-imperium",
         "icon": "🏜️",
+        "bestPlayers": 3,
         "description": "‘알려진 우주’ 전역을 통틀어도 이제 가치 있는 자원이라고는 스파이스 멜란지밖에 남지 않았습니다. 이 자원은 혹독한 기후의 사막 행성인 아라키스에서만 발견되며, 바로 이 스파이스 통제권이야말로 임페리움 대가문들 사이에서 갈등의 불씨라고 할 수 있습니다. 이제 그 불씨는 수많은 세력가, 심지어 황제까지 번져, 더이상 충돌을 피할 수 없게 되었습니다.",
         "expansion": "듄 임페리움 : 익스의 부상, 듄 임페리움 : 불멸"
     },
@@ -2193,6 +2313,7 @@ const games = [
         "difficulty": 3.49,
         "imageClass": "dune-imperium-uprising",
         "icon": "🕵️‍♂️",
+        "bestPlayers": 3,
         "description": "스파이스 멜란지의 땅, 아라키스에서 거대한 전쟁이 다시 펼쳐집니다. 듄의 패권을 둘러싼 경쟁에 뛰어드십시오. 에이전트를 배치해 동맹을 맺고 자원을 확보하며, 스파이를 통해 전략적 실익을 극대화하십시오. 전투에서의 승리가 한층 더 큰 보상을 제공할 것입니다."
     },
     {
@@ -2206,6 +2327,7 @@ const games = [
         "difficulty": 3.0,
         "imageClass": "deities",
         "icon": "🕍",
+        "bestPlayers": 3,
         "description": "새로운 문명이 움트고 있는 미지의 세계, 신들은 사람들을 도와 풍요와 번영을 선물합니다. 이에 사람들은 아름다운 건물을 짓고 신들의 이름을 높일 것입니다. 가장 영향력이 강한 최고의 신이 되어보세요!"
     },
     {
@@ -2219,6 +2341,7 @@ const games = [
         "difficulty": 3.46,
         "imageClass": "la-granja-deluxe",
         "icon": "🚜",
+        "bestPlayers": 3,
         "description": "라 그랑하는 햇살이 가득한 마요르카섬에서 농지를 경영하는 게임입니다. 작물을 수확하고, 돼지를 기르며, 조력자를 고용해 상품도 배달하고 중앙 시장에서 유리한 자리를 차지해 승점을 획득해야 합니다. 가장 많은 승점을 얻은자가 승리합니다."
     },
     {
@@ -2245,6 +2368,7 @@ const games = [
         "difficulty": 2.86,
         "imageClass": "five-tribes",
         "icon": "🐫",
+        "bestPlayers": 2,
         "description": "천일야화의 세계 어딘가에 존재한다는 전설의 왕국 나칼라. 여러분의 카라반이 그곳에 도착했을 때, 늙은 술탄은 세상을 떠났고 왕좌는 주인 없이 텅 비었습니다. 왕국에는 다섯 부족을 교묘히 다루는 이방인이 이 전설적인 도시 국가를 통치하게 될 것이라는 오랜 예언이 내려옵니다. 당신이 예언의 주인공이 될 수 있을까요? 옛 정령들을 불러내고, 부족들을 적재적소 이동시켜 나칼라의 술탄이 되세요!",
         "expansion": "다섯 부족 : 나칼라의 장인들"
     },
@@ -2259,6 +2383,7 @@ const games = [
         "difficulty": 3.25,
         "imageClass": "taiwan-tea-chronicles",
         "icon": "🍵",
+        "bestPlayers": 3,
         "description": "대만 차 연대기에서 플레이어들은 차 농장주가 되어 최고 품질의 찻잎을 수확하고, 차 생산 기술을 발전시키고, 국내외 시장을 개척 해가면서 명성을 얻기 위해 분투합니다. 자원들을 현명하게 분배하여 차의 명성을 드높이고 대만의 가장 명망 높은 차 농장주가 되어야 합니다."
     },
     {
@@ -2272,6 +2397,7 @@ const games = [
         "difficulty": 3.44,
         "imageClass": "dead-reckoning",
         "icon": "🏴‍☠️",
+        "bestPlayers": 3,
         "description": "해적의 바다에서 흥미진진한 모험이 펼쳐집니다! 순풍이 불어옵니다. 바다에 배를 띄우세요! 금화를 가장 많이 모으는 사람이 승리합니다. 어떻게 모으냐고요? 섬에 거점을 두어 자원을 모을 수도 있고, 바다 위 곳곳에서 보물을 발견해도 됩니다. 혹은 다른 배를 습격해도 됩니다. 선택은 여러분의 몫입니다.",
         "expansion": "데드 레커닝 : 깊은 바다의 전설, 데드 레커닝 : 소금과 천둥, 데드 레커닝 : 뱃사람 확장"
     },
@@ -2286,6 +2412,7 @@ const games = [
         "difficulty": 2.71,
         "imageClass": "last-will",
         "icon": "📜",
+        "bestPlayers": 4,
         "description": "억만장자 삼촌이 유언을 남겼다. 자기는 돈을 잘 못 써보았다며 잘쓰는 사람에게 유산을 준다는데...",
         "expansion": "라스트 윌 : 해고하기"
     },
@@ -2300,6 +2427,7 @@ const games = [
         "difficulty": 2.99,
         "imageClass": "race-for-the-galaxy",
         "icon": "🌌",
+        "bestPlayers": 2,
         "description": "은하계를 놓고 경쟁하라. 수많은 전략을 상상하게 하는 방대한 카드, 그리고 그것을 한데 엮은 간결하고 속도감 있는 게임 진행, 모던 보드게임의 고전 <레이스 포 더 갤럭시>",
         "expansion": "레이스 포 더 갤럭시 : 첫 번째 아크"
     },
@@ -2314,6 +2442,7 @@ const games = [
         "difficulty": 3.38,
         "imageClass": "rats-of-wistar",
         "icon": "🐭",
+        "bestPlayers": 3,
         "description": "과학 실험실을 탈출한 네 마리의 영리한 쥐들이 새로운 삶을 찾아 나섭니다. 이들은 농장을 은신처 삼아, 도구와 자원을 모아 발명품을 만들고, 식민지의 지도자가 되기 위한 경쟁을 시작합니다."
     },
     {
@@ -2327,6 +2456,7 @@ const games = [
         "difficulty": 2.98,
         "imageClass": "rococo-deluxe",
         "icon": "👗",
+        "bestPlayers": 3,
         "description": "로코코가 유행하는 프랑스로 여러분을 초대합니다. 게임 속 플레이어들은 누구보다도 가장 화려하고 우아한 의상을 만들어야 합니다. 직원을 고용해서 의상을 제작하고, 제작한 의상을 빌려주거나 판매합니다. 그리고 무도회에 참가하여 가장 명성이 높은 플레이어가 승리합니다."
     },
     {
@@ -2354,6 +2484,7 @@ const games = [
         "difficulty": 3.34,
         "imageClass": "lewis-and-clark",
         "icon": "🛶",
+        "bestPlayers": 3,
         "description": "1803년, 개척되지 않은 북아메리카 서부지역을 탐험하기 위해 미 합중국은 두 명의 모험가 메리워더 루이스와 윌리엄 클라크를 보내기로 하였습니다. 미지의 영역을 개척하여 서쪽 끝에서 닿아야 하는 험난한 임무, 하지만 동료를 모으고 인디언 원주민의 도움을 얻어 앞으로 니아가야만 합니다. 원정대의 주인공이 되어 서부개척의 모험을 떠나볼까요?"
     },
     {
@@ -2367,6 +2498,7 @@ const games = [
         "difficulty": 2.43,
         "imageClass": "root",
         "icon": "🦊🦝",
+        "bestPlayers": 4,
         "description": "이곳은 숲속 나라 우드랜드, 한때는 여러 동물들이 모닥불 앞에 모여 앉아 노래 부르고 춤추는 소리가 온 나무 사이로 퍼질 정도로 평화로운 곳이었습니다. 하지만 그날의 침공 이후, 모든것이 바뀌었습니다.",
         "expansion": "루트 : 리버포크, 루트 : 망명자와 게릴라 카드 팩, 루트 : 언더월드, 루트 : 방랑자 팩, 루트 : 태엽장치"
     },
@@ -2381,6 +2513,7 @@ const games = [
         "difficulty": 2.65,
         "imageClass": "castles-mad-king-ludwig",
         "icon": "🏰",
+        "bestPlayers": 4,
         "description": "루트비히의 취향에 맞춰 웅장하고 아름다운 성을 짓는 타일 놓기 게임"
     },
     {
@@ -2394,6 +2527,7 @@ const games = [
         "difficulty": 3.44,
         "imageClass": "revive",
         "icon": "🌱",
+        "bestPlayers": 3,
         "description": "지구 종말 이후.. 지구는 완전히 얼음으로 뒤덮였고, 살아남은 자들은 종족 단위로 지하에 모여 살았습니다. 5천 년이 흐른 뒤 대지가 녹기 시작하자, 각 종족들은 땅 위로 올라와 새로운 세계를 건설하기 위한 논의를 시작합니다. \"얼음이 녹고, 생명이 움트고 있습니다. 우리 다시 시작해봅시다\"",
         "expansion": "리바이브 : 심해의 부름"
     },
@@ -2408,6 +2542,7 @@ const games = [
         "difficulty": 3.41,
         "imageClass": "marco-polo-2",
         "icon": "🐫",
+        "bestPlayers": 4,
         "description": "마르코 폴로의 여정은 끝나지 않았습니다! 동쪽을 향한 오랜 여정 끝에 베이징에 도착한 마르코 폴로는 이제 쿠빌라이 칸의 명명을 받아 다시 서쪽으로 여행을 떠납니다. 칸의 이름으로 제국의 서쪽 끝에서 부와 명예를 찾아내야 합니다!",
         "expansion": "마르코 폴로 2 : 카라반"
     },
@@ -2422,6 +2557,7 @@ const games = [
         "difficulty": 3.1,
         "imageClass": "my-village",
         "icon": "🏡",
+        "bestPlayers": 4,
         "description": "마을 연대기의 새로운 막이 올랐습니다. 이제 플레이어들은 각자 자신의 마을을 부와 명예의 길로 이끌고자 합니다. 마을은 작은 농장과 각기 다른 작업을 가진 마을 주민 5명으로 출발합니다. 당신은 건물과 들판을 넓히고 여행을 떠나고 손님과 수도사들을 끌어모으면서 마을을 발전시켜 나갑니다."
     },
     {
@@ -2435,6 +2571,7 @@ const games = [
         "difficulty": 2.86,
         "imageClass": "maharaja",
         "icon": "🕌",
+        "bestPlayers": 4,
         "description": "인도의 위대한 왕인 마하라자는 매년 거주지를 바꾸고 거주지역의 신에게 예배를 드립니다. 플레이어는 각자 자신의 신을 모시는 신관이 되어 마하라자를 기쁘게 하기 위해 신의 동상을 만듭니다."
     },
     {
@@ -2448,6 +2585,7 @@ const games = [
         "difficulty": 2.46,
         "imageClass": "mangrovia",
         "icon": "🛶",
+        "bestPlayers": 4,
         "description": "플레이어는 각 부족의 족장이 되어 부족을 위한 최고의 땅에 오두막을 지어야 합니다."
     },
     {
@@ -2461,6 +2599,7 @@ const games = [
         "difficulty": 3.39,
         "imageClass": "merv",
         "icon": "🕌🐫",
+        "bestPlayers": 3,
         "description": "'메르브'는 세계에서 가장 큰 도시의 흥망성쇠를 그린 경제 게임입니다. 플레이어는 무역 거래, 긍정 음모, 모스크를 통한 종교 활동 등을 통해 실크로드의 중심부에서 권려고가 부를 축적하기 위한 경쟁을 합니다. 그러나 번영을 이루고 있는 성벽 너미에선 도시를 약탈하기 위한 무리기 다기오고 있습니다. 성벽 건설에 참여 한다면 부를 축적할 기회를 읽을지도 모르지만, 보호되지 못한 곳한 있던 재산은 불에 타 없어질 수도 있다는 딜레마를 겪게 됩니다."
     },
     {
@@ -2474,6 +2613,7 @@ const games = [
         "difficulty": 2.88,
         "imageClass": "motor-city",
         "icon": "🚗",
+        "bestPlayers": 2,
         "description": "디트로이트 자동차 산업의 황금기 속으로 뛰어들 때입니다! 자동차 공장을 운영하며 다양한 선택을 고민하세요! 제대로 된 엔진 빌딩 전략을 즐길 수 있습니다!"
     },
     {
@@ -2487,6 +2627,7 @@ const games = [
         "difficulty": 2.6,
         "imageClass": "champions-of-midgard",
         "icon": "🛡️",
+        "bestPlayers": 3,
         "description": "강력한 지도자 야를이 세상을 등지고, 몬스터가 창궐하여 절망이 드리울때, 혼란에 빠진 미드가르드를 구원할 챔피언이 나타나리라!",
         "expansion": "미드가르드의 챔피언 : 다크 마운틴, 미드가르드의 챔피언 : 발할라"
     },
@@ -2501,6 +2642,7 @@ const games = [
         "difficulty": 3.03,
         "imageClass": "white-castle",
         "icon": "🏰🏯",
+        "bestPlayers": 3,
         "description": "가문의 이름을 드높이려는 자, 백로성으로 모이라! 성이 외관이 백로를 닮았다 하여 백로성이라 불리는 히메지 성. 1761년, 많은 군소 가문들은 다이묘 사카이 다다즈미가 성주로 역임하는 히메지 성에 가문 구성원을 보내 신분 상승을 노렸습니다. 여러분의 가문 구성원을 적재적소에 보내고, 자원을 효율적으로 관리하여 이 치열한 경쟁 속에서 가문의 미래를 확보하세요!",
         "expansion": "백로성 : 말차"
     },
@@ -2515,6 +2657,7 @@ const games = [
         "difficulty": 2.97,
         "imageClass": "castles-of-burgundy-special",
         "icon": "🏰🍷",
+        "bestPlayers": 2,
         "description": "15세기 프랑스 중부 버건디의 영향력있는 군주들은 전략적 확장과 교역을 통해 영지의 명성을 높이는 목표를 심었습니다. 주사위를 굴리고 승리로 이끌어 줄 전략을 찾아서 선택하세요. 교역과 농장 경영, 건설과 연구 투자와 같은 다양한 방법을 통해 번영과 명예를 획득할 수 있습니다."
     },
     {
@@ -2528,6 +2671,7 @@ const games = [
         "difficulty": 3.62,
         "imageClass": "bonfire-big-box",
         "icon": "🔥🔥",
+        "bestPlayers": 3,
         "description": "회톳불을 점화하고, 황혼을 몰아내라! 촘촘한 구조에서 다양한 길을 제시하는, 환성적인 전략 게임. 모든 생명의 근원인 도시의 화톳불이 꺼지자, 세상이 어둠에 잠겼습니다. 빛의 수호자들은 성스러운 군도로 물러나, 과업에 이루고 다시금 화톳불을 밝힐 이들을 기다립니다. 여러분은 숲 속의 작은 노움 부족이 되어 자신의 운명을 예지하고 수호자들이 신뢰를 얻어 화톳불을 다시 환하게 비춰야 합니다."
     },
     {
@@ -2541,6 +2685,7 @@ const games = [
         "difficulty": 2.53,
         "imageClass": "raiders-of-the-north-sea",
         "icon": "⚓⚔️",
+        "bestPlayers": 3,
         "description": "바이킹 부족을 거느리고 북으로 침략하자!",
         "expansion": "북해의 침략자 : 영광의 전당, 북해의 침략자 : 영웅의 전당, 북해의 침략자 : 프로모 카드, 북해의 침략자 : 컬렉터즈 박스"
     },
@@ -2555,6 +2700,7 @@ const games = [
         "difficulty": 2.78,
         "imageClass": "red-cathedral",
         "icon": "⛪🇷🇺",
+        "bestPlayers": 3,
         "description": "16세기 중엽, 러시아의 '잔혹한 황제' 이반 4세의 명령으로 지어진 성 바실리 대성당은 설계에만 수십 년이 걸렸으며, 수많은 건설팀이 참여해 성당의 각 구역을 나누어 지었다고 합니다. 여러분은 각자 이 붉은 대성당을 짓는 건설팀의 수장이 되어 건설에 필요한 재료를 얻고, 영향력을 행사해 도움을 받기도 하며 이 기념비적인 건축물을 완성해야 합니다.",
         "expansion": "붉은 대성당 : 계약자"
     },
@@ -2569,6 +2715,7 @@ const games = [
         "difficulty": 3.59,
         "imageClass": "bruxelles-1893",
         "icon": "🏛️🇧🇪",
+        "bestPlayers": 4,
         "description": "1893년 브뤼셀에서, 당신은 벨기에 수도에서 아르누보의 확고한 명성을 가진 유명한 건축가 중에 한 명 입니다. 당신의 조수들은 당신이 아르누보 건물의 건설이나 예술작품을 창소하는 것을 도와줍니다. 왕국이나 시청에서 당신의 영향력을 증가 시키고 당신의 극장니들이 중에 만니는 공인으로부터 이익도 얻기미며 건축기로서 명성을 높여나가는 것이 목표입니다."
     },
     {
@@ -2582,7 +2729,9 @@ const games = [
         "difficulty": 2.73,
         "imageClass": "black-friday",
         "icon": "📉💹",
-        "description": "오늘도 증권 거래소에는 투자자들의 발길이 끊이지 않습니다. 블랙 프라이데이는 종잡을 수 없는 주식 시장의 변화를 잘 반영한 전략 게임입니다. 주식 투자자가 되어 가능한 많은 돈을 벌어 들이고, 저렴한 가격일 때 금괴를 매입해 자산을 구축하세요."
+        "bestPlayers": 4,
+        "description": "오늘도 증권 거래소에는 투자자들의 발길이 끊이지 않습니다. 블랙 프라이데이는 종잡을 수 없는 주식 시장의 변화를 잘 반영한 전략 게임입니다. 주식 투자자가 되어 가능한 많은 돈을 벌어 들이고, 저렴한 가격일 때 금괴를 매입해 자산을 구축하세요.",
+        "images": "블랙프라이데이.JPG"
     },
     {
         "id": "blood-rage",
@@ -2595,6 +2744,7 @@ const games = [
         "difficulty": 2.88,
         "imageClass": "blood-rage",
         "icon": "🩸🪓",
+        "bestPlayers": 4,
         "description": "라그나로크가 영토를 하나하나 잠식하는 동안 바이킹들은 침략과 약탈 그리고 생과사를 가늠하는 전투를 합니다.",
         "expansion": "블러드 레이지 : 아스가르드의 신들, 블러드 레이지 : 아스가르드의 정령사들, 블러드 레이지 : 5인 양부족 확장"
     },
@@ -2609,6 +2759,7 @@ const games = [
         "difficulty": 2.9,
         "imageClass": "viticulture-essential",
         "icon": "🍷🍇",
+        "bestPlayers": 3,
         "description": "이탈리아에서 최고의 양조장 주인이 되자.",
         "expansion": "비티컬처 : 투스카니 에센셜 에디션, 비티컬처 : 라인밸리에서 온 방문객들"
     },
@@ -2623,6 +2774,7 @@ const games = [
         "difficulty": 3.16,
         "imageClass": "village-big-box",
         "icon": "🏘️⏳",
+        "bestPlayers": 4,
         "description": "마을에 돌아오신 것을 환영합니다! 이 마을에서의 삶은 꽤나 고달프지만, 주민들은 그 고됨을 양분삼아 마을을 발전시키기도 합니다. 여러분은 가문의 명성을 드높이려는 가장이 되어 명망을 얻기 위해 열심히 일하게 됩니다. 가장 충실한 삶을 사는 사람만이 마을 연대기에 가문의 이름을 영원토록 남길 것입니다."
     },
     {
@@ -2636,6 +2788,7 @@ const games = [
         "difficulty": 2.63,
         "imageClass": "sardegna",
         "icon": "🏝️⛪",
+        "bestPlayers": 3,
         "description": "이 게임은 14세기 사르데냐 섬을 배경으로 하고 있습니다. 사르데냐 섬에 당신의 주민과 성직자를 정착시켜야 합니다. 마을을 건설하고, 항구로 배를 가져오고, 강력한 요새를 지어서 당신의 영향력을 넓히세요."
     },
     {
@@ -2649,6 +2802,7 @@ const games = [
         "difficulty": 2.49,
         "imageClass": "samurai",
         "icon": "⚔️🏯",
+        "bestPlayers": 3,
         "description": "전국시대의 권력투쟁 전략게임"
     },
     {
@@ -2662,6 +2816,7 @@ const games = [
         "difficulty": 3.41,
         "imageClass": "scythe",
         "icon": "⚙️🌾",
+        "bestPlayers": 4,
         "description": "때는 농경과 전쟁, 애태는 상실과 녹슨 장치, 그리고 혁신과 용맹이 공존하는 시대입니다. 전란의 낫질이 휩쓸고 각 이 작고도 매혹적인 이 땅으로 다섯 세력의 인물들이 모여드니, 과연 누가 농부 유로파의 지도자로서 자신의 제국을 건설하고 부와 명예를 누릴 수 있을까요.",
         "expansion": "사이쓰 : 먼 곳에서 온 침략자들이, 사이쓰 : 라이즈 오브 팬리스, 사이쓰 : 더 윈드 갬빗, 사이쓰 : 프로모션 팩"
     },
@@ -2676,6 +2831,7 @@ const games = [
         "difficulty": 3.02,
         "imageClass": "santa-maria",
         "icon": "⛵🗺️",
+        "bestPlayers": 3,
         "description": "르네상스 시대가 저물고 대항해시대의 깃발이 올랐습니다. 크리스토퍼 콜럼버스가 스페인의 카디스 항에서 위대한 출항을 시작한 이래로, 새로운 대륙과 새로운 문명이 눈 앞에 펼쳐졌습니다. 이제 플레이어는 신대륙에 첫 발을 내딛고 개척자로서 자신의 개척영지 구성원 모두가 만족할 수 있는 행복한 개척영지로 만들어야 합니다.",
         "expansion": "산타마리아 : 아메리카 킹덤스"
     },
@@ -2690,6 +2846,7 @@ const games = [
         "difficulty": 2.87,
         "imageClass": "suburbia-collector",
         "icon": "🏙️🏗️",
+        "bestPlayers": 3,
         "description": "보드게임으로 만나는 심시티! 서버비아의 완전판! 작은 도시를 대도시로 발전시켜 나가기 위해서는 전략과 계획이 필요합니다. 플레이어는 각자 도시의 주인이 되어서 그 전략과 계획을 풀어 나가야 하는데요. 도시개발, 환명, 명예 모든 것을 다 지키기는 힘듭니다. 하지만 이런 문제들을 잘 해결하고 인구수를 늘려 가장 많은 인구수를 보유한 플레이어가 이 게임의 승리자가 됩니다."
     },
     {
@@ -2703,6 +2860,7 @@ const games = [
         "difficulty": 2.76,
         "imageClass": "architects-west-kingdom",
         "icon": "🧱🏗️",
+        "bestPlayers": 3,
         "description": "서기 850년경 카롤링거 제국 달기, 새 땅에 아름답고 다양한 건축물들을 지으라는 왕의 명령이 떨어집니다. 모략과 배신이 팽배한 이 시대에, 여러분은 어떠한 수단과 방법도 마다하지 않고 왕실 소속 건축가로서 누구보다 뛰어난 건축물을 만들어서 영예로운 자리를 지켜야 합니다.",
         "expansion": "서쪽 왕국의 건축가 : 장인의 시대, 서쪽 왕국의 건축가 : 프로모 세트, 서쪽 왕국의 건축가 : 환상의 결상"
     },
@@ -2717,6 +2875,7 @@ const games = [
         "difficulty": 2.68,
         "imageClass": "three-sisters",
         "icon": "🌽🥔",
+        "bestPlayers": 2,
         "description": "아메리카 원주민의 지혜를 담은 세 자매 농법에서는 옥수수, 콩, 호박을 묶어 \"세 자매\"라고 부릅니다. 옥수수는 콩을 지지하고, 콩은 땅에 질소를 공급하고, 호박의 덩굴은 그늘을 만들어 해충과 잡초를 물리칩니다. 여러분의 뒤뜰에 옥수수, 콩, 호박 등 여러 작물을 키우고 과수원, 양봉 등 다양한 농산물을 관리해 마을에서 가장 훌룡한 텃밭을 가꾸어 보세요!"
     },
     {
@@ -2730,6 +2889,7 @@ const games = [
         "difficulty": 2.99,
         "imageClass": "shakespeare",
         "icon": "🎭📜",
+        "bestPlayers": 3,
         "description": "여왕님께 보여드릴 걸작을 일주일안에 완성해야 하는 극단 매니저의 심정을 느껴 보세요.",
         "expansion": "셰익스피어 : 무대 뒤에서"
     },
@@ -2744,6 +2904,7 @@ const games = [
         "difficulty": 2.76,
         "imageClass": "smartphone-inc",
         "icon": "📱🏢",
+        "bestPlayers": 4,
         "description": "각 플레이어들은 굴지의 스마트폰 제작사 오너가 되어 스마트폰을 제작하고 판매합니다. 출시되는 스마트폰의 가격을 자신이 정하고 회사의 기술을 쌓아 각 스마트폰의 특성을 만들어 갑니다. 다만, 전 세계의 대륙에서의 수요가 매번 변동하는 가운데 당신은 그 누구보다 높은 수익을 얻어야 합니다.",
         "expansion": "스마트폰 주식회사 : 업데이트 1.1"
     },
@@ -2758,6 +2919,7 @@ const games = [
         "difficulty": 2.69,
         "imageClass": "small-world-warcraft",
         "icon": "⚔️🌍",
+        "bestPlayers": 4,
         "description": "광활하지만 수많은 종족들이 뒤엉켜 살기에는 한없이 비좁은 이곳, 아제로스에서는 오늘도 이 땅을 지배하기 위한 종족들의 잔혹한 투쟁이 시작됩니다. 종족들은 이해관계에 따라 호드와 얼라이언스, 두 진영으로 나뉘어 끊임없이 갈등해왔고, 중립 세력들은 두 진영의 다툼을 이용해 자신들의 영역을 넓히고 있습니다."
     },
     {
@@ -2771,6 +2933,7 @@ const games = [
         "difficulty": 3.6,
         "imageClass": "scarface-1920",
         "icon": "🎩🔫",
+        "bestPlayers": 4,
         "description": "금주법이 시작되었습니다! 스카페이스 1920에서 여러분은 범죄 조직 중 하나를 이끌며, 시카고의 왕좌를 차지하기 위해 분투합니다. 도시에서 강력한 갱단을 구성하고, 상대조직을 분쇄하세요. 연방 경찰의 눈을 피해 당신만의 범죄 제국을 완성하세요!"
     },
     {
@@ -2784,6 +2947,7 @@ const games = [
         "difficulty": 2.86,
         "imageClass": "space-gate-odyssey",
         "icon": "🌌🛰️",
+        "bestPlayers": 3,
         "description": "수십년간의 연구와 기술개발 끝에, 인류를 지구를 떠날 수 있게 되었습니다. 과학자들은 6개의 행성이 있는 은하계를 찾았습니다. 그곳으로 갈 수 있는 방법은 차원 통과 관문인 '스페이스 게이트'를 이용하는 것입니다."
     },
     {
@@ -2797,6 +2961,7 @@ const games = [
         "difficulty": 2.77,
         "imageClass": "seasons",
         "icon": "🧙✨",
+        "bestPlayers": 3,
         "description": "왕국의 위대한 마법사들이 전설적인 토너먼트가 열릴 아르고스 슈 가운데 모였습니다. 12계절 간의 경합이 끝나면 대마법사가 선출될 것입니다.",
         "expansion": "시즌스 : 마법에 걸린 왕국, 시즌스 : 운명의 길"
     },
@@ -2811,6 +2976,7 @@ const games = [
         "difficulty": 3.54,
         "imageClass": "agricola",
         "icon": "👩‍🌾🚜",
+        "bestPlayers": 3,
         "description": "서기 1670년경의 중부 유럽, 오랜 기간 기승을 부려 온 흑사병이 드디어 극복되었습니다. 문명사회가 다시 살아나기 시작합니다. 사람들은 집을 늘리고 고치며 들판을 일구어 밭을 만들고 씨를 뿌려 곡식을 수확해야 합니다."
     },
     {
@@ -2824,6 +2990,7 @@ const games = [
         "difficulty": 2.86,
         "imageClass": "arnak",
         "icon": "🏹🗿",
+        "bestPlayers": 3,
         "description": "텅 빈 바다를 아무 성과 없이 꼬박 이틀을 헤맨 끝에, 드디어 한 줄기 희망의 빛을 보았다. 파도 너머로 수평선 위에 무엇인가 보일락 말락 번지고 있었다. 가까이 다가가자 찬란한 주홍빛 새들의 무리가 마치 우리를 환영이라도 하는 듯 배를 향해 다가왔다. 항해사가 이 섬은 아직 아무도 발견하지 못했던 미지의 섬이라고 장담했다. 저 험준한 고원과 푸른 정글을 보라!",
         "expansion": "아르낙 : 탐험 대장, 아르낙 : 사라진 탐험, 아르낙 : 빅박스"
     },
@@ -2838,6 +3005,7 @@ const games = [
         "difficulty": 3.67,
         "imageClass": "arkwright-card",
         "icon": "🏭📈",
+        "bestPlayers": 3,
         "description": "산업혁명이 시작되었습니다. 공장과 사업을 효율적으로 운영하고 당신이 최고의 사업가임을 증명하세요!"
     },
     {
@@ -2851,6 +3019,7 @@ const games = [
         "difficulty": 2.63,
         "imageClass": "merchants-amsterdam",
         "icon": "🚢🇳🇱",
+        "bestPlayers": 4,
         "description": "17세기 세계무역이 범람한 중심지 암스테르담, 플레이어들은 각 상인 가문 중 한 명을 맡게된다."
     },
     {
@@ -2864,6 +3033,7 @@ const games = [
         "difficulty": 3.0,
         "imageClass": "ankh",
         "icon": "𓂀🐈",
+        "bestPlayers": 4,
         "description": "망각되지 않기 위한 경쟁, 고대 이집트 신들의 치열한 전투",
         "expansion": "앙크 : 불가사의 무덤, 앙크 : 판테온, 앙크 : 파라오, 앙크 : 수호자 세트, 앙크 : 신성한 공물"
     },
@@ -2878,6 +3048,7 @@ const games = [
         "difficulty": 3.11,
         "imageClass": "endless-winter",
         "icon": "❄️🪵",
+        "bestPlayers": 3,
         "description": "기원전 10,000년, 북아메리카는 영원할 것 같은 빙하기를 견뎌내고 있습니다. 여러분은 우너시 부족의 강인한 부족장이 되어 혹독한 삶을 살고 있는 부족을 이끌어야 합니다. 사냥하고, 땅을 개척하고, 새로운 문명을 건설해 부족의 생존을 책임지세요!",
         "expansion": "엔들리스 윈터 : 선조들"
     },
@@ -2905,6 +3076,7 @@ const games = [
         "difficulty": 2.5,
         "imageClass": "acquire",
         "icon": "🏢💸",
+        "bestPlayers": 4,
         "description": "경영게임의 명작 어콰이어, 인수/ 합병, 대주주 개념으로 눈치싸움이 시작된다."
     },
     {
@@ -2918,6 +3090,7 @@ const games = [
         "difficulty": 2.44,
         "imageClass": "tyrants-underdark",
         "icon": "🐉💜",
+        "bestPlayers": 4,
         "description": "언더다크를 지배할 가문은 오직 하나뿐! 던전 앤 드래곤(D&D)에 등장하는 지하 세계, 언더다크. 드로우 가문의 수장이 되어 이곳을 장악하세요. 강력한 하수인을 고용하고 독자적인 군대를 만들어 적 가문과 맞서 싸워야 합니다."
     },
     {
@@ -2931,6 +3104,7 @@ const games = [
         "difficulty": 3.04,
         "imageClass": "orleans",
         "icon": "🏰🧺",
+        "bestPlayers": 4,
         "description": "중세 프랑스의 힘겨운 인재 관리 게임, 이 게임에서 여러분은 주머니에서 추종자를 뽑아 배치하고, 그에 따른 행동을 합니다. 핵심은 주머니의 구성을 바꾸어 추종자들을 원하는 구성으로 뽑을 확률을 높이는 데 있습니다.",
         "expansion": "오를레앙 : 교역과 음모, 오를레앙 : 침략, 오를레앙 : 페스트"
     },
@@ -2945,6 +3119,7 @@ const games = [
         "difficulty": 3.0,
         "imageClass": "origins",
         "icon": "🏛️🌌",
+        "bestPlayers": 3,
         "description": "인류 여명의 시기, 여러분은 도시 국가의 지도자가 됩니다. 후견자의 역할을 해주는 외계인에게 의뢰하여 인구를 늘리고, 고유의 건물들로 도시를 확장하고, 위대한 조디악 사원의 계단을 올라가 역사상 가장 위대한 지도자가 되세요."
     },
     {
@@ -2958,6 +3133,7 @@ const games = [
         "difficulty": 3.29,
         "imageClass": "yokohama",
         "icon": "⚓👘",
+        "bestPlayers": 3,
         "description": "근대화가 꽃피는 일본의 항구도시 '요코하마'에서 상인이 되어 부하들을 이끄세요! 도시 발전에 가장 많은 기여를 한 플레이어가 승리합니다."
     },
     {
@@ -2971,6 +3147,7 @@ const games = [
         "difficulty": 3.03,
         "imageClass": "wonderlands-war",
         "icon": "🃏🍵",
+        "bestPlayers": 4,
         "description": "거울이 산산조각 부서지고, 광기가 원더랜드의 주민들에게서 사라지며, 전쟁이 찾아왔다! 앨리스, 모자장수, 붉은 여왕, 재버워크, 그리고 체셔 캣은 전쟁을 앞두고 모자장수의 다과회에서 최대한의 힘을 모아야 한다!",
         "expansion": "원더랜드 워 : 광기의 파편, 원더랜드 워 : 프리미엄 칩, 원더랜드 워 : 프로모"
     },
@@ -2985,6 +3162,7 @@ const games = [
         "difficulty": 3.5,
         "imageClass": "ultimate-railroads",
         "icon": "🚂🛤️",
+        "bestPlayers": 3,
         "description": "러시아의 황제 니콜라이 1세는 1835년 러시아에서 최초의 철도 건설을 의뢰 했습니다. 차르스코예셀로와 세인트루이스를 잇는 약 27km의 경로였으며, 공식적으로는 1837년에 개통했습니다. 이는 훗날 수천 킬로미터 길이의 러시아 전역을 가로지르는, 철도 노선의 토대가 되었습니다. 이 게임에서 여러분의 목표는 가능한 빠르고 효율적으로 러시아의 철도망을 개발하는 것입니다. 선로를 확장하는 것과 동시에, 기관차를 구입하고, 산업화를 촉진시키며, 새로운 일꾼과 기술자를 고용해야 합니다."
     },
     {
@@ -3012,6 +3190,7 @@ const games = [
         "difficulty": 2.81,
         "imageClass": "everdell",
         "icon": "🌳🐿️",
+        "bestPlayers": 3,
         "description": "우뚝 솟은 나무 아래로 굽이치는 개울과 이끼 낀 굴, 매력적인 에버델 골짜기에는 다양한 숲속 동물들의 문명이 살아 숨쉬고 있습니다. 오래 전에 유명한 모험가 코린 에버테일이 이 숨겨진 골짜기를 발견한 이후, 동물들은 영원수의 가호 아래 번영을 이뤄냈죠. 이제 새로운 영토에 정착하여 새로운 도시를 세울 때가 왔습니다. 여러분은 이 위대한 작업에 헌신할 동물들의 수장입니다. 건물을 짓고, 멋진 동물들을 만나고, 축제를 열며 바쁜 한 허를 보내게 되겠죠. 과연 겨울 달이 뜨기 전에 태양빛이 찬란하게 빛나는 멋진 도시를 세울 수 있을까요?"
     },
     {
@@ -3025,6 +3204,7 @@ const games = [
         "difficulty": 2.9,
         "imageClass": "endeavor-deep-sea",
         "icon": "🌊🚢",
+        "bestPlayers": 3,
         "description": "플레이어는 독립적인 연구 기관의 책임자가 되어, 지속 가능한 프로젝트를 개발하고 섬세한 해양 생태계의 균형을 보존하는 것을 목표로 합니다. 게임 동안 플레이어는 현장 전문가를 모집하고, 그들의 능력을 활용해 새로운 해역을 탐사하고, 잠수 지점을 연구하며, 중요한 생태학 논문을 발표하고, 보전 활동을 전개하게 됩니다. 전문성을 확장하고, 팀을 성장시키며, 바다에 대해 가능한 한 많은 것을 배우세요. 여러분의 연구소가 지금 취하는 행동이, 건강한 바다와 지구의 지속 가능한 미래를 결정지을 수도 있습니다.",
         "expansion": "엔데버 : 5인 확장"
     },
@@ -3039,6 +3219,7 @@ const games = [
         "difficulty": 3.28,
         "imageClass": "lorenzo",
         "icon": "⚜️🎭",
+        "bestPlayers": 4,
         "description": "여러분은 한 가문의 수장이 되어 영토를 얻고 건물을 후원하며, 인물을 고용하고 사업을 추진합니다. 파문을 피하려면 교회와의 관계에도 주의를 기울여야 합니다. 주어진 6라운드 동안 가장 높은 점수를 얻어 자신의 가문을 최고의 가문으로 만드세요.",
         "expansion": "위대한 로렌초 : 르네상스의 가문들, 위대한 로렌초 : KS프로모 카드, 위대한 로렌초 : 파치의 음모"
     },
@@ -3053,6 +3234,7 @@ const games = [
         "difficulty": 3.0,
         "imageClass": "witchstone",
         "icon": "🔮🧙",
+        "bestPlayers": 3,
         "description": "오늘밤, 위치스톤을 둘러싼 마법사들의 회합이 열립니다. 과연 마스터가 될 사람은 누구일까요?"
     },
     {
@@ -3066,6 +3248,7 @@ const games = [
         "difficulty": 3.02,
         "imageClass": "wondrous-creatures",
         "icon": "🦄🏝️",
+        "bestPlayers": 3,
         "description": "미지의 섬에서 펼쳐지는 경이로운 생명체들과의 조우, 자원을 모으고, 동물을 수집하며 나만의 보호구역을 완성하세요.",
         "expansion": "원드러스 크리처 : 거대한 야수들, 원드러스 크리처 : 원정대 세트"
     },
@@ -3080,6 +3263,7 @@ const games = [
         "difficulty": 2.42,
         "imageClass": "wingspan",
         "icon": "🐦🪺",
+        "bestPlayers": 3,
         "description": "아름다운 새들을 모아 여러분의 보호구역을 만드세요!",
         "expansion": "윙스팬 : 유럽, 윙스팬 : 오세아니아, 윙스팬 : 아시아, 윙스팬 : 네스팅 박스"
     },
@@ -3094,6 +3278,7 @@ const games = [
         "difficulty": 3.12,
         "imageClass": "euphoria",
         "icon": "🏙️👁️",
+        "bestPlayers": 4,
         "description": "당신은 어릴 때부터 세상의 진실을 깨달았습니다. 지금 살고있는 사회는 유포리아라고 생각했고, '다스토피아'라는 단어는 당신의 사전에 없는 단어였죠. 하지만 진실을 깨닫게 된 순간, 당신은 선택해야만 했습니다. 이곳에서 도망치느냐 아니면 남아서 세상에 당신의 지표를 세우느냐. 이제 당신은 다음 단계로 나아갈 준비가 되었습니다. 당신은 현재의 무엇을 희생하여 과거로부터 나은 미래를 만들것입니까?",
         "expansion": "유포리아 : 무지는 축복이다"
     },
@@ -3108,6 +3293,7 @@ const games = [
         "difficulty": 2.95,
         "imageClass": "inis",
         "icon": "⚔️☘️",
+        "bestPlayers": 4,
         "description": "역사와 전설이 공존하는 고대 켈트인의 시대, 왕이 될 자는 누구인가? 협력과 분쟁, 계략과 음모가 뒤섞인 전장에서 벌어지는 두뇌 싸움"
     },
     {
@@ -3121,6 +3307,7 @@ const games = [
         "difficulty": 3.68,
         "imageClass": "escape-plan",
         "icon": "💰🚓",
+        "bestPlayers": 3,
         "description": "은행털이 성공으로 부유한 삶을 살고 있었다. 그러나 경찰이 꼬리를 잡고 추적하기 시작합니다. 여러분은 다툼 후 서로 각자의 길을 가게 되는데... 도시가 봉쇄되기 전까지 계획을 잘 사용해서 가능한 많은 돈을 챙겨 탈출하세요. #비탈 시리즈"
     },
     {
@@ -3134,6 +3321,7 @@ const games = [
         "difficulty": 2.54,
         "imageClass": "istanbul",
         "icon": "👳🐫",
+        "bestPlayers": 4,
         "description": "유럽과 아시아가 맞닿은 곳에 자리잡은 대도시 이스탄불! 이 거대한 도시의 시작은 늘 분주한 상인들로 가득합니다. 여러분의 목표는 이곳에서 제일가는 거상이 되는 것입니다."
     },
     {
@@ -3147,6 +3335,7 @@ const games = [
         "difficulty": 3.23,
         "imageClass": "gentes",
         "icon": "🏛️📜",
+        "bestPlayers": 3,
         "description": "젠테스에서 플레이어들은 역사의 흥망성쇠를 거쳐 자신의 국민들을 인도하게 되며, 역사 속 연대기에서 영구적인 위치를 차지하기 위해 노력하게 될 것입니다. 여러분은 중요 도시를 세우고, 웅장한 기념비를 건설하기 위하여 성직자, 군인, 상인, 귀족, 학자들을 훈련시킵니다."
     },
     {
@@ -3160,6 +3349,7 @@ const games = [
         "difficulty": 3.67,
         "imageClass": "tzolkin",
         "icon": "⚙️🌑",
+        "bestPlayers": 4,
         "description": "고도로 발달한 고대 마야 문명의 중심에는 신비한 달력, 졸킨이 있었습니다. 졸킨은 별들의 움직임을 이용한 260일간의 달력으로, 씨를 뿌리기에 적당한 시기뿐만 아니라, 의식을 치를 시기와 기념비를 건설하기에 좋은 때를 예측하는데 사용되었습니다. 미야 부족의 지도자인 ‘이하우’가 되어 신에게 비치는 의식을 주관하고, 마야 문명을 번영으로 이끌어 보시겠습니까? #T시리즈",
         "expansion": "졸킨 : 부족과 예언"
     },
@@ -3174,6 +3364,7 @@ const games = [
         "difficulty": 2.51,
         "imageClass": "carpe-diem",
         "icon": "🏛️🍇",
+        "bestPlayers": 3,
         "description": "고대 로마에서 당신은 영향력있는 귀족의 가족 구성원으로서 도시 지역을 개선하기 위해 출발하였습니다. 수익성 있는 건물과 아름다운 풍경으로 도시의 번영을 보장합니다. 편안한 주거를 짓고 자신의 빌라를 강화하며 명성을 얻고, 다양한 상품을 재배하고 수확하여 하루를 장악 한 다음 포럼에서 보상을 받습니다. ‘카르페디엠’의 개념을 수용하며 도시를 개성하십시오."
     },
     {
@@ -3187,6 +3378,7 @@ const games = [
         "difficulty": 3.23,
         "imageClass": "castell",
         "icon": "🗼🤸",
+        "bestPlayers": 4,
         "description": "8~10명의 사람이 인간 탑을 쌓기 위해 축제인 카스텔은 카탈루냐의 고유 민속 전통축제입니다. 이 게임에서 여러분은 카탈루냐의 여러 지역을 돌아다니며 팀원을 모집하고, 더욱 인상적인 탑을 쌓기 위해 새로운 기술을 훈련하고, 각 마을과 도시에서 열리는 축제에서 공연을 하며 카스텔 팀을 관리하게 됩니다. 당신은 이 땅에서 최고의 카스텔 팀이 될 수 있을까요?"
     },
     {
@@ -3200,6 +3392,7 @@ const games = [
         "difficulty": 3.13,
         "imageClass": "kemet",
         "icon": "🦁⚔️",
+        "bestPlayers": 4,
         "description": "신화의 시대, 고대 이집트. 여러분은 이집트의 신들 중 하나를 맡게 됩니다. 갖가지 능력과 갖추고 창조물을 소환하며 병사를 모집하여 강력한 군대를 만드세요. 여기에 상대의 허를 찌를 전략도 세워 둬야 합니다. 다른 모든 신을 무찌르고 전쟁에서 승리하십시오.",
         "expansion": "케메트 : 사자의 서, 케메트 : 프로모 4종"
     },
@@ -3214,6 +3407,7 @@ const games = [
         "difficulty": 3.28,
         "imageClass": "coimbra",
         "icon": "🎓⛵",
+        "bestPlayers": 3,
         "description": "코임브라는 탐험의 시대에 최초의 대학교가 있는 것으로 유명한 포르투갈의 대도시입니다. 코임브라 세력이 수장이 되어 소득을 늘리며, 경비대를 고용하며, 학문발전을 장려하고, 수도와의 관계를 돈독히 하거나, 항해에 투자하여 번창하기를 바랍니다."
     },
     {
@@ -3227,6 +3421,7 @@ const games = [
         "difficulty": 3.02,
         "imageClass": "concordia",
         "icon": "🏛️🤝",
+        "bestPlayers": 4,
         "description": "로마 제국의 통치자가 되어 개척자들을 각지로 파견합니다. 개척지를 이동하고, 건설하며 상품을 생산하고, 수익을 얻으면서 남들과 다른 전략을 찾고, 로마의 신들의 환심을 사며 가장 큰 점수를 얻은 플레이어가 승리합니다.",
         "expansion": "콩코르디아 : 소금, 콩코르디아 : 어시장"
     },
@@ -3241,6 +3436,7 @@ const games = [
         "difficulty": 3.46,
         "imageClass": "clans-caledonia",
         "icon": "🐄🥃",
+        "bestPlayers": 3,
         "description": "19세기 스코틀랜드는 농업을 기반으로 한 경제로부터 혁신적인 기술 발전을 이루었고, 이는 무역과 수출 활동 덕이었습니다. 여러분은 스코틀랜드 지방의 클랜을 이끌면서 번영을 위해 다양한 행동을 하게 됩니다."
     },
     {
@@ -3254,6 +3450,7 @@ const games = [
         "difficulty": 2.88,
         "imageClass": "tapestry",
         "icon": "🖼️📜",
+        "bestPlayers": 3,
         "description": "인류의 시초를 시작으로 미래를 향해 가장 유서 깊은 역사를 지닌 여러분만의 고유한 문명을 개척해 보세요. 여러분이 선택하는 길은 현실의 역사와 매우 다를 것입니다."
     },
     {
@@ -3267,6 +3464,7 @@ const games = [
         "difficulty": 2.9,
         "imageClass": "tfm-ares",
         "icon": "🚀🔴",
+        "bestPlayers": 2,
         "description": "세계정부의 화성 개발 프로젝트에 참여하세요. 화성에 숨 쉴 만큼의 산소, 지구와 비슷한 날씨를 만들 만큼의 해수량, 물이 얼지 않을 기온을 마련해야 합니다. 물론 그 와중에 자기 기업의 수익을 극대화하는 것도 놓쳐선 안 됩니다."
     },
     {
@@ -3280,6 +3478,7 @@ const games = [
         "difficulty": 3.24,
         "imageClass": "tfm",
         "icon": "🚀🏭",
+        "bestPlayers": 3,
         "description": "인류는 한계에 도달했습니다. 지구는 포화 상태가 되었고 자원은 바닥을 드러냈습니다. 우리는 화성을 보았고, 그곳에 미래가 있음을 직감했습니다. 머지않아 화성을 고향이라고 부르는 생명들이 태어날 것입니다. 서기 2315년, 전 지구로부터 걷어낸 세금을 쏟아부은 대규모 정부 사업 ‘테라포밍 마스’. 성장에 목마른 다국적 기업들은 화성으로 몰려들기 시작합니다.",
         "expansion": "테라포밍 마스 : 헬라스 언 엘리시움, 테라포밍 마스 : 서곡, 테라포밍 마스 : 격동, 테라포밍 마스 : 업적과 기업상"
     },
@@ -3294,6 +3493,7 @@ const games = [
         "difficulty": 3.65,
         "imageClass": "trajan",
         "icon": "🏛️🏺",
+        "bestPlayers": 4,
         "description": "서기 110년 - 로마 제국은 “지고의 황제” 트라야누스의 통치하에 최대의 전성기를 누렸다. 황제의 뜻에 따라 제국을 운영하자. #보드피아 적박스"
     },
     {
@@ -3307,6 +3507,7 @@ const games = [
         "difficulty": 2.9,
         "imageClass": "troyes",
         "icon": "⛪🎲",
+        "bestPlayers": 3,
         "description": "1200년, 트루아 대성당의 주춧돌이 놓이고 건축이 시작되었습니다. 그러나 400년이 넘도록 대성당은 완공되지 않았습니다. 이제 트루아의 귀족 가문을 지도하여 대성당을 완공하고 트루아를 번영 시키세요.",
         "expansion": "트루아 : 트루아의 여인들"
     },
@@ -3321,6 +3522,7 @@ const games = [
         "difficulty": 2.68,
         "imageClass": "taverns-tiefenthal",
         "icon": "🍺🥨",
+        "bestPlayers": 3,
         "description": "티펜탈 제일의 선술집을 만들어 봅시다. 선술집의 명성이 높을수록 손님이 몰리기 마련이죠. 더 많은 손님이 앉을 수 있게 탁자도 늘리고, 더 많은 손님께 음식을 제공할 수 있도록 종업원도 고용해야 합니다. 물론, 좋은 맥주를 충분히 공급해야만 선술집의 명성을 드높일 수 있음을 잊지 마세요. 누구의 선술집이 가장 명성을 높일 수 있을지 경쟁이 시작됩니다. 여러분의 선술집을 멋지게 경영해 보세요.",
         "expansion": "티펜탈의 선술집 : 신장 개업"
     },
@@ -3335,6 +3537,7 @@ const games = [
         "difficulty": 3.27,
         "imageClass": "power-grid",
         "icon": "🔌⚡",
+        "bestPlayers": 4,
         "description": "제대로 된 경제 게임의 마스터피스, 파워그리드가 리뉴얼 되어 돌아왔습니다. 치열한 돈 계산과 길 닦기 경쟁을 뚫고 발전소 업계의 진정한 승자가 되세요.",
         "expansion": "파워그리드 : 지도 모음집"
     },
@@ -3349,6 +3552,7 @@ const games = [
         "difficulty": 3.15,
         "imageClass": "faiyum",
         "icon": "🐊🌾",
+        "bestPlayers": 3,
         "description": "고대 이집트, 파라오 아메넴헤트 3세는 보좌관인 여러분에게 파라오의 땅 ‘파이움’의 번영과 발전이라는 무거운 짐을 맡겼습니다. 악어들이 서식하는 습지를 곡창지대로 만드는 것은 쉬운 일이 아니지만, 파라오의 눈에 들 수 있는 좋은 기회입니다. 인력, 자원, 자금을 적재적소에 사용해 여러분의 능력을 증명해보세요!"
     },
     {
@@ -3362,6 +3566,7 @@ const games = [
         "difficulty": 2.47,
         "imageClass": "pan-am",
         "icon": "✈️🌎",
+        "bestPlayers": 3,
         "description": "여러분은 신생 항공사의 사장입니다. 팬 암이 전 세계로 확장하는 시기인지라, 여러분은 항공사를 운영하면서 얻은 수익으로 팬 암의 주식을 사기로 했습니다. 여러분은 기술자들을 보내서 공항, 비행기, 목적지 카드를 획득하고, 항로를 개척합니다. 또한 항공사를 운영하고, 항로를 매각해서 얻은 수입으로 주식을 구매합니다. 팬암의 창립부터 창립자 후안 트립의 은퇴까지 진행되며 가장 주식이 많은 사람이 승자가 됩니다."
     },
     {
@@ -3375,6 +3580,7 @@ const games = [
         "difficulty": 3.35,
         "imageClass": "pulsar",
         "icon": "🌟⏳",
+        "bestPlayers": 3,
         "description": "펄서는 강한 자기장을 띠면서 굉장히 빠른 속도로 자전하는 중성자별입니다. 마치 맥박처럼 짧고 규칙적인 신호를 방출하는데, 이렇게 중성자별이 뿜어내는 에너지라고 합니다. 때는 2849년, 드디어 인류는 펄서 에너지를 이용하기 시작했고, 이제 우리는 이 에너지를 모든 별들에 분배할 방법을 찾아야 합니다."
     },
     {
@@ -3388,6 +3594,7 @@ const games = [
         "difficulty": 3.68,
         "imageClass": "praga",
         "icon": "🇨🇿🏰",
+        "bestPlayers": 3,
         "description": "때는 1347년, 보헤미아의 왕위에 오른 카를 4세는 신성로마제국 역시 통치하기 시작합니다. 카를 4세는 프라하 성에서 새로운 요새 불타바 강을 가로지를 다리, 대학, 그리고 성벽 내에 우뚝 솟은 대성당의 건축을 주관합니다. 이제 프라하는 명실상부 왕국의 심장이라는 위상을 차지하게 됩니다. 플레이어들은 프라하의 다양한 건축과업을 주도해야 합니다. 자신의 부를 확장하고 건설에 기여함으로써 국왕의 총애를 받게됩니다."
     },
     {
@@ -3401,6 +3608,7 @@ const games = [
         "difficulty": 3.59,
         "imageClass": "pret-a-porter",
         "icon": "👗👠",
+        "bestPlayers": 3,
         "description": "번쩍이는 카메라, 아름다운 모델, 비평가로 붐비는 쇼. 패션 산업 전문가의 삶은 흥미롭게 들리고 실제로도 그렇지만, 대부분의 사람들은 경쟁에서 앞서는 것이 얼마나 치열한지, 또 대중의 관심을 끄는 창작물을 디자인하는 것이 얼마나 어려운 것인지를 알지 못합니다. 여러분은 전도유망한 회사의 소유주가 되어 권위 있는 국제적인 쇼에 작품을 출품하면서 이런 치열한 환경에서 성공할 능력을 갖고 있다는 것을 증명해야 합니다."
     },
     {
@@ -3414,6 +3622,7 @@ const games = [
         "difficulty": 3.27,
         "imageClass": "prodigals-club",
         "icon": "🎩📉",
+        "bestPlayers": 3,
         "description": "인생의 바닥으로 떨어져보자."
     },
     {
@@ -3427,6 +3636,7 @@ const games = [
         "difficulty": 2.48,
         "imageClass": "pursuit-happiness",
         "icon": "😊🏠",
+        "bestPlayers": 3,
         "description": "행복을 찾아서는 여러분이 늘 원했던 삶을 살아볼 수 있도록 허용합니다. 하고 싶은 일들을 해보고, 갖고 싶었던 물건도 사보고, 원하는 직업을 가질 수 있습니다. 그리고 운명의 상대를 만나서 가정을 꾸릴 수도 있습니다. 어떤 삶을 살겠습니까?"
     },
     {
@@ -3440,6 +3650,7 @@ const games = [
         "difficulty": 2.72,
         "imageClass": "honey-buzz",
         "icon": "🐝🍯",
+        "bestPlayers": 3,
         "description": "경제를 알게 된 벌들은 곧 시장을 장악할 계획을 세웠습니다. 열심히 벌꿀을 모아 곰 시장에 판매하거나 특별 주문에 맞춰 납품해서 벌들의 경제를 살려야 해요! 꿀을 탐색하고, 벌집을 짓고, 꿀을 생산하고 판매해서 여왕벌의 임무를 달성하고 가장 많은 돈을 모으세요!"
     },
     {
@@ -3466,6 +3677,7 @@ const games = [
         "difficulty": 3.14,
         "imageClass": "beyond-the-sun",
         "icon": "🚀☀️",
+        "bestPlayers": 3,
         "description": "죽어가는 지구를 뒤로하고... 인류는 태양 너머로 나아갑니다. 인류의 미래를 짊어지고 나아갈 강력한 진영 중 하나를 선택하고 진영의 지도자가 되어 거주할 수 있는 행성계로 여러분을 따르는 이를 인도하세요. 우주의 새로운 지배자가 되려면 그에 걸맞은 실력을 갖추어야 할 것입니다.",
         "expansion": "태양 너머로 : 새 여명의 사노사들"
     },
@@ -3480,6 +3692,7 @@ const games = [
         "difficulty": 3.58,
         "imageClass": "messina",
         "icon": "🐀⛵",
+        "bestPlayers": 3,
         "description": "1347년, 크림반도에서 출발한 ‘제노아 갤리선’. 지중해 해상 교통의 중심지인 메시나 항구에 도착합니다. 갤리선에 타있던 쥐들은 전염병을 옮겼고, 그 전염병은 빠르게 유럽 전역으로 퍼졌습니다. 이후 4년 동안, 흑사병은 유럽 전역의 도시들을 관통해, 인구의 절반이 사망하기 이르렀습니다. 플레이어들은 메시나 주변의 영지를 가지고 있는 귀족 가문의 역할을 맡습니다. 귀족 가문을 대표하여, 시민들을 전염병으로부터 구하고, 감염된 사람들은 격리시키고, 감염되지 않은 사람들은 안전한 영지에서 일자리를 제공합니다."
     },
     {
@@ -3493,7 +3706,8 @@ const games = [
         "difficulty": 3.0,
         "imageClass": "ostia",
         "icon": "⚓🏟️",
-        "description": "서기 103년, 트라야누스 황제는 로마 최대의 항구인 오스티아 포르투스를 확장했습니다. 이 육각형 항구는 제국 전역에서 온 막대한 물자를 수용하며, 로마의 번영을 이끄는 물류 중심지로 자리잡았습니다. 이 항구의 가장 중요한 임무는 내륙에 위치한 로마로 식량을 전달하는 것이었습니다. 플레이어는 강력한 선단을 소유한 상인이 되어, 오스티아에 무여드는 귀족과 사인들에게 선박을 임대합니다. 로마 원로원과 시민들의 인정을 받아 가장 높은 명성을 얻으세요.",
+        "bestPlayers": 3,
+        "description": "서기 103년, 트라야누스 황제는 로마 최대의 항구인 오스티아 포르투스가 확장했습니다. 이 육각형 항구는 제국 전역에서 온 막대한 물자를 수용하며, 로마의 번영을 이끄는 물류 중심지로 자리잡았습니다. 이 항구의 가장 중요한 임무는 내륙에 위치한 로마로 식량을 전달하는 것이었습니다. 플레이어는 강력한 선단을 소유한 상인이 되어, 오스티아에 무여드는 귀족과 사인들에게 선박을 임대합니다. 로마 원로원과 시민들의 인정을 받아 가장 높은 명성을 얻으세요.",
         "expansion": "오스티아 : 해적, 오스티아 : 후원자, 오스티아 : 상인"
     },
     {
@@ -3507,6 +3721,7 @@ const games = [
         "difficulty": 3.0,
         "imageClass": "puerto-rico-1897",
         "icon": "🏝️🏗️",
+        "bestPlayers": 3,
         "description": "상품을 생산하고 판매해 부를 쌓고, 기반 시설을 건설하고 상품을 수출해 명성을 쌓아 푸에르토리코 근대화의 중심에 서세요!"
     },
     {
@@ -3520,6 +3735,7 @@ const games = [
         "difficulty": 3.0,
         "imageClass": "whistle-mountain",
         "icon": "🏔️🚂",
+        "bestPlayers": 3,
         "description": "휘슬 스탑이라 불리는 작은 정류장에 정착한 뒤 거대한 철도 제국을 건설하면서 미국 서부를 성공적으로 횡단한 지 몇 년이 지났습니다. 이제 당신은 물, 석탄, 철, 금... 그리고 휘슬 소리가 여기저기서 늘리는 로키산맥 깊숙한 곳에서 새로운 기술에 투자하여 이익을 도모해야 합니다."
     },
     {
@@ -3533,6 +3749,7 @@ const games = [
         "difficulty": 2.59,
         "imageClass": "hickory-dickory",
         "icon": "🐭🕰️",
+        "bestPlayers": 3,
         "description": "친애하는 토크톤 시계의 신사, 숙녀 여러분에게 왁스를 바르고 꼬리를 번쩍 들어올리세요. 여러분은 [로얄 스캐빈저 헌트]에 초대합니다! 팀원들을 모아 영광의 길을 향해 달려갈 때입니다. 하지만, 여러분의 스캐빈저 수집 카드에 주목하세요. 이 물건들은 시계기 지정을 가르키면 추가적인 상품 기치가 있을 수도 있기 때문이지요! 행사는 오후 7시에 시작합니다. -뻐꾸기경"
     },
     {
@@ -3546,6 +3763,7 @@ const games = [
         "difficulty": 3.25,
         "imageClass": "raising-robots",
         "icon": "🤖🏫",
+        "bestPlayers": 3,
         "description": "플레이어들은 로봇공학의 세계에 명성을 떨쳐 보기로 결심한 젊은 발명가의 역할을 맡습니다. 플레이어들은 학교에서 로봇을 조립하고, 좋은 학점을 획득해 명성을 얻습니다. 플레이어들은 로봇공학 동료들의 도움을 받아 설계도를 그리고, 부품을 제작하며, 자원을 재활용하고, 로봇을 업그레이드 합니다."
     },
     {
@@ -3572,6 +3790,7 @@ const games = [
         "difficulty": 3.5,
         "imageClass": "nippon",
         "icon": "🗾🏭",
+        "bestPlayers": 3,
         "description": "19세기 중엽, 일본은 서구에 비해 모든 면에서 뒤쳐져 있음을 깨달았습니다. 신흥 기업 자이바츠(재벌)를 중심으로 급진적 산업 혁명이 시작됩니다! 여러분은 자이바츠의 수장이 되어 일본의 근대화를 주도해야 합니다. 공장을 짓고, 물품을 생산하고, 지역에 공급하고, 계약을 이행하고, 기술을 발전시키고, 철도를 건설하며, 외국 고문을 초빙해보세요!"
     },
     {
@@ -3626,6 +3845,7 @@ const games = [
         "difficulty": 4.36,
         "imageClass": "gaia",
         "icon": "🌌🪐",
+        "bestPlayers": 3,
         "description": "자신만의 은하 제국을 건설하자, 각자 14개의 종족 중 하나를 맡아서 지휘하여 은하계를 차지하자.",
         "expansion": "가이아 프로젝트 : 잃어버린 함대"
     },
@@ -3654,6 +3874,7 @@ const games = [
         "difficulty": 3.94,
         "imageClass": "golem",
         "icon": "🗿📜",
+        "bestPlayers": 3,
         "description": "16세기 프라하의 학자인 여러분은 도시 발전을 꾀하며 유대 전설에서 유래한 진흙 거인, 골렘을 만들어냈습니다. 골렘을 제대로 다루기 위해서는, 연구를 통해 지식을 얻어야 할 뿐만 아니라 학생들의 보조 또한 필요합니다. 지루한 틈 없이 변화하는 선택지 앞에서 최선의 수를 효율적으로 풀이 기는 깊은 전략의 맛을 느껴보시길 바랍니다."
     },
     {
@@ -3667,6 +3888,7 @@ const games = [
         "difficulty": 4.01,
         "imageClass": "gwt-nz",
         "icon": "🐑🇳🇿",
+        "bestPlayers": 3,
         "description": "때는 19세기가 끝날 무렵, 여러분은 뉴질랜드 남서의 한 양떼목장의 목장 주인으로 자리를 잡았습니다! 최근 몇 년간 목장에서 양들의 품종을 다양화하고, 양털의 질을 높여 여러분의 목장을 번장시켜왔습니다. 그러나, 20세기가 밝아옴에 따라, 더 힘든 앞날이 펼쳐질 겁니다. 여러분의 목장을 지키기 위해. 또, 일군들의 안정적인 일터를 보장하기 위해 더 좋은 품종의 양들을 확보해야 할 것입니다! 이전에 해오던 익숙한 것들을 잘 해낼 것인지, 아니면 새로운 사업을 시작해볼지 결정할 시간입니다. 과연, 20세기의 시작이 지난날들처럼 풍숙할지, 아니면 다른 목장들의 전략이 당신을 능가할지, 모쪼록 행운을 빌어요!"
     },
     {
@@ -3680,6 +3902,7 @@ const games = [
         "difficulty": 4.04,
         "imageClass": "dominant-species",
         "icon": "🦎❄️",
+        "bestPlayers": 4,
         "description": "기원전 9만 년, 빙하시대가 닥쳐오고 있습니다. 누구도 의도하지 않았지만 자연스럽게 지구의 패권을 차지하기 위한 종간 다툼이 시작되었습니다. 빙하시대의 도래로 인해 변화하는 지구 환경 속에서 살아남기 위한 생존 경쟁 게임"
     },
     {
@@ -3719,6 +3942,7 @@ const games = [
         "difficulty": 4.02,
         "imageClass": "barrage",
         "icon": "🌊⚡",
+        "bestPlayers": 3,
         "description": "알프스 계곡에 각종 시설물을 건설하여 최고의 수력 발전 인프라를 만들어야 합니다. 최적의 위치를 선정해 댐/도관/발전소를 건설하고, 경쟁자들이 귀중한 자원으로 손을 뻗지 못하도록 막으십시오.",
         "expansion": "버라지 : 레이흐바터르드 프로젝트, 버라지 : 나일강"
     },
@@ -3733,6 +3957,7 @@ const games = [
         "difficulty": 3.72,
         "imageClass": "gwt-2nd",
         "icon": "🤠🐂",
+        "bestPlayers": 3,
         "description": "19세기 미국 대서부의 숨 막히는 장관 속으로 여러분을 초대합니다. 일확천금의 야망을 품은 목장주가 되어 소 떼를 이끌고 서부를 활보하세요. 동부로 향하는 철도의 기점, 캔자스시티까지 가서 대도시로 소를 실어 보내면 큰 돈을 거머쥘 수 있습니다. 소만 키우는 것이 아니라 황야에 건물을 세우고, 무법자를 토벌하고, 재난에 대처하는 등, 할 일은 너무나도 많습니다.",
         "expansion": "그레이트 웨스턴 트레일 : 북부행 철도"
     },
@@ -3747,6 +3972,7 @@ const games = [
         "difficulty": 4.17,
         "imageClass": "nucleum",
         "icon": "☢️⚡",
+        "bestPlayers": 3,
         "description": "19세기. 석탄을 이용하는 증기기관이 개발되면서. 유럽의 산업혁명에 영향을 끼쳤습니다. 하지만 이때 ‘우라늄’이 이용되었다면 어떨까요? 석탄에서 원자력으로, 변화하는 발전소를 활용하세요. 고유한 기업 기술을 개발하여 막강한 힘을 자랑하세요! 유통망을 구축하여 산업시설에 에너지를 공급하세요! 산업의 인플레이션과 네트워크를 경험할 수 있는 전략적인 선택!",
         "expansion": "뉴클리엄 : 호주, 뉴클리엄 : 궁전"
     },
@@ -3761,6 +3987,7 @@ const games = [
         "difficulty": 3.91,
         "imageClass": "darwins-journey",
         "icon": "🐢⛵",
+        "bestPlayers": 3,
         "description": "디워을 따라 갈라파고스로 떠나는 여정. 때로는 육상에서, 때로는 대양을 따라 다른 섬으로, 펼쳐지는 풍광에 경탄하고, 다양한 표본을 수집해 진화론의 영감을 얻으세요.",
         "expansion": "다윈의 여정 : 불의 땅, 다윈의 여정 : 다윈의 일꾼, 다윈의 여정 : 팔머스항"
     },
@@ -3789,6 +4016,7 @@ const games = [
         "difficulty": 3.86,
         "imageClass": "brass-lancashire",
         "icon": "🏗️🚂",
+        "bestPlayers": 3,
         "description": "1770년도부터 1870년도까지 영국에서 일어난 산업 혁명을 배경으로 플레이어는 운하와 철도를 구축하고 방직소, 탄광, 제철소, 조선소, 항구 등 다양한 산업을 건설 및 개발하여 자신의 사업을 확장해 나갑니다."
     },
     {
@@ -3802,6 +4030,7 @@ const games = [
         "difficulty": 3.91,
         "imageClass": "brass-birmingham",
         "icon": "🏭🍻",
+        "bestPlayers": 3,
         "description": "1770년도부터 1870년도까지 영국에서 일어난 신업 혁명을 배경으로, 웨스트 미들랜즈의 사업가들 사이어서 벌어지는 경쟁의 이야기를 담고 있습니다."
     },
     {
@@ -3977,6 +4206,7 @@ const games = [
         "difficulty": 4.64,
         "imageClass": "on-mars",
         "icon": "🚀🔴",
+        "bestPlayers": 3,
         "description": "무인 탐사선 임무의 성공에 힘입어, 국제연합(UN)은 화성탐사 사업부(D.O.M.E)를 창설했습니다. 2037년, 최초의 개척자가 화성에 첫 발을 내딛었고 이후 화성에 기지가 건설이 되었습니다. 이제 식민지 조성활동을 시작합니다. #비탈 시리즈"
     },
     {
@@ -4082,6 +4312,7 @@ const games = [
         "difficulty": 4.33,
         "imageClass": "kanban-ev",
         "icon": "⚡🚗",
+        "bestPlayers": 3,
         "description": "‘자동차의 미래’라 여겨지던 전기자동차(EV)를 이제 그 누구도 미래의 것이라 부르지 않는 시대가 왔습니다. 각국의 자동차 회사들이 친환경, 상호작용, 효율등 다양한 키워드를 앞세우며 전기차플랫폼 시대를 준비하고 있습니다. #비탈 시리즈"
     },
     {
@@ -4095,6 +4326,7 @@ const games = [
         "difficulty": 4.24,
         "imageClass": "coffee-traders",
         "icon": "☕🌾",
+        "bestPlayers": 3,
         "description": "'커피 트레이더스'에서 여러분은 커피 농장을 발전시키고 각 지역의 아라비카 커피를 가져와 전 세계로 수출해야 합니다. 또한 커피시장의 수요를 주시하면서 경쟁자와 협력해 커피 원두를 생산할 지역을 개발하고, 농장이 번창할 수 있도록 여러 종류의 건물을 건설해 각 지역과 더욱 긴밀한 관계도 다져야 합니다. 최상의 원두를 생산할 지역을 개발하고, 세계 각지 커피 애호가들의 기호에 맞는 계약을 체결하는 최고의 커피 상인이 되어보세요."
     },
     {
@@ -4108,6 +4340,7 @@ const games = [
         "difficulty": 3.96,
         "imageClass": "terra-mystica",
         "icon": "🌋🏰",
+        "bestPlayers": 4,
         "description": "14종의 다양한 세력이 살아남고 정착지를 발전시키기 위하여 땅을 개척하고 영역을 넓히는 순수 전략 게임입니다. 각 세력은 각자 정해진 지형에만 건물을 지을 수 있으므로, 마을을 세우고 발전하기 위해서는 주변 지형을 인위적으로 바꿔나가야 합니다."
     },
     {
@@ -4121,6 +4354,7 @@ const games = [
         "difficulty": 3.76,
         "imageClass": "teotihuacan",
         "icon": "🧱🔺",
+        "bestPlayers": 3,
         "description": "메소아메리카에서 가장 찬란했던 도시를 알고 있습니까? 그 곳으로 돌아가 역사의 일부가 되어, 당대 가장 강력했던 문명의 영광과 신비로움을 목격하십시오. 부를 거머쥐고, 부하를 통솔하고, 신의 가호를 얻으십시오. 그리고 태양의 피라미드를 건설하십시오! #T시리즈",
         "expansion": "테오티우아칸 : 전고전기 후기, 테오티우아칸 : 시틀레에 드리운 암운"
     },
@@ -4135,6 +4369,7 @@ const games = [
         "difficulty": 4.0,
         "imageClass": "tekhenu",
         "icon": "☀️🗿",
+        "bestPlayers": 2,
         "description": "이제 여러분은 고대의 파라오가 되어 2천 년 역사를 목격하고 영향력을 끼칩니다. 건축물을 세우고, 전략을 수집하여 이집트의 신들을 기려야 합니다. #T시리즈",
         "expansion": "뉴턴 : 위대한 발견"
     },
@@ -4149,6 +4384,7 @@ const games = [
         "difficulty": 4.52,
         "imageClass": "trickerion",
         "icon": "🪄🎩",
+        "bestPlayers": 3,
         "description": "위대한 마술사 달가드가 후계자를 찾기 위해 각기 다른 마술 분야의 대가인 유능한 마술사 네 명을 초대 하였다. 네 명의 마술사는 명성과 부를 얻기 위해 7주간의 마술 경쟁이 벌어지는데..."
     },
     {
@@ -4162,6 +4398,7 @@ const games = [
         "difficulty": 3.86,
         "imageClass": "pipeline",
         "icon": "⛽🔧",
+        "bestPlayers": 4,
         "description": "당신은 정유 회사를 경영하게 됩니다. 당신은 정유 공장의 효율적인 네트워크 구축 및 각 분야의 전문가를 고용하여 경쟁사보다 가치 있는 혜택을 제공하고 석유의 구매 및 판매를 통해 다양한 시장에서 수익을 창출하는 것에 집중해야 합니다.",
         "expansion": "파이프라인 : 이머징마켓"
     },
@@ -4176,6 +4413,7 @@ const games = [
         "difficulty": 4.19,
         "imageClass": "food-chain",
         "icon": "🍔💰",
+        "bestPlayers": 3,
         "description": "이제 패스트푸드 체인점의 사장이 되어 자본주의의 앞잡이가 됩니다. 목표는 단 하나 누구보다 돈을 더 많이 벌 것!"
     },
     {
@@ -4189,6 +4427,7 @@ const games = [
         "difficulty": 4.58,
         "imageClass": "feudum",
         "icon": "🏰👑",
+        "bestPlayers": 4,
         "description": "‘퓨덤’에서 플레이어는 동전 몇 푼과 먹다 남은 음식을 제외한 모든 것을 빼앗긴 상태로 게임을 시작합니다. 이런 악조건 속에서 영광을 되찾기 위하여 새로운 땅으로의 여정을 떠나게 되죠. 유럽 중세의 모습을 하고 있는 배경 속에서 외진 변방에서 농장을 관리하고, 세금을 걷고, 전초 기지를 건설해 세력을 키워나가야 합니다. 여러분의 운명은 냉혹한 군주 & 여왕의 손안에 있지만 말입니다."
     },
     {
@@ -4202,6 +4441,7 @@ const games = [
         "difficulty": 4.26,
         "imageClass": "age-innovation",
         "icon": "💡⚙️",
+        "bestPlayers": 4,
         "description": "고유한 개성을 지닌 다양한 세력이 이 세계에서의 영향력을 놓고 경쟁합니다. 건물을 짓고, 도시를 세우며 당신의 힘을 널리 떨치십시오. 세력, 출신지, 능력까지 매 게임 새로워지는 무한한 가능성이 여러분을 기다립니다."
     },
     {
@@ -4215,6 +4455,7 @@ const games = [
         "difficulty": 4.0,
         "imageClass": "trismegistus",
         "icon": "⚗️🎲",
+        "bestPlayers": 2,
         "description": "19세기 연금술은 고대의 지혜와 현대의 발견을 잇는 새로운 학문으로 여겨졌습니다. 황금기는 저물었지만 자연을 지배하는 현자의 돌을 완성하려는 꿈은 여전히 살아 있습니다. 이제 새로운 세대가 헤르메스 트리스메기스투스의 발자취를 따라 역대 최고의 연금술사가 되려 합니다.",
         "expansion": "트리스메기스투스 : 패밀리어"
     },
@@ -4229,6 +4470,7 @@ const games = [
         "difficulty": 3.84,
         "imageClass": "luthier",
         "icon": "🎻🎼",
+        "bestPlayers": 3,
         "description": "바흐, 모차르트, 베토벤 등 세기의 거장들이 무대를 빛내고, 귀족의 후원과 뛰어난 장인들의 손끝이 음악이라는 예술을 동등하게 떠받치던 시대에, 여러분은 바로 그 장인 가문의 후계자입니다. 최고의 장인은 갈고 닦은 기술을 갖췄을 뿐만 아니라 후원자의 모든 요구를 완벽히 충족해야 합니다. 경쟁자들을 제치고 유럽 전역에 가문의 명성을 떨치십시오!"
     },
     {
@@ -4242,6 +4484,7 @@ const games = [
         "difficulty": 3.71,
         "imageClass": "le-havre",
         "icon": "⚓🏗️",
+        "bestPlayers": 3,
         "description": "'르 아브르'는 오늘날 프랑스 제2의 항구 도시의 이름으로, 고대 노르만 언어로 '항구'를 뜻하는 말이 어원입니다. 제2차 세계대전 때 대규모 폭격으로 파괴되었던 이 도시는 약 20년간의 재건 프로젝트 끝에 멋지게 재탄생했고, 유네스코 세계문화유산으로 등재되기까지 했습니다."
     },
     {
@@ -4255,6 +4498,7 @@ const games = [
         "difficulty": 3.79,
         "imageClass": "ants",
         "icon": "🐜🌿",
+        "bestPlayers": 1,
         "description": "작은 곤충의 거대한 야망, 당신의 손 끝에서 위대한 문명이 깨어납니다!"
     },
     {
@@ -4268,6 +4512,7 @@ const games = [
         "difficulty": 4.18,
         "imageClass": "sankore",
         "icon": "🕌📜",
+        "bestPlayers": 3,
         "description": "상코레는 14세기 팀북투의 권위 있는 상코레 대학을 배경으로 하는 게임입니다. 플레이어는 만사 무사의 명을 받아 서아프리카 전역에 지식을 전파하는 임무를 맡으며, 위대한 대학이 점차 건설되는 가운데 이를 관리하게 됩니다. 학생을 등록하고 졸업시키며, 수업을 가르치고, 커리큘럼을 확장하고, 기대한 도서관에 책을 채워 넣음으로써, 신학, 법학, 수학, 천문학의 네 가지 주요 학문 분야에서 지식을 발전시켜 나갑니다. 대학 건설이 완료되면, 제국이 각 학문에 부여하는 가치에 따라 여러분이 전달한 지식의 점수화 방식이 크게 달라지게 됩니다. 당신은 학문 경쟁의 길을 헤쳐나가 만사 무사가 자랑하는 대학에 명성을 안겨줄 수 있을까요?"
     },
     {
@@ -4281,6 +4526,7 @@ const games = [
         "difficulty": 3.7,
         "imageClass": "men-nefer",
         "icon": "🏺🗿",
+        "bestPlayers": 3,
         "description": "기원전 3050년경, 나일강 삼각주의 남쪽에 세워진 맨-네페르, 즉 멤피스는 고대 이집트의 수도가 되었으며 당시 세계에서 가장 인구가 많은 도시로 성장했습니다. 여러분은 이집트 문화와 전형적인 다양한 과업들을 수행하게 됩니다. 예를 들어, 생명의 집에서 지식을 습득하고, 나일강을 따라 항해하고 무역을 하며, 숭배받는 신들에게 제물을 바치고, 고귀한 이들의 시신을 미라로 만들어 더 나은 삶으로 인도하며, 아름다운 스핑크스를 건립하고, 위대한 피라미드 건설에 기여해야 합니다. 이와 더불어, 오시리스가 여러분을 사후의 천국인 아아루(Aaru)로 인도해줄 수 있도록 현세의 삶을 신중히 살아가야 합니다."
     },
     {
@@ -4294,6 +4540,7 @@ const games = [
         "difficulty": 3.73,
         "imageClass": "shackleton-base",
         "icon": "👨‍🚀🌖",
+        "bestPlayers": 3,
         "description": "달남극의 섀클턴 크레이터에 영구 기지가 건설되고 있습니다. 플레이어는 이 기지에서의 영향력을 높이기 위해 협력하는 여러 우주 기관 중 하나를 이끄는 리더가 되어, 각기 다른 목표를 추구하며 달 개발에 참여하는 세 개의 주요 기업과 협력합니다. 여러분은 기업들이 진행하는 다양한 프로젝트에 참여하는 동시에, 기지에 다양한 구조물을 건설하여 크레이터를 개발해야 합니다."
     },
     {
@@ -4307,6 +4554,7 @@ const games = [
         "difficulty": 4.21,
         "imageClass": "civolution",
         "icon": "🧬🌍",
+        "bestPlayers": 2,
         "description": "창조 기술 아카데미의 문명 설계 기말시험인 시볼루션에 오신 것을 환영합니다! 이번 시험을 위해 저희는 외딴 대륙에서의 인간형 시나리오를 준비했습니다. 여기서 여러분 각자는 자신만의 문명과 깊이 연결된 지역 신의 지위를 가지며, 그 문명을 다른 문명들보다 성공적으로 이끄는 것이 목표입니다. 여러분의 발전 가능성은 무한하며, 문화적·기술적 진보에서부터 진화적 적응까지 다양합니다. 예를 들어, 여러분 부족에게 더 유리한 것은 무엇일까요? 바퀴를 발명하는 것일까요, 아니면 날개를 얻는 것일까요? 문명 콘솔을 조작하는 능력을 발휘하고, 변화하는 환경 조건과 가벼운 창조적 혼돈에 얼마나 잘 적응할 수 있는지 보여주세요."
     },
     {
@@ -4320,6 +4568,7 @@ const games = [
         "difficulty": 3.35,
         "imageClass": "nemesis",
         "icon": "🌌👾",
+        "bestPlayers": 4,
         "description": "우주선 '네메시스'의 승무원들이 동면실에서 깨어나고 우주선의 중앙 시스템이 크게 망가졌다는 피해 보고를 맞는다. 늦기 전에 손상 지점을 찾아 수리하고 지구로 귀환해야 하는데... 동료 중의 한 명이 죽은 채로 발견, 누군가가 동면 캡슐을 강제로 뜯어서 피해자의 몸을 끄집어낸 게 분명하다. 공황에 빠져 있는 승무원들의 귓가에, 갑자기 정체를 알 수 없는 괴기스런 소음이 들려온다.",
         "expansion": "네메시스 : 카르노모프, 네메시스 : 지형지물, 네메시스 : 정비통로카드, 네메시스 : 보이드시더, 네메시스 : 업적카드"
     },
@@ -4334,6 +4583,7 @@ const games = [
         "difficulty": 3.02,
         "imageClass": "dead-of-winter",
         "icon": "🧟❄️",
+        "bestPlayers": 4,
         "description": "혹독함 속에서 힘을 합친 생존자들, 허나 서로를 믿을 수 있는가"
     },
     {
@@ -4347,6 +4597,7 @@ const games = [
         "difficulty": 2.03,
         "imageClass": "crew-deep-sea",
         "icon": "🌊🚢",
+        "bestPlayers": 3,
         "description": "<딥 씨 크루>는 협력 트릭테이킹 카드 게임인 <스페이스 크루>의 후속작입니다. 전작과 마찬가지로 모두 함께 힘을 합쳐, 각자의 임무를 달성할 수 있도록 협동해야 합니다. 하지만 깊은 바다에서는 의사소통이 제한된다는 점도 유념해야 합니다. 다채로운 임무가 기다리는 깊은 바닷속으로 함께 탐험을 떠나세요."
     },
     {
@@ -4360,6 +4611,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "crew-space",
         "icon": "🚀🪐",
+        "bestPlayers": 4,
         "description": "2006년 8월 24일, 국제천문연맹 학자들의 결정으로 명왕성이 행성 지위를 박탈당하면서 우리 태양계에는 이제 8개의 행성밖에 남지 않게 되었습니다. 하지만 명왕성보다도 멀리, 태양계의 알려진 경계선 바깥에 미지의 9번째 행성이 있다는 가설이 제기되었습니다. 그걸 확인하는 것은 바로 여러분에게 주어진 임무입니다."
     },
     {
@@ -4373,6 +4625,7 @@ const games = [
         "difficulty": 3.79,
         "imageClass": "robinson-crusoe",
         "icon": "🏝️⛺",
+        "bestPlayers": 2,
         "description": "어느 날 갑자기 사람이 살지 않는 섬의 조난자가 되었다면 어떤 기분이 들까요? 동료들과 함께, 때로는 혼자서 각양각색의 모험을 떠나보세요!",
         "expansion": "로빈슨 크루소 : 미스테리 테일즈, 로빈슨 크루소 : 프로모 팩"
     },
@@ -4387,6 +4640,7 @@ const games = [
         "difficulty": 1.75,
         "imageClass": "magic-maze",
         "icon": "🧙‍♂️🛒",
+        "bestPlayers": 4,
         "description": "빈털터리 모험가 4명이 아이템을 훔치러 마트에 잠입했습니다. 은밀한 작전에 수다는 금물!"
     },
     {
@@ -4400,6 +4654,7 @@ const games = [
         "difficulty": 3.56,
         "imageClass": "lotr-journeys",
         "icon": "💍⛰️",
+        "bestPlayers": 2,
         "description": "여러분은 직접 가운데땅의 영웅들 중 한 명이 되어서 이 아름답고도 위험에 찬 환상의 세계를 누비며 한 편의 서사시를 써 내려갈 것입니다.",
         "expansion": "반지의 제왕 : 그림자 드리운 길, 반지의 제왕 : 에리아도르의 악한"
     },
@@ -4414,6 +4669,7 @@ const games = [
         "difficulty": 4.01,
         "imageClass": "spirit-island",
         "icon": "🏝️🔥",
+        "bestPlayers": 2,
         "description": "여러분은 세상으로부터 고립된 외딴 섬에 있는 자연의 정령들로 강력한 능력들을 갖고 있습니다. 섬이 회복하기 어려울 정도로 오염되기 전에 침략자들을 몰아내야 합니다.",
         "expansion": "정령섬 : 가지와 발톱, 정령섬 : 섬 아래 잠자는 뱀, 들불의 심장 프로모"
     },
@@ -4428,6 +4684,7 @@ const games = [
         "difficulty": 2.41,
         "imageClass": "pandemic",
         "icon": "🌡️💊",
+        "bestPlayers": 4,
         "description": "세계를 위협하는 치명적인 질병과의 사투."
     },
     {
@@ -4441,6 +4698,7 @@ const games = [
         "difficulty": 2.88,
         "imageClass": "paint-roses",
         "icon": "🃏🌹",
+        "bestPlayers": 3,
         "description": "여러분은 하트 여왕의 새로운 정원사가 되었습니다. 번덕쟁이 하트 여왕의 왕실 정원을 다 같이 협력해서 꾸며주세요!"
     },
     {
@@ -4454,6 +4712,7 @@ const games = [
         "difficulty": 1.7,
         "imageClass": "hanabi",
         "icon": "🎆🎇",
+        "bestPlayers": 4,
         "description": "서로를 믿고 지혜를 모아 오색의 화려한 불꽃놀이를 완성하자!"
     },
     {
@@ -4467,6 +4726,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "peek-a-mouse",
         "icon": "🐭🏠",
+        "bestPlayers": 4,
         "description": "생쥐 가족이 우리집 다락방 지붕 아래에 집을 지었어요. 그리고 집안 구석구석에서 가져온 물건들로 집을 꾸몄지요. 생쥐 가족이 잠시 집을 비운 틈을 타 슬쩍 훔쳐볼까요? 집안은 어떤 모습일까요? 생쥐들이 가져간 그 많은 물건들은 어디에 있는지 다 함께 찾아보세요!"
     },
     {
@@ -4480,6 +4740,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "stereo-mind",
         "icon": "🎵📱",
+        "bestPlayers": 5,
         "description": "모두가 같은 소리를 듣고 있지만 같은 생각을 하고 있을까요? 소리로 하는 공감 게임"
     },
     {
@@ -4493,6 +4754,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "stereo-mind-classical",
         "icon": "🎻🎼",
+        "bestPlayers": 5,
         "description": "스테레오 마인드의 두번째 버전, 소리로 하는 공감 게임"
     },
     {
@@ -4506,6 +4768,7 @@ const games = [
         "difficulty": 2.54,
         "imageClass": "zombicide",
         "icon": "🧟🔫",
+        "bestPlayers": 6,
         "description": "여명의 저 너머에서 죽은자들이 걸어나오기 시작했습니다. 살아남은 이들은 생존을 위해 그들과 싸워야 합니다."
     },
     {
@@ -4519,6 +4782,7 @@ const games = [
         "difficulty": 2.49,
         "imageClass": "keep-heroes-out",
         "icon": "🛡️🐉",
+        "bestPlayers": 3,
         "description": "던전을 침략하는 사악한 영웅들! \"막아야 한다.\" 본격 타워 디펜스 보드게임",
         "expansion": "킵 더 히어로즈 아웃 : 보스 배틀, 킵 더 히어로즈 아웃 : 코지 던전, 킵 더 히어로즈 아웃 : 지하 시장, 킵 더 히어로즈 아웃 : 불장난, 킵 더 히어로즈 아웃 : 스파클링 가디언, 킵 더 히어로즈 아웃 : 길드마스터의 복수, 킵 더 히어로즈 아웃 : 위대한 꿈꾸는 자"
     },
@@ -4533,6 +4797,7 @@ const games = [
         "difficulty": 1.0,
         "imageClass": "koryo-tu",
         "icon": "🐉🔢",
+        "bestPlayers": 2,
         "description": "상대방 보다 더 높은 숫자를 내서 이기면 된다! 최첨단 방식의 기계를 이용한 수 싸움 게임"
     },
     {
@@ -4546,6 +4811,7 @@ const games = [
         "difficulty": 1.5,
         "imageClass": "digit-code",
         "icon": "📟🔢",
+        "bestPlayers": 5,
         "description": "지금은 6자리 숫자로 이루어진 디지털 코드를 빠르게 분석해 내야 하는 상황입니다. 이유는 중요치 않습니다. 우리는 다양한 불친절한 정보들을 종합하여 코드를 찾아낼 것입니다."
     },
     {
@@ -4559,6 +4825,7 @@ const games = [
         "difficulty": 2.19,
         "imageClass": "lotr-confrontation",
         "icon": "💍⚔️",
+        "bestPlayers": 2,
         "description": "절대반지를 둘러싼 중간계 최대의 전쟁이 시작되었습니다. 반지의 제왕:대결에서, 두 플레이어는 각각 반지원정대와 사우론의 수하들을 조종하여 상대 세력을 물리치고 중간계의 지배자가 되거나 평화를 유지해야 합니다. 치밀한 전략으로 상대방의 전략을 뛰어넘어야 승리를 쟁취할 수 있을 것입니다."
     },
     {
@@ -4572,6 +4839,7 @@ const games = [
         "difficulty": 1.64,
         "imageClass": "venice-connection",
         "icon": "🇮🇹🛶",
+        "bestPlayers": 2,
         "description": "2명의 플레이어가 함께 하나의 운하를 만들어 갑니다. 베니스에서 펼쳐지는 아름다운 플레이를 경험해 보세요."
     },
     {
@@ -4585,6 +4853,7 @@ const games = [
         "difficulty": 1.72,
         "imageClass": "santorini",
         "icon": "🏛️🌊",
+        "bestPlayers": 2,
         "description": "지중해에서 가장 아름다운 섬으로 손꼽히는 산토리니 섬, 이 섬의 주인이 되기 위해 그리스 여러 신들이 모였습니다. 당신을 따르는 건축가들을 통해 건물을 건설하고 산토리니에서 가장 높은 건물 위에 오르세요."
     },
     {
@@ -4598,6 +4867,7 @@ const games = [
         "difficulty": 2.22,
         "imageClass": "7-wonders-duel",
         "icon": "🏛️⚔️",
+        "bestPlayers": 2,
         "description": "2인 게임의 명작 세븐원더스 듀얼",
         "expansion": "세븐원더스 듀얼 : 판테온, 세븐원더스 듀얼 : 아고라"
     },
@@ -4612,6 +4882,7 @@ const games = [
         "difficulty": 2.28,
         "imageClass": "super-fantasy-brawl",
         "icon": "⚔️🧙‍♂️",
+        "bestPlayers": 2,
         "description": "위대한 마법사들이 선택한 챔피언들의 치열한 전투! '파블로사'의 위대한 세 마법사들은 역사상 최고의 전사가 누구였을지에 대해 논쟁하기 시작했습니다. 해결책은 바로 그들을 직접 겨루게 하는 것이었습니다. 이윽고 이들의 전투, 브롤의 인기는 날이 갈수록 커졌고, 최고의 토너먼트 '슈퍼 브롤'이 탄생했습니다.",
         "expansion": "슈퍼 판타지 브롤 : 자연의 위력, 슈퍼 판타지 브롤 : 빛나는 권위, 슈퍼 판타지 브롤 : 유혈사태, 슈퍼 판타지 브롤 : 기발한 속임수, 슈퍼 판타지 브롤 : 전쟁의 기술, 슈퍼 판타지 브롤 : 정신의 힘"
     },
@@ -4626,6 +4897,7 @@ const games = [
         "difficulty": 3.73,
         "imageClass": "star-wars-rebellion",
         "icon": "🌌🚀",
+        "bestPlayers": 2,
         "description": "구 공화국의 잔재가 모조리 휩쓸려 나간 은하 내전의 시기, 은하 제국의 데스 스타가 얼데란을 향해 죽음의 항해를 시작한다. 한편, 데스 스타의 설계도를 반란 연합에 전달하기 위해 목숨을 거는 한 여성이 있었으니...",
         "expansion": "스타워즈 리벨리온 : 제국의 부상"
     },
@@ -4640,6 +4912,7 @@ const games = [
         "difficulty": 2.28,
         "imageClass": "war-chest",
         "icon": "⚔️🛡️",
+        "bestPlayers": 2,
         "description": "왕과 여왕 그리고 전사들이 펼치는 게임 속에서 아름다운 전략과 전술로 군대를 승리로 이끌어주십시오.",
         "expansion": "워 체스트 : 노빌리티, 워 체스트 : 시즈"
     },
@@ -4654,6 +4927,7 @@ const games = [
         "difficulty": 2.7,
         "imageClass": "yinsh",
         "icon": "⚪⚫",
+        "bestPlayers": 2,
         "description": "오목과 오셀로의 혼합으로 만들어진 추상전략 보드게임, 하지만 오목과 오셀로와는 전혀 다른 독보적인 전략이 필요하다. #기프 시리즈"
     },
     {
@@ -4667,6 +4941,7 @@ const games = [
         "difficulty": 1.94,
         "imageClass": "wars-roses",
         "icon": "🌹⚔️",
+        "bestPlayers": 2,
         "description": "장미전쟁은 랭커스터 가문과 요크 가문 사이에서 왕위를 놓고 벌어진 오랜 전쟁입니다. 영향력 카드로 군사를 이동하고, 영토를 점령하세요. 영토를 많이 모은 플레이어가 이 30년 간의 전쟁에서 승리할 수 있습니다."
     },
     {
@@ -4680,6 +4955,7 @@ const games = [
         "difficulty": 3.89,
         "imageClass": "imperial-struggle",
         "icon": "🏛️👑",
+        "bestPlayers": 2,
         "description": "제국의 투쟁은 18세기 프랑스와 영국의 경쟁을 그린 2인 게임입니다. 스페인의 차기 국왕 지명을 기다리던 1697년에 시작하여, 새로운 체제가 바스티유를 무너뜨리는 1789년까지의 이야기를 담고 있습니다. 여러분은 식민지로부터 부를 쌓아 기반을 마련하고, 유럽의 다른 국가들과 관계를 형성해야 합니다. #보드피아 책박스"
     },
     {
@@ -4693,6 +4969,7 @@ const games = [
         "difficulty": 2.02,
         "imageClass": "star-wars-deckbuilding",
         "icon": "🌌🚀",
+        "bestPlayers": 2,
         "description": "오래전 멀고 먼 은하계에...반란 연합은 은하 제국의 폭정에 맞서 맹전을 이어나가며, 승리에 승리를 거듭할수록 희망을 가져오고 영웅적인 희생 앞에 결의를 불태운다 그러나 제국은 막대한 자원과 막강한 화력을 자랑하는 함선으로 반란연합을 상대하고 있다. 그 어느 세력도 쉬이 패배를 받아들이지 않을 것이기에, 전쟁은 은하계 전체로 들불처럼 퍼져가리라..."
     },
     {
@@ -4706,6 +4983,7 @@ const games = [
         "difficulty": 3.38,
         "imageClass": "netrunner",
         "icon": "💻🕵️‍♂️",
+        "bestPlayers": 2,
         "description": "SF테마의 비대칭 LCG카드게임, 해커와 기업간의 아젠다 전쟁"
     },
     {
@@ -4719,6 +4997,7 @@ const games = [
         "difficulty": 1.5,
         "imageClass": "orlog",
         "icon": "🎲🦅",
+        "bestPlayers": 2,
         "description": "올로그는 고대 노르웨이인들과 앵글로색슨인들이 즐기던 주사위 게임입니다. 영리하게 주사위를 조합하고 신의 축복을 지혜롭게 사용하여 상대의 체력을 먼저 0으로 만들면 승리합니다."
     },
     {
@@ -4732,6 +5011,7 @@ const games = [
         "difficulty": 2.25,
         "imageClass": "orapa-mine",
         "icon": "💎⛏️",
+        "bestPlayers": 2,
         "description": "세계 최대의 다이아몬드 광산 오라파 마인에서 보석의 위치를 찾아달라는 의뢰가 들어왔습니다. 땅 속 깊은 곳으로 초음파를 쏘면 그 나오는 위치를 통해 보석의 위치와 상태를 알 수 있습니다. 가끔씩 초음파가 이상하게 되돌아 나오기도 하지만, 전문가인 우리들은 결국 보석을 찾아낼 수 있을 겁니다. 언제나 그랬듯이."
     },
     {
@@ -4745,6 +5025,7 @@ const games = [
         "difficulty": 2.74,
         "imageClass": "zertz",
         "icon": "⚫⚪",
+        "bestPlayers": 2,
         "description": "기프 시리즈의 3번째 게임, 구술을 먼저 모으는 사람이 이긴다. #기프 시리즈"
     },
     {
@@ -4758,6 +5039,7 @@ const games = [
         "difficulty": 1.78,
         "imageClass": "jekyll-hyde",
         "icon": "🎭🧪",
+        "bestPlayers": 2,
         "description": "지킬 박사 내면의 오만과 분노, 탐욕이 순간순간 표출되고 있습니다. 하이드는 이런 공격적인 모습들을 이끌어내 지킬 박사의 인격을 완전히 잠식하려 하고 지킬은 자신의 인격을 지키기 위해 고군분투합니다. 여러분은 각자 지킬과 하이드가 되어 양극단에 놓인 서로의 목표를 이루기 위해 대결을 펼쳐야 합니다. 과연 어떤 인격이 승리하게 될까요?"
     },
     {
@@ -4771,6 +5053,7 @@ const games = [
         "difficulty": 1.2,
         "imageClass": "princess-jing",
         "icon": "⛩️👸",
+        "bestPlayers": 2,
         "description": "짐 뒤에 숨으며 먼저 왕자를 찾아가자."
     },
     {
@@ -4784,6 +5067,7 @@ const games = [
         "difficulty": 1.88,
         "imageClass": "quoridor",
         "icon": "🧱🏃‍♂️",
+        "bestPlayers": 2,
         "description": "복도를 만들어 상대보다 먼저 목적지에 도달하자."
     },
     {
@@ -4797,6 +5081,7 @@ const games = [
         "difficulty": 2.0,
         "imageClass": "keyforge",
         "icon": "🔑🛡️",
+        "bestPlayers": 2,
         "description": "여러분은 각자 한 명의 집정관이 되어, 신비한 자원인 앰버를 모아 열쇠를 만들어야 합니다. 전선을 구축해 생명체를 제압하고, 다양한 효과를 구사해 효율적으로 앰버를 수집하세요. 상대보다 빠르게 열쇠 3개를 만들어 보물고를 여는 사람이 게임에서 승리합니다!"
     },
     {
@@ -4823,6 +5108,7 @@ const games = [
         "difficulty": 2.5,
         "imageClass": "tak",
         "icon": "🌳🧩",
+        "bestPlayers": 2,
         "description": "상대의 기물을 부수고 나의 길을 만들자"
     },
     {
@@ -4836,6 +5122,7 @@ const games = [
         "difficulty": 1.63,
         "imageClass": "patchwork-jogakbo",
         "icon": "🧵🎨",
+        "bestPlayers": 2,
         "description": "아름다운 퀼트 작품을 완성하세요! 패치워크 조각보는 전 세계, 각 나라의 상징적인 디자인을 담아 제작되는 전통문화 에디션의 대한민국 버전입니다. 한국의 전통문화인 조각보를 주제로 한국 고유의 단아한 아름다움을 담아보았습니다."
     },
     {
@@ -4849,6 +5136,7 @@ const games = [
         "difficulty": 1.92,
         "imageClass": "pylos",
         "icon": "🟠🟤",
+        "bestPlayers": 2,
         "description": "이 피라미드의 주인은 누구인가? 필로스에서 플레이어들은 피라미드 꼭대기의 자리를 차지하기 위해서 경쟁합니다. 자신의 구슬을 한알 한알 아껴 써야만 맨 마지막에 꼭대기에 올려놓을 수 있게 되요!"
     },
     {
@@ -4862,6 +5150,7 @@ const games = [
         "difficulty": 2.16,
         "imageClass": "whitehall-mystery",
         "icon": "🕵️‍♂️👣",
+        "bestPlayers": 3,
         "description": "살인자와 경찰의 쫓고 쫓기는 추격전!"
     },
     {
@@ -4875,6 +5164,7 @@ const games = [
         "difficulty": 2.05,
         "imageClass": "sky-team",
         "icon": "✈️🧑‍✈️",
+        "bestPlayers": 2,
         "description": "지금부터 여러분은 여객기를 조종하는 기장과 부기장입니다. 세계 곳곳의 공항이 위치한 지형과 환경에 맞춰 믿음직한 동료와 협력해 여객기를 무사히 착륙시키세요!"
     },
     {
@@ -4888,6 +5178,7 @@ const games = [
         "difficulty": 1.68,
         "imageClass": "adas-library",
         "icon": "📚👩‍🏫",
+        "bestPlayers": 2,
         "description": "카드 규칙에 따라 도서관을 정리합니다. 하지만 말처럼 간단하지 않습니다. 에이다의 도서관은 코딩에서 영감을 받은 전략을 게임에 활용합니다. 각 책 더미는 카드의 이동 규칙을 사용하여 전략적으로 배열해야 합니다. 액션 카드를 현명하게 사용하여 상대보다 먼저 책들의 색상 순서를 일치시키십시오."
     },
     {
@@ -4901,7 +5192,8 @@ const games = [
         "difficulty": 3.75,
         "imageClass": "fields-arle",
         "icon": "🚜🐑",
-        "description": "18세기가 끝나갈 무렵, 독일의 작은 마을 아를. 수 세기에 걸쳐 풍요롭기로 널리 이름을 알린 곳입니다. 비옥한 토지와 뛰어난 지리적 여건 덕에, 마을 사람들은 착실하게 부를 쌓았습니다. 그 시절 아들의 농부가 되어 소박한 풍요를 일궈보세요. 계절마다 계획을 착실하게 세우다 보면, 어느새 막대한 부를 거머쥘지도 모릅니다."
+        "bestPlayers": 2,
+        "description": "18세기가 끝나갈 무렵, 독일의 작은 마을 아를. 수 세기에 걸쳐 풍요롭기로 널리 이름을 알린 곳입니다. 비억한 토지와 뛰어난 지리적 여건 덕에, 마을 사람들은 착실하게 부를 쌓았습니다. 그 시절 아들의 농부가 되어 소박한 풍요를 일궈보세요. 계절마다 계획을 착실하게 세우다 보면, 어느새 막대한 부를 거머쥘지도 모릅니다."
     },
     {
         "id": "the-lord-of-the-rings-duel-for-middle-earth",
@@ -4914,6 +5206,7 @@ const games = [
         "difficulty": 2.06,
         "imageClass": "lotr-duel",
         "icon": "💍⚔️",
+        "bestPlayers": 2,
         "description": "자신의 힘을 회복하고자 하는 사우론과 그에 맞서는 반지 원정대가 펼치는 대결! 절대반지를 파괴하기 위해 운명의 산으로 향하는 프로도와 샘. 절대반지를 되찾기 위해 그들을 쫓는 나즈굴. 가운데땅에 살고 있는 여러 종족들로부터 지지를 받고 동맹을 맺기 위한 경쟁. 군사 활동을 통한 전쟁에 이르기까지! 가운데땅의 운명은 과연 어떤 결말을 맺을까요?",
         "expansion": "반지의 제왕 가운데에서의 대결 확장 : 조력자들"
     },
@@ -4928,6 +5221,7 @@ const games = [
         "difficulty": 1.75,
         "imageClass": "quoridor-pacman",
         "icon": "🟡👻",
+        "bestPlayers": 2,
         "description": "멘사에서 선정한 최고의 두뇌 게임 쿼리도와 전설적인 비디오 게임 팩맨이 만났습니다. 내가 전진할 것인가, 남을 가로막을 것이가! 팩맨 캐릭터들과 함께 쿼리도를 즐겨보세요."
     },
     {
@@ -4941,6 +5235,799 @@ const games = [
         "difficulty": 1.55,
         "imageClass": "buffalo-chess",
         "icon": "🐃🤠",
+        "bestPlayers": 2,
         "description": "지평선에 구름이 생기기라도 한 듯, 먼지가 자욱이 일어났습니다. 한 때의 버펄로(들소) 가 땅을 울리며 마을로 돌진합니다. 강 뒤의 마을 사람들은 불안해지기 시작합니다. 카우보이는 4마리 사냥개의 도움만으로 들소 떼의 공격을 막아낼 수 있을까요? 아니면 들소는 결국 강을 건너고야 말까요?"
+    },
+    {
+        "id": "dragon-stripes",
+        "title": "드래곤 스트라이프",
+        "genre": "파티",
+        "mechanism": "푸쉬 유어 럭",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "30분",
+        "difficulty": 1.5,
+        "imageClass": "dragon-stripes",
+        "icon": "🐉💎",
+        "bestPlayers": 2,
+        "description": "그 사나운 드래곤은 보석을 좋아해서, 몸 전체를 보석으로 감고 있습니다. 용감한 당신은 드래곤을 처치하기로 마음먹고는 드래곤의 머리까지 살금살금 걸어가는데, 보석들이 발에 채일만큼 많네요. 드래곤을 처치를 할까요, 아니면 보석들부터 먼저 챙길까요?"
+    },
+    {
+        "id": "deception-murder-in-hong-kong",
+        "title": "디셉션 : 홍콩 살인사건",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 4,
+        "maxPlayers": 12,
+        "playTime": "20분",
+        "difficulty": 1.6,
+        "imageClass": "deception",
+        "icon": "🕵️‍♂️🔍",
+        "bestPlayers": 6,
+        "description": "홍콩에서 살인이 일어났습니다. 도시에서 가장 실력 있는 법의학자가 수사관들을 지원하지만 살인자도 수사관중 한명입니다. 당신은 제대로 살인자를 지목할 수 있을 까요?",
+        "expansion": "디셉션 : 언더커버"
+    },
+    {
+        "id": "dixit",
+        "title": "딕싯",
+        "genre": "파티",
+        "mechanism": "스토리 텔링",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "60분",
+        "difficulty": 1.22,
+        "imageClass": "dixit",
+        "icon": "🃏🖼️",
+        "bestPlayers": 6,
+        "description": "동화적인 이미지 카드들을 이용하여 이야기를 만들어 보세요.",
+        "expansion": "딕싯 : 예지, 딕싯 : 메모리즈, 딕싯 : 퀘스트"
+    },
+    {
+        "id": "dixit-disney-100th-anniversary",
+        "title": "딕싯 디즈니 100주년 기념판",
+        "genre": "파티",
+        "mechanism": "스토리텔링",
+        "minPlayers": 3,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.14,
+        "imageClass": "dixit-disney",
+        "icon": "🏰✨",
+        "bestPlayers": 6,
+        "description": "딕싯의 세계에서 펼쳐지는 디즈니와 픽사의 마법 같은 이야기. 사랑스러운 캐릭터들과 함께했던 장면들을 떠올리며 여러분의 상상력과 창의력으로 그 추억을 재탄생시켜 주세요!"
+    },
+    {
+        "id": "las-vegas-royale",
+        "title": "라스베가스 로얄 20주년",
+        "genre": "파티",
+        "mechanism": "주사위",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "30분",
+        "difficulty": 1.19,
+        "imageClass": "las-vegas-royale",
+        "icon": "🎲🎰",
+        "bestPlayers": 5,
+        "description": "라스베가스의 대형 카지노 6곳에서 가장 많은 돈을 따낼 사람은 누가 될까요?"
+    },
+    {
+        "id": "the-resistance-avalon",
+        "title": "레지스탕스 아발론",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 5,
+        "maxPlayers": 10,
+        "playTime": "30분",
+        "difficulty": 1.77,
+        "imageClass": "avalon",
+        "icon": "⚔️👑",
+        "bestPlayers": 7,
+        "description": "악이 스스로를 드러냈고 대 마법사 멀린이 미래를 보았다. 여러분은 선한 기사 또는 악한 수하가 되어 정체를 숨긴체 임무를 완수해야 합니다."
+    },
+    {
+        "id": "the-wandering-towers",
+        "title": "마법사와 움직이는 탑",
+        "genre": "파티",
+        "mechanism": "핸드 관리, 메모리, 레이싱",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.64,
+        "imageClass": "wandering-towers",
+        "icon": "🧙‍♂️🏰",
+        "bestPlayers": 4,
+        "description": "올해도 어김없이 마법 학교의 졸업 시험이 다가왔습니다! 모든 마법사는 최종 시험의 목표이자 전설 속의 장소인 '까마귀 성'에 가장 먼저 도착해야 합니다! 하지만 까마귀 성으로 가는 길은 함정과 도전으로 가득하답니다. 마법을 능숙하게 사용하고, 탑을 움직여서 가장 먼저 까마귀 성에 도착하세요!"
+    },
+    {
+        "id": "thats-not-a-hat",
+        "title": "모자가 아니잖아",
+        "genre": "파티",
+        "mechanism": "메모리",
+        "minPlayers": 3,
+        "maxPlayers": 8,
+        "playTime": "15분",
+        "difficulty": 1.03,
+        "imageClass": "thats-not-a-hat",
+        "icon": "🎩🚫",
+        "bestPlayers": 6,
+        "description": "점점 흐릿해지는 기억 속에 진행되는 이 게임과 함께 잊을 수 없는 추억을 만들어 보세요!"
+    },
+    {
+        "id": "the-white-castle-duel",
+        "title": "백로성 대결",
+        "genre": "전략",
+        "mechanism": "입꾼 놓기",
+        "minPlayers": 2,
+        "maxPlayers": 2,
+        "playTime": "40분",
+        "difficulty": 2.93,
+        "imageClass": "white-castle-duel",
+        "icon": "🏰⚔️",
+        "bestPlayers": 2,
+        "description": "새로운 시대, 권력을 손에 쥐려는 두 가문의 대결! 16세기 일본은 서구 세력과 교류를 시작하며 정치, 경제, 사회가 격변한 “남만무역 시기”를 맞이합니다. 이러한 흐름은 다이묘들에게 힘을 실어주었고, 히메지 성은 이들의 권력 다툼의 중심지로 떠올랐습니다. 이제 이곳에서 두 가문의 치열한 경쟁이 펼쳐집니다. 명성과 군사력을 드높여 여러분의 가문이 백로성에 자리할 자격이 있음을 증명하세요!"
+    },
+    {
+        "id": "duel-for-cardia",
+        "title": "카르디아",
+        "genre": "패밀리",
+        "mechanism": "핸드 관리, 셋 컬렉션",
+        "minPlayers": 2,
+        "maxPlayers": 2,
+        "playTime": "15분",
+        "difficulty": 1.73,
+        "imageClass": "duel-cardia",
+        "icon": "🃏✨",
+        "bestPlayers": 2,
+        "description": "동일한 카드덱으로 펼치는 서로 다른 전략. 둘만의 전장에서 상대를 압도하세요!"
+    },
+    {
+        "id": "mandala",
+        "title": "만다라",
+        "genre": "패밀리",
+        "mechanism": "셋 컬렉션",
+        "minPlayers": 2,
+        "maxPlayers": 2,
+        "playTime": "20분",
+        "difficulty": 1.78,
+        "imageClass": "mandala",
+        "icon": "🎨🧘‍♂️",
+        "bestPlayers": 2,
+        "description": "만다라는 성스러운 의식의 상징물입니다. 형형색색의 모래는 만물을 형상화하며 수 놓이고, 그렇게 만들어진 문양은 다시 흐트러져 강으로 흘러들어갑니다. 이는 삶의 유한성과 죽음의 필연성을 반영합니다."
+    },
+    {
+        "id": "crown-of-the-clan",
+        "title": "가문의 왕관",
+        "genre": "파티",
+        "mechanism": "덱 빌딩",
+        "minPlayers": 3,
+        "maxPlayers": 5,
+        "playTime": "30분",
+        "difficulty": 1.4,
+        "imageClass": "crown-clan",
+        "icon": "👑🃏",
+        "bestPlayers": 5,
+        "description": "속임수, 배신, 눈치싸움 속 가장 먼저 왕관을 차지할 가문은? 오랜 기간 전쟁을 치른 가문들은 이제 하나의 왕국을 건설할 때가 되었다고 생각했습니다. 하지만 어느 가문이 처음으로 왕관을 써야 할까요? 이제부터 치열하고 비열한 생존이 펼쳐집니다!"
+    },
+    {
+        "id": "wavelength",
+        "title": "내 마음의 주파수",
+        "genre": "파티",
+        "mechanism": "추리",
+        "minPlayers": 2,
+        "maxPlayers": 10,
+        "playTime": "45분",
+        "difficulty": 1.1,
+        "imageClass": "wavelength",
+        "icon": "🧠📡",
+        "bestPlayers": 6,
+        "description": "넌 어떤 세상에 살고있니? 서로의 마음을 짐작하는 공감형 파티게임!"
+    },
+    {
+        "id": "no-touch-kraken-deluxe",
+        "title": "노터치 크라켄 디럭스",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 4,
+        "maxPlayers": 8,
+        "playTime": "20분",
+        "difficulty": 1.15,
+        "imageClass": "no-touch-kraken",
+        "icon": "🐙🚫",
+        "bestPlayers": 5,
+        "description": "플레이어는 탐험대 또는 스켈레톤 중 하나의 역할을 맡아 자신의 정체를 숨긴 채로 게임을 진행합니다. 탐험대는 숨겨진 보물을 모두 찾아야 하고, 스켈레톤은 탐험대가 보물 카드를 모두 찾기 전에 크라켄을 깨워 이를 막아야 합니다."
+    },
+    {
+        "id": "sheriff-of-nottingham",
+        "title": "노팅엄의 지방관",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 3,
+        "maxPlayers": 6,
+        "playTime": "60분",
+        "difficulty": 1.68,
+        "imageClass": "sheriff-nottingham",
+        "icon": "💰🍎",
+        "bestPlayers": 5,
+        "description": "영국 셔우드, 탐욕스러운 존 왕자는 상인들의 가진 걸 세금으로 빼앗고, 노팅엄의 지방관에게 성문으로 들어오는 모든 이들을 조사해서 밀수품을 찾아내도록 명을 내렸습니다. 그나마 다행인 건 노팅엄의 지방관이 뇌물만 섭섭하지 않게 바치면 눈을 감아줄 아량이 있다는 점입니다! 허세와 뇌물로 큰 이익을 얻느냐, 그냥 정직하게 안전하게 가느냐. 선택은 여러분의 몫입니다!"
+    },
+    {
+        "id": "barrel-dice",
+        "title": "배럴다이스",
+        "genre": "파티",
+        "mechanism": "주사위",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.58,
+        "imageClass": "barrel-dice",
+        "icon": "🍺🎲",
+        "bestPlayers": 6,
+        "description": "우리 마을에서 가장 유명한 술집 '술 먹는 하마'에 오신 여러분을 환영합니다! 여기는 공짜 맥주를 마음껏 마실 수 있는 곳입니다. 원하는 만큼 맥주를 주문해서 마셔보세요! 하지만 너무 욕심 부려서는 안됩니다. 준비된 양보다 더 많이 주문하는 욕심쟁이들이 있다면 술집 주인이 화가 나서 맥주를 모두 회수합니다!"
+    },
+    {
+        "id": "celestia",
+        "title": "셀레스티아",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.33,
+        "imageClass": "celestia",
+        "icon": "🎈🚢",
+        "bestPlayers": 6,
+        "description": "비행선을 타고 떠나는 최고의 여행, 다가오는 위험을 극복하고 멋진 보물을 얻으세요.",
+        "expansion": "셀레스티아 : 리틀헬프"
+    },
+    {
+        "id": "skull",
+        "title": "스컬",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 3,
+        "maxPlayers": 6,
+        "playTime": "45분",
+        "difficulty": 1.14,
+        "imageClass": "skull",
+        "icon": "💀🏵️",
+        "bestPlayers": 6,
+        "description": "기초기본의 충실한 정통파 블러핑, 군더더기 따위 필요 없이 순수 블러핑으로 승부한다."
+    },
+    {
+        "id": "stick-stack",
+        "title": "스틱 스택",
+        "genre": "파티",
+        "mechanism": "덱스터리티",
+        "minPlayers": 2,
+        "maxPlayers": 10,
+        "playTime": "20분",
+        "difficulty": 1.0,
+        "imageClass": "stick-stack",
+        "icon": "🥢🌈",
+        "bestPlayers": 5,
+        "description": "남녀노소 누구나 즐길 수 있는 컬러매칭 밸런스 게임!"
+    },
+    {
+        "id": "spicy",
+        "title": "스파이시",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "20분",
+        "difficulty": 1.53,
+        "imageClass": "spicy",
+        "icon": "🌶️🐱",
+        "bestPlayers": 5,
+        "description": "상대를 이기기 위해선 더 매운 스파이시를 먹어야 합니다. 상대방을 속이고 도전하며 트로피를 획득하세요. 하이델 베어 Cultural radiant Series의 한국 버전"
+    },
+    {
+        "id": "spyfall",
+        "title": "스파이폴",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 3,
+        "maxPlayers": 8,
+        "playTime": "15분",
+        "difficulty": 1.23,
+        "imageClass": "spyfall",
+        "icon": "🕵️‍♂️💼",
+        "bestPlayers": 6,
+        "description": "스파이들에게는 비밀이 생명! 자신의 임무를 달성하기 위해 스파이는 오늘도 낯선 장소에 조용히 침투합니다. 바로 지금! 나의 옆에 있는 그 누군가가 중대한 임무를 띠고 있는 스파이일지도?!"
+    },
+    {
+        "id": "silver-mine",
+        "title": "실버 마인",
+        "genre": "파티",
+        "mechanism": "주사위, 레이스",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.38,
+        "imageClass": "silver-mine",
+        "icon": "⛏️🥈",
+        "bestPlayers": 6,
+        "description": "그 악명높은 은 광산에 들어가려면 광산 발전기금을 내야 합니다. 일찍 들어간다면 조금만 내겠지만, 가장 늦게 간다면 모인 기금을 아무도 모르게 가져갈 수 있을 겁니다. 늦게 가기 위해서 무슨 수를 써야 할까요? 매 차례, 입구에서 가장 가까운 광부는 주사위를 1개 굴리고, 멀리 있는 광부는 먼 만큼 더 많이 굴려야 합니다."
+    },
+    {
+        "id": "winners-circle",
+        "title": "위너스 서클",
+        "genre": "파티",
+        "mechanism": "블러핑, 레이스, 주사위",
+        "minPlayers": 3,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.61,
+        "imageClass": "winners-circle",
+        "icon": "🐎🏆",
+        "bestPlayers": 6,
+        "description": "위너스 서클은 세 번의 경주로 이루어집니다. 플레이어들은 경주마다 7마리의 경주마에 돈을 걸어서, 자신이 응원하는 말에 박차를 가하고, 다른 말의 주의를 흐트러뜨립니다. 세 번의 경주가 끝나고, 배당금을 가장 많이 획득한 사람이 게임에서 승리합니다. #보드피아 책박스"
+    },
+    {
+        "id": "express-cross",
+        "title": "익스프레스 크로스",
+        "genre": "파티",
+        "mechanism": "주사위",
+        "minPlayers": 2,
+        "maxPlayers": 99,
+        "playTime": "15분",
+        "difficulty": 2.0,
+        "imageClass": "express-cross",
+        "icon": "🚂🎲",
+        "bestPlayers": 99,
+        "description": "주사위 5개로 나오는 숫자들을 20개의 칸에 오름차순으로 배치하세요. 오름순으로 길게 연결될 수록 점수가 높긴 하지만, 짧더라도 점수가 얻을 수 있습니다."
+    },
+    {
+        "id": "insider",
+        "title": "인사이더",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 4,
+        "maxPlayers": 8,
+        "playTime": "15분",
+        "difficulty": 1.07,
+        "imageClass": "insider",
+        "icon": "👁️💬",
+        "bestPlayers": 5,
+        "description": "다른 사람과 대화하고 문제를 맞추는 과정에서 그 대화를 조종하고 있는 내부자를 찾는 블러핑 게임"
+    },
+    {
+        "id": "6-nimmt",
+        "title": "젝스님트",
+        "genre": "파티",
+        "mechanism": "핸드 관리",
+        "minPlayers": 2,
+        "maxPlayers": 10,
+        "playTime": "45분",
+        "difficulty": 1.21,
+        "imageClass": "6-nimmt",
+        "icon": "🐮🃏",
+        "bestPlayers": 5,
+        "description": "1996년 고지능자 국제 협회인 멘사에서 추천한 영재 카드게임 젝스님트, 황소 뿔 벌점세례를 받지 않도록 카드를 잘 놓아야 합니다. 논리적 사고와 운 요소가 적절히 섞인 게임입니다."
+    },
+    {
+        "id": "goodcritters",
+        "title": "착한녀석들",
+        "genre": "파티",
+        "mechanism": "협잡",
+        "minPlayers": 4,
+        "maxPlayers": 8,
+        "playTime": "40분",
+        "difficulty": 1.38,
+        "imageClass": "goodcritters",
+        "icon": "🦝💰",
+        "bestPlayers": 7,
+        "description": "우리 조직원들이 가장 설레는 순간은 장물을 나눌 때랍니다. 여러분은 강도를 일삼는 조직의 일원이 됩니다. 조직원들은 자기 몫을 더 챙겨 받기 위한 암투를 합니다.",
+        "expansion": "착한녀석들 : 프로모"
+    },
+    {
+        "id": "3-second-try",
+        "title": "3초 트라이",
+        "genre": "파티",
+        "mechanism": "퀴즈",
+        "minPlayers": 2,
+        "maxPlayers": 7,
+        "playTime": "15분",
+        "difficulty": 1.0,
+        "imageClass": "3-second-try",
+        "icon": "⏱️⚡",
+        "bestPlayers": 5,
+        "description": "여러분은 3초 동안 얼마나 많은 것을 할 수 있을까요? 도전 과제를 3초 동안 몇 번이나 할 수 있는지 선언하고 직접 도전해야 합니다."
+    },
+    {
+        "id": "camel-up-2nd-edition",
+        "title": "카멜업 2판",
+        "genre": "파티",
+        "mechanism": "주사위, 레이스",
+        "minPlayers": 3,
+        "maxPlayers": 8,
+        "playTime": "30분",
+        "difficulty": 1.48,
+        "imageClass": "camel-up",
+        "icon": "🐪🏁",
+        "bestPlayers": 5,
+        "description": "이집트의 상류층들이 한곳에 모여 내기 잔치를 벌입니다. 우승할 것 같은 낙타를 후원해 일확천금을 노리세요. 경주의 흐름을 읽고 타이밍을 잡는 것도 중요하지만 결국에는 운이 따라주어야 합니다. 누가 우승할지는 아무도 모릅니다!"
+    },
+    {
+        "id": "codenames",
+        "title": "코드네임",
+        "genre": "파티",
+        "mechanism": "추리",
+        "minPlayers": 2,
+        "maxPlayers": 8,
+        "playTime": "15분",
+        "difficulty": 1.29,
+        "imageClass": "codenames",
+        "icon": "🕵️‍♂️🕵️‍♀️",
+        "bestPlayers": 6,
+        "description": "군중 속에 숨어있는 우리 팀 요원을 찾아라!"
+    },
+    {
+        "id": "coup",
+        "title": "쿠",
+        "genre": "파티",
+        "mechanism": "추리",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "15분",
+        "difficulty": 1.41,
+        "imageClass": "coup",
+        "icon": "🏰⚔️",
+        "bestPlayers": 5,
+        "description": "당신은 무능한 왕이 통치하는 이탈리아의 한 도시국가에서 집권을 노리는 한 가문의 수장입니다. 부정부패와 권모술수가 판치는 이 도시에서, 각 가문은 저마다 권력을 잡기 위해 뒷공작과 선동, 뇌물 공여를 서슴지 않습니다. 당신의 목표는 다른 가문의 영향력을 모두 지우고, 그 세력들을 이 도시에서 추방하는 것입니다."
+    },
+    {
+        "id": "top-ten-tv",
+        "title": "탑텐TV",
+        "genre": "파티",
+        "mechanism": "스토리텔링, 협력",
+        "minPlayers": 4,
+        "maxPlayers": 9,
+        "playTime": "30분",
+        "difficulty": 1.0,
+        "imageClass": "top-ten-tv",
+        "icon": "📺🔢",
+        "bestPlayers": 6,
+        "description": "예능 같은 신나는 모임, 더 이상 부러워하지 마세요! 당신의 모임에 예능의 기운을 불러올 게임! 과묵한 내 친구의 숨겨진 예능신을 찾아 주는 게임!"
+    },
+    {
+        "id": "team3",
+        "title": "팀3: 그린, 핑크",
+        "genre": "파티",
+        "mechanism": "덱스터리티",
+        "minPlayers": 3,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.21,
+        "imageClass": "team3",
+        "icon": "🐒🏗️",
+        "bestPlayers": 6,
+        "description": "설계자, 관리자, 건축가 3명이 호흡을 맞춰 멋진 건물을 만들어요!"
+    },
+    {
+        "id": "feed-the-kraken",
+        "title": "피드 더 크라켄",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 5,
+        "maxPlayers": 11,
+        "playTime": "90분",
+        "difficulty": 2.11,
+        "imageClass": "feed-kraken",
+        "icon": "🐙⚓",
+        "bestPlayers": 8,
+        "description": "선장일지, 1695년 10월 8일 항해 도중 몇몇 불행한 사건을 겪은 탓에 선원의 절반을 잃었다. 나머지 절반은 우리 배가 저주 받았다고 생각했고, 어느 작은 항구에 배가 다다르자마자 모두 떠나버렸다. 나는 이 여정을 끝마치기 위해 다시금 능력 있는 선원을 고용해야만 했다. 그리고 이 지역 여관에서 그럴 만한 사람들을 찾아냈지만... 이들 중 일부는 다른 목적을 가지고 내 배에 올라탄 것 같다..."
+    },
+    {
+        "id": "fuji-flush",
+        "title": "후지 플러시",
+        "genre": "파티",
+        "mechanism": "핸드 관리",
+        "minPlayers": 3,
+        "maxPlayers": 8,
+        "playTime": "20분",
+        "difficulty": 1.05,
+        "imageClass": "fuji-flush",
+        "icon": "                🗻🃏",
+        "bestPlayers": 6,
+        "description": "대세를 따를 것인가, 나 혼자 살아남을 것인가! 손에 든 카드를 남들보다 먼저 모두 내려놓으세요! 가장 큰 숫자만 살아남지만, 작은 숫자도 힘을 합친다면 큰 숫자를 이길 수 있습니다. 대세를 따를 것인지, 연합을 물리치고 혼자 살아남을 것인지... 선택은 여러분의 몫입니다."
+    },
+    {
+        "id": "liars-dice",
+        "title": "라이어스 다이스",
+        "genre": "파티",
+        "mechanism": "주사위, 블러핑",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "20분",
+        "difficulty": 1.25,
+        "imageClass": "liars-dice",
+        "icon": "🎲🤥",
+        "bestPlayers": 6,
+        "description": "“라이어스 다이스”는 게임 내 모든 이들의 주사위를 예측하고, 승부를 거는 게임입니다. 상대가 주사위를 잃어가는 동안 자신의 주사위를 끝까지 지켜 승리를 쟁취하세요!"
+    },
+    {
+        "id": "durian",
+        "title": "두리안",
+        "genre": "파티",
+        "mechanism": "눈치",
+        "minPlayers": 2,
+        "maxPlayers": 7,
+        "playTime": "20분",
+        "difficulty": 1.13,
+        "imageClass": "durian",
+        "icon": "🦍🍍",
+        "bestPlayers": 6,
+        "description": "종을 울려라! 고릴라가 온다! 오늘도 정글 과일 가게는 몰려드는 손님들로 정신이 없네요. 직원들은 너무 바쁜 나머지, 입고된 과일 상자를 제대로 확인하지도 않고 정신없이 주문을 받기 시작했어요. 만약 고릴라 점장이 재고가 부족하다는 사실을 알게 된다면... 으이, 상상만 해도 끔찍하군요!"
+    },
+    {
+        "id": "mahe",
+        "title": "마헤",
+        "genre": "파티",
+        "mechanism": "주사위, 레이스",
+        "minPlayers": 2,
+        "maxPlayers": 7,
+        "playTime": "20분",
+        "difficulty": 1.23,
+        "imageClass": "mahe",
+        "icon": "🐢🏝️",
+        "bestPlayers": 6,
+        "description": "많은 알을 낳기 위해 경쟁하는 거북이들의 울고 웃는 레이싱 게임!"
+    },
+    {
+        "id": "sounds-fishy",
+        "title": "수상한 생선들",
+        "genre": "파티",
+        "mechanism": "블러핑",
+        "minPlayers": 4,
+        "maxPlayers": 10,
+        "playTime": "30분",
+        "difficulty": 1.0,
+        "imageClass": "sounds-fishy",
+        "icon": "🐟🤥",
+        "bestPlayers": 6,
+        "description": "라운드마다 주어지는 이상한 질문에 물고기들이 답을 합니다. 전부 거짓말 같이 들리겠지만, 이중에 하나는 정답이에요. 물고기들의 거짓말과 연기에 속지 말고, 진짜 정답을 가려내세요!"
+    },
+    {
+        "id": "domemo",
+        "title": "도메모",
+        "genre": "패밀리",
+        "mechanism": "추리, 숫자",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "20분",
+        "difficulty": 1.5,
+        "imageClass": "domemo",
+        "icon": "🔢🕵️‍♂️",
+        "images": "도메모.jpg",
+        "bestPlayers": 4,
+        "description": "자신 앞에 놓인 숫자를 맞히는 논리 추리 게임입니다. 다른 사람의 패를 보고 내 패를 유추해야 합니다."
+    },
+    {
+        "id": "lancaster",
+        "title": "랭카스터",
+        "genre": "전략",
+        "mechanism": "일꾼 놓기, 영향력",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "60분",
+        "difficulty": 2.99,
+        "imageClass": "lancaster",
+        "icon": "🛡️💂",
+        "bestPlayers": 5,
+        "description": "1413년 잉글랜드의 새로운 국왕 헨리 5세는 잉글랜드의 통일과 프랑스 정복을 계획하고 있었습니다. 플레이어들은 귀족가문의 수장이 된다. 그리고 과연 누가 이 젊은 왕의 진실한 후원자가 되어 당대 최고의 영주가 될 것인가."
+    },
+    {
+        "id": "modern-art",
+        "title": "모던아트",
+        "genre": "패밀리",
+        "mechanism": "핸드 관리, 경매",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "45분",
+        "difficulty": 2.3,
+        "imageClass": "modern-art",
+        "icon": "🎨🖼️",
+        "bestPlayers": 5,
+        "description": "그림 경매게임, 어느 타이밍에 작가를 밀어줘야 할까. 시세 흐름을 잘 타서 그림을 알차게 사거나 팔아보자. #보드피아 책박스"
+    },
+    {
+        "id": "vampire-queen",
+        "title": "뱀파이어 퀸",
+        "genre": "파티",
+        "mechanism": "클라이밍",
+        "minPlayers": 4,
+        "maxPlayers": 8,
+        "playTime": "30분",
+        "difficulty": 1.09,
+        "imageClass": "vampire-queen",
+        "icon": "🧛‍♀️🧛‍♂️",
+        "bestPlayers": 7,
+        "description": "새벽이 밝았습니다. 착한 뱀파이어는 잠자리에 들 시간입니다. 늦게 잠드는 뱀파이어는 뱀파이어 헌터가 잡아갑니다."
+    },
+    {
+        "id": "schrodingers-cat",
+        "title": "슈뢰딩거의 고양이",
+        "genre": "패밀리",
+        "mechanism": "트릭 테이킹",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "30분",
+        "difficulty": 2.0,
+        "imageClass": "schrodingers-cat",
+        "icon": "🐈📦",
+        "bestPlayers": 5,
+        "description": "이 실험은 상자냥 연구소에서 비밀리에 시행되고 있는 일급비밀 프로젝트입니다. 각각의 대상은 외부에서 내부를 관찰할 수 없는 상자 형태의 보관함에 개별적으로 수용됩니다. 복슬복슬한 성질을 가져야 하는 각 대상 개체를 고양이로 합니다. 대상의 털 색깔이 관측되는 대로 이를 기록하세요. 고양이는 빨간색일 수도, 파란색일 수도, 동시에 노란색 일 수도 있습니다. 부디 당신에게 흥미로운 실험이 되길 바랍니다."
+    },
+    {
+        "id": "skull-king",
+        "title": "스컬킹",
+        "genre": "패밀리",
+        "mechanism": "트릭 테이킹",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.73,
+        "imageClass": "skull-king",
+        "icon": "🏴‍☠️💀",
+        "bestPlayers": 5,
+        "description": "배짱과 예측으로 승리하는 카드게임"
+    },
+    {
+        "id": "stockpile",
+        "title": "스타파일",
+        "genre": "패밀리",
+        "mechanism": "경매, 핸드 관리",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "45분",
+        "difficulty": 2.11,
+        "imageClass": "stockpile",
+        "icon": "📈🏦",
+        "bestPlayers": 5,
+        "description": "당신은 운 좋게도 주식 시장의 내부 정보를 입수했습니다! 이 정보를 잘만 이용하면, 가장 뛰어난 투자자가 되어 수많은 돈을 움켜쥐는 것도 꿈이 아닐 것입니다. 현명한 투자를 통해 주식 자산을 쌓고 경쟁자들에게는 잘못된 정보를 흘려 이윤을 남기지 못하게 하세요. 하지만 내부 정보를 아는 것만으로 승승장구할 정도로 주식 시장은 만만하지 않습니다.",
+        "expansion": "스타파일 : 계속되는 부패"
+    },
+    {
+        "id": "adrenaline",
+        "title": "아드레날린",
+        "genre": "전략",
+        "mechanism": "핸드 관리",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "45분",
+        "difficulty": 2.34,
+        "imageClass": "adrenaline",
+        "icon": "🔫🚀",
+        "bestPlayers": 5,
+        "description": "무기를 집어 들고, 탄약을 장전하고, 적들을 제압하세요!",
+        "expansion": "아드레날린 : 팀 플레이 DLC"
+    },
+    {
+        "id": "age-of-steam-deluxe",
+        "title": "에이지 오브 스팀 딜럭스 에디션",
+        "genre": "전략",
+        "mechanism": "경매, 타일 놓기",
+        "minPlayers": 1,
+        "maxPlayers": 6,
+        "playTime": "120분",
+        "difficulty": 3.9,
+        "imageClass": "age-of-steam-deluxe",
+        "icon": "🚂🛤️",
+        "bestPlayers": 5,
+        "description": "미국 경제를 급속도로 발전시킨 증기의 시대, 플레이어는 철도 회사의 경영자가 되어, 주식을 발행해서 자본을 확보하고, 미국 전역에 기차를 사들이고, 도시와 도시 사이로 자원을 실어 나르며 회사를 누구보다 크고 강하게 키워야 합니다."
+    },
+    {
+        "id": "endeavor",
+        "title": "엔데버 대항해시대",
+        "genre": "전략",
+        "mechanism": "영향력, 셋 컬렉션",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "75분",
+        "difficulty": 2.79,
+        "imageClass": "endeavor",
+        "icon": "⚓🧭",
+        "bestPlayers": 5,
+        "description": "대항해시대(1571~1862)는 원양 항해술을 앞세운 제국들이 강력한 함대를 이용해 전세계 대륙들을 하나의 바다로 묶은 전례 없는 팽창의 시기였습니다. 당신은 이 시기의 해양 제국이 되어 유럽의 거점부터 지도에 나오지 않는 오지까지 최선의 항로를 만들기 위해 노력하게 됩니다."
+    },
+    {
+        "id": "el-grande-big-box",
+        "title": "엘 그란데 빅박스",
+        "genre": "유로",
+        "mechanism": "카드 드래프트, 영향력",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "90분",
+        "difficulty": 2.78,
+        "imageClass": "el-grande",
+        "icon": "🏰🤴",
+        "bestPlayers": 5,
+        "description": "영향력게임의 원조, 왕이 돌아왔다."
+    },
+    {
+        "id": "zen-master",
+        "title": "젠 마스터",
+        "genre": "패밀리",
+        "mechanism": "트릭 테이킹",
+        "minPlayers": 3,
+        "maxPlayers": 5,
+        "playTime": "30분",
+        "difficulty": 1.3,
+        "imageClass": "zen-master",
+        "icon": "☯️🧘",
+        "bestPlayers": 5,
+        "description": "음과 양의 조화를 이루어 젠 마스터가 되어라!"
+    },
+    {
+        "id": "chinatown",
+        "title": "차이나타운",
+        "genre": "패밀리",
+        "mechanism": "협잡, 셋 컬렉션, 실시간",
+        "minPlayers": 3,
+        "maxPlayers": 5,
+        "playTime": "60분",
+        "difficulty": 2.27,
+        "imageClass": "chinatown",
+        "icon": "🏮🧧",
+        "bestPlayers": 5,
+        "description": "플레이어끼리 자유로운 거래가 이루어지는 협상 게임"
+    },
+    {
+        "id": "stick-em",
+        "title": "봉 잡았다!",
+        "genre": "패밀리",
+        "mechanism": "눈치, 경매",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "20분",
+        "difficulty": 1.0,
+        "imageClass": "stick-em",
+        "icon": "🥢🪵",
+        "bestPlayers": 5,
+        "description": "가치 있는 막대를 모으기 위한 경매가 열렸습니다. 경매에 참가하기 위해서는 한 가지만 유의하세요! 막대는 눈으로만 볼 수 있고, 가까이 다가가면 안 됩니다. 여러분은 단 5mm의 차이를 구분해 낼 수 있는 안목 있는 수집가가 될 수 있을까요?"
+    },
+    {
+        "id": "flamme-rouge",
+        "title": "플람루즈",
+        "genre": "패밀리",
+        "mechanism": "핸드 관리",
+        "minPlayers": 2,
+        "maxPlayers": 6,
+        "playTime": "30분",
+        "difficulty": 1.67,
+        "imageClass": "flamme-rouge",
+        "icon": "🚲🏁",
+        "bestPlayers": 6,
+        "description": "전술적 자전거 레이싱 게임. 각 플레이어는 룰러와 스프린터를 한 팀으로 구성하여 제어한다. 팀원 중 한 명이라도 먼저 결승선을 지나가자.",
+        "expansion": "플람루즈 : 펠로톤"
+    },
+    {
+        "id": "hansa-teutonica",
+        "title": "한자 토이토니카",
+        "genre": "유로",
+        "mechanism": "영향력",
+        "minPlayers": 3,
+        "maxPlayers": 5,
+        "playTime": "70분",
+        "difficulty": 2.9,
+        "imageClass": "hansa-teutonica",
+        "icon": "📜🤝",
+        "bestPlayers": 5,
+        "description": "중세 독일 북부의 '한자 동맹' 상인 조합을 이끌고 한자 동맹 내에서의 명성을 높이세요. 조합에 속한 상인을 보내 도시를 연결하는 교역로를 만들고, 교역소를 지어 영향력을 행사하세요. 더 많은 도시를 연결할수록 명성도 높아집니다. 때로는 다른 상인 조합을 밀어내며 핵심 지역을 차지해야 합니다."
+    },
+    {
+        "id": "hollywood-golden-age",
+        "title": "할리우드 골든 에이지",
+        "genre": "전략",
+        "mechanism": "셋 컬렉션, 경매",
+        "minPlayers": 2,
+        "maxPlayers": 5,
+        "playTime": "60분",
+        "difficulty": 2.11,
+        "imageClass": "hollywood-golden-age",
+        "icon": "🎬🎥",
+        "bestPlayers": 5,
+        "description": "당신은 영화사 중 하나를 운영해서 배우들을 캐스팅하고 직원들을 고용해 영화를 제작하게 됩니다."
     }
 ];
