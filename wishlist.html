@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>내 관심 보드게임 - 보유 보드게임</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="container header-content-flex">
+            <a href="index.html" class="back-link">← 메인으로</a>
+            <h1>⭐ 내 관심 게임 목록</h1>
+            <div class="header-actions">
+                <button id="btn-share-wishlist" class="btn-share" onclick="copyWishlistLink()">🔗 목록 공유하기</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="wishlist-hero">
+            <p id="wishlist-count-text">찜한 게임이 없습니다.</p>
+        </section>
+
+        <div id="wishlist-grid" class="image-grid">
+            <!-- JavaScript will populate this -->
+            <p style="text-align: center; grid-column: 1/-1; padding: 3rem;">목록을 불러오는 중...</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <img src="assets/images/caxac.png" alt="Logo" class="footer-logo">
+        </div>
+    </footer>
+
+    <script src="games-data.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

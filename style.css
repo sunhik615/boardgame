@@ -1058,6 +1058,93 @@ footer {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-content-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-wishlist-link {
+    color: white;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.nav-wishlist-link:hover {
+    background: white;
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.back-link:hover {
+    opacity: 1;
+}
+
+.wishlist-hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.wishlist-hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.wishlist-hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.wishlist-empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.wishlist-empty-state h2 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.wishlist-empty-state p {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.wishlist-empty-state .btn-primary {
+    padding: 0.8rem 1.8rem;
+    font-size: 1rem;
+}
+
 .carousel-wrapper {
     position: relative;
     max-width: 800px;
@@ -1428,6 +1515,39 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1.5rem;
     padding: 1rem 0;
+}
+
+#wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2.5rem 1.5rem;
+    padding: 2rem 0 5rem;
+}
+
+#wishlist-grid .card-link {
+    width: 100%;
+    position: relative;
+    transform: none !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+#wishlist-grid .game-card {
+    height: 100%;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+}
+
+#wishlist-grid .card-image-container {
+    height: 280px;
+    /* More compact for grid view */
+}
+
+#wishlist-grid .card-content {
+    padding: 1.2rem;
+}
+
+#wishlist-grid .card-content h2 {
+    font-size: 1.2rem;
 }
 
 .bazaar-card {
