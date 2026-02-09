@@ -11,12 +11,29 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Noto+Sans+KR:wght@400;700&display=swap"
         rel="stylesheet">
+
+    <!-- Open Graph (Link Thumbnails) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="내 관심 보드게임 - 보유 보드게임">
+    <meta property="og:description" content="내가 찜한 보드게임 목록을 확인하고 친구들과 공유하세요.">
+    <meta property="og:image" content="assets/images/games/배경화면.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="내 관심 보드게임 - 보유 보드게임">
+    <meta name="twitter:description" content="내가 찜한 보드게임 목록을 확인하고 친구들과 공유하세요.">
+    <meta name="twitter:image" content="assets/images/games/배경화면.jpg">
 </head>
 
 <body>
     <header>
         <div class="container header-content-flex">
-            <a href="index.html" class="back-link">← 메인으로</a>
+            <a href="index.html" class="back-link" aria-label="메인으로 가기">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+            </a>
             <h1>⭐ 내 관심 게임 목록</h1>
         </div>
     </header>

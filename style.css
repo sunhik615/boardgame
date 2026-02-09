@@ -64,74 +64,108 @@ body {
 }
 
 /* Header */
-header {
-    /* Background Image with Overlay for Header */
+/* Header Common Styles */
+header,
+header.detail-header {
     background: linear-gradient(rgba(26, 42, 58, 0.85), rgba(44, 62, 80, 0.85)), url('assets/images/games/배경화면.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: white;
-    padding: 2rem 0;
+    padding: 2.2rem 0;
+    /* Standardized unified padding for exact height */
     margin-bottom: 2rem;
     text-align: center;
     box-shadow: var(--shadow);
     position: relative;
+    width: 100%;
 }
 
-header h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+header.detail-header {
+    background: var(--primary-color);
+    margin-bottom: 0;
+    animation: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+header h1,
+header.detail-header h1 {
+    font-size: clamp(1.8rem, 5vw, 2.3rem);
+    /* Slightly larger for presence */
+    margin: 0;
+    padding: 0 110px;
+    text-align: center;
+    word-break: keep-all;
+    width: 100%;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 header p {
     font-size: 1rem;
     opacity: 0.8;
-    margin-bottom: 1rem;
+    margin-top: 0.5rem;
 }
 
-.results-info {
-    text-align: left;
-    margin-bottom: 2rem;
-}
-
-.results-count {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--secondary-text);
-}
-
-/* Detail Header Override */
-header.detail-header {
-    padding: 1.5rem 0;
-    /* Reduced padding for cleaner look */
-    margin-bottom: 0;
-    text-align: left;
-    background: var(--primary-color);
-    animation: none;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-header.detail-header .header-content-flex {
-    flex-direction: row;
-    justify-content: space-between;
+.header-content-flex {
+    position: relative;
+    display: flex;
+    justify-content: center;
     align-items: center;
-}
-
-header.detail-header::after {
-    display: none;
+    width: 100%;
+    min-height: 48px;
 }
 
 .back-link {
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
     color: white;
     text-decoration: none;
-    font-weight: 700;
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    transition: opacity 0.2s;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+    width: 40px;
+    height: 40px;
+    z-index: 10;
+}
+
+.back-link svg {
+    width: 28px;
+    height: 28px;
+    display: block;
 }
 
 .back-link:hover {
-    opacity: 0.8;
+    opacity: 0.7;
+    /* Removed all movement transforms */
+}
+
+.nav-wishlist-link {
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.75rem;
+    border-radius: 20px;
+    transition: all 0.3s ease, background 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.nav-wishlist-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    /* Removed movement transform */
 }
 
 /* Filter Section */
@@ -965,13 +999,25 @@ footer {
     }
 
     /* Adjust header to be smaller on mobile so it doesn't take much space before sticky kicks in */
-    header {
-        padding: 1rem 0;
-        margin-bottom: 1rem;
+    /* Unified Mobile Header */
+    header,
+    header.detail-header {
+        padding: 1.2rem 0;
+        /* Standardized mobile padding */
+        margin-bottom: 1.5rem;
+        min-height: auto;
+        /* Allow padding to define height on mobile */
     }
 
-    header h1 {
+    header.detail-header {
+        margin-bottom: 0;
+    }
+
+    header h1,
+    header.detail-header h1 {
         font-size: 1.5rem;
+        padding: 0 60px;
+        /* Reduced buffer for mobile side buttons */
     }
 
     .hero-content {
@@ -1049,58 +1095,9 @@ footer {
     padding: 0 20px;
 }
 
-.header-content-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+/* Legacy Redundant Styles Removed */
 
-header.detail-header {
-    margin-bottom: 0;
-}
-
-.header-content-flex h1 {
-    margin: 0;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-}
-
-.nav-wishlist-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    color: white !important;
-    text-decoration: none;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 0.6rem 1.2rem;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 0.95rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.nav-wishlist-link:hover {
-    background: white;
-    color: var(--primary-color);
-    transform: translateY(-2px);
-}
-
-.back-link {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    /* Increased from default */
-    opacity: 0.9;
-    transition: all 0.3s;
-    display: inline-block;
-}
-
-.back-link:hover {
-    opacity: 1;
-}
+/* Legacy Styles Removed */
 
 .wishlist-hero {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
@@ -1464,8 +1461,7 @@ header.detail-header {
     .slide-container {
         padding: 1rem 0;
         perspective: 1000px;
-        overflow: hidden;
-        /* Added to prevent horizontal scroll from side cards */
+        /* Removed overflow: hidden to allow side cards to be visible */
     }
 
     .game-grid.slide-view {
@@ -1484,15 +1480,15 @@ header.detail-header {
         transition: opacity 0.3s ease;
     }
 
-    /* Adjusted positions for mobile */
+    /* Adjusted positions for mobile to show hints of next/prev cards */
     .slide-view .card-link.slide-left {
-        transform: translateX(-200px) scale(0.7) rotateY(15deg);
+        transform: translateX(-150px) scale(0.7) rotateY(15deg);
         z-index: 5;
         opacity: 0.5;
     }
 
     .slide-view .card-link.slide-right {
-        transform: translateX(200px) scale(0.7) rotateY(-15deg);
+        transform: translateX(150px) scale(0.7) rotateY(-15deg);
         z-index: 5;
         opacity: 0.5;
     }
