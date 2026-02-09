@@ -36,6 +36,15 @@ function getGradient(id) {
     return curatedGradients[index];
 }
 
+// Fisher-Yates Shuffle Utility
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 
 // Shared State
 let currentGames = [];
@@ -47,7 +56,7 @@ let isSearchActive = false;
 document.addEventListener('DOMContentLoaded', () => {
     // Load games data (already loaded via script tag as 'games')
     if (typeof games !== 'undefined') {
-        currentGames = [...games]; // Copy
+        currentGames = shuffleArray([...games]); // Shuffle on load
     }
 
     const gameListContainer = document.getElementById('game-list');
@@ -147,7 +156,7 @@ function initFilters() {
         if (filterGenre) filterGenre.value = 'all';
         if (filterTime) filterTime.value = 'all';
         if (filterDifficulty) filterDifficulty.value = 'all';
-        if (sortOrder) sortOrder.value = 'name';
+        if (sortOrder) sortOrder.value = 'random';
         if (searchInput) searchInput.value = '';
         applyFilters();
     };
@@ -237,9 +246,11 @@ function applyFilters() {
         }
 
         if (sortVal === 'difficulty-asc') {
-            return a.difficulty - b.difficulty || a.title.localeCompare(b.title);
+            return a.difficulty - b.difficulty || 0;
         } else if (sortVal === 'difficulty-desc') {
-            return b.difficulty - a.difficulty || a.title.localeCompare(b.title);
+            return b.difficulty - a.difficulty || 0;
+        } else if (sortVal === 'random') {
+            return 0; // Preserve shuffled order
         } else {
             // Default: Name (Alphabetical)
             return a.title.localeCompare(b.title);
@@ -282,6 +293,9 @@ function renderImageBazaar(container, matches) {
         const gameImg = game.image || game.images;
         return Array.isArray(gameImg) ? gameImg.length > 0 : !!gameImg;
     });
+
+    // Always sort Bazaar (Grid View) by Name
+    gamesWithImages.sort((a, b) => a.title.localeCompare(b.title));
 
     if (gamesWithImages.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column:1/-1; opacity:0.6;">이미지가 있는 게임이 없습니다.</p>';
