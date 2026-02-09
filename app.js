@@ -113,11 +113,56 @@ function toggleWishlist(gameId, event) {
         renderImageBazaar(bazaarGrid, currentGames);
     }
 
+    // If on Wishlist Page, re-render the whole grid to remove the item immediately
+    const wishlistGrid = document.getElementById('wishlist-grid');
+    if (wishlistGrid) {
+        renderWishlistPage();
+    }
+
     // If "Wishlist Only" filter is active, we might need to re-render everything
     const wishlistFilter = document.getElementById('filter-wishlist');
     if (wishlistFilter && wishlistFilter.checked) {
         applyFilters();
     }
+}
+
+function renderWishlistPage() {
+    const grid = document.getElementById('wishlist-grid');
+    const countText = document.getElementById('wishlist-count-text');
+    if (!grid) return;
+
+    // Filter games that are in wishlist
+    const wishedGames = games.filter(g => wishlist.has(g.id));
+
+    // Sort by name
+    wishedGames.sort((a, b) => a.title.localeCompare(b.title));
+
+    grid.innerHTML = '';
+
+    if (wishedGames.length === 0) {
+        grid.innerHTML = `
+            <div class="wishlist-empty-state" style="grid-column: 1/-1;">
+                <h2>찜한 게임이 아직 없어요!</h2>
+                <p>메인 페이지에서 관심 있는 게임들을 별표(⭐)로 찜해 보세요.</p>
+                <a href="index.html" class="btn-share" style="display:inline-block; text-decoration:none;">게임 보러가기</a>
+            </div>
+        `;
+        if (countText) countText.textContent = '현재 찜한 게임이 없습니다.';
+        return;
+    }
+
+    if (countText) countText.textContent = `현재 총 ${wishedGames.length}개의 게임을 찜하셨습니다.`;
+
+    wishedGames.forEach(game => {
+        // We reuse the createGameCard logic but remove the sliding classes
+        const card = createGameCard(game);
+        // Remove slide-related classes since this is a normal grid
+        const article = card.querySelector('article');
+        if (article) {
+            article.classList.remove('slide-center', 'slide-left', 'slide-right');
+        }
+        grid.appendChild(card);
+    });
 }
 
 function copyWishlistLink() {
@@ -132,6 +177,7 @@ function copyWishlistLink() {
 
     navigator.clipboard.writeText(shareUrl).then(() => {
         const btn = document.getElementById('btn-share-wishlist');
+        if (!btn) return;
         const originalText = btn.innerHTML;
         btn.innerHTML = '✅ 복사 완료!';
         btn.classList.add('success');
@@ -163,6 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
         initFilters();
         initSlideCarousel();
         applyFilters(); // Initial render and count update
+    }
+
+    // Wishlist Page
+    const wishlistGrid = document.getElementById('wishlist-grid');
+    if (wishlistGrid) {
+        renderWishlistPage();
     }
 
     // Detail Page
@@ -865,7 +917,13 @@ function initSlideCarousel() {
     });
 
     // Prevent link navigation if it was a drag action OR if clicking a side card
+    // Prevent link navigation if it was a drag action OR if clicking a side card
     gameList.addEventListener('click', (e) => {
+        // 0. If clicking wishlist button, let the toggle handler handle it
+        if (e.target.closest('.wishlist-toggle-btn')) {
+            return;
+        }
+
         // 1. If dragged, prevent click
         if (isDragged) {
             e.preventDefault();
@@ -876,18 +934,13 @@ function initSlideCarousel() {
         // 2. Handle side card clicks
         const cardLike = e.target.closest('.card-link');
         if (cardLike) {
-            // Find the index of the clicked card relative to the original filtered list
-            // Note: gameList children are the visible cards. 
-            // We need to match this card to the 'filteredGames' array index or use the DOM index relative to gameList.
-            // Since we re-render gameList based on filteredGames, the DOM index matches the index in filteredGames.
+            const gameId = cardLike.getAttribute('data-id');
+            const realIndex = filteredGames.findIndex(g => g.id === gameId);
 
-            const childrenArray = Array.from(gameList.children);
-            const clickedIndex = childrenArray.indexOf(cardLike);
-
-            if (clickedIndex !== -1 && clickedIndex !== currentSlideIndex) {
+            if (realIndex !== -1 && realIndex !== currentSlideIndex) {
                 // It's a side card -> Slide to it
                 e.preventDefault();
-                slideToIndex(clickedIndex);
+                slideToIndex(realIndex);
             }
             // If it IS currentSlideIndex, let the link work (go to detail page)
         }
