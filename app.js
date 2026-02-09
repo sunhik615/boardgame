@@ -298,12 +298,11 @@ function renderImageBazaar(container, matches) {
 
 
 // --- Rendering Logic ---
+// --- Rendering Logic (Optimized Windowing) ---
 function renderGameList(container, matches, isSearchActive) {
     container.innerHTML = '';
-
-    // Store filtered games for slide carousel
     filteredGames = matches;
-    currentSlideIndex = 0; // Reset to first game
+    currentSlideIndex = 0;
 
     if (matches.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column:1/-1;">조건에 맞는 게임이 없습니다.</p>';
@@ -312,69 +311,115 @@ function renderGameList(container, matches, isSearchActive) {
         return;
     }
 
-    matches.forEach(game => {
-        const card = document.createElement('a');
-        card.href = `detail.html?id=${game.id}`;
-        card.className = 'card-link';
+    // Instead of creating ALL elements, we'll create them as needed.
+    // For initial render, we only need the first few.
+    updateSlideDisplay();
+    updateSlideControls();
+    updateSlideIndicators();
+}
 
-        // Generate dynamic gradient if no explicit CSS class
-        // Support for image/images property (now images is an array)
-        const gameImages = game.image || game.images;
-        const gameImg = Array.isArray(gameImages) ? gameImages[0] : gameImages;
+function updateSlideDisplay() {
+    const container = document.getElementById('game-list');
+    if (!container || filteredGames.length === 0) return;
 
-        // If image exists, use white background. Otherwise, use gradient.
-        const bgStyle = gameImg ? 'background: #fff;' : `background: ${getGradient(game.id)};`;
-        const iconColor = gameImg ? 'color: #333;' : 'color: white;';
+    // Windowing: Render current, and +/- 5 cards around it.
+    const windowSize = 5;
+    const start = Math.max(0, currentSlideIndex - windowSize);
+    const end = Math.min(filteredGames.length - 1, currentSlideIndex + windowSize);
 
-        // Logic: if it's a simple filename, assume it's in assets/images/games/
-        // Otherwise use the path as provided (starting from assets/images/)
-        let imgSrc = '';
-        if (gameImg) {
-            imgSrc = gameImg.includes('/') ? `assets/images/${gameImg}` : `assets/images/games/${gameImg}`;
+    // Identify which IDs should be in DOM
+    const targetIds = new Set();
+    for (let i = start; i <= end; i++) {
+        targetIds.add(filteredGames[i].id);
+    }
+
+    // Remove cards no longer in window
+    const existingCards = container.querySelectorAll('.card-link');
+    existingCards.forEach(card => {
+        const id = card.getAttribute('data-id');
+        if (!targetIds.has(id)) {
+            card.remove();
         }
-
-        const imageContent = gameImg
-            ? `<img src="${imgSrc}" alt="${game.title}" class="card-game-image">`
-            : `<span>${game.icon}</span>`;
-
-        card.innerHTML = `
-            <article class="game-card">
-                <div class="card-image-container">
-                    <div class="card-image" style="${bgStyle} ${iconColor}">
-                        ${imageContent}
-                    </div>
-                    <div class="card-info-reveal">
-                        <div class="reveal-content">
-                            <span class="reveal-tag">${game.genre || '보드게임'}</span>
-                            <p class="reveal-mech">${game.mechanism || '다양한 재미'}</p>
-                            <span class="reveal-hint">자세히 보기 →</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-content">
-                    <h2>${game.title}</h2>
-                    <div class="meta-info">
-                        <span class="badge players">
-                            ${isSearchActive
-                ? `⭐ 추천: ${game.bestPlayers ? (game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`) : `${game.minPlayers}-${game.maxPlayers}인`}`
-                : `👥 ${game.minPlayers}-${game.maxPlayers}인${game.bestPlayers ? ` | 추천: ${game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`}` : ''}`
-            }
-                        </span>
-                        <span class="badge time">⏱️ ${game.playTime}</span>
-                        <span class="badge difficulty">🔥 ${game.difficulty}/5</span>
-                    </div>
-                </div>
-            </article>
-        `;
-
-        container.appendChild(card);
     });
 
-    // Initialize slide positions after rendering
-    setTimeout(() => {
-        updateSlidePositions();
-        updateSlideControls();
-    }, 100);
+    // Add or Update cards in window
+    for (let i = start; i <= end; i++) {
+        const game = filteredGames[i];
+        let card = container.querySelector(`.card-link[data-id="${game.id}"]`);
+
+        if (!card) {
+            card = createGameCard(game);
+            card.setAttribute('data-id', game.id);
+
+            // Insert at correct relative position
+            const successors = Array.from(container.children).filter(child => {
+                const idx = filteredGames.findIndex(g => g.id === child.getAttribute('data-id'));
+                return idx > i;
+            });
+
+            if (successors.length > 0) {
+                container.insertBefore(card, successors[0]);
+            } else {
+                container.appendChild(card);
+            }
+        }
+
+        // Apply classes for position
+        card.classList.remove('slide-center', 'slide-left', 'slide-right', 'slide-far-left', 'slide-far-right', 'slide-hidden');
+        const diff = i - currentSlideIndex;
+        if (diff === 0) card.classList.add('slide-center');
+        else if (diff === -1) card.classList.add('slide-left');
+        else if (diff === 1) card.classList.add('slide-right');
+        else if (diff === -2) card.classList.add('slide-far-left');
+        else if (diff === 2) card.classList.add('slide-far-right');
+        else card.classList.add('slide-hidden');
+    }
+}
+
+function createGameCard(game) {
+    const card = document.createElement('a');
+    card.href = `detail.html?id=${game.id}`;
+    card.className = 'card-link';
+
+    const gameImages = game.image || game.images;
+    const gameImg = Array.isArray(gameImages) ? gameImages[0] : gameImages;
+    const bgStyle = gameImg ? 'background: #fff;' : `background: ${getGradient(game.id)};`;
+    const iconColor = gameImg ? 'color: #333;' : 'color: white;';
+
+    let imgSrc = '';
+    if (gameImg) {
+        imgSrc = gameImg.includes('/') ? `assets/images/${gameImg}` : `assets/images/games/${gameImg}`;
+    }
+
+    const imageContent = gameImg
+        ? `<img src="${imgSrc}" alt="${game.title}" class="card-game-image" loading="lazy">`
+        : `<span>${game.icon}</span>`;
+
+    card.innerHTML = `
+        <article class="game-card">
+            <div class="card-image-container">
+                <div class="card-image" style="${bgStyle} ${iconColor}">
+                    ${imageContent}
+                </div>
+                <div class="card-info-reveal">
+                    <div class="reveal-content">
+                        <span class="reveal-tag">${game.genre || '보드게임'}</span>
+                        <p class="reveal-mech">${game.mechanism || '다양한 재미'}</p>
+                        <span class="reveal-hint">자세히 보기 →</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+                <h2>${game.title}</h2>
+                <div class="meta-info">
+                    <span class="badge players">👥 ${game.minPlayers}-${game.maxPlayers}인</span>
+                    <span class="badge time">⏱️ ${game.playTime}</span>
+                    <span class="badge difficulty">🔥 ${game.difficulty}/5</span>
+                </div>
+            </div>
+        </article>
+    `;
+    return card;
 }
 
 function renderGameDetail() {
@@ -719,35 +764,12 @@ function slideToIndex(newIndex) {
     if (newIndex < 0 || newIndex >= filteredGames.length) return;
 
     currentSlideIndex = newIndex;
-    updateSlidePositions();
+    updateSlideDisplay();
     updateSlideControls();
 }
 
 function updateSlidePositions() {
-    const cards = document.querySelectorAll('.slide-view .card-link');
-
-    cards.forEach((card, index) => {
-        // Remove all position classes
-        card.classList.remove('slide-center', 'slide-left', 'slide-right',
-            'slide-far-left', 'slide-far-right', 'slide-hidden');
-
-        const diff = index - currentSlideIndex;
-
-        if (diff === 0) {
-            card.classList.add('slide-center');
-        } else if (diff === -1) {
-            card.classList.add('slide-left');
-        } else if (diff === 1) {
-            card.classList.add('slide-right');
-        } else if (diff === -2) {
-            card.classList.add('slide-far-left');
-        } else if (diff === 2) {
-            card.classList.add('slide-far-right');
-        } else {
-            card.classList.add('slide-hidden');
-        }
-    });
-
+    updateSlideDisplay();
     updateSlideIndicators();
 }
 
