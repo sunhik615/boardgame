@@ -406,7 +406,9 @@ function applyFilters() {
             } else if (difficultyVal === 'normal') {
                 if (diff < 2.0 || diff >= 3.0) return false;
             } else if (difficultyVal === 'hard') {
-                if (diff < 3.0) return false;
+                if (diff < 3.0 || diff >= 4.0) return false;
+            } else if (difficultyVal === 'expert') {
+                if (diff < 4.0) return false;
             }
         }
 
