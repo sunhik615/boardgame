@@ -472,8 +472,7 @@ function renderImageBazaar(container, matches) {
         return Array.isArray(gameImg) ? gameImg.length > 0 : !!gameImg;
     });
 
-    // Always sort Bazaar (Grid View) by Name
-    gamesWithImages.sort((a, b) => a.title.localeCompare(b.title));
+    // Bazaar (Grid View) now follows the global sorting order provided by 'matches'
 
     if (gamesWithImages.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column:1/-1; opacity:0.6;">이미지가 있는 게임이 없습니다.</p>';
