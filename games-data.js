@@ -787,6 +787,7 @@
         "minPlayers": 3,
         "maxPlayers": 8,
         "playTime": "35분",
+        "difficulty": 1.8,
         "imageClass": "decrypto",
         "icon": "📟",
         "bestPlayers": 4,
