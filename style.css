@@ -797,29 +797,26 @@ header p {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    /* Increased gap for better readability */
     width: 100%;
-}
-
-.hero-mini-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    padding: 5px;
 }
 
 .hero-content h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
+    /* Increased margin */
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.4;
+    /* Relaxed line-height */
 }
 
-/* New Tags Section */
 .hero-tags {
-    margin-bottom: 1rem;
+    margin-bottom: 0.4rem;
     display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
 }
+
 
 .tag {
     font-size: 0.9rem;
