@@ -41,6 +41,7 @@ function getGradient(id) {
 let currentGames = [];
 let currentSlideIndex = 0;
 let filteredGames = [];
+let isSearchActive = false;
 
 // Main Execution
 document.addEventListener('DOMContentLoaded', () => {
@@ -226,16 +227,27 @@ function applyFilters() {
     });
 
     // 5. Sorting
-    if (sortVal === 'difficulty-asc') {
-        filtered.sort((a, b) => a.difficulty - b.difficulty);
-    } else if (sortVal === 'difficulty-desc') {
-        filtered.sort((a, b) => b.difficulty - a.difficulty);
-    } else {
-        // Default: Name (Alphabetical)
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
-    }
+    filtered.sort((a, b) => {
+        // Search relevance priority: Titles starting with the search term come first
+        if (searchVal) {
+            const aStart = a.title.toLowerCase().startsWith(searchVal);
+            const bStart = b.title.toLowerCase().startsWith(searchVal);
+            if (aStart && !bStart) return -1;
+            if (!aStart && bStart) return 1;
+        }
+
+        if (sortVal === 'difficulty-asc') {
+            return a.difficulty - b.difficulty || a.title.localeCompare(b.title);
+        } else if (sortVal === 'difficulty-desc') {
+            return b.difficulty - a.difficulty || a.title.localeCompare(b.title);
+        } else {
+            // Default: Name (Alphabetical)
+            return a.title.localeCompare(b.title);
+        }
+    });
 
     const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all');
+    isSearchActive = isFilterActive; // Store in global state
     const container = document.getElementById('game-list');
     const bazaarContainer = document.getElementById('image-bazaar');
 
@@ -412,7 +424,12 @@ function createGameCard(game) {
             <div class="card-content">
                 <h2>${game.title}</h2>
                 <div class="meta-info">
-                    <span class="badge players">👥 ${game.minPlayers}-${game.maxPlayers}인</span>
+                    <span class="badge players">
+                        ${isSearchActive
+            ? `⭐ 추천: ${game.bestPlayers ? (game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`) : `${game.minPlayers}-${game.maxPlayers}인`}`
+            : `👥 ${game.minPlayers}-${game.maxPlayers}인${game.bestPlayers ? ` | 추천: ${game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`}` : ''}`
+        }
+                    </span>
                     <span class="badge time">⏱️ ${game.playTime}</span>
                     <span class="badge difficulty">🔥 ${game.difficulty}/5</span>
                 </div>
