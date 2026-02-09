@@ -32,12 +32,21 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    /* Ensure fixed elements align correctly */
+}
+
 body {
     font-family: 'Outfit', 'Noto Sans KR', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    min-height: 100vh;
 }
 
 .container {
@@ -45,13 +54,16 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 /* Header */
 header {
-    background: linear-gradient(-45deg, #1a2a3a, #2c3e50, #34495e, #2c3e50);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    /* Background Image with Overlay for Header */
+    background: linear-gradient(rgba(26, 42, 58, 0.85), rgba(44, 62, 80, 0.85)), url('assets/images/games/배경화면.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: white;
     padding: 2.5rem 0;
     margin-bottom: 3rem;
@@ -200,7 +212,10 @@ header.detail-header::after {
     padding: 2.5rem 0;
     /* Reduced from 3rem */
     perspective: 2000px;
-    overflow: visible;
+    overflow: hidden;
+    /* Changed from visible to hidden to prevent shaking */
+    touch-action: pan-y;
+    /* Allow vertical scroll, let JS handle horizontal */
 }
 
 /* Grid Layout - Modified for Slide View */
@@ -385,13 +400,27 @@ header.detail-header::after {
     height: 100%;
     /* Ensure full height in grid */
     position: relative;
+    overflow: hidden;
+    /* Key fix for corners */
+    background: white;
+    /* Ensure background fills corners */
+
+    /* Stronger corner masking using clip-path */
+    clip-path: inset(0 round var(--radius));
+    -webkit-clip-path: inset(0 round 15px);
+    /* Fallback with explicit value just in case var doesn't work in clip-path on some browsers */
+
+    /* Performance hint */
+    will-change: transform;
 }
 
 /* 3D Box Sides - Removed for simpler animation */
 
-.card-link:hover .game-card {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+/* Container for transforms */
+.card-content-wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Image Wrapper with Quick View */
@@ -400,6 +429,7 @@ header.detail-header::after {
     height: 400px;
     /* Increased from 150px for real card ratio */
     overflow: hidden;
+    /* Re-apply border-radius to prevent bleeding */
     border-radius: var(--radius) var(--radius) 0 0;
     background: #f8f9fa;
 }
