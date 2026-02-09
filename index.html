@@ -80,9 +80,29 @@
         </div>
 
         <!-- Container for dynamic content -->
-        <div id="game-list" class="game-grid">
-            <!-- JavaScript will populate this -->
-            <p style="grid-column: 1/-1; text-align: center;">게임 목록을 불러오는 중...</p>
+        <div class="slide-container">
+            <!-- Slide Navigation Controls -->
+            <button id="slide-prev" class="slide-nav-btn slide-prev" aria-label="이전 게임">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+            <button id="slide-next" class="slide-nav-btn slide-next" aria-label="다음 게임">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+
+            <div id="game-list" class="game-grid slide-view">
+                <!-- JavaScript will populate this -->
+                <p style="grid-column: 1/-1; text-align: center;">게임 목록을 불러오는 중...</p>
+            </div>
+        </div>
+
+        <div class="slide-indicators" id="slide-indicators">
+            <!-- JavaScript will populate indicators -->
         </div>
     </main>
 

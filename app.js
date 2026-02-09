@@ -39,6 +39,8 @@ function getGradient(id) {
 
 // Shared State
 let currentGames = [];
+let currentSlideIndex = 0;
+let filteredGames = [];
 
 // Main Execution
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Index Page
     if (gameListContainer) {
         initFilters();
+        initSlideCarousel();
         applyFilters(); // Initial render and count update
     }
 
@@ -211,8 +214,14 @@ function applyFilters() {
 function renderGameList(container, matches, isSearchActive) {
     container.innerHTML = '';
 
+    // Store filtered games for slide carousel
+    filteredGames = matches;
+    currentSlideIndex = 0; // Reset to first game
+
     if (matches.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column:1/-1;">조건에 맞는 게임이 없습니다.</p>';
+        updateSlideControls();
+        updateSlideIndicators();
         return;
     }
 
@@ -222,8 +231,9 @@ function renderGameList(container, matches, isSearchActive) {
         card.className = 'card-link';
 
         // Generate dynamic gradient if no explicit CSS class
-        // Support for image/images property
-        const gameImg = game.image || game.images;
+        // Support for image/images property (now images is an array)
+        const gameImages = game.image || game.images;
+        const gameImg = Array.isArray(gameImages) ? gameImages[0] : gameImages;
 
         // If image exists, use white background. Otherwise, use gradient.
         const bgStyle = gameImg ? 'background: #fff;' : `background: ${getGradient(game.id)};`;
@@ -272,6 +282,12 @@ function renderGameList(container, matches, isSearchActive) {
 
         container.appendChild(card);
     });
+
+    // Initialize slide positions after rendering
+    setTimeout(() => {
+        updateSlidePositions();
+        updateSlideControls();
+    }, 100);
 }
 
 function renderGameDetail() {
@@ -296,11 +312,14 @@ function renderGameDetail() {
     // Dynamic Background again
     heroSection.style.background = getGradient(game.id);
 
-    // If image exists, add it to hero section
-    const gameImg = game.image || game.images;
+    // Handle images (now an array)
+    const gameImages = game.image || game.images;
+    const imageArray = Array.isArray(gameImages) ? gameImages : (gameImages ? [gameImages] : []);
     const miniImgContainer = document.getElementById('game-image-mini');
-    if (gameImg) {
-        const imgSrc = gameImg.includes('/') ? `assets/images/${gameImg}` : `assets/images/games/${gameImg}`;
+
+    if (imageArray.length > 0) {
+        const firstImg = imageArray[0];
+        const imgSrc = firstImg.includes('/') ? `assets/images/${firstImg}` : `assets/images/games/${firstImg}`;
         heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${imgSrc}')`;
         heroSection.style.backgroundSize = 'cover';
         heroSection.style.backgroundPosition = 'center';
@@ -309,6 +328,9 @@ function renderGameDetail() {
             miniImgContainer.innerHTML = `<img src="${imgSrc}" alt="${game.title}">`;
             miniImgContainer.style.display = 'block';
         }
+
+        // Initialize carousel if there are images
+        initCarousel(imageArray, game.title);
     } else if (miniImgContainer) {
         miniImgContainer.style.display = 'none';
     }
@@ -362,4 +384,324 @@ function renderGameDetail() {
     } else if (expEl) {
         expEl.style.display = 'none';
     }
+}
+
+// Carousel functionality
+function initCarousel(images, gameTitle) {
+    if (!images || images.length === 0) return;
+
+    const carouselContainer = document.getElementById('image-carousel');
+    const carouselImages = document.getElementById('carousel-images');
+    const carouselIndicators = document.getElementById('carousel-indicators');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    if (!carouselContainer || !carouselImages) return;
+
+    // Show carousel
+    carouselContainer.style.display = 'block';
+
+    let currentIndex = 0;
+
+    // Create image elements
+    carouselImages.innerHTML = '';
+    images.forEach((img, index) => {
+        const imgSrc = img.includes('/') ? `assets/images/${img}` : `assets/images/games/${img}`;
+        const imgEl = document.createElement('img');
+        imgEl.src = imgSrc;
+        imgEl.alt = `${gameTitle} - 이미지 ${index + 1}`;
+        imgEl.className = 'carousel-image';
+        imgEl.style.transform = `translateX(${index * 100}%)`;
+        carouselImages.appendChild(imgEl);
+    });
+
+    // Create indicators
+    if (carouselIndicators && images.length > 1) {
+        carouselIndicators.innerHTML = '';
+        images.forEach((_, index) => {
+            const indicator = document.createElement('button');
+            indicator.className = 'carousel-indicator';
+            if (index === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(index));
+            carouselIndicators.appendChild(indicator);
+        });
+    }
+
+    function updateCarousel() {
+        const allImages = carouselImages.querySelectorAll('.carousel-image');
+        allImages.forEach((img, index) => {
+            img.style.transform = `translateX(${(index - currentIndex) * 100}%)`;
+        });
+
+        // Update indicators
+        if (carouselIndicators) {
+            const allIndicators = carouselIndicators.querySelectorAll('.carousel-indicator');
+            allIndicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Update button visibility
+        if (prevBtn) prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
+        if (nextBtn) nextBtn.style.display = currentIndex === images.length - 1 ? 'none' : 'flex';
+    }
+
+    function goToSlide(index) {
+        currentIndex = Math.max(0, Math.min(index, images.length - 1));
+        updateCarousel();
+    }
+
+    function nextSlide() {
+        if (currentIndex < images.length - 1) {
+            currentIndex++;
+            updateCarousel();
+        }
+    }
+
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
+    }
+
+    // Event listeners
+    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
+    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'ArrowRight') nextSlide();
+    });
+
+    // Initial update
+    updateCarousel();
+
+    // Hide carousel if only one image
+    if (images.length === 1) {
+        if (prevBtn) prevBtn.style.display = 'none';
+        if (nextBtn) nextBtn.style.display = 'none';
+        if (carouselIndicators) carouselIndicators.style.display = 'none';
+    }
+}
+
+// --- Slide Carousel Logic ---
+let touchStartX = 0;
+let touchEndX = 0;
+
+function initSlideCarousel() {
+    const prevBtn = document.getElementById('slide-prev');
+    const nextBtn = document.getElementById('slide-next');
+    const gameList = document.getElementById('game-list');
+
+    if (!prevBtn || !nextBtn || !gameList) return;
+
+    // Button click handlers
+    prevBtn.addEventListener('click', () => slideToIndex(currentSlideIndex - 1));
+    nextBtn.addEventListener('click', () => slideToIndex(currentSlideIndex + 1));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            slideToIndex(currentSlideIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+            slideToIndex(currentSlideIndex + 1);
+        }
+    });
+
+    // Touch/swipe support
+    gameList.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    gameList.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+
+    // Mouse drag support
+    let isMouseDown = false;
+    let mouseStartX = 0;
+    let mouseEndX = 0;
+    let isDragged = false; // Flag to distinguish click vs drag
+
+    gameList.addEventListener('mousedown', (e) => {
+        isMouseDown = true;
+        isDragged = false;
+        mouseStartX = e.pageX;
+        gameList.style.cursor = 'grabbing';
+    });
+
+    gameList.addEventListener('mousemove', (e) => {
+        if (!isMouseDown) return;
+        e.preventDefault(); // Prevent text selection
+        // Optional: Real-time visual feedback could be added here
+    });
+
+    gameList.addEventListener('mouseup', (e) => {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        mouseEndX = e.pageX;
+        gameList.style.cursor = 'grab'; // Reset cursor
+
+        handleMouseSwipe(mouseStartX, mouseEndX);
+    });
+
+    gameList.addEventListener('mouseleave', () => {
+        if (isMouseDown) {
+            isMouseDown = false;
+            gameList.style.cursor = 'grab';
+        }
+    });
+
+    // Prevent link navigation if it was a drag action OR if clicking a side card
+    gameList.addEventListener('click', (e) => {
+        // 1. If dragged, prevent click
+        if (isDragged) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+
+        // 2. Handle side card clicks
+        const cardLike = e.target.closest('.card-link');
+        if (cardLike) {
+            // Find the index of the clicked card relative to the original filtered list
+            // Note: gameList children are the visible cards. 
+            // We need to match this card to the 'filteredGames' array index or use the DOM index relative to gameList.
+            // Since we re-render gameList based on filteredGames, the DOM index matches the index in filteredGames.
+
+            const childrenArray = Array.from(gameList.children);
+            const clickedIndex = childrenArray.indexOf(cardLike);
+
+            if (clickedIndex !== -1 && clickedIndex !== currentSlideIndex) {
+                // It's a side card -> Slide to it
+                e.preventDefault();
+                slideToIndex(clickedIndex);
+            }
+            // If it IS currentSlideIndex, let the link work (go to detail page)
+        }
+    }, true); // Use capturing to intercept early
+
+    function handleMouseSwipe(start, end) {
+        const threshold = 30; // Reduced threshold for easier dragging
+        const diff = start - end;
+        const absDiff = Math.abs(diff);
+
+        if (absDiff > threshold) {
+            isDragged = true;
+
+            // Calculate how many slides to move based on distance
+            // e.g., every 150px moves 1 slide
+            const moveCount = Math.max(1, Math.round(absDiff / 150));
+
+            if (diff > 0) {
+                // Dragged Left -> Next
+                slideToIndex(currentSlideIndex + moveCount);
+            } else {
+                // Dragged Right -> Prev
+                slideToIndex(currentSlideIndex - moveCount);
+            }
+
+            setTimeout(() => {
+                isDragged = false;
+            }, 100);
+        }
+    }
+}
+
+function handleSwipe() {
+    const swipeThreshold = 30;
+    const diff = touchStartX - touchEndX;
+    const absDiff = Math.abs(diff);
+
+    if (absDiff > swipeThreshold) {
+        // Same logic for touch
+        const moveCount = Math.max(1, Math.round(absDiff / 150));
+
+        if (diff > 0) {
+            slideToIndex(currentSlideIndex + moveCount);
+        } else {
+            slideToIndex(currentSlideIndex - moveCount);
+        }
+    }
+}
+
+function slideToIndex(newIndex) {
+    if (newIndex < 0 || newIndex >= filteredGames.length) return;
+
+    currentSlideIndex = newIndex;
+    updateSlidePositions();
+    updateSlideControls();
+}
+
+function updateSlidePositions() {
+    const cards = document.querySelectorAll('.slide-view .card-link');
+
+    cards.forEach((card, index) => {
+        // Remove all position classes
+        card.classList.remove('slide-center', 'slide-left', 'slide-right',
+            'slide-far-left', 'slide-far-right', 'slide-hidden');
+
+        const diff = index - currentSlideIndex;
+
+        if (diff === 0) {
+            card.classList.add('slide-center');
+        } else if (diff === -1) {
+            card.classList.add('slide-left');
+        } else if (diff === 1) {
+            card.classList.add('slide-right');
+        } else if (diff === -2) {
+            card.classList.add('slide-far-left');
+        } else if (diff === 2) {
+            card.classList.add('slide-far-right');
+        } else {
+            card.classList.add('slide-hidden');
+        }
+    });
+
+    updateSlideIndicators();
+}
+
+function updateSlideControls() {
+    const prevBtn = document.getElementById('slide-prev');
+    const nextBtn = document.getElementById('slide-next');
+
+    if (prevBtn) {
+        prevBtn.disabled = currentSlideIndex === 0;
+    }
+
+    if (nextBtn) {
+        nextBtn.disabled = currentSlideIndex === filteredGames.length - 1;
+    }
+}
+
+function updateSlideIndicators() {
+    const indicatorsContainer = document.getElementById('slide-indicators');
+    if (!indicatorsContainer) return;
+
+    // Only show indicators if there are multiple games
+    if (filteredGames.length <= 1) {
+        indicatorsContainer.innerHTML = '';
+        return;
+    }
+
+    // Limit indicators to avoid clutter (show max 20)
+    const maxIndicators = 20;
+    if (filteredGames.length > maxIndicators) {
+        indicatorsContainer.innerHTML = `<span style="color: var(--secondary-text); font-size: 0.9rem;">${currentSlideIndex + 1} / ${filteredGames.length}</span>`;
+        return;
+    }
+
+    indicatorsContainer.innerHTML = '';
+    filteredGames.forEach((_, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = 'slide-indicator';
+        if (index === currentSlideIndex) {
+            indicator.classList.add('active');
+        }
+        indicator.addEventListener('click', () => slideToIndex(index));
+        indicatorsContainer.appendChild(indicator);
+    });
 }

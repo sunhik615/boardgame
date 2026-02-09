@@ -53,7 +53,7 @@ header {
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
     color: white;
-    padding: 4rem 0;
+    padding: 2.5rem 0;
     margin-bottom: 3rem;
     text-align: center;
     box-shadow: var(--shadow);
@@ -97,7 +97,7 @@ header p {
 
 /* Detail Header Override */
 header.detail-header {
-    padding: 1.5rem 0;
+    padding: 3rem 0;
     margin-bottom: 0;
     text-align: left;
     background: var(--primary-color);
@@ -193,13 +193,127 @@ header.detail-header::after {
 }
 
 
-/* Grid Layout */
+/* Slide Container */
+.slide-container {
+    position: relative;
+    width: 100%;
+    padding: 2.5rem 0;
+    /* Reduced from 3rem */
+    perspective: 2000px;
+    overflow: visible;
+}
+
+/* Grid Layout - Modified for Slide View */
 .game-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    /* Mobile first */
-    gap: 1.5rem;
-    padding-bottom: 3rem;
+    display: flex;
+    gap: 2rem;
+    padding: 2.5rem 0;
+    /* Reduced from 2rem */
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
+}
+
+.game-grid.slide-view {
+    justify-content: center;
+    align-items: center;
+    min-height: 750px;
+    /* Increased to accommodate taller cards */
+    width: 100%;
+}
+
+/* Slide View Card Positioning */
+.slide-view .card-link {
+    flex-shrink: 0;
+    width: 380px;
+    /* Increased from 320px */
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Slide Navigation Buttons */
+.slide-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    color: white;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    filter: none !important;
+    /* Removed shadow */
+}
+
+.slide-nav-btn:hover {
+    background: transparent !important;
+    color: white;
+    transform: translateY(-50%) scale(1.2);
+    filter: none !important;
+    /* Removed shadow */
+}
+
+.slide-nav-btn:active {
+    transform: translateY(-50%) scale(1.05);
+}
+
+.slide-nav-btn.slide-prev {
+    left: -30px;
+}
+
+.slide-nav-btn.slide-next {
+    right: -30px;
+}
+
+.slide-nav-btn svg {
+    width: 40px;
+    /* Larger icon */
+    height: 40px;
+    filter: none !important;
+}
+
+.slide-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Slide Indicators - Hidden as per user request */
+.slide-indicators {
+    display: none !important;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.slide-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.slide-indicator.active {
+    background: var(--accent-color);
+    width: 30px;
+    border-radius: 5px;
+}
+
+.slide-indicator:hover:not(.active) {
+    background: #bbb;
+    transform: scale(1.2);
 }
 
 @media (min-width: 600px) {
@@ -213,6 +327,52 @@ header.detail-header::after {
     text-decoration: none;
     color: inherit;
     display: block;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Slide View Card Positioning */
+.slide-view .card-link {
+    flex-shrink: 0;
+    width: 320px;
+    transform-style: preserve-3d;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Card positions in slide view */
+.slide-view .card-link.slide-center {
+    transform: translateX(0) scale(1.15) rotateY(0deg);
+    z-index: 10;
+    opacity: 1;
+}
+
+.slide-view .card-link.slide-left {
+    transform: translateX(-100px) scale(0.85) rotateY(25deg);
+    z-index: 5;
+    opacity: 0.6;
+}
+
+.slide-view .card-link.slide-right {
+    transform: translateX(100px) scale(0.85) rotateY(-25deg);
+    z-index: 5;
+    opacity: 0.6;
+}
+
+.slide-view .card-link.slide-far-left {
+    transform: translateX(-180px) scale(0.7) rotateY(35deg);
+    z-index: 1;
+    opacity: 0.3;
+}
+
+.slide-view .card-link.slide-far-right {
+    transform: translateX(180px) scale(0.7) rotateY(-35deg);
+    z-index: 1;
+    opacity: 0.3;
+}
+
+.slide-view .card-link.slide-hidden {
+    transform: scale(0.5);
+    opacity: 0;
+    pointer-events: none;
 }
 
 /* Card Style */
@@ -237,7 +397,8 @@ header.detail-header::after {
 /* Image Wrapper with Quick View */
 .card-image-container {
     position: relative;
-    height: 150px;
+    height: 400px;
+    /* Increased from 150px for real card ratio */
     overflow: hidden;
     border-radius: var(--radius) var(--radius) 0 0;
     background: #f8f9fa;
@@ -652,11 +813,19 @@ footer {
         align-items: flex-start;
         gap: 1.5rem;
         padding-top: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
     }
 
     .hero-mini-image {
         width: 150px;
         height: 150px;
+    }
+
+    /* Detail Header Mobile Padding */
+    header.detail-header .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
@@ -700,13 +869,353 @@ footer {
     box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
 }
 
+/* Carousel Styles */
+.carousel-container {
+    background: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-wrapper {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+.carousel-images {
+    display: flex;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f8f9fa;
+    position: relative;
+    aspect-ratio: 16 / 9;
+}
+
+.carousel-image {
+    min-width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.5s ease;
+    padding: 1rem;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+    left: 0;
+}
+
+.carousel-btn.next {
+    right: 0;
+}
+
+.carousel-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.carousel-indicator.active {
+    background: var(--accent-color);
+    width: 32px;
+    border-radius: 6px;
+}
+
+.carousel-indicator:hover {
+    background: #bbb;
+}
+
+
+/* Main Page 3D Slide Styles */
+.slide-container {
+    position: relative;
+    width: 100%;
+    padding: 3rem 0;
+    perspective: 2000px;
+    overflow: visible;
+}
+
+.game-grid.slide-view {
+    display: flex;
+    gap: 0;
+    padding: 2rem 0;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
+    justify-content: center;
+    align-items: center;
+    min-height: 500px;
+    width: 100%;
+}
+
+.slide-view .card-link {
+    position: absolute;
+    width: 320px;
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background: transparent;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.slide-view .card-link.slide-center {
+    transform: translateX(0) scale(1.15) rotateY(0deg);
+    z-index: 20;
+    opacity: 1;
+    pointer-events: auto;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+
+.slide-view .card-link.slide-left {
+    transform: translateX(-420px) scale(0.9) rotateY(15deg);
+    z-index: 10;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.slide-view .card-link.slide-right {
+    transform: translateX(420px) scale(0.9) rotateY(-15deg);
+    z-index: 10;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.slide-view .card-link.slide-far-left {
+    transform: translateX(-840px) scale(0.75) rotateY(20deg);
+    z-index: 5;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.slide-view .card-link.slide-far-right {
+    transform: translateX(840px) scale(0.75) rotateY(-20deg);
+    z-index: 5;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+
+.slide-view .card-link.slide-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.5);
+    z-index: 0;
+}
+
+.slide-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid var(--accent-color);
+    color: var(--accent-color);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.slide-nav-btn:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.slide-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: translateY(-50%);
+}
+
+.slide-prev {
+    left: 20px;
+}
+
+.slide-next {
+    right: 20px;
+}
+
+.slide-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    padding-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.slide-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #e0e0e0;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.slide-indicator.active {
+    background: var(--accent-color);
+    width: 30px;
+    border-radius: 10px;
+}
+
 /* Mobile Adjustments */
 @media (max-width: 600px) {
+    .carousel-wrapper {
+        padding: 0 2.5rem;
+    }
+
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .carousel-image {
+        padding: 0.5rem;
+    }
+
     .fab-btn {
         bottom: 1.5rem;
         right: 1.5rem;
         width: 50px;
         height: 50px;
         padding: 8px;
+    }
+
+    /* Slide View Mobile Adjustments */
+    .slide-container {
+        padding: 1rem 0;
+        perspective: 1000px;
+        /* Reduce perspective on mobile */
+    }
+
+    .game-grid.slide-view {
+        min-height: 450px;
+        padding: 1rem 0;
+    }
+
+    .slide-view .card-link {
+        width: 260px;
+        /* Smaller card width */
+    }
+
+    /* Hide content (title/info) for side cards on mobile to prevent text overlapping */
+    .slide-view .card-link:not(.slide-center) .card-content {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Adjusted positions for mobile */
+    .slide-view .card-link.slide-left {
+        transform: translateX(-200px) scale(0.7) rotateY(15deg);
+        z-index: 5;
+        opacity: 0.5;
+    }
+
+    .slide-view .card-link.slide-right {
+        transform: translateX(200px) scale(0.7) rotateY(-15deg);
+        z-index: 5;
+        opacity: 0.5;
+    }
+
+    .slide-view .card-link.slide-far-left {
+        transform: translateX(-70px) scale(0.75) rotateY(25deg);
+        z-index: 2;
+        opacity: 0;
+        /* Hide far cards completely on mobile */
+    }
+
+    .slide-view .card-link.slide-far-right {
+        transform: translateX(70px) scale(0.75) rotateY(-25deg);
+        z-index: 2;
+        opacity: 0;
+        /* Hide far cards completely on mobile */
+    }
+
+    /* Adjust Navigation Buttons */
+    .slide-nav-btn {
+        width: 45px;
+        height: 45px;
+    }
+
+    .slide-nav-btn.slide-prev {
+        left: 5px;
+        background: transparent !important;
+    }
+
+    .slide-nav-btn.slide-next {
+        right: 5px;
+        background: transparent !important;
+    }
+
+    .slide-nav-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Hide indicators if too many on mobile to save space */
+    .slide-indicators {
+        margin-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    /* Adjust image height for mobile */
+    .card-image-container {
+        height: 260px;
+        /* Adjusted for mobile screen */
     }
 }
