@@ -1458,9 +1458,10 @@ footer {
     .slide-container {
         padding: 1rem 0;
         perspective: 1000px;
-        overflow-x: hidden;
-        /* Force clip side items that overflow viewport */
-        width: 100%;
+        overflow-x: visible;
+        /* Restore visibility */
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
         position: relative;
     }
 
@@ -1482,13 +1483,13 @@ footer {
 
     /* Adjusted positions for mobile to show hints of next/prev cards */
     .slide-view .card-link.slide-left {
-        transform: translateX(-150px) scale(0.7) rotateY(15deg);
+        transform: translateX(-135px) scale(0.7) rotateY(15deg);
         z-index: 5;
         opacity: 0.5;
     }
 
     .slide-view .card-link.slide-right {
-        transform: translateX(150px) scale(0.7) rotateY(-15deg);
+        transform: translateX(135px) scale(0.7) rotateY(-15deg);
         z-index: 5;
         opacity: 0.5;
     }
