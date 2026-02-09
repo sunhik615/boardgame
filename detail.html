@@ -44,19 +44,6 @@
             <div class="hero-content container">
                 <div class="hero-text-content">
                     <h1 id="game-title">게임 제목 로딩중...</h1>
-
-                    <!-- Tags Section -->
-                    <div class="hero-tags">
-                        <span id="game-genre" class="tag genre">장르</span>
-                        <span id="game-mechanism" class="tag mechanism">메커니즘</span>
-                    </div>
-
-                    <div class="hero-meta">
-                        <span id="game-players" class="badge players">👥 -인</span>
-                        <span id="game-best-players" class="badge best-players" style="display: none;">⭐ 추천: -인</span>
-                        <span id="game-time" class="badge time">⏱️ -분</span>
-                        <span id="game-difficulty" class="badge difficulty">🔥 -/5</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -91,6 +78,30 @@
                 </p>
                 <div id="game-expansion" class="game-expansion" style="display: none;">
                     <strong>추가 확장팩:</strong> <span id="game-expansion-text"></span>
+                </div>
+            </section>
+
+            <!-- 상세 정보 섹션 (기존 히어로 섹션에서 이동) -->
+            <section class="game-stats-section">
+                <div class="game-stats-container">
+                    <div class="stats-group">
+                        <h3>게임 정보</h3>
+                        <div id="game-stats-meta" class="stats-meta">
+                            <span id="game-players" class="badge players">👥 -인</span>
+                            <span id="game-best-players" class="badge best-players" style="display: none;">⭐ 추천:
+                                -인</span>
+                            <span id="game-time" class="badge time">⏱️ -분</span>
+                            <span id="game-difficulty" class="badge difficulty">🔥 -/5</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-group">
+                        <h3>태그</h3>
+                        <div id="game-stats-tags" class="stats-tags">
+                            <span id="game-genre" class="tag genre">장르</span>
+                            <span id="game-mechanism" class="tag mechanism">메커니즘</span>
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>
