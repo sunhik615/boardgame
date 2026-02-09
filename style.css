@@ -1,14 +1,17 @@
 :root {
-    --primary-color: #1a2a3a;
-    --accent-color: #ff4757;
-    --bg-color: #f0f2f5;
+    --primary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    /* Red-ish */
+    --star-color: #f1c40f;
+    /* Gold-ish */
+    --bg-color: #f4f7f6;
     --card-bg: #ffffff;
     --text-color: #2f3542;
-    --secondary-text: #57606f;
+    --secondary-text: #7f8c8d;
     --tag-bg: rgba(255, 255, 255, 0.15);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.12);
-    --radius: 16px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.15);
+    --radius: 12px;
     --glass: rgba(255, 255, 255, 0.7);
 }
 
@@ -204,6 +207,159 @@ header.detail-header::after {
     background-color: var(--primary-color);
 }
 
+.btn-share {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-share:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.btn-share.success {
+    background-color: #27ae60;
+}
+
+
+/* New Wishlist UI Components */
+.wish-badge {
+    background: var(--accent-color);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.bazaar-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--accent-color);
+    color: white;
+    font-size: 0.6rem;
+    padding: 0.2rem 0.4rem;
+    z-index: 10;
+    font-weight: bold;
+}
+
+
+.card-content {
+    padding: 1rem 1.2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.4rem;
+    /* Reduced gap */
+    background: white;
+    position: relative;
+}
+
+.title-row h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+.wishlist-toggle-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #ccc;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.wishlist-toggle-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.wishlist-toggle-btn:hover {
+    transform: scale(1.2);
+    color: var(--star-color);
+}
+
+.wishlist-toggle-btn.active {
+    color: var(--star-color);
+}
+
+.wishlist-toggle-btn.active svg {
+    fill: var(--star-color);
+    stroke: transparent;
+}
+
+
+.wishlist-action-btn {
+    margin-top: 1.5rem;
+    background: white;
+    color: var(--primary-color);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Outfit', sans-serif;
+}
+
+.wishlist-action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.wishlist-action-btn.active {
+    background: var(--star-color);
+    color: white;
+}
+
+/* Wishlist Filter Styling */
+.wishlist-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.8rem;
+    background: rgba(255, 71, 87, 0.1);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.wishlist-filter:hover {
+    background: rgba(255, 71, 87, 0.2);
+}
+
+.wishlist-filter input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent-color);
+}
+
+.wishlist-filter label {
+    cursor: pointer;
+    color: var(--accent-color) !important;
+    white-space: nowrap;
+}
 
 /* Slide Container */
 .slide-container {
@@ -284,12 +440,20 @@ header.detail-header::after {
     right: -30px;
 }
 
-.slide-nav-btn svg {
-    width: 40px;
-    /* Larger icon */
-    height: 40px;
-    filter: none !important;
+.wishlist-btn.detail-wishlist {
+    position: relative;
+    top: auto;
+    right: auto;
+    display: inline-flex;
+    margin-right: 1.2rem;
+    margin-left: 0;
+    vertical-align: middle;
+    background: transparent;
+    color: white;
+    box-shadow: none;
+    border: none;
 }
+
 
 .slide-nav-btn:disabled {
     opacity: 0.3;
@@ -390,8 +554,7 @@ header.detail-header::after {
 /* Card Style */
 .game-card {
     background: white;
-    border-radius: var(--radius);
-    /* box-shadow replaced by drop-shadow for better corner rendering in 3D */
+    border-radius: 0;
     box-shadow: none;
     filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
 
@@ -399,19 +562,10 @@ header.detail-header::after {
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* Ensure full height in grid */
     position: relative;
     overflow: hidden;
-    /* Key fix for corners */
     background: white;
-    /* Ensure background fills corners */
 
-    /* Stronger corner masking using clip-path */
-    clip-path: inset(0 round var(--radius));
-    -webkit-clip-path: inset(0 round 15px);
-    /* Fallback with explicit value just in case var doesn't work in clip-path on some browsers */
-
-    /* Performance hint */
     will-change: transform;
 }
 
@@ -428,14 +582,10 @@ header.detail-header::after {
 .card-image-container {
     position: relative;
     height: 400px;
-    /* Increased from 150px for real card ratio */
     overflow: hidden;
-    /* Re-apply border-radius to prevent bleeding */
-    border-radius: var(--radius) var(--radius) 0 0;
+    border-radius: 0;
     background: transparent;
-    /* Changed from #f8f9fa to remove gray line */
     border-bottom: none !important;
-    /* Remove gray line */
 }
 
 .card-image {
@@ -536,24 +686,14 @@ header.detail-header::after {
 /* Dynamic colors handled by JS */
 
 
-.card-content {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.card-content h2 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
-}
 
 .meta-info {
     margin-top: auto;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    padding-right: 2.5rem;
+    /* Prevent overlap with wishlist button */
 }
 
 .badge {
@@ -1292,7 +1432,7 @@ footer {
 
 .bazaar-card {
     background: white;
-    border-radius: 12px;
+    border-radius: 0;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1333,7 +1473,7 @@ footer {
     padding: 0.8rem;
     background: white;
     text-align: center;
-    border-top: 1px solid #eee;
+    border-top: none;
 }
 
 .bazaar-info h3 {
