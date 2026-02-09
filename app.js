@@ -158,6 +158,7 @@ function initFilters() {
         if (filterDifficulty) filterDifficulty.value = 'all';
         if (sortOrder) sortOrder.value = 'random';
         if (searchInput) searchInput.value = '';
+        currentSlideIndex = 0; // Will be recalcuated in applyFilters
         applyFilters();
     };
 
@@ -182,7 +183,7 @@ function applyFilters() {
     const searchInput = document.getElementById('search-input');
     const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-    let filtered = games.filter(game => {
+    let filtered = currentGames.filter(game => {
         // 0. Search Filter
         if (searchVal) {
             if (!game.title.toLowerCase().includes(searchVal)) return false;
@@ -328,7 +329,15 @@ function renderImageBazaar(container, matches) {
 function renderGameList(container, matches, isSearchActive) {
     container.innerHTML = '';
     filteredGames = matches;
-    currentSlideIndex = 0;
+
+    // Handle index: 
+    // 1. If filtering/searching, reset to first card
+    // 2. If initial load (not filtering) and index is 0, start from middle
+    if (isSearchActive) {
+        currentSlideIndex = 0;
+    } else if (currentSlideIndex === 0 && matches.length > 0) {
+        currentSlideIndex = Math.floor(matches.length / 2);
+    }
 
     if (matches.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column:1/-1;">조건에 맞는 게임이 없습니다.</p>';

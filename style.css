@@ -210,12 +210,9 @@ header.detail-header::after {
     position: relative;
     width: 100%;
     padding: 2.5rem 0;
-    /* Reduced from 3rem */
     perspective: 2000px;
     overflow: hidden;
-    /* Changed from visible to hidden to prevent shaking */
     touch-action: pan-y;
-    /* Allow vertical scroll, let JS handle horizontal */
 }
 
 /* Grid Layout - Modified for Slide View */
