@@ -39,10 +39,8 @@
 
 html,
 body {
-    overflow-x: hidden;
     width: 100%;
-    position: relative;
-    /* Ensure fixed elements align correctly */
+    /* overflow-x: hidden removed to fix position: sticky */
 }
 
 body {
@@ -70,24 +68,11 @@ header {
     background-position: center;
     background-repeat: no-repeat;
     color: white;
-    padding: 2.5rem 0;
-    margin-bottom: 3rem;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
     text-align: center;
     box-shadow: var(--shadow);
     position: relative;
-    overflow: hidden;
-}
-
-header::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    right: 0;
-    height: 20px;
-    background: var(--bg-color);
-    border-top-left-radius: 50% 100%;
-    border-top-right-radius: 50% 100%;
 }
 
 header h1 {
@@ -114,11 +99,19 @@ header p {
 
 /* Detail Header Override */
 header.detail-header {
-    padding: 3rem 0;
+    padding: 1.5rem 0;
+    /* Reduced padding for cleaner look */
     margin-bottom: 0;
     text-align: left;
     background: var(--primary-color);
     animation: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+header.detail-header .header-content-flex {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header.detail-header::after {
@@ -156,8 +149,13 @@ header.detail-header::after {
 
     /* Sticky Positioning */
     position: sticky;
-    top: 1.5rem;
-    z-index: 100;
+    top: 0;
+    z-index: 1000;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.95);
+    /* More opaque for sticky readability */
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
 }
 
 .mobile-filter-toggle {
@@ -726,13 +724,13 @@ header.detail-header::after {
 
 /* Detail Page Styles */
 .hero-section {
-    height: 400px;
-    /* Reduced from 450px */
-    background-color: #ddd;
+    height: auto;
+    /* Allow content to define height */
+    min-height: 250px;
     background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
     display: flex;
-    align-items: flex-end;
-    padding-bottom: 2rem;
+    align-items: center;
+    padding: 2rem 0;
     color: white;
     margin-bottom: 2rem;
     position: relative;
@@ -754,25 +752,15 @@ header.detail-header::after {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 3rem;
-    padding: 2rem 0;
+    padding: 1rem 0;
 }
 
-.hero-mini-image {
-    width: 200px;
-    height: 200px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    border: 3px solid rgba(255, 255, 255, 0.8);
-    background-color: white;
-}
-
+/* Hero Mini Image is removed */
 .hero-text-content {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    width: 100%;
 }
 
 .hero-mini-image img {
@@ -1072,15 +1060,30 @@ footer {
     align-items: center;
 }
 
+header.detail-header {
+    margin-bottom: 0;
+}
+
+.header-content-flex h1 {
+    margin: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+}
+
 .nav-wishlist-link {
-    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: white !important;
     text-decoration: none;
     background: rgba(255, 255, 255, 0.2);
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 30px;
     font-weight: bold;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .nav-wishlist-link:hover {
@@ -1093,8 +1096,11 @@ footer {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    opacity: 0.8;
-    transition: opacity 0.3s;
+    font-size: 1.1rem;
+    /* Increased from default */
+    opacity: 0.9;
+    transition: all 0.3s;
+    display: inline-block;
 }
 
 .back-link:hover {
@@ -1110,7 +1116,8 @@ footer {
     text-align: center;
     margin-bottom: 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 0 0 20px 20px;
+    border-radius: 0;
+    /* Changed to rectangular */
 }
 
 .wishlist-hero h1 {
@@ -1129,6 +1136,10 @@ footer {
 .name-input-container {
     max-width: 400px;
     margin: 1rem auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
 }
 
 #user-name-input {
@@ -1657,6 +1668,42 @@ footer {
     }
 
     .section-title {
+        font-size: 1.4rem;
+    }
+
+    /* Compact Wishlist Mobile Styles */
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    .header-content-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .wishlist-hero {
+        padding: 1.8rem 0;
+        margin-bottom: 1.5rem;
+        border-radius: 0;
+        /* Rectangular on mobile too */
+    }
+
+    .wishlist-hero h1 {
         font-size: 1.5rem;
+    }
+
+    .wishlist-hero p {
+        font-size: 0.9rem;
+        margin-bottom: 0.6rem;
+    }
+
+    #user-name-input {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+        max-width: 85%;
+    }
+
+    #sharer-name-display {
+        font-size: 1.3rem !important;
     }
 }
