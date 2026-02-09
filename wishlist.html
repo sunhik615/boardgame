@@ -26,7 +26,13 @@
 
     <main class="container">
         <section class="wishlist-hero">
+            <div id="sharer-name-container" style="display: none;">
+                <h2 id="sharer-name-display" style="font-size: 2rem; margin-bottom: 0.5rem;">[이름]님의 관심 목록</h2>
+            </div>
             <p id="wishlist-count-text">찜한 게임이 없습니다.</p>
+            <div class="name-input-container" id="own-wishlist-actions">
+                <input type="text" id="user-name-input" placeholder="여기에 이름을 입력하면 이름으로 공유할 수 있어요!" maxlength="10">
+            </div>
         </section>
 
         <div id="wishlist-grid" class="image-grid">

@@ -1,5 +1,7 @@
 :root {
     --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    /* Add secondary dark color */
     --accent-color: #e74c3c;
     /* Red-ish */
     --star-color: #f1c40f;
@@ -1101,11 +1103,14 @@ footer {
 
 .wishlist-hero {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background-color: var(--primary-color);
+    /* Fallback */
     color: white;
-    padding: 3rem 0;
+    padding: 3.5rem 0;
     text-align: center;
     margin-bottom: 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 20px 20px;
 }
 
 .wishlist-hero h1 {
@@ -1115,8 +1120,38 @@ footer {
 }
 
 .wishlist-hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
+    font-size: 1.3rem;
+    opacity: 1;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+}
+
+.name-input-container {
+    max-width: 400px;
+    margin: 1rem auto 0;
+}
+
+#user-name-input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    text-align: center;
+}
+
+#user-name-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#user-name-input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: white;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
 }
 
 .wishlist-empty-state {
