@@ -55,6 +55,57 @@ let wishlist = new Set();
 
 // LocalStorage Utils
 const WISHLIST_KEY = 'boardgame_wishlist';
+const SEARCH_STATE_KEY = 'boardgame_search_state';
+
+// State Persistence
+function saveSearchState() {
+    try {
+        const playersVal = document.getElementById('filter-players')?.value || 'all';
+        const genreVal = document.getElementById('filter-genre')?.value || 'all';
+        const timeVal = document.getElementById('filter-time')?.value || 'all';
+        const difficultyVal = document.getElementById('filter-difficulty')?.value || 'all';
+        const sortVal = document.getElementById('sort-order')?.value || 'random';
+        const filterWishlist = document.getElementById('filter-wishlist');
+        const wishlistOnly = filterWishlist ? filterWishlist.checked : false;
+        const searchVal = document.getElementById('search-input')?.value || '';
+
+        const state = {
+            players: playersVal,
+            genre: genreVal,
+            time: timeVal,
+            difficulty: difficultyVal,
+            sort: sortVal,
+            wishlistOnly: wishlistOnly,
+            search: searchVal,
+            slideIndex: Number(currentSlideIndex) || 0
+        };
+        sessionStorage.setItem(SEARCH_STATE_KEY, JSON.stringify(state));
+    } catch (e) {
+        console.error('Failed to save search state', e);
+    }
+}
+
+function loadSearchState() {
+    try {
+        const saved = sessionStorage.getItem(SEARCH_STATE_KEY);
+        if (!saved) return null;
+
+        const state = JSON.parse(saved);
+        if (document.getElementById('filter-players')) document.getElementById('filter-players').value = state.players || 'all';
+        if (document.getElementById('filter-genre')) document.getElementById('filter-genre').value = state.genre || 'all';
+        if (document.getElementById('filter-time')) document.getElementById('filter-time').value = state.time || 'all';
+        if (document.getElementById('filter-difficulty')) document.getElementById('filter-difficulty').value = state.difficulty || 'all';
+        if (document.getElementById('sort-order')) document.getElementById('sort-order').value = state.sort || 'random';
+        if (document.getElementById('filter-wishlist')) document.getElementById('filter-wishlist').checked = !!state.wishlistOnly;
+        if (document.getElementById('search-input')) document.getElementById('search-input').value = state.search || '';
+
+        currentSlideIndex = Number(state.slideIndex) || 0;
+        return state;
+    } catch (e) {
+        console.error('Failed to load search state', e);
+        return null;
+    }
+}
 function loadWishlist() {
     // 1. Check URL parameters first for shared wishlist
     const urlParams = new URLSearchParams(window.location.search);
@@ -232,7 +283,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (gameListContainer) {
         initFilters();
         initSlideCarousel();
-        applyFilters(); // Initial render and count update
+
+        // Restore state if available
+        const savedState = loadSearchState();
+        applyFilters(!!savedState); // Pass true if we restored state to avoid resetting index
     }
 
     // Wishlist Page
@@ -332,8 +386,9 @@ function initFilters() {
         if (sortOrder) sortOrder.value = 'random';
         if (searchInput) searchInput.value = '';
         if (filterWishlist) filterWishlist.checked = false;
-        currentSlideIndex = 0; // Will be recalcuated in applyFilters
-        applyFilters();
+        currentSlideIndex = 0;
+        sessionStorage.removeItem(SEARCH_STATE_KEY); // Clear saved state
+        applyFilters(true);
     };
 
     if (btnReset) {
@@ -348,7 +403,7 @@ function initFilters() {
     }
 }
 
-function applyFilters() {
+function applyFilters(isStateRestored = false) {
     const playersVal = document.getElementById('filter-players') ? document.getElementById('filter-players').value : 'all';
     const genreVal = document.getElementById('filter-genre') ? document.getElementById('filter-genre').value : 'all';
     const timeVal = document.getElementById('filter-time') ? document.getElementById('filter-time').value : 'all';
@@ -394,7 +449,7 @@ function applyFilters() {
             if (timeVal === '30') {
                 if (maxTime > 30) return false;
             } else if (timeVal === '60') {
-                if (maxTime > 60) return false;
+                if (maxTime <= 30 || maxTime > 60) return false;
             } else if (timeVal === 'over60') {
                 if (maxTime <= 60) return false;
             }
@@ -428,9 +483,9 @@ function applyFilters() {
         }
 
         if (sortVal === 'difficulty-asc') {
-            return a.difficulty - b.difficulty || 0;
+            return (a.difficulty || 0) - (b.difficulty || 0) || a.title.localeCompare(b.title);
         } else if (sortVal === 'difficulty-desc') {
-            return b.difficulty - a.difficulty || 0;
+            return (b.difficulty || 0) - (a.difficulty || 0) || a.title.localeCompare(b.title);
         } else if (sortVal === 'random') {
             return 0; // Preserve shuffled order
         } else {
@@ -441,12 +496,16 @@ function applyFilters() {
 
     const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all' || wishlistOnly);
     isSearchActive = isFilterActive; // Store in global state
+
+    // Save state whenever filters change
+    saveSearchState();
+
     const container = document.getElementById('game-list');
     const bazaarContainer = document.getElementById('image-bazaar');
 
     if (container) {
-        // Real filter changes SHOULD reset the index
-        renderGameList(container, filtered, isFilterActive, true);
+        // Only reset index if it's a fresh filter change (not a state restoration)
+        renderGameList(container, filtered, isFilterActive, !isStateRestored);
     }
 
     if (bazaarContainer) {
@@ -520,6 +579,13 @@ function renderGameList(container, matches, isSearchActive, resetIndex = true) {
         } else if (currentSlideIndex === 0 && matches.length > 0) {
             currentSlideIndex = Math.floor(matches.length / 2);
         }
+    }
+
+    // Safety: ensure index is within current matches bounds and is a number
+    if (isNaN(currentSlideIndex) || currentSlideIndex < 0) {
+        currentSlideIndex = 0;
+    } else if (matches.length > 0 && currentSlideIndex >= matches.length) {
+        currentSlideIndex = matches.length - 1;
     }
 
     if (matches.length === 0) {
@@ -1021,6 +1087,7 @@ function slideToIndex(newIndex) {
     if (newIndex < 0 || newIndex >= filteredGames.length) return;
 
     currentSlideIndex = newIndex;
+    saveSearchState(); // Save new index position
     updateSlideDisplay();
     updateSlideControls();
 }
