@@ -66,8 +66,6 @@ function loadWishlist() {
             wishlist = new Set(arr);
             // Save to local storage so it persists for this user too
             saveWishlist();
-            // Clear URL to prevent re-loading same shared list on refresh if they toggle items
-            // window.history.replaceState({}, document.title, window.location.pathname);
         } catch (e) {
             console.error('Failed to parse shared wishlist', e);
         }
@@ -81,6 +79,22 @@ function loadWishlist() {
             } catch (e) {
                 console.error('Failed to load wishlist', e);
             }
+        }
+    }
+
+    // 3. Handle 'name' parameter for display
+    const sharerName = urlParams.get('name');
+    if (sharerName) {
+        const sharerContainer = document.getElementById('sharer-name-container');
+        const sharerDisplay = document.getElementById('sharer-name-display');
+        const ownActions = document.getElementById('own-wishlist-actions');
+        const mainTitle = document.querySelector('header h1');
+
+        if (sharerContainer && sharerDisplay) {
+            sharerContainer.style.display = 'block';
+            sharerDisplay.textContent = `${sharerName}님의 관심 게임 목록`;
+            if (mainTitle) mainTitle.textContent = `${sharerName}님의 게임 목록`;
+            if (ownActions) ownActions.style.display = 'none'; // Hide input if viewing shared list
         }
     }
 }
@@ -173,7 +187,15 @@ function copyWishlistLink() {
 
     const ids = Array.from(wishlist).join(',');
     const baseUrl = window.location.origin + window.location.pathname;
-    const shareUrl = `${baseUrl}?wished=${ids}`;
+
+    // Get name if provided
+    const nameInput = document.getElementById('user-name-input');
+    const name = nameInput ? nameInput.value.trim() : '';
+
+    let shareUrl = `${baseUrl}?wished=${ids}`;
+    if (name) {
+        shareUrl += `&name=${encodeURIComponent(name)}`;
+    }
 
     navigator.clipboard.writeText(shareUrl).then(() => {
         const btn = document.getElementById('btn-share-wishlist');
