@@ -86,8 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // --- Filtering Logic ---
+// --- Filtering Logic ---
 function initFilters() {
     const filterPlayers = document.getElementById('filter-players');
+    const filterGenre = document.getElementById('filter-genre');
     const filterTime = document.getElementById('filter-time');
     const filterDifficulty = document.getElementById('filter-difficulty');
     const btnReset = document.getElementById('btn-reset');
@@ -95,20 +97,42 @@ function initFilters() {
     const searchInput = document.getElementById('search-input');
     const mobileToggle = document.getElementById('mobile-filter-toggle');
 
+    // Populate Genre Options Dynamically
+    if (filterGenre && typeof games !== 'undefined') {
+        const genres = new Set();
+        games.forEach(game => {
+            if (game.genre) {
+                // Split by comma if multiple genres exist? Assuming single string based on data
+                genres.add(game.genre);
+            }
+        });
+
+        // Sort genres alphabetically
+        const sortedGenres = Array.from(genres).sort();
+
+        sortedGenres.forEach(genre => {
+            const option = document.createElement('option');
+            option.value = genre;
+            option.textContent = genre;
+            filterGenre.appendChild(option);
+        });
+    }
+
     // Mobile Toggle Listener
     if (mobileToggle) {
         mobileToggle.addEventListener('click', () => {
             const container = document.querySelector('.filter-container');
             container.classList.toggle('expanded');
-            // Optional: Update text content or icon rotation handled by CSS
         });
     }
 
-    const filterInputs = [filterPlayers, filterTime, filterDifficulty, sortOrder];
+    const filterInputs = [filterPlayers, filterGenre, filterTime, filterDifficulty, sortOrder];
 
     // Event Listener for all changes
     filterInputs.forEach(input => {
-        input.addEventListener('change', () => applyFilters());
+        if (input) {
+            input.addEventListener('change', () => applyFilters());
+        }
     });
 
     // Search Input Listener (Real-time)
@@ -117,22 +141,36 @@ function initFilters() {
     }
 
     // Reset Button
-    btnReset.addEventListener('click', () => {
-        filterPlayers.value = 'all';
-        filterTime.value = 'all';
-        filterDifficulty.value = 'all';
-        sortOrder.value = 'name';
+    const resetLogic = () => {
+        if (filterPlayers) filterPlayers.value = 'all';
+        if (filterGenre) filterGenre.value = 'all';
+        if (filterTime) filterTime.value = 'all';
+        if (filterDifficulty) filterDifficulty.value = 'all';
+        if (sortOrder) sortOrder.value = 'name';
         if (searchInput) searchInput.value = '';
         applyFilters();
-    });
+    };
+
+    if (btnReset) {
+        btnReset.addEventListener('click', resetLogic);
+    }
+
+    // Header Title Click to Reset
+    const headerTitle = document.querySelector('header h1');
+    if (headerTitle) {
+        headerTitle.style.cursor = 'pointer'; // Make it look clickable
+        headerTitle.addEventListener('click', resetLogic);
+    }
 }
 
 function applyFilters() {
-    const playersVal = document.getElementById('filter-players').value;
-    const timeVal = document.getElementById('filter-time').value;
-    const difficultyVal = document.getElementById('filter-difficulty').value;
-    const sortVal = document.getElementById('sort-order').value;
-    const searchVal = document.getElementById('search-input').value.toLowerCase().trim();
+    const playersVal = document.getElementById('filter-players') ? document.getElementById('filter-players').value : 'all';
+    const genreVal = document.getElementById('filter-genre') ? document.getElementById('filter-genre').value : 'all';
+    const timeVal = document.getElementById('filter-time') ? document.getElementById('filter-time').value : 'all';
+    const difficultyVal = document.getElementById('filter-difficulty') ? document.getElementById('filter-difficulty').value : 'all';
+    const sortVal = document.getElementById('sort-order') ? document.getElementById('sort-order').value : 'name';
+    const searchInput = document.getElementById('search-input');
+    const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
     let filtered = games.filter(game => {
         // 0. Search Filter
@@ -142,18 +180,25 @@ function applyFilters() {
 
         // 1. Players Filter
         if (playersVal !== 'all') {
-            const p = parseInt(playersVal);
-            if (playersVal === '5+') {
-                if (game.maxPlayers < 5) return false;
+            if (playersVal === '7+') {
+                // 7 or more players (maxPlayers >= 7)
+                if (game.maxPlayers < 7) return false;
             } else {
+                const p = parseInt(playersVal);
+                // Check if p is within the range [min, max]
                 if (p < game.minPlayers || p > game.maxPlayers) return false;
             }
         }
 
-        // 2. Time Filter
+        // 2. Genre Filter
+        if (genreVal !== 'all') {
+            if (game.genre !== genreVal) return false;
+        }
+
+        // 3. Time Filter
         if (timeVal !== 'all') {
             const times = game.playTime.match(/\d+/g);
-            if (!times) return true;
+            if (!times) return true; // Keep if format unknown
             const maxTime = Math.max(...times.map(Number));
 
             if (timeVal === '30') {
@@ -165,7 +210,7 @@ function applyFilters() {
             }
         }
 
-        // 3. Difficulty Filter
+        // 4. Difficulty Filter
         if (difficultyVal !== 'all') {
             const diff = game.difficulty;
             if (difficultyVal === 'easy') {
@@ -180,8 +225,7 @@ function applyFilters() {
         return true;
     });
 
-    // 4. Sorting
-    // Default to 'name' if sortVal is 'default' (though option removed, handle defensively) or 'name' or anything else
+    // 5. Sorting
     if (sortVal === 'difficulty-asc') {
         filtered.sort((a, b) => a.difficulty - b.difficulty);
     } else if (sortVal === 'difficulty-desc') {
@@ -191,9 +235,17 @@ function applyFilters() {
         filtered.sort((a, b) => a.title.localeCompare(b.title));
     }
 
-    const isFilterActive = !!(searchVal || playersVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all');
+    const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all');
     const container = document.getElementById('game-list');
-    renderGameList(container, filtered, isFilterActive);
+    const bazaarContainer = document.getElementById('image-bazaar');
+
+    if (container) {
+        renderGameList(container, filtered, isFilterActive);
+    }
+
+    if (bazaarContainer) {
+        renderImageBazaar(bazaarContainer, filtered);
+    }
 
     // Update results count display
     const resultsCountEl = document.getElementById('results-count');
@@ -207,6 +259,41 @@ function applyFilters() {
             resultsCountEl.textContent = `총 ${total}개 보유중입니다.`;
         }
     }
+}
+
+// --- Image Bazaar (Grid View) Logic ---
+function renderImageBazaar(container, matches) {
+    container.innerHTML = '';
+
+    // Filter only those that HAVE images
+    const gamesWithImages = matches.filter(game => {
+        const gameImg = game.image || game.images;
+        return Array.isArray(gameImg) ? gameImg.length > 0 : !!gameImg;
+    });
+
+    if (gamesWithImages.length === 0) {
+        container.innerHTML = '<p style="text-align:center; grid-column:1/-1; opacity:0.6;">이미지가 있는 게임이 없습니다.</p>';
+        return;
+    }
+
+    gamesWithImages.forEach(game => {
+        const gameImages = game.image || game.images;
+        const img = Array.isArray(gameImages) ? gameImages[0] : gameImages;
+        const imgSrc = img.includes('/') ? `assets/images/${img}` : `assets/images/games/${img}`;
+
+        const card = document.createElement('a');
+        card.href = `detail.html?id=${game.id}`;
+        card.className = 'bazaar-card';
+        card.innerHTML = `
+            <div class="bazaar-img-container">
+                <img src="${imgSrc}" alt="${game.title}" class="bazaar-img" loading="lazy">
+            </div>
+            <div class="bazaar-info">
+                <h3>${game.title}</h3>
+            </div>
+        `;
+        container.appendChild(card);
+    });
 }
 
 

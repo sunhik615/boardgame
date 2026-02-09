@@ -27,6 +27,7 @@
                 <span>🔍 검색 & 필터 설정</span>
                 <span class="toggle-icon">▼</span>
             </button>
+
             <div class="filter-group search-group">
                 <label for="search-input">검색</label>
                 <input type="text" id="search-input" placeholder="게임 이름 검색...">
@@ -36,10 +37,22 @@
                 <label for="filter-players">인원 수</label>
                 <select id="filter-players">
                     <option value="all">전체</option>
-                    <option value="2">2명</option>
-                    <option value="3">3명</option>
-                    <option value="4">4명</option>
-                    <option value="5+">5명 이상</option>
+                    <option value="1">1인</option>
+                    <option value="2">2인</option>
+                    <option value="3">3인</option>
+                    <option value="4">4인</option>
+                    <option value="5">5인</option>
+                    <option value="6">6인</option>
+                    <option value="7">7인</option>
+                    <option value="7+">7인 이상</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="filter-genre">장르</label>
+                <select id="filter-genre">
+                    <option value="all">전체</option>
+                    <!-- JavaScript will populate this -->
                 </select>
             </div>
 
@@ -104,6 +117,13 @@
         <div class="slide-indicators" id="slide-indicators">
             <!-- JavaScript will populate indicators -->
         </div>
+
+        <!-- Board Game Bazaar Section -->
+        <section class="bazaar-section">
+            <div id="image-bazaar" class="bazaar-grid">
+                <!-- JavaScript will populate this -->
+            </div>
+        </section>
     </main>
 
     <footer>
