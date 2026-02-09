@@ -51,6 +51,100 @@ let currentGames = [];
 let currentSlideIndex = 0;
 let filteredGames = [];
 let isSearchActive = false;
+let wishlist = new Set();
+
+// LocalStorage Utils
+const WISHLIST_KEY = 'boardgame_wishlist';
+function loadWishlist() {
+    // 1. Check URL parameters first for shared wishlist
+    const urlParams = new URLSearchParams(window.location.search);
+    const sharedWished = urlParams.get('wished');
+
+    if (sharedWished) {
+        try {
+            const arr = sharedWished.split(',').filter(id => id.trim() !== '');
+            wishlist = new Set(arr);
+            // Save to local storage so it persists for this user too
+            saveWishlist();
+            // Clear URL to prevent re-loading same shared list on refresh if they toggle items
+            // window.history.replaceState({}, document.title, window.location.pathname);
+        } catch (e) {
+            console.error('Failed to parse shared wishlist', e);
+        }
+    } else {
+        // 2. Otherwise load from local storage
+        const saved = localStorage.getItem(WISHLIST_KEY);
+        if (saved) {
+            try {
+                const arr = JSON.parse(saved);
+                wishlist = new Set(arr);
+            } catch (e) {
+                console.error('Failed to load wishlist', e);
+            }
+        }
+    }
+}
+
+function saveWishlist() {
+    localStorage.setItem(WISHLIST_KEY, JSON.stringify(Array.from(wishlist)));
+}
+
+function toggleWishlist(gameId, event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    if (wishlist.has(gameId)) {
+        wishlist.delete(gameId);
+    } else {
+        wishlist.add(gameId);
+    }
+    saveWishlist();
+
+    // For the new Badge UI, we re-render the card simplest by re-applying filters or re-rendering list
+    // This ensures badges and overlays update correctly
+    const gameList = document.getElementById('game-list');
+    if (gameList && gameList.children.length > 0) {
+        renderGameList(gameList, filteredGames, isSearchActive);
+    }
+    const bazaarGrid = document.querySelector('.bazaar-grid');
+    if (bazaarGrid) {
+        renderImageBazaar(bazaarGrid, currentGames);
+    }
+
+    // If "Wishlist Only" filter is active, we might need to re-render everything
+    const wishlistFilter = document.getElementById('filter-wishlist');
+    if (wishlistFilter && wishlistFilter.checked) {
+        applyFilters();
+    }
+}
+
+function copyWishlistLink() {
+    if (wishlist.size === 0) {
+        alert('찜한 게임이 없습니다. 먼저 별을 눌러 게임을 추가해 주세요!');
+        return;
+    }
+
+    const ids = Array.from(wishlist).join(',');
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareUrl = `${baseUrl}?wished=${ids}`;
+
+    navigator.clipboard.writeText(shareUrl).then(() => {
+        const btn = document.getElementById('btn-share-wishlist');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '✅ 복사 완료!';
+        btn.classList.add('success');
+
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('success');
+        }, 2000);
+    }).catch(err => {
+        console.error('Failed to copy', err);
+        alert('링크 복사에 실패했습니다. 주소창의 링크를 직접 복사해 주세요.');
+    });
+}
 
 // Main Execution
 document.addEventListener('DOMContentLoaded', () => {
@@ -58,6 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof games !== 'undefined') {
         currentGames = shuffleArray([...games]); // Shuffle on load
     }
+
+    loadWishlist();
 
     const gameListContainer = document.getElementById('game-list');
     const detailContainer = document.getElementById('game-detail');
@@ -105,6 +201,7 @@ function initFilters() {
     const btnReset = document.getElementById('btn-reset');
     const sortOrder = document.getElementById('sort-order');
     const searchInput = document.getElementById('search-input');
+    const filterWishlist = document.getElementById('filter-wishlist');
     const mobileToggle = document.getElementById('mobile-filter-toggle');
 
     // Populate Genre Options Dynamically
@@ -136,7 +233,7 @@ function initFilters() {
         });
     }
 
-    const filterInputs = [filterPlayers, filterGenre, filterTime, filterDifficulty, sortOrder];
+    const filterInputs = [filterPlayers, filterGenre, filterTime, filterDifficulty, sortOrder, filterWishlist];
 
     // Event Listener for all changes
     filterInputs.forEach(input => {
@@ -158,6 +255,7 @@ function initFilters() {
         if (filterDifficulty) filterDifficulty.value = 'all';
         if (sortOrder) sortOrder.value = 'random';
         if (searchInput) searchInput.value = '';
+        if (filterWishlist) filterWishlist.checked = false;
         currentSlideIndex = 0; // Will be recalcuated in applyFilters
         applyFilters();
     };
@@ -179,11 +277,16 @@ function applyFilters() {
     const genreVal = document.getElementById('filter-genre') ? document.getElementById('filter-genre').value : 'all';
     const timeVal = document.getElementById('filter-time') ? document.getElementById('filter-time').value : 'all';
     const difficultyVal = document.getElementById('filter-difficulty') ? document.getElementById('filter-difficulty').value : 'all';
-    const sortVal = document.getElementById('sort-order') ? document.getElementById('sort-order').value : 'name';
+    const sortVal = document.getElementById('sort-order') ? document.getElementById('sort-order').value : 'random';
+    const filterWishlist = document.getElementById('filter-wishlist');
+    const wishlistOnly = filterWishlist ? filterWishlist.checked : false;
     const searchInput = document.getElementById('search-input');
     const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
     let filtered = currentGames.filter(game => {
+        // -1. Wishlist Filter
+        if (wishlistOnly && !wishlist.has(game.id)) return false;
+
         // 0. Search Filter
         if (searchVal) {
             if (!game.title.toLowerCase().includes(searchVal)) return false;
@@ -258,7 +361,7 @@ function applyFilters() {
         }
     });
 
-    const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all');
+    const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all' || wishlistOnly);
     isSearchActive = isFilterActive; // Store in global state
     const container = document.getElementById('game-list');
     const bazaarContainer = document.getElementById('image-bazaar');
@@ -314,6 +417,7 @@ function renderImageBazaar(container, matches) {
         card.innerHTML = `
             <div class="bazaar-img-container">
                 <img src="${imgSrc}" alt="${game.title}" class="bazaar-img" loading="lazy">
+                ${wishlist.has(game.id) ? '<span class="bazaar-badge">찜</span>' : ''}
             </div>
             <div class="bazaar-info">
                 <h3>${game.title}</h3>
@@ -430,8 +534,22 @@ function createGameCard(game) {
         ? `<img src="${imgSrc}" alt="${game.title}" class="card-game-image" loading="lazy">`
         : `<span>${game.icon}</span>`;
 
+    // Prepare badges for meta-info
+    const badges = [];
+    badges.push(`
+        <span class="badge players">
+            ${isSearchActive
+            ? `⭐ 추천: ${game.bestPlayers ? (game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`) : `${game.minPlayers}-${game.maxPlayers}인`}`
+            : `👥 ${game.minPlayers}-${game.maxPlayers}인${game.bestPlayers ? ` | 추천: ${game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`}` : ''}`
+        }
+        </span>
+    `);
+    badges.push(`<span class="badge time">⏱️ ${game.playTime}</span>`);
+    badges.push(`<span class="badge difficulty">🔥 ${game.difficulty}/5</span>`);
+
+
     card.innerHTML = `
-        <article class="game-card">
+        <article class="game-card ${wishlist.has(game.id) ? 'is-wished' : ''}">
             <div class="card-image-container">
                 <div class="card-image" style="${bgStyle} ${iconColor}">
                     ${imageContent}
@@ -445,17 +563,20 @@ function createGameCard(game) {
                 </div>
             </div>
             <div class="card-content">
-                <h2>${game.title}</h2>
-                <div class="meta-info">
-                    <span class="badge players">
-                        ${isSearchActive
-            ? `⭐ 추천: ${game.bestPlayers ? (game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`) : `${game.minPlayers}-${game.maxPlayers}인`}`
-            : `👥 ${game.minPlayers}-${game.maxPlayers}인${game.bestPlayers ? ` | 추천: ${game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`}` : ''}`
-        }
-                    </span>
-                    <span class="badge time">⏱️ ${game.playTime}</span>
-                    <span class="badge difficulty">🔥 ${game.difficulty}/5</span>
+                <div class="title-row">
+                    <h2>${game.title}</h2>
+                    ${wishlist.has(game.id) ? '<span class="wish-badge">찜완료</span>' : ''}
                 </div>
+                <div class="meta-info">
+                    ${badges.join('')}
+                </div>
+                <button class="wishlist-toggle-btn ${wishlist.has(game.id) ? 'active' : ''}" 
+                        onclick="toggleWishlist('${game.id}', event)" 
+                        aria-label="찜하기">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </button>
             </div>
         </article>
     `;
@@ -508,6 +629,22 @@ function renderGameDetail() {
     }
 
     document.getElementById('game-title').textContent = game.title;
+
+    // Add Wishlist Action Button in Hero Section
+    const heroText = document.querySelector('.hero-text-content');
+    const existingAction = document.getElementById('wishlist-action');
+    if (existingAction) existingAction.remove();
+
+    const actionBtn = document.createElement('button');
+    actionBtn.id = 'wishlist-action';
+    actionBtn.className = `wishlist-action-btn ${wishlist.has(game.id) ? 'active' : ''}`;
+    actionBtn.innerHTML = wishlist.has(game.id) ? '⭐ 찜한 게임에서 제외' : '☆ 하고 싶은 게임으로 찜하기';
+    actionBtn.onclick = (e) => {
+        toggleWishlist(game.id, e);
+        actionBtn.classList.toggle('active', wishlist.has(game.id));
+        actionBtn.innerHTML = wishlist.has(game.id) ? '⭐ 찜한 게임에서 제외' : '☆ 하고 싶은 게임으로 찜하기';
+    };
+    heroText.appendChild(actionBtn);
 
     // Genre & Mechanism
     const genreEl = document.getElementById('game-genre');
