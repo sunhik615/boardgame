@@ -120,11 +120,13 @@ function toggleWishlist(gameId, event) {
     // This ensures badges and overlays update correctly
     const gameList = document.getElementById('game-list');
     if (gameList && gameList.children.length > 0) {
-        renderGameList(gameList, filteredGames, isSearchActive);
+        // Maintain current index when toggling wishlist
+        renderGameList(gameList, filteredGames, isSearchActive, false);
     }
     const bazaarGrid = document.querySelector('.bazaar-grid');
     if (bazaarGrid) {
-        renderImageBazaar(bazaarGrid, currentGames);
+        // Sync bazaar with the CURRENT filtered results, not all games
+        renderImageBazaar(bazaarGrid, filteredGames);
     }
 
     // If on Wishlist Page, re-render the whole grid to remove the item immediately
@@ -443,7 +445,8 @@ function applyFilters() {
     const bazaarContainer = document.getElementById('image-bazaar');
 
     if (container) {
-        renderGameList(container, filtered, isFilterActive);
+        // Real filter changes SHOULD reset the index
+        renderGameList(container, filtered, isFilterActive, true);
     }
 
     if (bazaarContainer) {
@@ -505,17 +508,18 @@ function renderImageBazaar(container, matches) {
 
 // --- Rendering Logic ---
 // --- Rendering Logic (Optimized Windowing) ---
-function renderGameList(container, matches, isSearchActive) {
+function renderGameList(container, matches, isSearchActive, resetIndex = true) {
     container.innerHTML = '';
     filteredGames = matches;
 
     // Handle index: 
-    // 1. If filtering/searching, reset to first card
-    // 2. If initial load (not filtering) and index is 0, start from middle
-    if (isSearchActive) {
-        currentSlideIndex = 0;
-    } else if (currentSlideIndex === 0 && matches.length > 0) {
-        currentSlideIndex = Math.floor(matches.length / 2);
+    // Only reset if explicitly requested (e.g., filter changed)
+    if (resetIndex) {
+        if (isSearchActive) {
+            currentSlideIndex = 0;
+        } else if (currentSlideIndex === 0 && matches.length > 0) {
+            currentSlideIndex = Math.floor(matches.length / 2);
+        }
     }
 
     if (matches.length === 0) {
