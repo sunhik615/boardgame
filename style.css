@@ -1023,25 +1023,14 @@ footer {
     }
 
     /* Collapsed State (Default on Mobile) */
-    .filter-container:not(.expanded) .filter-group,
-    .filter-container:not(.expanded) .btn-reset {
-        /* Display none prevents animation, using max-height instead */
-        max-height: 0;
-        opacity: 0;
+    /* Collapsed State (Default on Mobile) & Animation Base */
+    .filter-group,
+    .btn-reset {
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        max-height: 120px;
+        /* Increased safety margin */
+        opacity: 1;
         overflow: hidden;
-        margin: 0;
-        padding: 0;
-        pointer-events: none;
-        width: 0;
-        /* Ensure no horizontal space is taken */
-        border: none;
-        min-width: 0;
-        flex: 0 0 0;
-        /* Remove flex growth */
-    }
-
-    .filter-container:not(.expanded) .filter-actions {
-        gap: 0;
     }
 
     .filter-container:not(.expanded) {
@@ -1051,15 +1040,25 @@ footer {
         /* Remove gap when collapsed */
     }
 
-    /* Animation Base */
-    .filter-group,
-    .btn-reset {
-        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        max-height: 120px;
-        /* Increased safety margin */
-        opacity: 1;
+    .filter-container:not(.expanded) .filter-actions {
+        gap: 0;
+    }
+
+    .filter-container:not(.expanded) .filter-group,
+    .filter-container:not(.expanded) .btn-reset {
+        /* Collapsed properties */
+        max-height: 0;
+        opacity: 0;
         overflow: hidden;
-        /* Ensure content stays inside during animation */
+        margin: 0;
+        padding: 0;
+        pointer-events: none;
+
+        /* Layout cleaning for hidden elements */
+        width: 0;
+        min-width: 0;
+        border: none;
+        flex: 0 0 0;
     }
 
     /* Expanded State */
