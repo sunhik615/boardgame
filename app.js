@@ -36,14 +36,7 @@ function getGradient(id) {
     return curatedGradients[index];
 }
 
-// Fisher-Yates Shuffle Utility
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
+
 
 
 // Shared State
@@ -64,9 +57,7 @@ function saveSearchState() {
         const genreVal = document.getElementById('filter-genre')?.value || 'all';
         const timeVal = document.getElementById('filter-time')?.value || 'all';
         const difficultyVal = document.getElementById('filter-difficulty')?.value || 'all';
-        const sortVal = document.getElementById('sort-order')?.value || 'random';
-        const filterWishlist = document.getElementById('filter-wishlist');
-        const wishlistOnly = filterWishlist ? filterWishlist.checked : false;
+        const sortVal = document.getElementById('sort-order')?.value || 'name';
         const searchVal = document.getElementById('search-input')?.value || '';
 
         const state = {
@@ -75,7 +66,6 @@ function saveSearchState() {
             time: timeVal,
             difficulty: difficultyVal,
             sort: sortVal,
-            wishlistOnly: wishlistOnly,
             search: searchVal,
             slideIndex: Number(currentSlideIndex) || 0
         };
@@ -95,8 +85,7 @@ function loadSearchState() {
         if (document.getElementById('filter-genre')) document.getElementById('filter-genre').value = state.genre || 'all';
         if (document.getElementById('filter-time')) document.getElementById('filter-time').value = state.time || 'all';
         if (document.getElementById('filter-difficulty')) document.getElementById('filter-difficulty').value = state.difficulty || 'all';
-        if (document.getElementById('sort-order')) document.getElementById('sort-order').value = state.sort || 'random';
-        if (document.getElementById('filter-wishlist')) document.getElementById('filter-wishlist').checked = !!state.wishlistOnly;
+        if (document.getElementById('sort-order')) document.getElementById('sort-order').value = state.sort || 'name';
         if (document.getElementById('search-input')) document.getElementById('search-input').value = state.search || '';
 
         currentSlideIndex = Number(state.slideIndex) || 0;
@@ -271,7 +260,7 @@ function copyWishlistLink() {
 document.addEventListener('DOMContentLoaded', () => {
     // Load games data (already loaded via script tag as 'games')
     if (typeof games !== 'undefined') {
-        currentGames = shuffleArray([...games]); // Shuffle on load
+        currentGames = [...games]; // Use natural order
     }
 
     loadWishlist();
@@ -363,7 +352,7 @@ function initFilters() {
         });
     }
 
-    const filterInputs = [filterPlayers, filterGenre, filterTime, filterDifficulty, sortOrder, filterWishlist];
+    const filterInputs = [filterPlayers, filterGenre, filterTime, filterDifficulty, sortOrder];
 
     // Event Listener for all changes
     filterInputs.forEach(input => {
@@ -383,9 +372,8 @@ function initFilters() {
         if (filterGenre) filterGenre.value = 'all';
         if (filterTime) filterTime.value = 'all';
         if (filterDifficulty) filterDifficulty.value = 'all';
-        if (sortOrder) sortOrder.value = 'random';
+        if (sortOrder) sortOrder.value = 'name';
         if (searchInput) searchInput.value = '';
-        if (filterWishlist) filterWishlist.checked = false;
         currentSlideIndex = 0;
         sessionStorage.removeItem(SEARCH_STATE_KEY); // Clear saved state
         applyFilters(true);
@@ -393,6 +381,53 @@ function initFilters() {
 
     if (btnReset) {
         btnReset.addEventListener('click', resetLogic);
+    }
+
+    const btnRandom = document.getElementById('btn-random');
+    if (btnRandom) {
+        btnRandom.addEventListener('click', () => {
+            if (filteredGames.length > 0) {
+                const randomIndex = Math.floor(Math.random() * filteredGames.length);
+                slideToIndex(randomIndex);
+
+                // Apply winner effect after slide animation completes
+                setTimeout(() => {
+                    const centerCardLink = document.querySelector('.slide-center');
+                    if (centerCardLink) {
+                        // 1. Add focal class for sizing/z-index
+                        centerCardLink.classList.add('winner-parent');
+
+                        // 2. Clear any existing effect
+                        const oldEffect = centerCardLink.querySelector('.winner-effect-container');
+                        if (oldEffect) oldEffect.remove();
+
+                        // 3. Inject SVG Element
+                        const effectDiv = document.createElement('div');
+                        effectDiv.className = 'winner-effect-container';
+
+                        // SVG for the precise path along the border
+                        effectDiv.innerHTML = `
+                            <svg class="border-beam-svg">
+                                <rect class="border-beam-path" x="4" y="4" width="calc(100% - 8px)" height="calc(100% - 8px)" rx="12" pathLength="1000"></rect>
+                            </svg>
+                        `;
+                        centerCardLink.appendChild(effectDiv);
+
+                        // 4. Remove after duration (animation is 1.8s + small buffer)
+                        setTimeout(() => {
+                            if (centerCardLink) {
+                                centerCardLink.classList.remove('winner-parent');
+                                setTimeout(() => {
+                                    if (effectDiv) effectDiv.remove();
+                                }, 500); // Wait for scale back animation
+                            }
+                        }, 2200);
+                    }
+                }, 650);
+            } else {
+                alert('추천할 게임이 없습니다. 필터를 조정해 보세요!');
+            }
+        });
     }
 
     // Header Title Click to Reset
@@ -408,15 +443,11 @@ function applyFilters(isStateRestored = false) {
     const genreVal = document.getElementById('filter-genre') ? document.getElementById('filter-genre').value : 'all';
     const timeVal = document.getElementById('filter-time') ? document.getElementById('filter-time').value : 'all';
     const difficultyVal = document.getElementById('filter-difficulty') ? document.getElementById('filter-difficulty').value : 'all';
-    const sortVal = document.getElementById('sort-order') ? document.getElementById('sort-order').value : 'random';
-    const filterWishlist = document.getElementById('filter-wishlist');
-    const wishlistOnly = filterWishlist ? filterWishlist.checked : false;
+    const sortVal = document.getElementById('sort-order') ? document.getElementById('sort-order').value : 'name';
     const searchInput = document.getElementById('search-input');
     const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
     let filtered = currentGames.filter(game => {
-        // -1. Wishlist Filter
-        if (wishlistOnly && !wishlist.has(game.id)) return false;
 
         // 0. Search Filter
         if (searchVal) {
@@ -486,15 +517,13 @@ function applyFilters(isStateRestored = false) {
             return (a.difficulty || 0) - (b.difficulty || 0) || a.title.localeCompare(b.title);
         } else if (sortVal === 'difficulty-desc') {
             return (b.difficulty || 0) - (a.difficulty || 0) || a.title.localeCompare(b.title);
-        } else if (sortVal === 'random') {
-            return 0; // Preserve shuffled order
         } else {
             // Default: Name (Alphabetical)
             return a.title.localeCompare(b.title);
         }
     });
 
-    const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all' || wishlistOnly);
+    const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all');
     isSearchActive = isFilterActive; // Store in global state
 
     // Save state whenever filters change
@@ -574,11 +603,7 @@ function renderGameList(container, matches, isSearchActive, resetIndex = true) {
     // Handle index: 
     // Only reset if explicitly requested (e.g., filter changed)
     if (resetIndex) {
-        if (isSearchActive) {
-            currentSlideIndex = 0;
-        } else if (currentSlideIndex === 0 && matches.length > 0) {
-            currentSlideIndex = Math.floor(matches.length / 2);
-        }
+        currentSlideIndex = 0;
     }
 
     // Safety: ensure index is within current matches bounds and is a number
@@ -833,7 +858,8 @@ function renderGameDetail() {
     const expText = document.getElementById('game-expansion-text');
 
     if (game.expansion && expEl && expText) {
-        expText.textContent = game.expansion;
+        const expansions = game.expansion.split(',').map(e => e.trim());
+        expText.innerHTML = expansions.join('<br>');
         expEl.style.display = 'block';
     } else if (expEl) {
         expEl.style.display = 'none';
