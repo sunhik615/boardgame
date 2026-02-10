@@ -469,65 +469,59 @@ function initFilters() {
 }
 
 function applyFilters(isStateRestored = false) {
-    const playersVal = document.getElementById('filter-players') ? document.getElementById('filter-players').value : 'all';
-    const genreVal = document.getElementById('filter-genre') ? document.getElementById('filter-genre').value : 'all';
-    const timeVal = document.getElementById('filter-time') ? document.getElementById('filter-time').value : 'all';
-    const difficultyVal = document.getElementById('filter-difficulty') ? document.getElementById('filter-difficulty').value : 'all';
-    const sortVal = document.getElementById('sort-order') ? document.getElementById('sort-order').value : 'name';
-    const searchInput = document.getElementById('search-input');
-    const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : '';
+    const filters = {
+        players: document.getElementById('filter-players'),
+        genre: document.getElementById('filter-genre'),
+        time: document.getElementById('filter-time'),
+        difficulty: document.getElementById('filter-difficulty'),
+        sort: document.getElementById('sort-order'),
+        search: document.getElementById('search-input')
+    };
+
+    const values = {
+        players: filters.players?.value || 'all',
+        genre: filters.genre?.value || 'all',
+        time: filters.time?.value || 'all',
+        difficulty: filters.difficulty?.value || 'all',
+        sort: filters.sort?.value || 'name',
+        search: filters.search?.value.toLowerCase().trim() || ''
+    };
 
     let filtered = currentGames.filter(game => {
-
         // 0. Search Filter
-        if (searchVal) {
-            if (!game.title.toLowerCase().includes(searchVal)) return false;
-        }
+        if (values.search && !game.title.toLowerCase().includes(values.search)) return false;
 
         // 1. Players Filter
-        if (playersVal !== 'all') {
-            if (playersVal === '7+') {
-                // 7 or more players (maxPlayers >= 7)
+        if (values.players !== 'all') {
+            if (values.players === '7+') {
                 if (game.maxPlayers < 7) return false;
             } else {
-                const p = parseInt(playersVal);
-                // Check if p is within the range [min, max]
+                const p = parseInt(values.players);
                 if (p < game.minPlayers || p > game.maxPlayers) return false;
             }
         }
 
         // 2. Genre Filter
-        if (genreVal !== 'all') {
-            if (game.genre !== genreVal) return false;
-        }
+        if (values.genre !== 'all' && game.genre !== values.genre) return false;
 
         // 3. Time Filter
-        if (timeVal !== 'all') {
+        if (values.time !== 'all') {
             const times = game.playTime.match(/\d+/g);
-            if (!times) return true; // Keep if format unknown
+            if (!times) return true;
             const maxTime = Math.max(...times.map(Number));
 
-            if (timeVal === '30') {
-                if (maxTime > 30) return false;
-            } else if (timeVal === '60') {
-                if (maxTime <= 30 || maxTime > 60) return false;
-            } else if (timeVal === 'over60') {
-                if (maxTime <= 60) return false;
-            }
+            if (values.time === '30' && maxTime > 30) return false;
+            if (values.time === '60' && (maxTime <= 30 || maxTime > 60)) return false;
+            if (values.time === 'over60' && maxTime <= 60) return false;
         }
 
         // 4. Difficulty Filter
-        if (difficultyVal !== 'all') {
+        if (values.difficulty !== 'all') {
             const diff = game.difficulty;
-            if (difficultyVal === 'easy') {
-                if (diff >= 2.0) return false;
-            } else if (difficultyVal === 'normal') {
-                if (diff < 2.0 || diff >= 3.0) return false;
-            } else if (difficultyVal === 'hard') {
-                if (diff < 3.0 || diff >= 4.0) return false;
-            } else if (difficultyVal === 'expert') {
-                if (diff < 4.0) return false;
-            }
+            if (values.difficulty === 'easy' && diff >= 2.0) return false;
+            if (values.difficulty === 'normal' && (diff < 2.0 || diff >= 3.0)) return false;
+            if (values.difficulty === 'hard' && (diff < 3.0 || diff >= 4.0)) return false;
+            if (values.difficulty === 'expert' && diff < 4.0) return false;
         }
 
         return true;
@@ -535,53 +529,36 @@ function applyFilters(isStateRestored = false) {
 
     // 5. Sorting
     filtered.sort((a, b) => {
-        // Search relevance priority: Titles starting with the search term come first
-        if (searchVal) {
-            const aStart = a.title.toLowerCase().startsWith(searchVal);
-            const bStart = b.title.toLowerCase().startsWith(searchVal);
+        if (values.search) {
+            const aStart = a.title.toLowerCase().startsWith(values.search);
+            const bStart = b.title.toLowerCase().startsWith(values.search);
             if (aStart && !bStart) return -1;
             if (!aStart && bStart) return 1;
         }
 
-        if (sortVal === 'difficulty-asc') {
+        if (values.sort === 'difficulty-asc') {
             return (a.difficulty || 0) - (b.difficulty || 0) || a.title.localeCompare(b.title);
-        } else if (sortVal === 'difficulty-desc') {
+        } else if (values.sort === 'difficulty-desc') {
             return (b.difficulty || 0) - (a.difficulty || 0) || a.title.localeCompare(b.title);
-        } else {
-            // Default: Name (Alphabetical)
-            return a.title.localeCompare(b.title);
         }
+        return a.title.localeCompare(b.title);
     });
 
-    const isFilterActive = !!(searchVal || playersVal !== 'all' || genreVal !== 'all' || timeVal !== 'all' || difficultyVal !== 'all');
-    isSearchActive = isFilterActive; // Store in global state
-
-    // Save state whenever filters change
+    const isFilterActive = !!(values.search || values.players !== 'all' || values.genre !== 'all' || values.time !== 'all' || values.difficulty !== 'all');
+    isSearchActive = isFilterActive;
     saveSearchState();
 
     const container = document.getElementById('game-list');
     const bazaarContainer = document.getElementById('image-bazaar');
 
-    if (container) {
-        // Only reset index if it's a fresh filter change (not a state restoration)
-        renderGameList(container, filtered, isFilterActive, !isStateRestored);
-    }
+    if (container) renderGameList(container, filtered, isFilterActive, !isStateRestored);
+    if (bazaarContainer) renderImageBazaar(bazaarContainer, filtered);
 
-    if (bazaarContainer) {
-        renderImageBazaar(bazaarContainer, filtered);
-    }
-
-    // Update results count display
     const resultsCountEl = document.getElementById('results-count');
     if (resultsCountEl && typeof games !== 'undefined') {
         const total = games.length;
         const count = filtered.length;
-
-        if (isFilterActive) {
-            resultsCountEl.textContent = `${total}개 중에 ${count}개를 찾았습니다.`;
-        } else {
-            resultsCountEl.textContent = `총 ${total}개 보유중입니다.`;
-        }
+        resultsCountEl.textContent = isFilterActive ? `${total}개 중에 ${count}개를 찾았습니다.` : `총 ${total}개 보유중입니다.`;
     }
 }
 
@@ -589,19 +566,17 @@ function applyFilters(isStateRestored = false) {
 function renderImageBazaar(container, matches) {
     container.innerHTML = '';
 
-    // Filter only those that HAVE images
     const gamesWithImages = matches.filter(game => {
         const gameImg = game.image || game.images;
         return Array.isArray(gameImg) ? gameImg.length > 0 : !!gameImg;
     });
-
-    // Bazaar (Grid View) now follows the global sorting order provided by 'matches'
 
     if (gamesWithImages.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column:1/-1; opacity:0.6;">이미지가 있는 게임이 없습니다.</p>';
         return;
     }
 
+    const fragment = document.createDocumentFragment();
     gamesWithImages.forEach(game => {
         const gameImages = game.image || game.images;
         const img = Array.isArray(gameImages) ? gameImages[0] : gameImages;
@@ -619,8 +594,9 @@ function renderImageBazaar(container, matches) {
                 <h3>${game.title}</h3>
             </div>
         `;
-        container.appendChild(card);
+        fragment.appendChild(card);
     });
+    container.appendChild(fragment);
 }
 
 
