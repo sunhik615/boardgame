@@ -37,12 +37,20 @@
     box-sizing: border-box;
 }
 
-html,
+html {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    /* overflow-x: hidden; Removed from html to fix sticky */
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
     width: 100%;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    /* Keep on body */
     position: relative;
     -webkit-overflow-scrolling: touch;
 }
@@ -312,6 +320,8 @@ header p {
     display: flex;
     gap: 1rem;
     margin-top: 0.5rem;
+    justify-content: center;
+    /* Center buttons */
 }
 
 .btn-reset,
@@ -1015,12 +1025,41 @@ footer {
     /* Collapsed State (Default on Mobile) */
     .filter-container:not(.expanded) .filter-group,
     .filter-container:not(.expanded) .btn-reset {
-        display: none;
+        /* Display none prevents animation, using max-height instead */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        margin: 0;
+        padding: 0;
+        pointer-events: none;
+        width: 0;
+        /* Ensure no horizontal space is taken */
+        border: none;
+        min-width: 0;
+        flex: 0 0 0;
+        /* Remove flex growth */
+    }
+
+    .filter-container:not(.expanded) .filter-actions {
+        gap: 0;
     }
 
     .filter-container:not(.expanded) {
         grid-template-columns: 1fr;
         padding-bottom: 0.5rem;
+        gap: 0;
+        /* Remove gap when collapsed */
+    }
+
+    /* Animation Base */
+    .filter-group,
+    .btn-reset {
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        max-height: 120px;
+        /* Increased safety margin */
+        opacity: 1;
+        overflow: hidden;
+        /* Ensure content stays inside during animation */
     }
 
     /* Expanded State */

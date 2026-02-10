@@ -387,6 +387,12 @@ function initFilters() {
     if (btnRandom) {
         btnRandom.addEventListener('click', () => {
             if (filteredGames.length > 0) {
+                // Scroll to top first to see the result
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+
                 const randomIndex = Math.floor(Math.random() * filteredGames.length);
                 slideToIndex(randomIndex);
 
