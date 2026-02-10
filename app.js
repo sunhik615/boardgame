@@ -362,8 +362,15 @@ function initFilters() {
     });
 
     // Search Input Listener (Real-time)
+    // Search Input Listener (Debounced)
     if (searchInput) {
-        searchInput.addEventListener('input', () => applyFilters());
+        let debounceTimer;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                applyFilters();
+            }, 300);
+        });
     }
 
     // Reset Button
