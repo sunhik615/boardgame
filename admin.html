@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>보드게임 데이터 관리자</title>
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --bg-color: #f8f9fa;
+            --text-color: #2d3436;
+            --white: #ffffff;
+            --danger: #ff7675;
+            --success: #00b894;
+        }
+
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .alert {
+            background: #e1f5fe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            color: #0277bd;
+            border-left: 5px solid #0277bd;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .search-bar {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #dfe6e9;
+            color: #636e72;
+        }
+
+        .game-list {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+        }
+
+        .game-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .game-item:hover {
+            background-color: #f1f2f6;
+        }
+
+        .game-icon {
+            font-size: 24px;
+            margin-right: 15px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .game-info {
+            flex: 1;
+        }
+
+        .game-title {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .game-meta {
+            font-size: 12px;
+            color: #636e72;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-close {
+            background: none;
+            color: #aaa;
+            font-size: 28px;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .form-row>div {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            color: #2d3436;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: -5px;
+            margin-bottom: 10px;
+        }
+
+        .save-area {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #ddd;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🎲 보드게임 데이터 편집기</h1>
+
+        <div class="alert">
+            <strong>사용 방법:</strong><br>
+            1. 아래 목록에서 수정할 게임을 클릭하거나 <strong>'+ 새 게임 추가'</strong> 버튼을 누르세요.<br>
+            2. 창이 뜨면 내용을 수정하고 '임시 저장'을 누르세요.<br>
+            3. 모든 수정이 끝나면 맨 아래 <strong style="color:var(--success)">'💾 변경사항 파일로 저장'</strong> 버튼을 눌러 파일을 다운로드하세요.<br>
+            4. 다운로드된 <code>games-data.js</code> 파일을 원래 폴더(보드게임 폴더)에 덮어씌우면 끝입니다!
+        </div>
+
+        <div class="toolbar">
+            <input type="text" id="searchInput" class="search-bar" placeholder="게임 이름으로 검색...">
+            <button class="btn-primary" onclick="openModal()">+ 새 게임 추가</button>
+        </div>
+
+        <div class="game-list" id="gameList">
+            <!-- 자바스크립트로 게임 목록이 여기에 표시됩니다 -->
+        </div>
+
+        <div class="save-area">
+            <p style="margin-bottom: 10px; color: #636e72;">수정을 모두 마쳤으면 아래 버튼을 눌러 파일을 저장하세요.</p>
+            <button class="btn-success" onclick="exportData()"
+                style="width: 100%; max-width: 400px; padding: 15px; font-size: 18px;">
+                💾 변경사항 파일로 저장 (다운로드)
+            </button>
+        </div>
+    </div>
+
+    <!-- 편집 모달 창 -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">게임 정보 수정</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <form id="gameForm">
+                <input type="hidden" id="editIndex"> <!-- 배열 인덱스 저장용 -->
+
+                <label>게임 제목 <span style="color:red">*</span></label>
+                <input type="text" id="title" required placeholder="예: 스플렌더">
+
+                <div class="form-row">
+                    <div>
+                        <label>ID (영문) <span style="color:red">*</span></label>
+                        <input type="text" id="id" required placeholder="예: splendor">
+                        <p class="helper-text">고유한 영어 ID (소문자, 하이픈 권장)</p>
+                    </div>
+                    <!-- ID가 imageClass로도 사용됩니다 -->
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>아이콘 (이모지)</label>
+                        <input type="text" id="icon" placeholder="예: 💎">
+                    </div>
+                    <div>
+                        <label>장르</label>
+                        <input type="text" id="genre" placeholder="예: 전략, 파티">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>최소 인원</label>
+                        <input type="number" id="minPlayers" required min="1" value="2">
+                    </div>
+                    <div>
+                        <label>최대 인원</label>
+                        <input type="number" id="maxPlayers" required min="1" value="4">
+                    </div>
+                </div>
+
+                <div class="form-row" style="background: #fff9c4; padding: 10px; border-radius: 8px;">
+                    <div style="flex: 2;">
+                        <label style="color: #f39c12;">★ 추천 인원 (베스트)</label>
+                        <input type="number" id="bestPlayers" placeholder="선택사항 (예: 4)">
+                        <p class="helper-text">비어두면 표시되지 않습니다.</p>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>플레이 시간</label>
+                        <input type="text" id="playTime" placeholder="예: 30분">
+                    </div>
+                    <div>
+                        <label>난이도 (1.0 ~ 5.0)</label>
+                        <input type="number" step="0.01" id="difficulty" placeholder="예: 2.5">
+                    </div>
+                </div>
+
+                <label>메커니즘 (콤마로 구분)</label>
+                <input type="text" id="mechanism" placeholder="예: 셋 컬렉션, 드래프트">
+
+                <label>설명</label>
+                <textarea id="description" rows="3" placeholder="게임에 대한 간단한 설명을 적어주세요."></textarea>
+
+                <label>이미지 파일명</label>
+                <input type="text" id="imageFiles" placeholder="예: splendor.jpg">
+                <p class="helper-text">'assets/images/games/' 폴더에 있는 파일명을 정확히 입력하세요. 여러 개면 쉼표로 구분.</p>
+
+                <label>확장팩 정보 (선택사항)</label>
+                <input type="text" id="expansion" placeholder="보유 중인 확장팩이 있다면 입력하세요.">
+
+                <div
+                    style="margin-top: 20px; display: flex; justify-content: space-between; padding-top: 15px; border-top: 1px solid #eee;">
+                    <button type="button" class="btn-danger" id="deleteBtn" onclick="deleteGame()">삭제하기</button>
+                    <div style="display: flex; gap: 10px;">
+                        <button type="button" class="btn-secondary" onclick="closeModal()">취소</button>
+                        <button type="button" class="btn-primary" onclick="saveGame()">임시 저장</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 기존 데이터 파일 로드 (같은 폴더에 있어야 함) -->
+    <script src="games-data.js"></script>
+
+    <script>
+        // games 변수는 games-data.js에서 로드됨
+        // 만약 로드 실패 시 빈 배열로 초기화
+        if (typeof games === 'undefined') {
+            alert('경고: games-data.js 파일을 찾을 수 없습니다. 같은 폴더에 있는지 확인해주세요.');
+            var games = [];
+        }
+
+        let currentGameList = JSON.parse(JSON.stringify(games)); // 깊은 복사로 원본 보호
+
+        const gameListEl = document.getElementById('gameList');
+        const searchInput = document.getElementById('searchInput');
+        const editModal = document.getElementById('editModal');
+        const gameForm = document.getElementById('gameForm');
+
+        // 초기 목록 렌더링
+        renderList();
+
+        // 검색 기능 연결
+        searchInput.addEventListener('input', (e) => {
+            const keyword = e.target.value.toLowerCase();
+            renderList(keyword);
+        });
+
+        function renderList(keyword = '') {
+            gameListEl.innerHTML = '';
+
+            if (currentGameList.length === 0) {
+                gameListEl.innerHTML = '<div style="padding:20px; text-align:center;">데이터가 없습니다.</div>';
+                return;
+            }
+
+            currentGameList.forEach((game, index) => {
+                // 검색 필터링
+                if (keyword && !game.title.toLowerCase().includes(keyword) && !game.id.toLowerCase().includes(keyword)) {
+                    return;
+                }
+
+                const item = document.createElement('div');
+                item.className = 'game-item';
+                item.onclick = () => openModal(index);
+
+                let bestBadge = '';
+                if (game.bestPlayers) {
+                    bestBadge = `<span style="background:#fff9c4; color:#f39c12; padding:2px 5px; border-radius:4px; font-size:11px; margin-left:5px;">★${game.bestPlayers}인 추천</span>`;
+                }
+
+                item.innerHTML = `
+                <div class="game-icon">${game.icon || '🎲'}</div>
+                <div class="game-info">
+                    <div class="game-title">${game.title} ${bestBadge}</div>
+                    <div class="game-meta">
+                        ${game.minPlayers}~${game.maxPlayers}인 | ${game.playTime} | 난이도 ${game.difficulty}
+                    </div>
+                </div>
+            `;
+                gameListEl.appendChild(item);
+            });
+        }
+
+        // 모달 열기 (새로 만들기 또는 수정)
+        window.openModal = function (index = null) {
+            editModal.classList.add('active');
+            document.getElementById('editIndex').value = index !== null ? index : '';
+
+            const deleteBtn = document.getElementById('deleteBtn');
+            const modalTitle = document.getElementById('modalTitle');
+
+            if (index !== null) {
+                // 수정 모드
+                deleteBtn.style.display = 'block';
+                modalTitle.innerText = '게임 정보 수정';
+
+                const game = currentGameList[index];
+                document.getElementById('title').value = game.title || '';
+                document.getElementById('id').value = game.id || '';
+                document.getElementById('icon').value = game.icon || '';
+                document.getElementById('genre').value = game.genre || '';
+                document.getElementById('mechanism').value = game.mechanism || '';
+                document.getElementById('minPlayers').value = game.minPlayers || '';
+                document.getElementById('maxPlayers').value = game.maxPlayers || '';
+                document.getElementById('bestPlayers').value = game.bestPlayers || '';
+                document.getElementById('playTime').value = game.playTime || '';
+                document.getElementById('difficulty').value = game.difficulty || '';
+                document.getElementById('description').value = game.description || '';
+                document.getElementById('expansion').value = game.expansion || '';
+
+                if (game.images && Array.isArray(game.images)) {
+                    document.getElementById('imageFiles').value = game.images.join(', ');
+                } else {
+                    document.getElementById('imageFiles').value = '';
+                }
+            } else {
+                // 새 게임 추가 모드
+                deleteBtn.style.display = 'none';
+                modalTitle.innerText = '새 게임 추가';
+                gameForm.reset();
+                // 기본값 설정
+                document.getElementById('minPlayers').value = 2;
+                document.getElementById('maxPlayers').value = 4;
+            }
+        };
+
+        window.closeModal = function () {
+            editModal.classList.remove('active');
+        };
+
+        window.saveGame = function () {
+            const indexVal = document.getElementById('editIndex').value;
+            const index = indexVal === '' ? -1 : parseInt(indexVal);
+            const isNew = index === -1;
+
+            // 필수 입력 체크
+            const title = document.getElementById('title').value.trim();
+            const id = document.getElementById('id').value.trim();
+
+            if (!title || !id) {
+                alert('제목과 ID는 필수 입력 항목입니다.');
+                return;
+            }
+
+            const newGameData = {
+                id: id,
+                title: title,
+                genre: document.getElementById('genre').value.trim(),
+                mechanism: document.getElementById('mechanism').value.trim(),
+                minPlayers: parseInt(document.getElementById('minPlayers').value) || 1,
+                maxPlayers: parseInt(document.getElementById('maxPlayers').value) || 1,
+                playTime: document.getElementById('playTime').value.trim(),
+                difficulty: parseFloat(document.getElementById('difficulty').value) || 1,
+                imageClass: id, // ID를 클래스명으로 자동 사용
+                icon: document.getElementById('icon').value.trim(),
+                description: document.getElementById('description').value.trim(),
+            };
+
+            // 베스트 인원 (값이 있을 때만 저장)
+            const bestPlayersInput = document.getElementById('bestPlayers').value;
+            if (bestPlayersInput) {
+                newGameData.bestPlayers = parseInt(bestPlayersInput);
+            }
+
+            // 확장팩 (값이 있을 때만 저장)
+            const expansionInput = document.getElementById('expansion').value.trim();
+            if (expansionInput) {
+                newGameData.expansion = expansionInput;
+            }
+
+            // 이미지 배열 처리
+            const imageFilesStr = document.getElementById('imageFiles').value;
+            if (imageFilesStr.trim()) {
+                newGameData.images = imageFilesStr.split(',').map(s => s.trim());
+            }
+
+            if (isNew) {
+                currentGameList.push(newGameData);
+            } else {
+                // 기존 데이터 유지하면서 병합 (혹시 모를 필드 유실 방지)
+                currentGameList[index] = { ...currentGameList[index], ...newGameData };
+            }
+
+            closeModal();
+            renderList(searchInput.value);
+            // alert('목록이 갱신되었습니다. 꼭 파일로 저장을 해주세요!');
+        };
+
+        window.deleteGame = function () {
+            const index = document.getElementById('editIndex').value;
+            if (index !== '' && confirm('정말 이 게임을 삭제하시겠습니까? (복구할 수 없습니다)')) {
+                currentGameList.splice(index, 1);
+                closeModal();
+                renderList(searchInput.value);
+            }
+        };
+
+        window.exportData = function () {
+            const jsonStr = JSON.stringify(currentGameList, null, 4);
+            const fileContent = `const games = ${jsonStr};`;
+
+            const blob = new Blob([fileContent], { type: "text/javascript;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "games-data.js";
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('파일이 다운로드되었습니다. 기존 games-data.js 파일에 덮어씌워주세요.');
+        };
+
+        // 모달 밖 클릭시 닫기
+        window.onclick = function (event) {
+            if (event.target == editModal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+
+</html>
