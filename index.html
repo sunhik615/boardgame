@@ -43,14 +43,12 @@
             </button>
 
             <div class="filter-group search-group">
-                <label for="search-input">검색</label>
                 <input type="text" id="search-input" placeholder="게임 이름 검색...">
             </div>
 
             <div class="filter-group">
-                <label for="filter-players">인원 수</label>
                 <select id="filter-players">
-                    <option value="all">전체</option>
+                    <option value="all">인원 수 (전체)</option>
                     <option value="1">1인</option>
                     <option value="2">2인</option>
                     <option value="3">3인</option>
@@ -62,17 +60,15 @@
             </div>
 
             <div class="filter-group">
-                <label for="filter-genre">장르</label>
                 <select id="filter-genre">
-                    <option value="all">전체</option>
+                    <option value="all">장르 (전체)</option>
                     <!-- JavaScript will populate this -->
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="filter-time">플레이 시간</label>
                 <select id="filter-time">
-                    <option value="all">전체</option>
+                    <option value="all">플레이 시간 (전체)</option>
                     <option value="30">30분 이하</option>
                     <option value="60">30분 초과 60분 이하</option>
                     <option value="over60">60분 초과</option>
@@ -80,9 +76,8 @@
             </div>
 
             <div class="filter-group">
-                <label for="filter-difficulty">난이도</label>
                 <select id="filter-difficulty">
-                    <option value="all">전체</option>
+                    <option value="all">난이도 (전체)</option>
                     <option value="easy">쉬움 (~2.0)</option>
                     <option value="normal">보통 (2.0~3.0)</option>
                     <option value="hard">어려움 (3.0~4.0)</option>
@@ -91,9 +86,8 @@
             </div>
 
             <div class="filter-group">
-                <label for="sort-order">정렬</label>
                 <select id="sort-order">
-                    <option value="name" selected>이름순</option>
+                    <option value="name" selected>정렬 (이름순)</option>
                     <option value="difficulty-asc">난이도 낮은 순</option>
                     <option value="difficulty-desc">난이도 높은 순</option>
                 </select>
@@ -151,11 +145,21 @@
     </footer>
 
     <!-- Data and Application Scripts -->
-    <!-- FAB Button -->
+    <!-- FAB Buttons (Icon-only Flat Design) -->
+    <button id="random-fab" class="fab-btn-left" title="랜덤 게임 추천">
+        <svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="4" fill="currentColor" />
+            <circle cx="7" cy="7" r="1.5" fill="white" />
+            <circle cx="17" cy="17" r="1.5" fill="white" />
+            <circle cx="7" cy="17" r="1.5" fill="white" />
+            <circle cx="17" cy="7" r="1.5" fill="white" />
+            <circle cx="12" cy="12" r="1.5" fill="white" />
+        </svg>
+    </button>
     <button id="scroll-to-top" class="fab-btn" title="맨 위로 이동">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"
             stroke-linejoin="round">
-            <polyline points="18 15 12 9 6 15"></polyline>
+            <polyline points="20 15 12 7 4 15"></polyline>
         </svg>
     </button>
 

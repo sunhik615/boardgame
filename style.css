@@ -177,17 +177,18 @@ header p {
 }
 
 /* Filter Section */
+/* Filter Section - Minimalist Style */
 .filter-container {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    padding: 1.5rem;
+    padding: 1.2rem 1.5rem;
     border-radius: var(--radius);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 1.2rem;
     align-items: center;
     justify-content: center;
     border: 1px solid rgba(255, 255, 255, 0.4);
@@ -207,31 +208,63 @@ header p {
 .filter-group {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
 }
 
-.filter-group label {
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: var(--primary-color);
-}
-
-.filter-group select {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+.filter-group select,
+.filter-group input[type="text"] {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #e1e4e8;
+    border-radius: 8px;
     font-family: inherit;
     cursor: pointer;
+    background: #f8f9fa;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
 }
 
-/* Search Input */
+.filter-group select:hover,
+.filter-group input[type="text"]:focus {
+    border-color: #cbd5e0;
+    background: white;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.03);
+}
+
 .filter-group input[type="text"] {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-family: inherit;
-    width: 200px;
-    /* Specific width for search */
+    width: 220px;
+}
+
+/* PC/Tablet Filter Layout Optimization (Minimalist) */
+@media (min-width: 769px) {
+    .filter-container {
+        justify-content: flex-start;
+        /* Items start from left */
+        padding: 1rem 2rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        /* Flexible for tablets */
+        align-items: center;
+        /* Balanced centering without labels */
+    }
+
+    .filter-actions {
+        grid-column: auto;
+        margin-top: 0;
+        margin-left: auto;
+        /* PUSH BUTTONS TO THE RIGHT */
+        justify-content: flex-end;
+        gap: 0.8rem;
+    }
+
+    .btn-reset,
+    .btn-random {
+        flex: 0 0 auto;
+        padding: 0.6rem 1.4rem;
+        font-size: 0.9rem;
+        border-radius: 30px;
+        /* Sophisticated pill shape */
+    }
 }
 
 .btn-reset {
@@ -363,6 +396,8 @@ header p {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
 }
+
+
 
 .wishlist-toggle-btn {
     position: absolute;
@@ -814,14 +849,17 @@ header p {
 }
 
 /* Detail Page Styles */
+/* Detail Page Styles */
 .hero-section {
     height: auto;
     /* Allow content to define height */
-    min-height: 250px;
+    min-height: 160px;
+    /* Reduced from 250px */
     background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
     display: flex;
     align-items: center;
-    padding: 2rem 0;
+    padding: 1.5rem 0;
+    /* Reduced padding */
     color: white;
     margin-bottom: 2rem;
     position: relative;
@@ -843,7 +881,8 @@ header p {
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
+    /* Reduced padding */
 }
 
 /* Hero Mini Image is removed */
@@ -851,17 +890,47 @@ header p {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    /* Increased gap for better readability */
     width: 100%;
+    align-items: flex-start;
+    /* Align specific items to start */
 }
 
 .hero-content h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-    /* Increased margin */
+    font-size: 2.2rem;
+    /* Slightly reduced font size */
+    margin-bottom: 0.2rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    line-height: 1.4;
-    /* Relaxed line-height */
+    line-height: 1.3;
+}
+
+/* Wishlist Button in Hero Section */
+.wishlist-action-btn {
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(5px);
+}
+
+.wishlist-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.wishlist-action-btn.active {
+    background-color: #ffd700;
+    /* Gold */
+    color: #333;
+    border-color: #ffd700;
+    font-weight: bold;
 }
 
 
@@ -1111,11 +1180,16 @@ footer {
         padding: 0.6rem;
     }
 
+    .btn-random {
+        display: none !important;
+    }
+
     .hero-section {
         height: auto;
-        min-height: 250px;
-        /* Reduced from 300px slightly */
+        min-height: 140px;
+        /* Reduced for mobile */
         padding-top: 1rem;
+        padding-bottom: 1rem;
     }
 
     /* Adjust header to be smaller on mobile so it doesn't take much space before sticky kicks in */
@@ -1161,32 +1235,37 @@ footer {
     }
 }
 
-/* FAB Button */
-.fab-btn {
+/* FAB Buttons (Simplified - No container, Symmetrical Layout) */
+.fab-btn,
+.fab-btn-left {
     position: fixed;
     bottom: 2rem;
-    right: 2rem;
+    /* Both at the same bottom level */
     width: 60px;
     height: 60px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background: transparent;
+    border: none;
     color: var(--accent-color);
-    border: 2px solid var(--accent-color);
-    border-radius: 12px;
+    /* Brand Red Theme */
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0;
-    visibility: hidden;
     z-index: 1000;
-    padding: 10px;
+    padding: 0;
 }
 
-.fab-btn svg {
-    width: 100%;
-    height: 100%;
+.fab-btn {
+    right: 1.5rem;
+    /* Arrow on the right */
+    opacity: 0;
+    visibility: hidden;
+}
+
+.fab-btn-left {
+    left: 1.5rem;
+    /* Dice on the left */
 }
 
 .fab-btn.visible {
@@ -1194,11 +1273,35 @@ footer {
     visibility: visible;
 }
 
-.fab-btn:hover {
-    transform: translateY(-8px);
-    background-color: var(--accent-color);
-    color: white;
-    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+/* Apply shadow and white outline to SVG icons for visibility */
+.fab-btn svg,
+.fab-btn-left svg {
+    width: 44px;
+    /* Enlarged icon for visibility */
+    height: 44px;
+    /* Composite filter: White outline + Black drop shadow */
+    filter: drop-shadow(1px 1px 0 #ffffff) drop-shadow(-1px -1px 0 #ffffff) drop-shadow(1px -1px 0 #ffffff) drop-shadow(-1px 1px 0 #ffffff) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.fab-btn:hover,
+.fab-btn-left:hover {
+    color: #c0392b;
+    /* Darker red on hover */
+    transform: translateY(-5px);
+}
+
+.fab-btn:active,
+.fab-btn-left:active {
+    transform: scale(0.9);
+}
+
+/* On desktop, hide the recommendation FAB if needed */
+@media (min-width: 769px) {
+    .fab-btn-left {
+        display: none;
+    }
 }
 
 /* Carousel Styles */
@@ -1570,13 +1673,7 @@ footer {
         padding: 0.5rem;
     }
 
-    .fab-btn {
-        bottom: 1.5rem;
-        right: 1.5rem;
-        width: 50px;
-        height: 50px;
-        padding: 8px;
-    }
+    /* FAB Styles Consolidated to line 1203 */
 
     /* Slide View Mobile Adjustments */
     .slide-container {

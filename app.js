@@ -292,8 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Scroll-to-Top FAB Logic
     const scrollToTopBtn = document.getElementById('scroll-to-top');
     if (scrollToTopBtn) {
+        // Initial state check
+        if (window.scrollY > 400) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
+            if (window.scrollY > 400) {
                 scrollToTopBtn.classList.add('visible');
             } else {
                 scrollToTopBtn.classList.remove('visible');
@@ -391,56 +398,66 @@ function initFilters() {
     }
 
     const btnRandom = document.getElementById('btn-random');
-    if (btnRandom) {
-        btnRandom.addEventListener('click', () => {
-            if (filteredGames.length > 0) {
-                // Scroll to top first to see the result
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+    const randomFab = document.getElementById('random-fab');
+
+    const handleRandomClick = () => {
+        if (filteredGames.length > 0) {
+            // Scroll to center the slide container so the result is highly visible
+            const slideContainer = document.querySelector('.slide-container');
+            if (slideContainer) {
+                slideContainer.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
                 });
-
-                const randomIndex = Math.floor(Math.random() * filteredGames.length);
-                slideToIndex(randomIndex);
-
-                // Apply winner effect after slide animation completes
-                setTimeout(() => {
-                    const centerCardLink = document.querySelector('.slide-center');
-                    if (centerCardLink) {
-                        // 1. Add focal class for sizing/z-index
-                        centerCardLink.classList.add('winner-parent');
-
-                        // 2. Clear any existing effect
-                        const oldEffect = centerCardLink.querySelector('.winner-effect-container');
-                        if (oldEffect) oldEffect.remove();
-
-                        // 3. Inject SVG Element
-                        const effectDiv = document.createElement('div');
-                        effectDiv.className = 'winner-effect-container';
-
-                        // SVG for the precise path along the border
-                        effectDiv.innerHTML = `
-                            <svg class="border-beam-svg">
-                                <rect class="border-beam-path" x="4" y="4" width="calc(100% - 8px)" height="calc(100% - 8px)" rx="12" pathLength="1000"></rect>
-                            </svg>
-                        `;
-                        centerCardLink.appendChild(effectDiv);
-
-                        // 4. Remove after duration (animation is 1.8s + small buffer)
-                        setTimeout(() => {
-                            if (centerCardLink) {
-                                centerCardLink.classList.remove('winner-parent');
-                                setTimeout(() => {
-                                    if (effectDiv) effectDiv.remove();
-                                }, 500); // Wait for scale back animation
-                            }
-                        }, 2200);
-                    }
-                }, 650);
-            } else {
-                alert('추천할 게임이 없습니다. 필터를 조정해 보세요!');
             }
-        });
+
+            const randomIndex = Math.floor(Math.random() * filteredGames.length);
+            slideToIndex(randomIndex);
+
+            // Apply winner effect after slide animation completes
+            setTimeout(() => {
+                const centerCardLink = document.querySelector('.slide-center');
+                if (centerCardLink) {
+                    // 1. Add focal class for sizing/z-index
+                    centerCardLink.classList.add('winner-parent');
+
+                    // 2. Clear any existing effect
+                    const oldEffect = centerCardLink.querySelector('.winner-effect-container');
+                    if (oldEffect) oldEffect.remove();
+
+                    // 3. Inject SVG Element
+                    const effectDiv = document.createElement('div');
+                    effectDiv.className = 'winner-effect-container';
+
+                    // SVG for the precise path along the border
+                    effectDiv.innerHTML = `
+                        <svg class="border-beam-svg">
+                            <rect class="border-beam-path" x="4" y="4" width="calc(100% - 8px)" height="calc(100% - 8px)" rx="12" pathLength="1000"></rect>
+                        </svg>
+                    `;
+                    centerCardLink.appendChild(effectDiv);
+
+                    // 4. Remove after duration (animation is 1.8s + small buffer)
+                    setTimeout(() => {
+                        if (centerCardLink) {
+                            centerCardLink.classList.remove('winner-parent');
+                            setTimeout(() => {
+                                if (effectDiv) effectDiv.remove();
+                            }, 500); // Wait for scale back animation
+                        }
+                    }, 2200);
+                }
+            }, 650);
+        } else {
+            alert('추천할 게임이 없습니다. 필터를 조정해 보세요!');
+        }
+    };
+
+    if (btnRandom) {
+        btnRandom.addEventListener('click', handleRandomClick);
+    }
+    if (randomFab) {
+        randomFab.addEventListener('click', handleRandomClick);
     }
 
     // Header Title Click to Reset
