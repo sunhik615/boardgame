@@ -843,11 +843,26 @@ function renderGameDetail() {
     document.getElementById('game-players').textContent = `👥 ${game.minPlayers}-${game.maxPlayers}인`;
     const bestPlayersEl = document.getElementById('game-best-players');
     if (bestPlayersEl) {
-        if (game.bestPlayers) {
-            bestPlayersEl.textContent = `⭐ 추천: ${game.bestPlayers === 99 ? 'N/A' : `${game.bestPlayers}인`}`;
+        // Check for pending updates in localStorage
+        const pendingUpdates = JSON.parse(localStorage.getItem('boardgame_pending_updates') || '[]');
+        const pendingUpdate = pendingUpdates.find(u => u.id === game.id);
+
+        const displayValue = pendingUpdate ? pendingUpdate.bestPlayers : game.bestPlayers;
+
+        if (displayValue) {
+            bestPlayersEl.innerHTML = `⭐ 추천: ${displayValue === 99 ? 'N/A' : `${displayValue}인`}`;
+            if (pendingUpdate) {
+                bestPlayersEl.innerHTML += ` <span style="font-size:0.8em; color:#e67e22;">(저장 대기중)</span>`;
+            }
             bestPlayersEl.style.display = 'inline-block';
         } else {
-            bestPlayersEl.style.display = 'none';
+            // No data and no pending update -> Show Quick Edit Input
+            bestPlayersEl.innerHTML = `
+                <span style="margin-right:5px;">⭐ 추천인원 없음</span>
+                <input type="number" id="quick-best-input" style="width:50px; padding:2px;" placeholder="인원">
+                <button onclick="saveBestPlayers('${game.id}')" style="padding:2px 5px; cursor:pointer; margin-left:5px;">저장</button>
+            `;
+            bestPlayersEl.style.display = 'inline-block';
         }
     }
     document.getElementById('game-time').textContent = `⏱️ ${game.playTime}`;
@@ -1169,4 +1184,29 @@ function updateSlideIndicators() {
         indicator.addEventListener('click', () => slideToIndex(index));
         indicatorsContainer.appendChild(indicator);
     });
+}
+
+// Quick Edit Save Function
+function saveBestPlayers(gameId) {
+    const input = document.getElementById('quick-best-input');
+    if (!input || !input.value) return;
+
+    const val = parseInt(input.value);
+    if (isNaN(val) || val < 1) {
+        alert('올바른 인원수를 입력해주세요.');
+        return;
+    }
+
+    const pendingUpdates = JSON.parse(localStorage.getItem('boardgame_pending_updates') || '[]');
+
+    // Remove existing update for this game if any
+    const filtered = pendingUpdates.filter(u => u.id !== gameId);
+
+    // Add new update
+    filtered.push({ id: gameId, bestPlayers: val, timestamp: new Date().toISOString() });
+
+    localStorage.setItem('boardgame_pending_updates', JSON.stringify(filtered));
+
+    alert('임시 저장되었습니다! \n나중에 관리자 페이지(admin.html)에 접속하면 파일로 저장할 수 있습니다.');
+    location.reload(); // Refresh to show the "Pending Save" state
 }
