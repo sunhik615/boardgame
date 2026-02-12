@@ -231,14 +231,14 @@
 <body>
 
     <div class="container">
-        <h1>🎲 보드게임 데이터 편집기</h1>
+        <h1>🎲 보드게임 데이터 관리자 (v2.0)</h1>
 
         <div class="alert">
             <strong>사용 방법:</strong><br>
             1. 아래 목록에서 수정할 게임을 클릭하거나 <strong>'+ 새 게임 추가'</strong> 버튼을 누르세요.<br>
             2. 창이 뜨면 내용을 수정하고 '임시 저장'을 누르세요.<br>
-            3. 모든 수정이 끝나면 맨 아래 <strong style="color:var(--success)">'💾 변경사항 파일로 저장'</strong> 버튼을 눌러 파일을 다운로드하세요.<br>
-            4. 다운로드된 <code>games-data.js</code> 파일을 원래 폴더(보드게임 폴더)에 덮어씌우면 끝입니다!
+            3. 모든 수정이 끝나면 맨 아래 <strong style="color:var(--success)">'💾 변경사항 파일로 저장'</strong> 버튼을 눌러 다운로드하거나,<br>
+            4. <strong style="color:#6c5ce7">'📋 코드 복사'</strong> 버튼을 눌러 복사한 뒤 <code>games-data.js</code> 파일에 직접 붙여넣으세요.
         </div>
 
         <div class="toolbar">
@@ -251,11 +251,16 @@
         </div>
 
         <div class="save-area">
-            <p style="margin-bottom: 10px; color: #636e72;">수정을 모두 마쳤으면 아래 버튼을 눌러 파일을 저장하세요.</p>
-            <button class="btn-success" onclick="exportData()"
-                style="width: 100%; max-width: 400px; padding: 15px; font-size: 18px;">
-                💾 변경사항 파일로 저장 (다운로드)
-            </button>
+            <p style="margin-bottom: 10px; color: #636e72;">수정을 모두 마쳤으면 아래 버튼 중 하나를 선택하세요.</p>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="btn-success" onclick="exportData()" style="padding: 15px; font-size: 18px;">
+                    💾 변경사항 파일로 저장 (다운로드)
+                </button>
+                <button class="btn-primary" onclick="copyToClipboard()"
+                    style="padding: 15px; font-size: 18px; background-color: #6c5ce7;">
+                    📋 코드 복사 (추천)
+                </button>
+            </div>
         </div>
     </div>
 
@@ -279,7 +284,6 @@
                         <input type="text" id="id" required placeholder="예: splendor">
                         <p class="helper-text">고유한 영어 ID (소문자, 하이픈 권장)</p>
                     </div>
-                    <!-- ID가 imageClass로도 사용됩니다 -->
                 </div>
 
                 <div class="form-row">
@@ -329,9 +333,17 @@
                 <label>설명</label>
                 <textarea id="description" rows="3" placeholder="게임에 대한 간단한 설명을 적어주세요."></textarea>
 
-                <label>이미지 파일명</label>
-                <input type="text" id="imageFiles" placeholder="예: splendor.jpg">
-                <p class="helper-text">'assets/images/games/' 폴더에 있는 파일명을 정확히 입력하세요. 여러 개면 쉼표로 구분.</p>
+                <div style="background: #f1f2f6; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <label>🖼️ 이미지 설정</label>
+
+                    <label style="font-size: 13px; margin-top: 10px;">1. 대표 이미지 (카드/배경용)</label>
+                    <input type="text" id="mainImage" placeholder="예: splendor.jpg">
+
+                    <label style="font-size: 13px; margin-top: 10px;">2. 추가 상세 이미지 (상세페이지 갤러리용)</label>
+                    <textarea id="detailImages" rows="2"
+                        placeholder="예: splendor_play.jpg, splendor_components.jpg (쉼표로 구분)"></textarea>
+                    <p class="helper-text">'assets/images/games/' 폴더에 있는 파일명을 입력하세요.</p>
+                </div>
 
                 <label>확장팩 정보 (선택사항)</label>
                 <input type="text" id="expansion" placeholder="보유 중인 확장팩이 있다면 입력하세요.">
@@ -418,6 +430,10 @@
 
             const deleteBtn = document.getElementById('deleteBtn');
             const modalTitle = document.getElementById('modalTitle');
+            const form = document.getElementById('gameForm');
+
+            // 폼 초기화 (이전에 입력된 값 제거)
+            form.reset();
 
             if (index !== null) {
                 // 수정 모드
@@ -438,16 +454,31 @@
                 document.getElementById('description').value = game.description || '';
                 document.getElementById('expansion').value = game.expansion || '';
 
-                if (game.images && Array.isArray(game.images)) {
-                    document.getElementById('imageFiles').value = game.images.join(', ');
+                // 이미지 처리 분리
+                if (game.images && Array.isArray(game.images) && game.images.length > 0) {
+                    // 첫 번째 이미지는 대표 이미지로
+                    document.getElementById('mainImage').value = game.images[0];
+
+                    // 나머지는 추가 이미지로
+                    if (game.images.length > 1) {
+                        const others = game.images.slice(1);
+                        document.getElementById('detailImages').value = others.join(', ');
+                    } else {
+                        document.getElementById('detailImages').value = '';
+                    }
+                } else if (game.image) {
+                    // 하위 호환성: 단일 image 문자열인 경우
+                    document.getElementById('mainImage').value = game.image;
+                    document.getElementById('detailImages').value = '';
                 } else {
-                    document.getElementById('imageFiles').value = '';
+                    document.getElementById('mainImage').value = '';
+                    document.getElementById('detailImages').value = '';
                 }
+
             } else {
                 // 새 게임 추가 모드
                 deleteBtn.style.display = 'none';
                 modalTitle.innerText = '새 게임 추가';
-                gameForm.reset();
                 // 기본값 설정
                 document.getElementById('minPlayers').value = 2;
                 document.getElementById('maxPlayers').value = 4;
@@ -472,7 +503,8 @@
                 return;
             }
 
-            const newGameData = {
+            // 폼 데이터 수집
+            const formData = {
                 id: id,
                 title: title,
                 genre: document.getElementById('genre').value.trim(),
@@ -481,7 +513,7 @@
                 maxPlayers: parseInt(document.getElementById('maxPlayers').value) || 1,
                 playTime: document.getElementById('playTime').value.trim(),
                 difficulty: parseFloat(document.getElementById('difficulty').value) || 1,
-                imageClass: id, // ID를 클래스명으로 자동 사용
+                // imageClass: id, // 삭제됨: 기존 imageClass를 덮어쓰지 않음
                 icon: document.getElementById('icon').value.trim(),
                 description: document.getElementById('description').value.trim(),
             };
@@ -489,26 +521,45 @@
             // 베스트 인원 (값이 있을 때만 저장)
             const bestPlayersInput = document.getElementById('bestPlayers').value;
             if (bestPlayersInput) {
-                newGameData.bestPlayers = parseInt(bestPlayersInput);
+                formData.bestPlayers = parseInt(bestPlayersInput);
             }
 
             // 확장팩 (값이 있을 때만 저장)
             const expansionInput = document.getElementById('expansion').value.trim();
             if (expansionInput) {
-                newGameData.expansion = expansionInput;
+                formData.expansion = expansionInput;
             }
 
-            // 이미지 배열 처리
-            const imageFilesStr = document.getElementById('imageFiles').value;
-            if (imageFilesStr.trim()) {
-                newGameData.images = imageFilesStr.split(',').map(s => s.trim());
+            // 이미지 배열 처리 (Main + Details 합치기)
+            const mainImg = document.getElementById('mainImage').value.trim();
+            const detailImgsStr = document.getElementById('detailImages').value.trim();
+
+            const newImages = [];
+            if (mainImg) {
+                newImages.push(mainImg);
             }
+            if (detailImgsStr) {
+                const details = detailImgsStr.split(',').map(s => s.trim()).filter(s => s !== '');
+                newImages.push(...details);
+            }
+
+            if (newImages.length > 0) {
+                formData.images = newImages;
+                // 구버전 호환성을 위해 image 필드가 있었다면 제거하거나 업데이트 (여기선 images로 통일 권장)
+            }
+
 
             if (isNew) {
-                currentGameList.push(newGameData);
+                // 새 게임은 그냥 추가
+                // 새 게임일 때는 imageClass 기본값을 id로 설정해주는 것이 안전할 수 있음 (없는 경우)
+                formData.imageClass = id;
+                currentGameList.push(formData);
             } else {
-                // 기존 데이터 유지하면서 병합 (혹시 모를 필드 유실 방지)
-                currentGameList[index] = { ...currentGameList[index], ...newGameData };
+                // 기존 데이터 유지하면서 병합 (핵심 수정 사항!)
+                // 기존 게임 데이터 + 새 폼 데이터 (폼 데이터가 덮어씀)
+                // 이렇게 하면 폼에 없는 hidden 필드(예: 커스텀 imageClass)는 보존됨
+                const originalGame = currentGameList[index];
+                currentGameList[index] = { ...originalGame, ...formData };
             }
 
             closeModal();
@@ -542,12 +593,49 @@
             alert('파일이 다운로드되었습니다. 기존 games-data.js 파일에 덮어씌워주세요.');
         };
 
+        window.copyToClipboard = function () {
+            const jsonStr = JSON.stringify(currentGameList, null, 4);
+            const fileContent = `const games = ${jsonStr};`;
+
+            navigator.clipboard.writeText(fileContent).then(() => {
+                alert('코드가 클립보드에 복사되었습니다!\n\n이제 games-data.js 파일을 열고\n모든 내용을 지운 뒤 붙여넣기(Ctrl+V) 하세요.');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert('복사에 실패했습니다. 보안 설정 때문일 수 있습니다. 다운로드 버튼을 이용해주세요.');
+            });
+        }
+
         // 모달 밖 클릭시 닫기
         window.onclick = function (event) {
             if (event.target == editModal) {
                 closeModal();
             }
         }
+
+        // Check for pending updates from detail pages
+        window.addEventListener('load', () => {
+            const pendingUpdates = JSON.parse(localStorage.getItem('boardgame_pending_updates') || '[]');
+
+            if (pendingUpdates.length > 0) {
+                let appliedCount = 0;
+
+                pendingUpdates.forEach(update => {
+                    const gameIndex = currentGameList.findIndex(g => g.id === update.id);
+                    if (gameIndex !== -1) {
+                        currentGameList[gameIndex].bestPlayers = update.bestPlayers;
+                        appliedCount++;
+                    }
+                });
+
+                if (appliedCount > 0) {
+                    renderList(searchInput.value);
+                    alert(`📢 상세 페이지에서 수정된 데이터 ${appliedCount}건이 반영되었습니다!\n\n꼭 [💾 저장] 또는 [📋 코드 복사]를 해보세요.`);
+
+                    // Clear pending updates after applying
+                    localStorage.removeItem('boardgame_pending_updates');
+                }
+            }
+        });
     </script>
 
 </body>
