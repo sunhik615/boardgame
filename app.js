@@ -263,20 +263,27 @@ import { db, collection, getDocs } from "./firebase-config.js";
 window.games = [];
 
 // Fetch data from Firestore
+// Fetch data from Firestore
 async function fetchGamesData() {
+    const startTime = performance.now();
+    console.log("Starting data fetch...");
+
     try {
+        // Note: With offline persistence enabled, getDocs will first try to return results from cache.
         const querySnapshot = await getDocs(collection(db, "games"));
         const fetchedGames = [];
         querySnapshot.forEach((doc) => {
             const data = doc.data();
-            // Ensure ID is present (use doc.id if not in data)
             if (!data.id) data.id = doc.id;
             fetchedGames.push(data);
         });
 
+        const fetchTime = performance.now();
+        console.log(`Data fetched in ${(fetchTime - startTime).toFixed(2)}ms. Items: ${fetchedGames.length}`);
+
         // Update global games array
         window.games = fetchedGames;
-        currentGames = [...window.games]; // Use natural order
+        currentGames = [...window.games];
 
         // Re-run initialization logic now that data is loaded
         loadWishlist();
@@ -286,31 +293,23 @@ async function fetchGamesData() {
 
         // Index Page
         if (gameListContainer) {
-            console.log("Game list container found, initializing index page...");
-            // Initialize filters and carousel AFTER data is loaded
-            if (typeof initFilters === 'function') {
-                initFilters();
-            } else {
-                console.warn("initFilters function not found!");
-            }
+            if (typeof initFilters === 'function') initFilters();
+            if (typeof initSlideCarousel === 'function') initSlideCarousel();
+        }
 
-            if (typeof initSlideCarousel === 'function') {
-                initSlideCarousel();
-            } else {
-                console.warn("initSlideCarousel function not found!");
-            }
+        // Detail Page
+        if (detailContainer) {
+            renderGameDetail();
+        }
 
-            // Restore state if available
-            const savedState = loadSearchState();
-            applyFilters(!!savedState);
+        // Restore state if available
+        const savedState = loadSearchState();
+        applyFilters(!!savedState);
 
-            // Remove loading message
-            const loadingMsg = document.querySelector('#game-list p');
-            if (loadingMsg && loadingMsg.textContent === '게임 목록을 불러오는 중...') {
-                loadingMsg.remove();
-            }
-        } else {
-            console.log("Game list container not found (not index page?)");
+        // Remove loading message
+        const loadingMsg = document.querySelector('#game-list p');
+        if (loadingMsg && loadingMsg.textContent === '게임 목록을 불러오는 중...') {
+            loadingMsg.remove();
         }
 
         // Wishlist Page
@@ -320,17 +319,15 @@ async function fetchGamesData() {
             renderWishlistPage();
         }
 
-        // Detail Page
-        if (detailContainer) {
-            console.log("Detail container found, rendering detail...");
-            renderGameDetail();
-        }
+        const endTime = performance.now();
+        console.log(`Initialization complete in ${(endTime - startTime).toFixed(2)}ms`);
 
-    } catch (error) {
-        console.error("Error fetching games:", error);
+    } catch (err) {
+        console.error("Firestore error:", err);
+        // Fallback or error UI
         const gameListContainer = document.getElementById('game-list');
         if (gameListContainer) {
-            gameListContainer.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:red;">데이터를 불러오는데 실패했습니다.<br>${error.message}</p>`;
+            gameListContainer.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:red;">데이터를 불러오는데 실패했습니다.<br>${err.message}</p>`;
         }
     }
 }

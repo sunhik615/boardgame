@@ -1,10 +1,16 @@
-// Firebase 설정 파일
-// CDN 방식을 사용하므로 import 문 대신 전역 객체를 사용하지는 않지만,
-// 모듈 방식(type="module")을 사용할 것이므로 import 문을 그대로 두되,
-// CDN URL로 변경합니다.
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    addDoc,
+    updateDoc,
+    deleteDoc,
+    doc,
+    getDoc,
+    writeBatch,
+    enableMultiTabIndexedDbPersistence
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 const firebaseConfig = {
@@ -20,6 +26,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// Enable Offline Persistence
+enableMultiTabIndexedDbPersistence(db).catch((err) => {
+    if (err.code == 'failed-precondition') {
+        // Multiple tabs open, persistence can only be enabled in one tab at a time.
+        console.warn("Firestore persistence failed-precondition: Multiple tabs open.");
+    } else if (err.code == 'unimplemented') {
+        // The current browser does not support all of the features required to enable persistence
+        console.warn("Firestore persistence unimplemented: Browser not supported.");
+    }
+});
+
 const storage = getStorage(app);
 
 // 다른 파일에서 사용할 수 있도록 export
