@@ -257,37 +257,88 @@ function copyWishlistLink() {
 }
 
 // Main Execution
+import { db, collection, getDocs } from "./firebase-config.js";
+
+// Make games globally available for compatibility
+window.games = [];
+
+// Fetch data from Firestore
+async function fetchGamesData() {
+    try {
+        const querySnapshot = await getDocs(collection(db, "games"));
+        const fetchedGames = [];
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            // Ensure ID is present (use doc.id if not in data)
+            if (!data.id) data.id = doc.id;
+            fetchedGames.push(data);
+        });
+
+        // Update global games array
+        window.games = fetchedGames;
+        currentGames = [...window.games]; // Use natural order
+
+        // Re-run initialization logic now that data is loaded
+        loadWishlist();
+
+        const gameListContainer = document.getElementById('game-list');
+        const detailContainer = document.getElementById('game-detail');
+
+        // Index Page
+        if (gameListContainer) {
+            console.log("Game list container found, initializing index page...");
+            // Initialize filters and carousel AFTER data is loaded
+            if (typeof initFilters === 'function') {
+                initFilters();
+            } else {
+                console.warn("initFilters function not found!");
+            }
+
+            if (typeof initSlideCarousel === 'function') {
+                initSlideCarousel();
+            } else {
+                console.warn("initSlideCarousel function not found!");
+            }
+
+            // Restore state if available
+            const savedState = loadSearchState();
+            applyFilters(!!savedState);
+
+            // Remove loading message
+            const loadingMsg = document.querySelector('#game-list p');
+            if (loadingMsg && loadingMsg.textContent === '게임 목록을 불러오는 중...') {
+                loadingMsg.remove();
+            }
+        } else {
+            console.log("Game list container not found (not index page?)");
+        }
+
+        // Wishlist Page
+        const wishlistGrid = document.getElementById('wishlist-grid');
+        if (wishlistGrid) {
+            console.log("Wishlist grid found, rendering wishlist...");
+            renderWishlistPage();
+        }
+
+        // Detail Page
+        if (detailContainer) {
+            console.log("Detail container found, rendering detail...");
+            renderGameDetail();
+        }
+
+    } catch (error) {
+        console.error("Error fetching games:", error);
+        const gameListContainer = document.getElementById('game-list');
+        if (gameListContainer) {
+            gameListContainer.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:red;">데이터를 불러오는데 실패했습니다.<br>${error.message}</p>`;
+        }
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Load games data (already loaded via script tag as 'games')
-    if (typeof games !== 'undefined') {
-        currentGames = [...games]; // Use natural order
-    }
-
-    loadWishlist();
-
-    const gameListContainer = document.getElementById('game-list');
-    const detailContainer = document.getElementById('game-detail');
-
-    // Index Page
-    if (gameListContainer) {
-        initFilters();
-        initSlideCarousel();
-
-        // Restore state if available
-        const savedState = loadSearchState();
-        applyFilters(!!savedState); // Pass true if we restored state to avoid resetting index
-    }
-
-    // Wishlist Page
-    const wishlistGrid = document.getElementById('wishlist-grid');
-    if (wishlistGrid) {
-        renderWishlistPage();
-    }
-
-    // Detail Page
-    if (detailContainer) {
-        renderGameDetail();
-    }
+    // Initial UI Setup (Logic that doesn't depend on data)
+    console.log("DOM Content Loaded. Starting app...");
 
     // Scroll-to-Top FAB Logic
     const scrollToTopBtn = document.getElementById('scroll-to-top');
@@ -314,6 +365,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Start Data Fetch
+    fetchGamesData();
 });
 
 
@@ -580,14 +634,22 @@ function renderImageBazaar(container, matches) {
     gamesWithImages.forEach(game => {
         const gameImages = game.image || game.images;
         const img = Array.isArray(gameImages) ? gameImages[0] : gameImages;
-        const imgSrc = img.includes('/') ? `assets/images/${img}` : `assets/images/games/${img}`;
+
+        // Smart Path Logic (Matches createGameCard)
+        let imgSrc = img;
+        if (!img.startsWith('http') && !img.startsWith('data:')) {
+            if (!img.includes('/')) {
+                imgSrc = `assets/images/games/${img}`;
+            }
+        }
 
         const card = document.createElement('a');
         card.href = `detail.html?id=${game.id}`;
         card.className = 'bazaar-card';
         card.innerHTML = `
             <div class="bazaar-img-container">
-                <img src="${imgSrc}" alt="${game.title}" class="bazaar-img" loading="lazy">
+                <img src="${imgSrc}" alt="${game.title}" class="bazaar-img" loading="lazy" 
+                     onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=No+Image';">
                 ${wishlist.has(game.id) ? '<span class="bazaar-badge">찜</span>' : ''}
             </div>
             <div class="bazaar-info">
@@ -663,19 +725,25 @@ function updateSlideDisplay() {
         let card = container.querySelector(`.card-link[data-id="${game.id}"]`);
 
         if (!card) {
-            card = createGameCard(game);
-            card.setAttribute('data-id', game.id);
-
-            // Insert at correct relative position
-            const successors = Array.from(container.children).filter(child => {
-                const idx = filteredGames.findIndex(g => g.id === child.getAttribute('data-id'));
-                return idx > i;
-            });
-
-            if (successors.length > 0) {
-                container.insertBefore(card, successors[0]);
+            // Logic to prevent duplicates even if selector fails
+            const existing = container.querySelector(`[data-id="${game.id}"]`);
+            if (existing) {
+                card = existing;
             } else {
-                container.appendChild(card);
+                card = createGameCard(game);
+                card.setAttribute('data-id', game.id);
+
+                // Insert at correct relative position
+                const successors = Array.from(container.children).filter(child => {
+                    const idx = filteredGames.findIndex(g => g.id === child.getAttribute('data-id'));
+                    return idx !== -1 && idx > i;
+                });
+
+                if (successors.length > 0) {
+                    container.insertBefore(card, successors[0]);
+                } else {
+                    container.appendChild(card);
+                }
             }
         }
 
@@ -693,23 +761,8 @@ function updateSlideDisplay() {
 
 function createGameCard(game) {
     const card = document.createElement('a');
+    card.className = 'card-link'; // Critical: Add this class for querySelector to work
     card.href = `detail.html?id=${game.id}`;
-    card.className = 'card-link';
-
-    const gameImages = game.image || game.images;
-    const gameImg = Array.isArray(gameImages) ? gameImages[0] : gameImages;
-    const bgStyle = gameImg ? 'background: #fff;' : `background: ${getGradient(game.id)};`;
-    const iconColor = gameImg ? 'color: #333;' : 'color: white;';
-
-    let imgSrc = '';
-    if (gameImg) {
-        imgSrc = gameImg.includes('/') ? `assets/images/${gameImg}` : `assets/images/games/${gameImg}`;
-    }
-
-    const imageContent = gameImg
-        ? `<img src="${imgSrc}" alt="${game.title}" class="card-game-image" loading="lazy">`
-        : `<span>${game.icon}</span>`;
-
     // Prepare badges for meta-info
     const badges = [];
     badges.push(`
@@ -722,6 +775,39 @@ function createGameCard(game) {
     `);
     badges.push(`<span class="badge time">⏱️ ${game.playTime}</span>`);
     badges.push(`<span class="badge difficulty">🔥 ${game.difficulty}/5</span>`);
+
+    // --- Restore Image Handling Logic ---
+    const gameImages = game.images || game.image; // Handle array(new) or string(old)
+    let firstImage = null;
+
+    if (Array.isArray(gameImages) && gameImages.length > 0) {
+        firstImage = gameImages[0];
+    } else if (typeof gameImages === 'string' && gameImages.trim() !== '') {
+        firstImage = gameImages;
+    }
+
+    // Determine Background & Icon Color
+    // If image exists -> White bg, black icon color (if any text)
+    // If no image -> Gradient bg, white icon color
+    let imageContent = '';
+    let bgStyle = `background: ${getGradient(game.id)};`; // Default gradient
+    let iconColor = 'color: white;';
+
+    if (firstImage) {
+        let imgSrc = firstImage;
+        if (!firstImage.startsWith('http') && !firstImage.startsWith('data:')) {
+            // Only prepend path if it's a simple filename (no slashes)
+            if (!firstImage.includes('/')) {
+                imgSrc = `assets/images/games/${firstImage}`;
+            }
+        }
+
+        bgStyle = 'background: #fff;';
+        iconColor = 'color: #333;';
+        imageContent = `<img src="${imgSrc}" alt="${game.title}" class="card-game-image" loading="lazy" onerror="this.onerror=null; this.parentElement.style.background='${getGradient(game.id)}'; this.parentElement.innerHTML='<span>${game.icon || '🎲'}</span>';">`;
+    } else {
+        imageContent = `<span>${game.icon || '🎲'}</span>`;
+    }
 
 
     card.innerHTML = `
@@ -788,13 +874,21 @@ function renderGameDetail() {
 
     if (imageArray.length > 0) {
         const firstImg = imageArray[0];
-        const imgSrc = firstImg.includes('/') ? `assets/images/${firstImg}` : `assets/images/games/${firstImg}`;
+
+        // Smart Path Logic
+        let imgSrc = firstImg;
+        if (!firstImg.startsWith('http') && !firstImg.startsWith('data:')) {
+            if (!firstImg.includes('/')) {
+                imgSrc = `assets/images/games/${firstImg}`;
+            }
+        }
+
         heroSection.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${imgSrc}')`;
         heroSection.style.backgroundSize = 'cover';
         heroSection.style.backgroundPosition = 'center';
 
         if (miniImgContainer) {
-            miniImgContainer.innerHTML = `<img src="${imgSrc}" alt="${game.title}">`;
+            miniImgContainer.innerHTML = `<img src="${imgSrc}" alt="${game.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/150?text=No+Image';">`;
             miniImgContainer.style.display = 'block';
         }
 
@@ -907,12 +1001,23 @@ function initCarousel(images, gameTitle) {
     // Create image elements
     carouselImages.innerHTML = '';
     images.forEach((img, index) => {
-        const imgSrc = img.includes('/') ? `assets/images/${img}` : `assets/images/games/${img}`;
+        // Smart Path Logic
+        let imgSrc = img;
+        if (!img.startsWith('http') && !img.startsWith('data:')) {
+            if (!img.includes('/')) {
+                imgSrc = `assets/images/games/${img}`;
+            }
+        }
+
         const imgEl = document.createElement('img');
         imgEl.src = imgSrc;
         imgEl.alt = `${gameTitle} - 이미지 ${index + 1}`;
         imgEl.className = 'carousel-image';
         imgEl.style.transform = `translateX(${index * 100}%)`;
+        imgEl.onerror = function () {
+            this.onerror = null;
+            this.src = 'https://via.placeholder.com/600x400?text=No+Image';
+        };
         carouselImages.appendChild(imgEl);
     });
 
@@ -1210,3 +1315,8 @@ function saveBestPlayers(gameId) {
     alert('임시 저장되었습니다! \n나중에 관리자 페이지(admin.html)에 접속하면 파일로 저장할 수 있습니다.');
     location.reload(); // Refresh to show the "Pending Save" state
 }
+
+// Expose functions to window for HTML onclick attributes
+window.toggleWishlist = toggleWishlist;
+window.saveBestPlayers = saveBestPlayers;
+window.copyWishlistLink = copyWishlistLink;

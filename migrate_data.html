@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Data Migration</title>
+</head>
+
+<body>
+    <h1>데이터 마이그레이션 중...</h1>
+    <div id="status"></div>
+
+    <script src="games-data.js"></script>
+    <script type="module">
+        import { db, collection, addDoc, getDocs } from "./firebase-config.js";
+
+        const statusDiv = document.getElementById('status');
+        const gamesCollection = collection(db, "games");
+
+        async function migrate() {
+            try {
+                // Check if data already exists
+                const snapshot = await getDocs(gamesCollection);
+                if (!snapshot.empty) {
+                    statusDiv.innerHTML = "⚠️ 데이터가 이미 존재합니다. 중복 업로드를 방지하기 위해 중단합니다.";
+                    return;
+                }
+
+                statusDiv.innerHTML = `총 ${games.length}개의 게임을 업로드합니다...<br>`;
+
+                let count = 0;
+                for (const game of games) {
+                    await addDoc(gamesCollection, game);
+                    count++;
+                    statusDiv.innerHTML += `${count}. ${game.title} 업로드 완료<br>`;
+                }
+
+                statusDiv.innerHTML += "<br>✅ <strong>모든 데이터 이동 완료!</strong>";
+                console.log("Migration finished!");
+
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                statusDiv.innerHTML += `<br>❌ 오류 발생: ${e.message}`;
+            }
+        }
+
+        // games 변수가 로드되었는지 확인 후 실행
+        if (typeof games !== 'undefined') {
+            migrate();
+        } else {
+            statusDiv.innerHTML = "❌ games-data.js를 찾을 수 없습니다.";
+        }
+    </script>
+</body>
+
+</html>
