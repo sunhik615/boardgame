@@ -268,99 +268,123 @@ function copyWishlistLink() {
 }
 
 // Main Execution
-import { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, storage, ref, uploadBytes, getDownloadURL, query, where, orderBy } from "./firebase-config.js";
+import { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, storage, ref, uploadBytes, getDownloadURL, query, where, orderBy, onSnapshot } from "./firebase-config.js";
 
 let currentGameList = [];
 // Make games globally available for compatibility
 window.games = [];
 
-// Fetch data from Firestore
-// Fetch data from Firestore
+// Fetch data from Firestore with real-time updates and cache-first rendering
 async function fetchGamesData() {
     const startTime = performance.now();
-    console.log("Starting data fetch...");
+    console.log("Starting data fetch with onSnapshot...");
+
+    // Show initial skeleton state if container exists
+    const gameListContainer = document.getElementById('game-list');
+    if (gameListContainer && gameListContainer.innerHTML.includes('게임 목록을 불러오는 중...')) {
+        renderSkeletons(gameListContainer, 6);
+    }
 
     try {
-        // Note: With offline persistence enabled, getDocs will first try to return results from cache.
-        const querySnapshot = await getDocs(collection(db, "games"));
-        const fetchedGames = [];
-        querySnapshot.forEach((doc) => {
-            const data = doc.data();
-            if (!data.id) data.id = doc.id;
-            fetchedGames.push(data);
+        const q = collection(db, "games");
+
+        // onSnapshot will trigger immediately with cached data if available, 
+        // then again when the server data is received.
+        onSnapshot(q, (querySnapshot) => {
+            const fetchedGames = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                if (!data.id) data.id = doc.id;
+                fetchedGames.push(data);
+            });
+
+            console.log(`Data updated. Items: ${fetchedGames.length}. Source: ${querySnapshot.metadata.fromCache ? 'Cache' : 'Server'}`);
+
+            // Update global games array
+            window.games = fetchedGames;
+            currentGames = [...window.games];
+
+            // Re-run initialization logic now that data is loaded
+            loadWishlist();
+
+            const detailContainer = document.getElementById('game-detail');
+
+            // Index Page
+            if (gameListContainer) {
+                if (typeof initFilters === 'function') initFilters();
+                if (typeof initSlideCarousel === 'function') initSlideCarousel();
+            }
+
+            // Detail Page
+            if (detailContainer) {
+                renderGameDetail();
+            }
+
+            // Restore state if available
+            const savedState = loadSearchState();
+            if (savedState && gameListContainer) {
+                applyFilters(true); // Explicitly say state is being restored
+
+                // Restore scroll position after a short delay (only on first load)
+                if (savedState.scrollPos && !window._scrollRestored) {
+                    let attempts = 0;
+                    const restoreScroll = () => {
+                        window.scrollTo(0, savedState.scrollPos);
+                        if (Math.abs(window.scrollY - savedState.scrollPos) < 2 || attempts > 15) {
+                            window._scrollRestored = true;
+                        } else {
+                            attempts++;
+                            setTimeout(restoreScroll, 50 * attempts);
+                        }
+                    };
+                    setTimeout(restoreScroll, 100);
+                }
+            } else {
+                applyFilters(false);
+            }
+
+            // Remove loading skeletons/message
+            if (gameListContainer) {
+                const skeletons = gameListContainer.querySelectorAll('.skeleton-card');
+                skeletons.forEach(s => s.remove());
+
+                const loadingMsg = gameListContainer.querySelector('p');
+                if (loadingMsg && loadingMsg.textContent.includes('불러오는 중...')) {
+                    loadingMsg.remove();
+                }
+            }
+
+            // Wishlist Page
+            const wishlistGrid = document.getElementById('wishlist-grid');
+            if (wishlistGrid) {
+                renderWishlistPage();
+            }
+        }, (err) => {
+            console.error("Firestore onSnapshot error:", err);
+            if (gameListContainer) {
+                gameListContainer.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:red;">데이터를 불러오는데 실패했습니다.<br>${err.message}</p>`;
+            }
         });
 
-        const fetchTime = performance.now();
-        console.log(`Data fetched in ${(fetchTime - startTime).toFixed(2)}ms. Items: ${fetchedGames.length}`);
-
-        // Update global games array
-        window.games = fetchedGames;
-        currentGames = [...window.games];
-
-        // Re-run initialization logic now that data is loaded
-        loadWishlist();
-
-        const gameListContainer = document.getElementById('game-list');
-        const detailContainer = document.getElementById('game-detail');
-
-        // Index Page
-        if (gameListContainer) {
-            if (typeof initFilters === 'function') initFilters();
-            if (typeof initSlideCarousel === 'function') initSlideCarousel();
-        }
-
-        // Detail Page
-        if (detailContainer) {
-            renderGameDetail();
-        }
-        // Restore state if available
-        const savedState = loadSearchState();
-        if (savedState && gameListContainer) {
-            applyFilters(true); // Explicitly say state is being restored
-
-            // Restore scroll position after a short delay
-            if (savedState.scrollPos) {
-                let attempts = 0;
-                const restoreScroll = () => {
-                    window.scrollTo(0, savedState.scrollPos);
-                    // Check if we actually reached the target position
-                    // (Allow small difference for sub-pixel rendering or elastic scrolling)
-                    if (Math.abs(window.scrollY - savedState.scrollPos) < 2 || attempts > 15) {
-                        console.log(`Scroll restored to ${window.scrollY} after ${attempts} attempts`);
-                    } else {
-                        attempts++;
-                        setTimeout(restoreScroll, 50 * attempts); // Increasingly wait more
-                    }
-                };
-                setTimeout(restoreScroll, 100);
-            }
-        } else {
-            applyFilters(false);
-        }
-
-        // Remove loading message
-        const loadingMsg = document.querySelector('#game-list p');
-        if (loadingMsg && loadingMsg.textContent === '게임 목록을 불러오는 중...') {
-            loadingMsg.remove();
-        }
-
-        // Wishlist Page
-        const wishlistGrid = document.getElementById('wishlist-grid');
-        if (wishlistGrid) {
-            console.log("Wishlist grid found, rendering wishlist...");
-            renderWishlistPage();
-        }
-
-        const endTime = performance.now();
-        console.log(`Initialization complete in ${(endTime - startTime).toFixed(2)}ms`);
-
     } catch (err) {
-        console.error("Firestore error:", err);
-        // Fallback or error UI
-        const gameListContainer = document.getElementById('game-list');
-        if (gameListContainer) {
-            gameListContainer.innerHTML = `<p style="text-align:center; grid-column:1/-1; color:red;">데이터를 불러오는데 실패했습니다.<br>${err.message}</p>`;
-        }
+        console.error("Initialization error:", err);
+    }
+}
+
+function renderSkeletons(container, count) {
+    if (!container) return;
+    container.innerHTML = '';
+    for (let i = 0; i < count; i++) {
+        const skeleton = document.createElement('div');
+        skeleton.className = 'skeleton-card';
+        skeleton.innerHTML = `
+            <div class="skeleton-image"></div>
+            <div class="skeleton-content">
+                <div class="skeleton-title"></div>
+                <div class="skeleton-meta"></div>
+            </div>
+        `;
+        container.appendChild(skeleton);
     }
 }
 
@@ -670,25 +694,49 @@ function applyFilters(isStateRestored = false) {
 }
 
 // --- Image Bazaar (Grid View) Logic ---
-function renderImageBazaar(container, matches) {
-    container.innerHTML = '';
+// --- Image Bazaar (Grid View) Logic with Chunked Rendering ---
+let bazaarObserver = null;
+let currentBazaarMatches = [];
+let bazaarLoadedCount = 0;
+const BAZAAR_BATCH_SIZE = 24;
 
-    const gamesWithImages = matches.filter(game => {
+function renderImageBazaar(container, matches) {
+    currentBazaarMatches = matches.filter(game => {
         const gameImg = game.image || game.images;
         return Array.isArray(gameImg) ? gameImg.length > 0 : !!gameImg;
     });
 
-    if (gamesWithImages.length === 0) {
+    container.innerHTML = '';
+    bazaarLoadedCount = 0;
+
+    if (currentBazaarMatches.length === 0) {
         container.innerHTML = '<p style="text-align:center; grid-column:1/-1; opacity:0.6;">이미지가 있는 게임이 없습니다.</p>';
         return;
     }
 
+    // Disconnect old observer
+    if (bazaarObserver) bazaarObserver.disconnect();
+
+    // Setup Observer
+    bazaarObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+            loadMoreBazaarItems(container);
+        }
+    }, { rootMargin: '200px' });
+
+    // Initial load
+    loadMoreBazaarItems(container);
+}
+
+function loadMoreBazaarItems(container) {
+    const nextBatch = currentBazaarMatches.slice(bazaarLoadedCount, bazaarLoadedCount + BAZAAR_BATCH_SIZE);
+    if (nextBatch.length === 0) return;
+
     const fragment = document.createDocumentFragment();
-    gamesWithImages.forEach(game => {
+    nextBatch.forEach(game => {
         const gameImages = game.image || game.images;
         const img = Array.isArray(gameImages) ? gameImages[0] : gameImages;
 
-        // Smart Path Logic (Matches createGameCard)
         let imgSrc = img;
         if (!img.startsWith('http') && !img.startsWith('data:')) {
             if (!img.includes('/')) {
@@ -717,7 +765,24 @@ function renderImageBazaar(container, matches) {
         `;
         fragment.appendChild(card);
     });
+
+    // Remove existing sentinel
+    const oldSentinel = container.querySelector('.bazaar-sentinel');
+    if (oldSentinel) oldSentinel.remove();
+
     container.appendChild(fragment);
+    bazaarLoadedCount += nextBatch.length;
+
+    // Add new sentinel if there are more items
+    if (bazaarLoadedCount < currentBazaarMatches.length) {
+        const sentinel = document.createElement('div');
+        sentinel.className = 'bazaar-sentinel';
+        sentinel.style.height = '10px';
+        sentinel.style.width = '100%';
+        sentinel.style.gridColumn = '1/-1';
+        container.appendChild(sentinel);
+        bazaarObserver.observe(sentinel);
+    }
 }
 
 
