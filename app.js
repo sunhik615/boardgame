@@ -867,6 +867,7 @@ function createGameCard(game) {
         <article class="game-card ${wishlist.has(game.id) ? 'is-wished' : ''}">
             <div class="card-image-container">
                 <div class="card-image" style="${bgStyle} ${iconColor}">
+                    ${game.averageRating ? `<div class="card-rating-badge">⭐ ${game.averageRating}</div>` : ''}
                     ${imageContent}
                 </div>
                 <div class="card-info-reveal">
@@ -1483,6 +1484,8 @@ async function addReview(event) {
 
         // Reload reviews
         loadReviews(gameId);
+        // Update game stats
+        await updateGameStats(gameId);
 
     } catch (error) {
         console.error("Error adding review:", error);
@@ -1508,7 +1511,10 @@ async function deleteReview(reviewId, correctPassword) {
         await deleteDoc(doc(db, "reviews", reviewId));
         alert("삭제되었습니다.");
         const gameId = getQueryParam('id');
-        if (gameId) loadReviews(gameId);
+        if (gameId) {
+            loadReviews(gameId);
+            await updateGameStats(gameId);
+        }
     } catch (error) {
         console.error("Error deleting review:", error);
         alert("삭제 중 오류가 발생했습니다.");
@@ -1564,3 +1570,32 @@ function escapeHtml(text) {
 }
 
 window.deleteReview = deleteReview; // Expose for onclick
+
+// Feature: Update Game Stats (Denormalization)
+async function updateGameStats(gameId) {
+    try {
+        const q = query(collection(db, "reviews"), where("gameId", "==", gameId));
+        const snapshot = await getDocs(q);
+        let totalRating = 0;
+        let count = 0;
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            totalRating += Number(data.rating);
+            count++;
+        });
+
+        const average = count > 0 ? Number((totalRating / count).toFixed(1)) : 0;
+
+        // Update game document
+        const gameRef = doc(db, "games", gameId);
+        await updateDoc(gameRef, {
+            averageRating: average,
+            reviewCount: count
+        });
+        console.log(`Updated stats for ${gameId}: Avg ${average}, Count ${count}`);
+    } catch (e) {
+        console.error("Failed to update game stats", e);
+    }
+}
+window.updateGameStats = updateGameStats; // Expose for Admin

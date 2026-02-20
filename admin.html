@@ -258,6 +258,8 @@
         <div class="toolbar">
             <button class="btn-secondary" onclick="location.href='index.html'">🏠 홈으로</button>
             <input type="text" id="searchInput" class="search-bar" placeholder="게임 이름으로 검색...">
+            <button class="btn-primary" onclick="window.syncAllRatings()" style="background-color: #f39c12;">🔄 리뷰
+                동기화</button>
             <button class="btn-primary" onclick="openModal()">+ 새 게임 추가</button>
         </div>
 
@@ -382,12 +384,13 @@
                         <button type="button" class="btn-danger" id="deleteBtn" onclick="deleteGame()">삭제하기</button>
                         <div style="display: flex; gap: 10px;">
                             <button type="button" class="btn-secondary" onclick="closeModal()">취소</button>
-                            <button type="button" class="btn-primary" onclick="saveGame()">저장 (서버 반영)</button>
                         </div>
+                        <button type="button" class="btn-primary" onclick="saveGame()">저장 (서버 반영)</button>
                     </div>
-                </form>
             </div>
+            </form>
         </div>
+    </div>
     </div>
 
     <!-- Firebase Config & Scripts -->
@@ -599,11 +602,77 @@
                 }
                 closeModal();
                 loadGames(); // Reload list
-            } catch (e) {
-                console.error("Error saving game: ", e);
-                alert('저장 중 오류가 발생했습니다: ' + e.message);
+            } catch (error) {
+                console.error("Error saving best players:", error);
+                alert("저장 중 오류가 발생했습니다.");
             }
-        };
+        }
+
+        async function syncAllRatings() {
+            if (!confirm('모든 게임의 평점 정보를 갱신하시겠습니까? (시간이 조금 걸릴 수 있습니다)')) return;
+
+            try {
+                // Determine source for games list
+                // If window.games is populated, use it. Otherwise fetch.
+                let gamesToSync = window.games || currentGameList;
+
+                if (!gamesToSync || gamesToSync.length === 0) {
+                    const q = query(collection(db, "games"), orderBy("title"));
+                    const querySnapshot = await getDocs(q);
+                    gamesToSync = [];
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        data.id = doc.id;
+                        gamesToSync.push(data);
+                    });
+                }
+
+                let count = 0;
+                for (const game of gamesToSync) {
+                    // Call the shared update logic exposed in app.js
+                    // Note: We need to ensure app.js functions are available or replicate logic here.
+                    // Since app.js is a module in admin.html context? No, admin.html imports firebase-config directly.
+                    // app.js is NOT imported in admin.html usually. We should replicate or import logic.
+                    // Replicating logic here for safety in admin context.
+
+                    const qReviews = query(collection(db, "reviews"), where("gameId", "==", game.id));
+                    const snapshot = await getDocs(qReviews);
+                    let totalRating = 0;
+                    let reviewCount = 0;
+
+                    snapshot.forEach(d => {
+                        const r = d.data();
+                        totalRating += Number(r.rating);
+                        reviewCount++;
+                    });
+
+                    const average = reviewCount > 0 ? Number((totalRating / reviewCount).toFixed(1)) : 0;
+
+                    try {
+                        await updateDoc(doc(db, "games", game.id), {
+                            averageRating: average,
+                            reviewCount: reviewCount
+                        });
+                        count++;
+                        console.log(`Synced ${game.title} (ID: ${game.id}): Avg ${average}, Count ${reviewCount}`);
+                    } catch (err) {
+                        if (err.code === 'not-found') {
+                            console.warn(`Skipping ${game.title} (ID: ${game.id}): Document not found in DB. Make sure the ID in 'games' collection matches.`);
+                        } else {
+                            console.error(`Error syncing ${game.title}:`, err);
+                        }
+                    }
+                }
+
+                alert(`${count}개 게임의 평점 동기화가 완료되었습니다!`);
+                location.reload();
+
+            } catch (e) {
+                console.error(e);
+                alert('동기화 중 오류가 발생했습니다.');
+            }
+        }
+        window.syncAllRatings = syncAllRatings;
 
         window.deleteGame = async function () {
             const docId = document.getElementById('editIndex').value;
