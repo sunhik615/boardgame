@@ -615,16 +615,27 @@
                 // Determine source for games list
                 // If window.games is populated, use it. Otherwise fetch.
                 let gamesToSync = window.games || currentGameList;
+                console.log("Checking games source. window.games:", window.games ? window.games.length : "undefined", "currentGameList:", currentGameList ? currentGameList.length : "undefined");
 
                 if (!gamesToSync || gamesToSync.length === 0) {
+                    console.log("No games found in memory. Fetching from Firestore...");
                     const q = query(collection(db, "games"), orderBy("title"));
                     const querySnapshot = await getDocs(q);
                     gamesToSync = [];
                     querySnapshot.forEach((doc) => {
                         const data = doc.data();
-                        data.id = doc.id;
+                        data.docId = doc.id; // Critical: captured document key
+                        if (!data.id) data.id = doc.id;
                         gamesToSync.push(data);
                     });
+                    console.log("Fetched games from DB:", gamesToSync.length);
+                } else {
+                    console.log("Using existing game list:", gamesToSync.length);
+                }
+
+                if (gamesToSync.length === 0) {
+                    alert("동기화할 게임 데이터가 없습니다.");
+                    return;
                 }
 
                 let count = 0;
@@ -635,7 +646,18 @@
                     // app.js is NOT imported in admin.html usually. We should replicate or import logic.
                     // Replicating logic here for safety in admin context.
 
-                    const qReviews = query(collection(db, "reviews"), where("gameId", "==", game.id));
+                    // reviews collection stores 'gameId' which corresponds to the 'id' field in games collection
+                    // NOT necessarily the document Key (though they should be same if data quality is good)
+
+                    const queryId = game.id; // user-defined ID string (e.g. 'splendor')
+                    const docKey = game.docId; // Firestore Document Key
+
+                    if (!queryId) {
+                        console.warn(`Skipping ${game.title}: No 'id' field found.`);
+                        continue;
+                    }
+
+                    const qReviews = query(collection(db, "reviews"), where("gameId", "==", queryId));
                     const snapshot = await getDocs(qReviews);
                     let totalRating = 0;
                     let reviewCount = 0;
@@ -649,18 +671,19 @@
                     const average = reviewCount > 0 ? Number((totalRating / reviewCount).toFixed(1)) : 0;
 
                     try {
-                        await updateDoc(doc(db, "games", game.id), {
+                        // We must update the document using its Key (docId)
+                        await updateDoc(doc(db, "games", docKey), {
                             averageRating: average,
                             reviewCount: reviewCount
                         });
-                        count++;
-                        console.log(`Synced ${game.title} (ID: ${game.id}): Avg ${average}, Count ${reviewCount}`);
-                    } catch (err) {
-                        if (err.code === 'not-found') {
-                            console.warn(`Skipping ${game.title} (ID: ${game.id}): Document not found in DB. Make sure the ID in 'games' collection matches.`);
+                        if (reviewCount > 0) {
+                            count++;
+                            console.log(`Synced ${game.title} (ID: ${queryId}): Avg ${average}, Count ${reviewCount}`);
                         } else {
-                            console.error(`Error syncing ${game.title}:`, err);
+                            console.log(`checked ${game.title}: No reviews.`);
                         }
+                    } catch (err) {
+                        console.error(`Error syncing ${game.title}:`, err);
                     }
                 }
 
