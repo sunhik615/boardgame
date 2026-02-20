@@ -706,6 +706,12 @@ function renderImageBazaar(container, matches) {
                 ${wishlist.has(game.id) ? '<span class="bazaar-badge">찜</span>' : ''}
             </div>
             <div class="bazaar-info">
+                ${game.averageRating ?
+                `<div class="bazaar-rating-badge">
+                        <span class="rating-star-icon">★</span>
+                        <span class="rating-value">${game.averageRating}</span>
+                    </div>`
+                : ''} 
                 <h3>${game.title}</h3>
             </div>
         `;
@@ -867,7 +873,6 @@ function createGameCard(game) {
         <article class="game-card ${wishlist.has(game.id) ? 'is-wished' : ''}">
             <div class="card-image-container">
                 <div class="card-image" style="${bgStyle} ${iconColor}">
-                    ${game.averageRating ? `<div class="card-rating-badge">⭐ ${game.averageRating}</div>` : ''}
                     ${imageContent}
                 </div>
                 <div class="card-info-reveal">

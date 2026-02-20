@@ -775,6 +775,37 @@ header p {
 
 
 /* Quick View Overlay */
+/* Simple Rating Design - Black Star */
+.simple-rating {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+
+.simple-star {
+    color: #2d3436;
+    /* Dark/Black */
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.simple-score {
+    color: #2d3436;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1;
+}
+
+
+.bazaar-info h3 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+    color: var(--text-color);
+}
+
 .card-info-reveal {
     position: absolute;
     top: 0;
@@ -2149,7 +2180,7 @@ footer {
 }
 
 .bazaar-info {
-    padding: 0.8rem;
+    padding: 0.1rem 0.6rem 0.3rem;
     background: white;
     text-align: center;
     border-top: none;
