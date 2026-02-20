@@ -267,6 +267,26 @@
 
 
 
+        <div class="game-list" id="gameList">
+            <!-- 자바스크립트로 게임 목록이 여기에 표시됩니다 -->
+        </div>
+
+        <!-- 리뷰 관리 모달 -->
+        <div class="modal" id="reviewModal">
+            <div class="modal-content" style="max-width: 700px;">
+                <div class="modal-header">
+                    <h2 id="reviewModalTitle">리뷰 관리</h2>
+                    <button class="modal-close" onclick="closeReviewModal()">&times;</button>
+                </div>
+                <div id="adminReviewList" style="max-height: 60vh; overflow-y: auto;">
+                    <p style="text-align: center; color: #666;">로딩 중...</p>
+                </div>
+                <div style="margin-top: 20px; text-align: right;">
+                    <button class="btn-secondary" onclick="closeReviewModal()">닫기</button>
+                </div>
+            </div>
+        </div>
+
         <!-- 편집 모달 창 -->
         <div class="modal" id="editModal">
             <div class="modal-content">
@@ -372,7 +392,7 @@
 
     <!-- Firebase Config & Scripts -->
     <script type="module">
-        import { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, storage, ref, uploadBytes, getDownloadURL } from "./firebase-config.js";
+        import { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, storage, ref, uploadBytes, getDownloadURL, query, where, orderBy } from "./firebase-config.js";
 
         let currentGameList = [];
         const gameListEl = document.getElementById('gameList');
@@ -433,13 +453,14 @@
                 }
 
                 item.innerHTML = `
-                <div class="game-icon">${game.icon || '🎲'}</div>
-                <div class="game-info">
-                    <div class="game-title">${game.title} ${bestBadge}</div>
-                    <div class="game-meta">
-                        ${game.minPlayers}~${game.maxPlayers}인 | ${game.playTime} | 난이도 ${game.difficulty}
-                    </div>
-                </div>
+            <div class="game-icon">${game.icon || '🎲'}</div>
+            <div class="game-info">
+                <div class="game-title">${game.title} ${bestBadge} <span style="font-weight:normal; font-size:12px; color:#888;">(${game.id})</span></div>
+                <div class="game-meta">${game.minPlayers}-${game.maxPlayers}인 | ${game.playTime || '-'} | 난이도 ${game.difficulty || '-'}</div>
+            </div>
+            <div>
+                <button class="btn-secondary" onclick="event.stopPropagation(); openReviewModal('${game.id}', '${game.title}')" style="font-size: 0.8rem; padding: 5px 10px; margin-right: 5px;">💬 리뷰 관리</button>
+            </div>
             `;
                 gameListEl.appendChild(item);
             });
@@ -599,10 +620,91 @@
             }
         };
 
-        // Window Close Logic
+        // Review Management Logic
+        const reviewModal = document.getElementById('reviewModal');
+        const reviewListEl = document.getElementById('adminReviewList');
+        const reviewModalTitle = document.getElementById('reviewModalTitle');
+
+        window.openReviewModal = async (gameId, gameTitle) => {
+            reviewModal.style.display = 'flex';
+            reviewModalTitle.textContent = `'${gameTitle}' 리뷰 관리`;
+            reviewListEl.innerHTML = '<p style="text-align: center; padding: 20px;">불러오는 중...</p>';
+
+            try {
+                const q = query(collection(db, "reviews"), where("gameId", "==", gameId), orderBy("timestamp", "desc"));
+                const snapshot = await getDocs(q);
+
+                if (snapshot.empty) {
+                    reviewListEl.innerHTML = '<p style="text-align: center; padding: 20px; color: #999;">등록된 리뷰가 없습니다.</p>';
+                    return;
+                }
+
+                reviewListEl.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const review = doc.data();
+                    const date = new Date(review.timestamp?.toDate ? review.timestamp.toDate() : review.timestamp).toLocaleDateString();
+
+                    const item = document.createElement('div');
+                    item.style.borderBottom = '1px solid #eee';
+                    item.style.padding = '15px';
+                    item.style.display = 'flex';
+                    item.style.justifyContent = 'space-between';
+                    item.style.alignItems = 'flex-start';
+
+                    item.innerHTML = `
+            <div style="flex: 1;">
+                <div style="font-weight: bold; margin-bottom: 5px;">
+                    ${escapeHtml(review.nickname)}
+                    <span style="color: #f1c40f;">${'★'.repeat(review.rating) + '☆'.repeat(10 - review.rating)}</span>
+                    <span style="font-size: 12px; color: #999; margin-left: 10px;">${date}</span>
+                </div>
+                <div style="color: #444; font-size: 14px;">${escapeHtml(review.comment)}</div>
+            </div>
+            <button class="btn-danger" style="font-size: 12px; padding: 5px 10px;" onclick="deleteReviewAdmin('${doc.id}', '${gameId}', '${gameTitle}')">삭제</button>
+                    `;
+                    reviewListEl.appendChild(item);
+                });
+            } catch (error) {
+                console.error("Error loading reviews:", error);
+                reviewListEl.innerHTML = '<p style="text-align: center; color: red;">리뷰를 불러오는데 실패했습니다.</p>';
+            }
+        };
+
+        window.closeReviewModal = () => {
+            reviewModal.style.display = 'none';
+        };
+
+        window.deleteReviewAdmin = async (reviewId, gameId, gameTitle) => {
+            if (!confirm('경고: 관리자 권한으로 이 리뷰를 즉시 삭제합니다. 복구할 수 없습니다.\n계속하시겠습니까?')) return;
+
+            try {
+                await deleteDoc(doc(db, "reviews", reviewId));
+                // Reload list
+                openReviewModal(gameId, gameTitle);
+            } catch (error) {
+                console.error("Error deleting review:", error);
+                alert("삭제 실패: " + error.message);
+            }
+        };
+
+        // Helper
+        function escapeHtml(text) {
+            if (!text) return "";
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Close modal when clicking outside
         window.onclick = function (event) {
             if (event.target == editModal) {
                 closeModal();
+            }
+            if (event.target == reviewModal) {
+                closeReviewModal();
             }
         }
     </script>

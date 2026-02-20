@@ -9,6 +9,9 @@ import {
     doc,
     getDoc,
     writeBatch,
+    query,
+    where,
+    orderBy,
     enableMultiTabIndexedDbPersistence
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
@@ -41,4 +44,4 @@ enableMultiTabIndexedDbPersistence(db).catch((err) => {
 const storage = getStorage(app);
 
 // 다른 파일에서 사용할 수 있도록 export
-export { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, writeBatch, storage, ref, uploadBytes, getDownloadURL };
+export { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, writeBatch, storage, ref, uploadBytes, getDownloadURL, query, where, orderBy };
