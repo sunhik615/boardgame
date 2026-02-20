@@ -1610,25 +1610,32 @@ footer {
 .review-card-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.review-author-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .review-author {
     font-weight: bold;
     color: #2d3436;
+    font-size: 1.05rem;
 }
 
-.review-meta {
+.review-sub-info {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     font-size: 0.85rem;
-    color: #636e72;
     align-items: center;
 }
 
-.review-stars {
-    color: #f1c40f;
-    letter-spacing: -2px;
+.review-rating-score {
+    color: #f39c12;
+    font-weight: 600;
 }
 
 .review-date {

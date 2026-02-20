@@ -1433,23 +1433,24 @@ function renderReviewList(container, reviews) {
 
     reviews.forEach(review => {
         const date = new Date(review.timestamp?.toDate ? review.timestamp.toDate() : review.timestamp).toLocaleDateString();
-        const stars = '★'.repeat(review.rating) + '☆'.repeat(10 - review.rating);
 
         const card = document.createElement('div');
         card.className = 'review-card';
         card.innerHTML = `
             <div class="review-card-header">
-                <span class="review-author">${escapeHtml(review.nickname)}</span>
-                <div class="review-meta">
-                    <span class="review-stars">${stars}</span>
-                    <span class="review-date">${date}</span>
-                    <button class="btn-delete-review" onclick="deleteReview('${review.id}', '${review.password}')" title="삭제">
-                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="3 6 5 6 21 6"></polyline>
-                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        </svg>
-                    </button>
+                <div class="review-author-info">
+                    <span class="review-author">${escapeHtml(review.nickname)}</span>
+                    <div class="review-sub-info">
+                        <span class="review-rating-score">⭐ ${review.rating} / 10</span>
+                        <span class="review-date">${date}</span>
+                    </div>
                 </div>
+                <button class="btn-delete-review" onclick="deleteReview('${review.id}', '${review.password}')" title="삭제">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                </button>
             </div>
             <div class="review-text">${escapeHtml(review.comment)}</div>
         `;
