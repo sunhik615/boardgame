@@ -979,40 +979,31 @@ header p {
     padding-bottom: 3rem;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 0.5rem;
+    /* Reduced from 2.5rem to bring stats and desc closer */
 }
 
 .game-stats-section {
-    background: white;
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eee;
+    background: transparent;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    margin-bottom: 0.5rem;
+    /* Reduced from 1rem */
 }
 
 .game-stats-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 2rem;
-}
-
-.stats-group {
-    flex: 1;
-    min-width: 250px;
-}
-
-.stats-group h3 {
-    font-size: 1.1rem;
-    color: var(--secondary-text);
-    margin-bottom: 1rem;
-    font-weight: 700;
+    align-items: center;
+    gap: 10px;
 }
 
 .stats-meta,
 .stats-tags {
-    display: flex;
+    display: inline-flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .tag {
@@ -1025,12 +1016,11 @@ header p {
     font-weight: 500;
 }
 
-.game-description h2 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 0.5rem;
+.game-description {
+    margin-top: 0;
 }
+
+/* Removed h2 styling as it is deleted */
 
 .game-description p {
     font-size: 1.1rem;
@@ -1433,6 +1423,213 @@ footer {
     background: rgba(255, 255, 255, 0.2);
     border-color: white;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+/* --- Review Section Styles --- */
+.game-reviews-section {
+    margin-top: 3rem;
+    /* Increased to separate from description */
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.review-header h3 {
+    font-size: 1.3rem;
+    color: #2d3436;
+    margin: 0;
+}
+
+.review-count {
+    font-size: 1rem;
+    color: #636e72;
+    font-weight: normal;
+}
+
+.average-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #2d3436;
+}
+
+.star-icon {
+    color: #f1c40f;
+}
+
+.rating-max {
+    font-size: 0.9rem;
+    color: #b2bec3;
+    font-weight: normal;
+}
+
+/* Review Form */
+.review-form-container {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.form-row-compact {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.form-row-compact input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    min-width: 0;
+    /* Prevent overflow */
+}
+
+@media (max-width: 480px) {
+    .form-row-compact {
+        flex-direction: column;
+    }
+}
+
+.rating-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.rating-label {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #2d3436;
+}
+
+.star-rating-widget {
+    display: flex;
+    gap: 2px;
+    cursor: pointer;
+}
+
+.star-rating-widget span {
+    font-size: 1.3rem;
+    /* Slightly smaller for 10 stars */
+    color: #ddd;
+    /* Inactive color */
+    transition: color 0.2s;
+}
+
+.star-rating-widget span.active {
+    color: #f1c40f;
+    /* Active color */
+}
+
+#review-comment {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    resize: none;
+    margin-bottom: 10px;
+    font-family: inherit;
+}
+
+.btn-submit-review {
+    width: 100%;
+    padding: 10px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-submit-review:hover {
+    background: var(--primary-dark);
+}
+
+/* Review List */
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.review-card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+}
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #2d3436;
+}
+
+.review-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: #636e72;
+    align-items: center;
+}
+
+.review-stars {
+    color: #f1c40f;
+    letter-spacing: -2px;
+}
+
+.review-date {
+    color: #b2bec3;
+}
+
+.review-text {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+    white-space: pre-wrap;
+}
+
+.btn-delete-review {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0 5px;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.btn-delete-review:hover {
+    opacity: 1;
+}
+
+.review-empty {
+    text-align: center;
+    color: #b2bec3;
+    padding: 2rem 0;
 }
 
 .wishlist-empty-state {

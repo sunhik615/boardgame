@@ -268,8 +268,9 @@ function copyWishlistLink() {
 }
 
 // Main Execution
-import { db, collection, getDocs } from "./firebase-config.js";
+import { db, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc, storage, ref, uploadBytes, getDownloadURL, query, where, orderBy } from "./firebase-config.js";
 
+let currentGameList = [];
 // Make games globally available for compatibility
 window.games = [];
 
@@ -387,6 +388,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Also save search state to remember scroll position periodically
             // Throttled using requestAnimationFrame for performance
+            // Also save search state to remember scroll position periodically
+            // Throttled using requestAnimationFrame for performance
+            const gameListContainer = document.getElementById('game-list');
             if (gameListContainer && !document.getElementById('game-detail')) {
                 if (!window._scrollTimer) {
                     window._scrollTimer = requestAnimationFrame(() => {
@@ -1028,15 +1032,19 @@ function renderGameDetail() {
     } else if (expEl) {
         expEl.style.display = 'none';
     }
+
+    // Load Reviews
+    loadReviews(gameId);
+    initReviewSystem();
 }
 
 // Carousel functionality
 function initCarousel(images, gameTitle) {
     if (!images || images.length === 0) return;
 
-    const carouselContainer = document.getElementById('image-carousel');
     const carouselImages = document.getElementById('carousel-images');
     const carouselIndicators = document.getElementById('carousel-indicators');
+    const carouselContainer = document.getElementById('image-carousel');
     const prevBtn = document.getElementById('carousel-prev');
     const nextBtn = document.getElementById('carousel-next');
 
@@ -1369,3 +1377,190 @@ function saveBestPlayers(gameId) {
 window.toggleWishlist = toggleWishlist;
 window.saveBestPlayers = saveBestPlayers;
 window.copyWishlistLink = copyWishlistLink;
+
+// --- Review System Logic ---
+async function loadReviews(gameId) {
+    const listEl = document.getElementById('review-list');
+    const countEl = document.getElementById('review-count');
+    const avgRatingEl = document.getElementById('average-rating-value');
+
+    if (!listEl) return;
+
+    listEl.innerHTML = '<div style="text-align:center; padding:20px;">리뷰를 불러오는 중...</div>';
+
+    try {
+        const q = query(collection(db, "reviews"), where("gameId", "==", gameId), orderBy("timestamp", "desc"));
+        const snapshot = await getDocs(q);
+
+        const reviews = [];
+        let totalRating = 0;
+
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            data.id = doc.id;
+            reviews.push(data);
+            totalRating += Number(data.rating);
+        });
+
+        // Update Summary
+        if (countEl) countEl.textContent = `(${reviews.length})`;
+        if (avgRatingEl) {
+            const avg = reviews.length > 0 ? (totalRating / reviews.length).toFixed(1) : "0.0";
+            avgRatingEl.textContent = avg;
+        }
+
+        renderReviewList(listEl, reviews);
+
+    } catch (error) {
+        console.error("Error loading reviews:", error);
+        listEl.innerHTML = '<div style="text-align:center; color:red;">리뷰를 불러오는데 실패했습니다.</div>';
+    }
+}
+
+function renderReviewList(container, reviews) {
+    container.innerHTML = '';
+
+    if (reviews.length === 0) {
+        container.innerHTML = '<div class="review-empty">첫 번째 리뷰를 남겨보세요!</div>';
+        return;
+    }
+
+    reviews.forEach(review => {
+        const date = new Date(review.timestamp?.toDate ? review.timestamp.toDate() : review.timestamp).toLocaleDateString();
+        const stars = '★'.repeat(review.rating) + '☆'.repeat(10 - review.rating);
+
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.innerHTML = `
+            <div class="review-card-header">
+                <span class="review-author">${escapeHtml(review.nickname)}</span>
+                <div class="review-meta">
+                    <span class="review-stars">${stars}</span>
+                    <span class="review-date">${date}</span>
+                    <button class="btn-delete-review" onclick="deleteReview('${review.id}', '${review.password}')" title="삭제">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="review-text">${escapeHtml(review.comment)}</div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+async function addReview(event) {
+    event.preventDefault();
+
+    const gameId = getQueryParam('id');
+    const nickname = document.getElementById('review-nickname').value;
+    const password = document.getElementById('review-password').value;
+    const rating = document.getElementById('review-rating').value;
+    const comment = document.getElementById('review-comment').value;
+    const btn = event.target.querySelector('button');
+
+    if (!gameId) return;
+
+    btn.disabled = true;
+    btn.textContent = '등록 중...';
+
+    try {
+        await addDoc(collection(db, "reviews"), {
+            gameId: gameId,
+            nickname: nickname,
+            password: password,
+            rating: Number(rating),
+            comment: comment,
+            timestamp: new Date()
+        });
+
+        // Reset form
+        document.getElementById('review-form').reset();
+        document.getElementById('review-rating').value = 10;
+        updateStarWidget(10);
+
+        // Reload reviews
+        loadReviews(gameId);
+
+    } catch (error) {
+        console.error("Error adding review:", error);
+        alert("리뷰 등록에 실패했습니다.");
+    } finally {
+        btn.disabled = false;
+        btn.textContent = '리뷰 등록';
+    }
+}
+
+async function deleteReview(reviewId, correctPassword) {
+    const inputPassword = prompt("리뷰 작성 시 입력한 비밀번호를 입력하세요:");
+    if (inputPassword === null) return;
+
+    if (inputPassword !== correctPassword) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+    }
+
+    if (!confirm("정말 삭제하시겠습니까?")) return;
+
+    try {
+        await deleteDoc(doc(db, "reviews", reviewId));
+        alert("삭제되었습니다.");
+        const gameId = getQueryParam('id');
+        if (gameId) loadReviews(gameId);
+    } catch (error) {
+        console.error("Error deleting review:", error);
+        alert("삭제 중 오류가 발생했습니다.");
+    }
+}
+
+function updateStarWidget(value) {
+    const stars = document.querySelectorAll('#star-rating-widget span');
+    stars.forEach(star => {
+        const starVal = parseInt(star.getAttribute('data-value'));
+        if (starVal <= value) {
+            star.classList.add('active');
+            star.style.color = '#f1c40f';
+        } else {
+            star.classList.remove('active');
+            star.style.color = '#ddd';
+        }
+    });
+}
+
+function initReviewSystem() {
+    const form = document.getElementById('review-form');
+    const starWidget = document.getElementById('star-rating-widget');
+
+    if (form) {
+        form.addEventListener('submit', addReview);
+    }
+
+    if (starWidget) {
+        // Star Click
+        starWidget.addEventListener('click', (e) => {
+            if (e.target.tagName === 'SPAN') {
+                const value = e.target.getAttribute('data-value');
+                document.getElementById('review-rating').value = value;
+                updateStarWidget(value);
+            }
+        });
+
+        // Initialize with default 10 stars
+        updateStarWidget(10);
+    }
+}
+
+// Helper to prevent XSS
+function escapeHtml(text) {
+    if (!text) return "";
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+window.deleteReview = deleteReview; // Expose for onclick

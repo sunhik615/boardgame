@@ -72,8 +72,27 @@
         </div>
 
         <div class="container detail-content">
+            <!-- 상세 정보 섹션 (아이콘 바 형태) -->
+            <section class="game-stats-section">
+                <div class="game-stats-container">
+                    <!-- 게임 정보 -->
+                    <div id="game-stats-meta" class="stats-meta"
+                        style="display: inline-flex; flex-wrap: wrap; gap: 8px;">
+                        <span id="game-players" class="badge players">👥 -인</span>
+                        <span id="game-best-players" class="badge best-players" style="display: none;">⭐ 추천:
+                            -인</span>
+                        <span id="game-time" class="badge time">⏱️ -분</span>
+                        <span id="game-difficulty" class="badge difficulty">🔥 -/5</span>
+                    </div>
+                    <!-- 태그 -->
+                    <div id="game-stats-tags" class="stats-tags"
+                        style="display: inline-flex; flex-wrap: wrap; gap: 8px;">
+                        <span id="game-genre" class="tag genre">장르</span>
+                        <span id="game-mechanism" class="tag mechanism">메커니즘</span>
+                    </div>
+                </div>
+            </section>
             <section class="game-description">
-                <h2>게임 소개</h2>
                 <p id="game-description-text">
                     게임 정보를 불러오고 있습니다...
                 </p>
@@ -83,27 +102,52 @@
                 </div>
             </section>
 
-            <!-- 상세 정보 섹션 (기존 히어로 섹션에서 이동) -->
-            <section class="game-stats-section">
-                <div class="game-stats-container">
-                    <div class="stats-group">
-                        <h3>게임 정보</h3>
-                        <div id="game-stats-meta" class="stats-meta">
-                            <span id="game-players" class="badge players">👥 -인</span>
-                            <span id="game-best-players" class="badge best-players" style="display: none;">⭐ 추천:
-                                -인</span>
-                            <span id="game-time" class="badge time">⏱️ -분</span>
-                            <span id="game-difficulty" class="badge difficulty">🔥 -/5</span>
-                        </div>
-                    </div>
 
-                    <div class="stats-group">
-                        <h3>태그</h3>
-                        <div id="game-stats-tags" class="stats-tags">
-                            <span id="game-genre" class="tag genre">장르</span>
-                            <span id="game-mechanism" class="tag mechanism">메커니즘</span>
-                        </div>
+            <!-- Review Section -->
+            <section class="game-reviews-section">
+                <div class="review-header">
+                    <h3>💬 리뷰 및 평점 <span id="review-count" class="review-count">(0)</span></h3>
+                    <div class="average-rating">
+                        <span class="star-icon">⭐</span>
+                        <span id="average-rating-value">0.0</span>
+                        <span class="rating-max">/ 10.0</span>
                     </div>
+                </div>
+
+                <!-- Review Form -->
+                <div class="review-form-container">
+                    <form id="review-form">
+                        <div class="form-row-compact">
+                            <input type="text" id="review-nickname" placeholder="닉네임" required maxlength="10">
+                            <input type="password" id="review-password" placeholder="비밀번호(4자리)" required maxlength="4"
+                                pattern="\d{4}" inputmode="numeric" title="4자리 숫자를 입력하세요">
+                        </div>
+                        <div class="rating-input-container">
+                            <span class="rating-label">별점:</span>
+                            <div class="star-rating-widget" id="star-rating-widget">
+                                <span data-value="1">★</span>
+                                <span data-value="2">★</span>
+                                <span data-value="3">★</span>
+                                <span data-value="4">★</span>
+                                <span data-value="5">★</span>
+                                <span data-value="6">★</span>
+                                <span data-value="7">★</span>
+                                <span data-value="8">★</span>
+                                <span data-value="9">★</span>
+                                <span data-value="10">★</span>
+                            </div>
+                            <input type="hidden" id="review-rating" value="10">
+                        </div>
+                        <textarea id="review-comment" placeholder="이 게임에 대한 리뷰를 남겨주세요 (최대 100자)" required
+                            maxlength="100" rows="3"></textarea>
+                        <button type="submit" class="btn-submit-review">리뷰 등록</button>
+                    </form>
+                </div>
+
+                <!-- Review List -->
+                <div id="review-list" class="review-list">
+                    <!-- Reviews will be loaded here -->
+                    <div class="review-empty">첫 번째 리뷰를 남겨보세요!</div>
                 </div>
             </section>
         </div>
