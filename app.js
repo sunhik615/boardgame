@@ -82,7 +82,7 @@ function saveSearchState() {
         };
         sessionStorage.setItem(SEARCH_STATE_KEY, JSON.stringify(state));
     } catch (e) {
-        console.error('Failed to save search state', e);
+        console.warn('Failed to save search state (Normal in some mobile browsers/Private Mode)', e);
     }
 }
 
@@ -151,7 +151,11 @@ function loadWishlist() {
 }
 
 function saveWishlist() {
-    localStorage.setItem(WISHLIST_KEY, JSON.stringify(Array.from(wishlist)));
+    try {
+        localStorage.setItem(WISHLIST_KEY, JSON.stringify(Array.from(wishlist)));
+    } catch (e) {
+        console.warn('Failed to save wishlist to storage', e);
+    }
 }
 
 function toggleWishlist(gameId, event) {
@@ -311,8 +315,14 @@ async function fetchGamesData() {
 
             // Index Page
             if (gameListContainer) {
-                if (typeof initFilters === 'function') initFilters();
-                if (typeof initSlideCarousel === 'function') initSlideCarousel();
+                if (typeof initFilters === 'function' && !window._filtersInitialized) {
+                    initFilters();
+                    window._filtersInitialized = true;
+                }
+                if (typeof initSlideCarousel === 'function' && !window._carouselInitialized) {
+                    initSlideCarousel();
+                    window._carouselInitialized = true;
+                }
             }
 
             // Detail Page
@@ -648,8 +658,8 @@ function applyFilters(isStateRestored = false) {
             const diff = game.difficulty;
             if (values.difficulty === 'easy' && diff >= 2.0) return false;
             if (values.difficulty === 'normal' && (diff < 2.0 || diff >= 3.0)) return false;
-            if (values.difficulty === 'hard' && (diff < 3.0 || diff >= 4.0)) return false;
-            if (values.difficulty === 'expert' && diff < 4.0) return false;
+            if (values.difficulty === 'medium' && (diff < 3.0 || diff >= 4.0)) return false;
+            if (values.difficulty === 'hard' && diff < 4.0) return false;
         }
 
         return true;
