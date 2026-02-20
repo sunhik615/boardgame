@@ -1036,6 +1036,7 @@ header p {
     font-size: 1.1rem;
     line-height: 1.8;
     color: #444;
+    white-space: pre-wrap;
 }
 
 /* Expansion Section */
@@ -1064,6 +1065,7 @@ header p {
     line-height: 1.6;
     color: #444;
     padding-left: 0.5rem;
+    white-space: pre-wrap;
 }
 
 /* Footer */
