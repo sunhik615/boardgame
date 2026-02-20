@@ -98,6 +98,8 @@ header.detail-header {
 
 header h1,
 header.detail-header h1 {
+    font-size: 2rem;
+    /* Fallback for older browsers */
     font-size: clamp(1.8rem, 5vw, 2.3rem);
     /* Slightly larger for presence */
     margin: 0;
@@ -207,6 +209,9 @@ header p {
 /* Filter Section - Minimalist Style */
 .filter-container {
     background: rgba(255, 255, 255, 0.95);
+    background-color: #ffffff;
+    /* Fallback for browsers not supporting translucency/backdrop-filter */
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     padding: 1.2rem 1.5rem;
@@ -2386,11 +2391,15 @@ footer {
 
 /* Aspect Ratio & CLS Prevention */
 .card-image-container {
+    height: 350px;
+    /* Fallback for older Safari */
     aspect-ratio: 1 / 1.35;
     background: #f8f9fa;
 }
 
 .bazaar-img-container {
+    height: 180px;
+    /* Approximate fallback */
     aspect-ratio: 1 / 1;
     background: #f9f9f9;
 }
