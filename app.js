@@ -4,6 +4,11 @@ function getQueryParam(param) {
     return urlParams.get(param);
 }
 
+// Disable native scroll restoration to handle it manually
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
 // Curated Gradients Palette (Modern & Vibrant)
 const curatedGradients = [
     "linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)", // Purple to Pink
@@ -52,13 +57,17 @@ const SEARCH_STATE_KEY = 'boardgame_search_state';
 
 // State Persistence
 function saveSearchState() {
+    // Only save if we are on the page with filters (index page)
+    const searchInput = document.getElementById('search-input');
+    if (!searchInput) return;
+
     try {
         const playersVal = document.getElementById('filter-players')?.value || 'all';
         const genreVal = document.getElementById('filter-genre')?.value || 'all';
         const timeVal = document.getElementById('filter-time')?.value || 'all';
         const difficultyVal = document.getElementById('filter-difficulty')?.value || 'all';
         const sortVal = document.getElementById('sort-order')?.value || 'name';
-        const searchVal = document.getElementById('search-input')?.value || '';
+        const searchVal = searchInput.value || '';
 
         const state = {
             players: playersVal,
@@ -67,7 +76,9 @@ function saveSearchState() {
             difficulty: difficultyVal,
             sort: sortVal,
             search: searchVal,
-            slideIndex: Number(currentSlideIndex) || 0
+            slideIndex: Number(currentSlideIndex) || 0,
+            scrollPos: window.scrollY || 0,
+            url: window.location.pathname // Helper to track if we were on index
         };
         sessionStorage.setItem(SEARCH_STATE_KEY, JSON.stringify(state));
     } catch (e) {
@@ -301,10 +312,30 @@ async function fetchGamesData() {
         if (detailContainer) {
             renderGameDetail();
         }
-
         // Restore state if available
         const savedState = loadSearchState();
-        applyFilters(!!savedState);
+        if (savedState && gameListContainer) {
+            applyFilters(true); // Explicitly say state is being restored
+
+            // Restore scroll position after a short delay
+            if (savedState.scrollPos) {
+                let attempts = 0;
+                const restoreScroll = () => {
+                    window.scrollTo(0, savedState.scrollPos);
+                    // Check if we actually reached the target position
+                    // (Allow small difference for sub-pixel rendering or elastic scrolling)
+                    if (Math.abs(window.scrollY - savedState.scrollPos) < 2 || attempts > 15) {
+                        console.log(`Scroll restored to ${window.scrollY} after ${attempts} attempts`);
+                    } else {
+                        attempts++;
+                        setTimeout(restoreScroll, 50 * attempts); // Increasingly wait more
+                    }
+                };
+                setTimeout(restoreScroll, 100);
+            }
+        } else {
+            applyFilters(false);
+        }
 
         // Remove loading message
         const loadingMsg = document.querySelector('#game-list p');
@@ -353,6 +384,17 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 scrollToTopBtn.classList.remove('visible');
             }
+
+            // Also save search state to remember scroll position periodically
+            // Throttled using requestAnimationFrame for performance
+            if (gameListContainer && !document.getElementById('game-detail')) {
+                if (!window._scrollTimer) {
+                    window._scrollTimer = requestAnimationFrame(() => {
+                        saveSearchState();
+                        window._scrollTimer = null;
+                    });
+                }
+            }
         });
 
         scrollToTopBtn.addEventListener('click', () => {
@@ -365,6 +407,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start Data Fetch
     fetchGamesData();
+
+    // Ensure state is saved before leaving
+    window.addEventListener('beforeunload', saveSearchState);
 });
 
 
@@ -520,6 +565,10 @@ function initFilters() {
 }
 
 function applyFilters(isStateRestored = false) {
+    // Only apply if we are on the index page
+    const container = document.getElementById('game-list');
+    if (!container) return;
+
     const filters = {
         players: document.getElementById('filter-players'),
         genre: document.getElementById('filter-genre'),
@@ -597,9 +646,12 @@ function applyFilters(isStateRestored = false) {
 
     const isFilterActive = !!(values.search || values.players !== 'all' || values.genre !== 'all' || values.time !== 'all' || values.difficulty !== 'all');
     isSearchActive = isFilterActive;
-    saveSearchState();
 
-    const container = document.getElementById('game-list');
+    // Only save if it's NOT a restoration call (otherwise we save while scrolling to position)
+    if (!isStateRestored) {
+        saveSearchState();
+    }
+
     const bazaarContainer = document.getElementById('image-bazaar');
 
     if (container) renderGameList(container, filtered, isFilterActive, !isStateRestored);
